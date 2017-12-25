@@ -1,3 +1,4 @@
+import React from "react";
 import {BaseComponent} from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
 

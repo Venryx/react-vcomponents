@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
+import React from "react";
 export declare class DropDown extends BaseComponent<{
     className?;
     onShow?;

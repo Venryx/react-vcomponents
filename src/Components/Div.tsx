@@ -1,3 +1,4 @@
+import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
 
 function Global(target) {

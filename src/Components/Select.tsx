@@ -1,3 +1,4 @@
+import React from "react";
 import autoBind from "react-autobind";
 import {BaseComponent, FindDOM} from "react-vextensions";
 import { RemoveDuplicates } from "../General";

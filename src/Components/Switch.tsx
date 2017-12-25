@@ -1,3 +1,4 @@
+import React from "react";
 import {BaseComponent} from "react-vextensions";
 
 export class Switch extends BaseComponent<{}, {}> {

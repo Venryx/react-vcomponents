@@ -1,6 +1,7 @@
 export {  } from "./General";
 export * from "./Components/Div";
 export * from "./Components/Button";
+export * from "./Components/CheckBox";
 export * from "./Components/Column";
 export * from "./Components/DropDown";
 export * from "./Components/Row";

@@ -1,3 +1,4 @@
+import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 
 /*export class Row extends BaseComponent<any, any> {

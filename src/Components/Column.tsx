@@ -1,3 +1,4 @@
+import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 
 @ApplyBasicStyles

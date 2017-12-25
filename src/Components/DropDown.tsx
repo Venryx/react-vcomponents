@@ -1,5 +1,6 @@
 import {cloneElement} from "react";
 import {BaseComponent, FindDOM, AddGlobalStyle} from "react-vextensions";
+import React from "react";
 import classNames from "classnames";
 
 AddGlobalStyle(`
@@ -83,7 +84,7 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & Rea
 		// create component classes
 		const active = this.isActive();
 		// stick callback on trigger element
-		const boundChildren = React.Children.map(children, child => {
+		const boundChildren = React.Children.map(children, (child: any)=> {
 			if (child.type === DropDownTrigger) {
 				const originalOnClick = child.props.onClick;
 				child = cloneElement(child, {

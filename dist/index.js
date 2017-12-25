@@ -91,6 +91,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
+	var _CheckBox = __webpack_require__(52);
+
+	Object.keys(_CheckBox).forEach(function (key) {
+	  if (key === "default" || key === "__esModule") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _CheckBox[key];
+	    }
+	  });
+	});
+
 	var _Column = __webpack_require__(32);
 
 	Object.keys(_Column).forEach(function (key) {
@@ -202,7 +214,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactVextensions = __webpack_require__(3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -248,7 +266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                pre = _a.pre,
 	                style = _a.style,
 	                rest = __rest(_a, ["pre", "style"]);
-	            return React.createElement("span", Object.assign({}, rest, { style: E(style, pre && { whiteSpace: "pre" }) }));
+	            return _react2.default.createElement("span", Object.assign({}, rest, { style: E(style, pre && { whiteSpace: "pre" }) }));
 	        }
 	    }]);
 
@@ -277,7 +295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                style = _a.style,
 	                children = _a.children,
 	                rest = __rest(_a, ["allowWrap", "style", "children"]);
-	            return React.createElement("span", Object.assign({}, rest, { style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
+	            return _react2.default.createElement("span", Object.assign({}, rest, { style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
 	        }
 	    }]);
 
@@ -310,7 +328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                shouldUpdate = _a.shouldUpdate,
 	                style = _a.style,
 	                rest = __rest(_a, ["shouldUpdate", "style"]);
-	            return React.createElement("div", Object.assign({}, rest, { style: style }));
+	            return _react2.default.createElement("div", Object.assign({}, rest, { style: style }));
 	        }
 	    }]);
 
@@ -1641,11 +1659,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactVextensions = __webpack_require__(3);
 
 	var _CSSPropertyOperations = __webpack_require__(7);
 
 	var _General = __webpack_require__(31);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1789,7 +1813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                }
 	            }
-	            return React.createElement("div", Object.assign({}, rest, { title: title, onClick: this.OnClick, className: "Button " + currentPseudoSelectorStyleKeys.join(" ") + " " + (className || ""), style: finalStyle }), hasCheckbox ? React.createElement("span", { style: { verticalAlign: 4 } }, text) : text, children);
+	            return _react2.default.createElement("div", Object.assign({}, rest, { title: title, onClick: this.OnClick, className: "Button " + currentPseudoSelectorStyleKeys.join(" ") + " " + (className || ""), style: finalStyle }), hasCheckbox ? _react2.default.createElement("span", { style: { verticalAlign: 4 } }, text) : text, children);
 	        }
 	    }, {
 	        key: "OnClick",
@@ -3933,7 +3957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 31 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	"use strict";
 
@@ -3946,17 +3970,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.RemoveDuplicates = RemoveDuplicates;
 	exports.Assert = Assert;
 	exports.AssertWarn = AssertWarn;
-
-	var _react = __webpack_require__(4);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function G(entries) {
 	    Object.assign(window, entries);
 	}
-	G({ React: _react2.default });
 	G({ E: E });
 	function E(e1, e2, e3, e4, e5, e6, e7, e8) {
 	    var result = {};
@@ -4056,7 +4072,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactVextensions = __webpack_require__(3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4096,7 +4118,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _a = this.props,
 	                style = _a.style,
 	                rest = __rest(_a, ["style"]);
-	            return React.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexDirection: "column", flexShrink: 0 }, style) }));
+	            return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexDirection: "column", flexShrink: 0 }, style) }));
 	        }
 	    }]);
 
@@ -4119,6 +4141,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
 
 	var _reactVextensions = __webpack_require__(3);
 
@@ -4237,7 +4261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var active = this.isActive();
 	            // stick callback on trigger element
-	            var boundChildren = React.Children.map(children, function (child) {
+	            var boundChildren = _react2.default.Children.map(children, function (child) {
 	                if (child.type === DropDownTrigger) {
 	                    var originalOnClick = child.props.onClick;
 	                    child = (0, _react.cloneElement)(child, {
@@ -4256,7 +4280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            delete cleanProps.active;
 	            delete cleanProps.onShow;
 	            delete cleanProps.onHide;
-	            return React.createElement("div", Object.assign({}, cleanProps, { className: (0, _classnames2.default)("dropdown", { "dropdown--active": active }, className) }), boundChildren);
+	            return _react2.default.createElement("div", Object.assign({}, cleanProps, { className: (0, _classnames2.default)("dropdown", { "dropdown--active": active }, className) }), boundChildren);
 	        }
 	    }]);
 
@@ -4279,7 +4303,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                children = _a.children,
 	                className = _a.className,
 	                rest = __rest(_a, ["children", "className"]);
-	            return React.createElement("div", Object.assign({}, rest, { className: (0, _classnames2.default)("dropdown__trigger", className) }), children);
+	            return _react2.default.createElement("div", Object.assign({}, rest, { className: (0, _classnames2.default)("dropdown__trigger", className) }), children);
 	        }
 	    }]);
 
@@ -4303,7 +4327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                className = _a.className,
 	                style = _a.style,
 	                rest = __rest(_a, ["children", "className", "style"]);
-	            return React.createElement("div", Object.assign({}, rest, { className: (0, _classnames2.default)("dropdown__content", className), style: E({ padding: 10, background: "rgba(0,0,0,.7)", borderRadius: "0 0 0 5px" }, style) }), children);
+	            return _react2.default.createElement("div", Object.assign({}, rest, { className: (0, _classnames2.default)("dropdown__content", className), style: E({ padding: 10, background: "rgba(0,0,0,.7)", borderRadius: "0 0 0 5px" }, style) }), children);
 	        }
 	    }]);
 
@@ -4379,7 +4403,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactVextensions = __webpack_require__(3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4449,7 +4479,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _a = this.props,
 	                style = _a.style,
 	                rest = __rest(_a, ["style"]);
-	            return React.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", alignItems: "center" }, style) }));
+	            return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", alignItems: "center" }, style) }));
 	        }
 	    }]);
 
@@ -4480,7 +4510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                children = _a.children,
 	                rest = __rest(_a, ["splitAt", "height", "className", "style", "leftStyle", "rightStyle", "children"]);
 	            Assert(children.length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
-	            return React.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexShrink: 0 }, style) }), React.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), React.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, children[1]));
+	            return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexShrink: 0 }, style) }), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, children[1]));
 	        }
 	    }]);
 
@@ -4503,9 +4533,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactVextensions = __webpack_require__(3);
 
 	var _General = __webpack_require__(31);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4604,14 +4640,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return <Option key={index} index={index} style={child.props.style}>{child.props.children}</Option>;
 	            });*/
 	            if (displayType == "dropdown") {
-	                return React.createElement("select", { ref: "root", disabled: enabled == false, value: "value" + this.GetIndexOfValue(value), className: className, title: title, style: E({ color: "#000" }, style), onChange: function onChange(e) {
+	                return _react2.default.createElement("select", { ref: "root", disabled: enabled == false, value: "value" + this.GetIndexOfValue(value), className: className, title: title, style: E({ color: "#000" }, style), onChange: function onChange(e) {
 	                        return _onChange(_this2.GetSelectedValue());
 	                    } }, options.map(function (option, index) {
-	                    return React.createElement(Dropdown_OptionUI, { key: option.name, index: index, style: E(childStyle, option.style) }, option.name);
+	                    return _react2.default.createElement(Dropdown_OptionUI, { key: option.name, index: index, style: E(childStyle, option.style) }, option.name);
 	                }));
 	            }
-	            return React.createElement("div", { style: E({}, style) }, options.map(function (option, index) {
-	                return React.createElement(ButtonBar_OptionUI, { key: option.name, first: index == 0, last: index == options.length - 1, selected: option.value === value, style: E(childStyle, option.style), onSelect: function onSelect(e) {
+	            return _react2.default.createElement("div", { style: E({}, style) }, options.map(function (option, index) {
+	                return _react2.default.createElement(ButtonBar_OptionUI, { key: option.name, first: index == 0, last: index == options.length - 1, selected: option.value === value, style: E(childStyle, option.style), onSelect: function onSelect(e) {
 	                        return _onChange(option.value);
 	                    } }, option.name);
 	            }));
@@ -4715,7 +4751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                style = _props2.style,
 	                children = _props2.children;
 
-	            return React.createElement("option", { value: "value" + index, style: E({ color: "#000" }, style) }, children);
+	            return _react2.default.createElement("option", { value: "value" + index, style: E({ color: "#000" }, style) }, children);
 	        }
 	    }]);
 
@@ -4745,7 +4781,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                onSelect = _props3.onSelect;
 	            var hovered = this.state.hovered;
 
-	            return React.createElement("div", { className: "ButtonBar_OptionUI", onMouseEnter: function onMouseEnter() {
+	            return _react2.default.createElement("div", { className: "ButtonBar_OptionUI", onMouseEnter: function onMouseEnter() {
 	                    return _this5.SetState({ hovered: true });
 	                }, onMouseLeave: function onMouseLeave() {
 	                    return _this5.SetState({ hovered: false });
@@ -4794,7 +4830,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactVextensions = __webpack_require__(3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4825,7 +4867,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                onChange = _props.onChange,
 	                onFocus = _props.onFocus;
 
-	            return React.createElement("input", { ref: "root", type: "number", step: step, min: min, max: max, value: value, disabled: !enabled, title: title, style: E({ color: "#000" }, style), onChange: this.OnChange, onFocus: onFocus });
+	            return _react2.default.createElement("input", { ref: "root", type: "number", step: step, min: min, max: max, value: value, disabled: !enabled, title: title, style: E({ color: "#000" }, style), onChange: this.OnChange, onFocus: onFocus });
 	        }
 	    }, {
 	        key: "OnChange",
@@ -4924,6 +4966,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactVextensions = __webpack_require__(3);
 
 	var _reactTextareaAutosize = __webpack_require__(40);
@@ -4996,7 +5042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 
 	            if (defaultValue === undefined && value == null) value = "";
-	            return React.createElement("textarea", Object.assign({}, rest, { ref: "root", readOnly: !editable, className: "simpleText selectable " + className, style: E(styles.root, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+	            return _react2.default.createElement("textarea", Object.assign({}, rest, { ref: "root", readOnly: !editable, className: "simpleText selectable " + className, style: E(styles.root, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
 	                    var newVal = e.target.value;
 	                    if (delayChangeTillDefocus) {
 	                        _this2.SetState({ editedValue: newVal });
@@ -5040,7 +5086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                style = _a.style,
 	                _onChange2 = _a.onChange,
 	                rest = __rest(_a, ["enabled", "style", "onChange"]);
-	            return React.createElement(_reactTextareaAutosize2.default, Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ resize: "none" }, style), onChange: function onChange(e) {
+	            return _react2.default.createElement(_reactTextareaAutosize2.default, Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ resize: "none" }, style), onChange: function onChange(e) {
 	                    return _onChange2(_this4.refs.root.value);
 	                } }));
 	        }
@@ -6737,6 +6783,125 @@ return /******/ (function(modules) { // webpackBootstrap
 	  codes[alias] = aliases[alias]
 	}
 
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.CheckBox = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactVextensions = __webpack_require__(3);
+
+	var _Row = __webpack_require__(35);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+	    var c = arguments.length,
+	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+	        d;
+	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+
+	var CheckBox = CheckBox_1 = function (_BaseComponent) {
+	    _inherits(CheckBox, _BaseComponent);
+
+	    function CheckBox(props) {
+	        _classCallCheck(this, CheckBox);
+
+	        var _this = _possibleConstructorReturn(this, (CheckBox.__proto__ || Object.getPrototypeOf(CheckBox)).call(this, props));
+
+	        _this.id = ++CheckBox_1.lastID;
+	        return _this;
+	    }
+
+	    _createClass(CheckBox, [{
+	        key: "render",
+	        value: function render() {
+	            var _this2 = this;
+
+	            var _props = this.props,
+	                text = _props.text,
+	                title = _props.title,
+	                checked = _props.checked,
+	                enabled = _props.enabled,
+	                style = _props.style,
+	                labelStyle = _props.labelStyle,
+	                internalChanging = _props.internalChanging,
+	                _onChange = _props.onChange;
+	            var editedValue = this.state.editedValue;
+
+	            return _react2.default.createElement(_Row.Row, { style: E({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
+	                    return _this2.input = c;
+	                }, id: "checkBox_" + this.id, type: "checkbox", checked: checked, onChange: function onChange(e) {
+	                    return _onChange && _onChange(_this2.input.checked, e);
+	                } }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: E({ marginLeft: 3 }, labelStyle) }, _react2.default.createElement("span", null), text));
+	        }
+	    }, {
+	        key: "PostRender",
+	        value: function PostRender() {
+	            var indeterminate = this.props.indeterminate;
+
+	            this.input.indeterminate = indeterminate;
+	        }
+	    }, {
+	        key: "Checked",
+	        get: function get() {
+	            return this.input.checked;
+	        }
+	    }]);
+
+	    return CheckBox;
+	}(_reactVextensions.BaseComponent);
+	CheckBox.lastID = -1;
+	exports.CheckBox = CheckBox = CheckBox_1 = __decorate([_reactVextensions.ApplyBasicStyles], CheckBox);
+	exports.CheckBox = CheckBox;
+
+	var CheckBox_1;
+	/*export class CheckBox_Auto extends BaseComponent<
+	        {text?, title?, style?, labelStyle?,
+	            path: ()=>any, onChange?: (val: boolean)=>void}, {}> {
+	    ComponentWillMountOrReceiveProps(props) {
+	        var {path} = props;
+	        let {node, key: propName} = path();
+	        this.AddChangeListeners(node,
+	            (propName + "_PostSet").Func(this.Update),
+	        );
+	    }
+
+	    render() {
+	        var {path, onChange, ...rest} = this.props;
+	        let {node, key: propName} = path();
+	        return (
+	            <CheckBox {...rest} checked={node[propName]}
+	                onChange={val=> {
+	                    node.a(propName).set = val;
+	                    if (onChange) onChange(val);
+	                }}/>
+	        );
+	    }
+	}*/
 
 /***/ }
 /******/ ])
