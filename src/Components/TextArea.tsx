@@ -27,7 +27,7 @@ var styles = {
 	}
 };
 
-export default class TextArea extends BaseComponent
+export class TextArea extends BaseComponent
 		<{
 			value?, defaultValue?, editable?, className?, style?, onChange?: (newVal, event)=>void,
 			delayChangeTillDefocus?: boolean,

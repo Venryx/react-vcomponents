@@ -2,7 +2,7 @@ import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import Row from "./Row";
 
 @ApplyBasicStyles
-export default class CheckBox extends BaseComponent
+export class CheckBox extends BaseComponent
 		<{
 			text?, title?, checked: boolean, indeterminate?: boolean,
 			enabled?: boolean, style?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void},

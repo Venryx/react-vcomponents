@@ -1,6 +1,6 @@
 import {BaseComponent} from "react-vextensions";
 
-export default class Spinner extends BaseComponent
+export class Spinner extends BaseComponent
 		<{step?, min?, max?, value?, enabled?, title?, style?, onChange, onFocus?}, {}> {
 	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true};
 	render() {

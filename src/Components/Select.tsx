@@ -13,7 +13,7 @@ import { RemoveDuplicates } from "../General";
 	style;
 }*/
 
-export default class Select extends BaseComponent
+export class Select extends BaseComponent
 		<{options: {name: string, value, style?}[] | {name: string}[] | string[] | any[] | /*(new()=>Enum) |*/ {[s: string]: any},
 			displayType?: "dropdown" | "button bar",
 			compareBy?: "name" | "value" | "value toString",

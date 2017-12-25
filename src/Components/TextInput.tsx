@@ -3,7 +3,7 @@ import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import * as keycode from "keycode";
 
 @ApplyBasicStyles
-export default class TextInput extends BaseComponent
+export class TextInput extends BaseComponent
 		<{
 			value: string, enabled?: boolean, onChange?: (newVal, event)=>void, onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>)=>any,
 			delayChangeTillDefocus?: boolean, useEscape?: boolean,

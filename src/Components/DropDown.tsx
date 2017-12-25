@@ -19,7 +19,7 @@ AddGlobalStyle(`
 */
 `);
 
-export default class DropDown extends BaseComponent<{className?, onShow?, onHide?} & React.HTMLProps<HTMLDivElement>, {active: boolean}> {
+export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & React.HTMLProps<HTMLDivElement>, {active: boolean}> {
 	ComponentDidMount() {
 		window.addEventListener("click", this._onWindowClick);
 		window.addEventListener("touchstart", this._onWindowClick);

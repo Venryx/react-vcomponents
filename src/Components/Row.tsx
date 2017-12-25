@@ -1,6 +1,6 @@
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 
-/*export default class Row extends BaseComponent<any, any> {
+/*export class Row extends BaseComponent<any, any> {
 	render() {
 		var {style, height, children, ...otherProps} = this.props;
 		height = height != null ? height : (style||{}).height;
@@ -32,7 +32,7 @@ export class RowLR extends BaseComponent<{height?, className?, rowStyle?, leftSt
 }*/
 
 @ApplyBasicStyles
-export default class Row extends BaseComponent<{style?} & React.HTMLProps<HTMLDivElement>, {}> {
+export class Row extends BaseComponent<{style?} & React.HTMLProps<HTMLDivElement>, {}> {
 	render() {
 		let {style, ...rest} = this.props;
 		return <div {...rest} style={E({display: "flex", alignItems: "center"}, style)}/>
