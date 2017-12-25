@@ -1,9 +1,9 @@
-# React - VExtensions
+# React - VComponnts
 
-Extensions for ReactJS, by Venryx.
+Components for ReactJS, by Venryx.
 
 ### Install
 
 ```
-npm install --save react-vextensions
+npm install --save react-vcomponents
 ```
