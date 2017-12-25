@@ -1,5 +1,5 @@
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
-import Row from "./Row";
+import {Row} from "./Row";
 
 @ApplyBasicStyles
 export class CheckBox extends BaseComponent

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-export default class CheckBox extends BaseComponent<{
+export declare class CheckBox extends BaseComponent<{
     text?;
     title?;
     checked: boolean;

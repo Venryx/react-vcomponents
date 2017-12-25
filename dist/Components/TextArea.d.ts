@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-export default class TextArea extends BaseComponent<{
+export declare class TextArea extends BaseComponent<{
     value?;
     defaultValue?;
     editable?;

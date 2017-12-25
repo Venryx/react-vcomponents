@@ -4050,6 +4050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.Column = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4101,8 +4102,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return Column;
 	}(_reactVextensions.BaseComponent);
-	Column = __decorate([_reactVextensions.ApplyBasicStyles], Column);
-	exports.default = Column;
+	exports.Column = Column = __decorate([_reactVextensions.ApplyBasicStyles], Column);
+	exports.Column = Column;
 
 /***/ },
 /* 33 */
@@ -4113,7 +4114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.DropDownContent = exports.DropDownTrigger = undefined;
+	exports.DropDownContent = exports.DropDownTrigger = exports.DropDown = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4144,7 +4145,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	(0, _reactVextensions.AddGlobalStyle)("\n.dropdown {\n    display: inline-block;\n}\n.dropdown__content {\n    display: none;\n    position: absolute;\n}\n.dropdown--active > .dropdown__content {\n    display: block;\n}\n/*\n.dropdown__content > * { pointer-events: auto; }\n.dropdown__content { pointer-events: none; }\n*/\n");
 
-	var DropDown = function (_BaseComponent) {
+	var DropDown = exports.DropDown = function (_BaseComponent) {
 	    _inherits(DropDown, _BaseComponent);
 
 	    _createClass(DropDown, [{
@@ -4262,8 +4263,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return DropDown;
 	}(_reactVextensions.BaseComponent);
 
-	exports.default = DropDown;
-
 	var DropDownTrigger = exports.DropDownTrigger = function (_BaseComponent2) {
 	    _inherits(DropDownTrigger, _BaseComponent2);
 
@@ -4374,7 +4373,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.RowLR = undefined;
+	exports.RowLR = exports.Row = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4405,7 +4404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }return t;
 	};
 
-	/*export default class Row extends BaseComponent<any, any> {
+	/*export class Row extends BaseComponent<any, any> {
 	    render() {
 	        var {style, height, children, ...otherProps} = this.props;
 	        height = height != null ? height : (style||{}).height;
@@ -4456,8 +4455,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return Row;
 	}(_reactVextensions.BaseComponent);
-	Row = __decorate([_reactVextensions.ApplyBasicStyles], Row);
-	exports.default = Row;
+	exports.Row = Row = __decorate([_reactVextensions.ApplyBasicStyles], Row);
+	exports.Row = Row;
 
 	var RowLR = function (_BaseComponent2) {
 	    _inherits(RowLR, _BaseComponent2);
@@ -4500,7 +4499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.ButtonBar_OptionUI = exports.Dropdown_OptionUI = undefined;
+	exports.ButtonBar_OptionUI = exports.Dropdown_OptionUI = exports.Select = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4524,7 +4523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value;
 	    style;
 	}*/
-	var Select = function (_BaseComponent) {
+	var Select = exports.Select = function (_BaseComponent) {
 	    _inherits(Select, _BaseComponent);
 
 	    function Select() {
@@ -4693,8 +4692,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return Select;
 	}(_reactVextensions.BaseComponent);
 
-	exports.default = Select;
-
 	Select.defaultProps = {
 	    displayType: "dropdown",
 	    compareBy: "value",
@@ -4793,6 +4790,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.Spinner = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4804,7 +4802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Spinner = function (_BaseComponent) {
+	var Spinner = exports.Spinner = function (_BaseComponent) {
 	    _inherits(Spinner, _BaseComponent);
 
 	    function Spinner() {
@@ -4842,8 +4840,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return Spinner;
 	}(_reactVextensions.BaseComponent);
 
-	exports.default = Spinner;
-
 	Spinner.defaultProps = { step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true };
 	/*export class Spinner_Auto extends BaseComponent
 	        <{step?, min?, max?, enabled?, title?, style?, onFocus?,
@@ -4879,6 +4875,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.Switch = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4890,7 +4887,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Switch = function (_BaseComponent) {
+	var Switch = exports.Switch = function (_BaseComponent) {
 	    _inherits(Switch, _BaseComponent);
 
 	    function Switch() {
@@ -4914,8 +4911,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return Switch;
 	}(_reactVextensions.BaseComponent);
 
-	exports.default = Switch;
-
 /***/ },
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
@@ -4925,7 +4920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.TextArea_AutoSize = undefined;
+	exports.TextArea_AutoSize = exports.TextArea = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4975,7 +4970,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-	var TextArea = function (_BaseComponent) {
+	var TextArea = exports.TextArea = function (_BaseComponent) {
 	    _inherits(TextArea, _BaseComponent);
 
 	    function TextArea() {
@@ -5021,8 +5016,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return TextArea;
 	}(_reactVextensions.BaseComponent);
-
-	exports.default = TextArea;
 
 	TextArea.defaultProps = {
 	    editable: true
@@ -6465,6 +6458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.TextInput = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6567,8 +6561,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return TextInput;
 	}(_reactVextensions.BaseComponent);
 	TextInput.defaultProps = { type: "text" };
-	TextInput = __decorate([_reactVextensions.ApplyBasicStyles], TextInput);
-	exports.default = TextInput;
+	exports.TextInput = TextInput = __decorate([_reactVextensions.ApplyBasicStyles], TextInput);
+	exports.TextInput = TextInput;
 	/*export class TextInput_Auto extends BaseComponent<
 	        {style?, delayChangeTillDefocus?,
 	            path: ()=>any, onChange?: (val: string)=>void}, {}> {
