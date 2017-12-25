@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import React from "react";
 import { BaseComponent } from "react-vextensions";
-export default class TextInput extends BaseComponent<{
+export declare class TextInput extends BaseComponent<{
     value: string;
     enabled?: boolean;
     onChange?: (newVal, event) => void;

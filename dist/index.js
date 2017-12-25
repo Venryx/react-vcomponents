@@ -67,7 +67,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _Div = __webpack_require__(31);
+	var _Div = __webpack_require__(2);
 
 	Object.keys(_Div).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _Button = __webpack_require__(2);
+	var _Button = __webpack_require__(6);
 
 	Object.keys(_Button).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -196,7 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.Button = undefined;
+	exports.Div = exports.Pre = exports.Span = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -204,15 +204,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactVextensions = __webpack_require__(3);
 
-	var _CSSPropertyOperations = __webpack_require__(6);
-
-	var _General = __webpack_require__(30);
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
 	    var c = arguments.length,
@@ -231,148 +229,95 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }return t;
 	};
 
-	var styles = {
-	    root: {
-	        //display: "inline-block",
-	        display: "inline-flex",
-	        alignItems: "center",
-	        justifyContent: "center",
-	        backgroundColor: "rgba(90,100,110,.6)",
-	        backgroundRepeat: "no-repeat",
-	        borderRadius: 5,
-	        border: "1px solid rgba(210,210,230,.12)",
-	        color: "#AAA",
-	        /*fontFamily: "fancyFontSemibold, Trebuchet MS, Tahoma, sans-serif",*/
-	        fontSize: 14, textAlign: "center",
-	        cursor: "pointer",
-	        ":hover": {
-	            //backgroundColor: "rgba(0,0,0,.7)"
-	            backgroundColor: "rgba(90,100,110,.8)"
-	        }
-	    },
-	    root_opacityHover: {
-	        opacity: .6,
-	        ":hover": {
-	            opacity: 1
-	        }
-	    },
-	    root_hasCheckbox: { paddingTop: 4, verticalAlign: 1 },
-	    root_disabled: {
-	        opacity: .5, cursor: "default"
-	    },
-	    checkbox: { marginLeft: -6 }
-	};
-	/*AddGlobalStyle(`
-	.Button:hover { background-color: rgba(90,100,110,.8) !important; }
-	`);*/
-	var pseudoSelectorStyleKeys = {};
-	//@Radium
-	var Button = function (_BaseComponent) {
-	    _inherits(Button, _BaseComponent);
+	function Global(target) {
+	    Object.assign(window, _defineProperty({}, target.name, target));
+	}
+	var Span = function (_BaseComponent) {
+	    _inherits(Span, _BaseComponent);
 
-	    function Button() {
-	        _classCallCheck(this, Button);
+	    function Span() {
+	        _classCallCheck(this, Span);
 
-	        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Span.__proto__ || Object.getPrototypeOf(Span)).apply(this, arguments));
 	    }
 
-	    _createClass(Button, [{
+	    _createClass(Span, [{
 	        key: "render",
 	        value: function render() {
 	            var _a = this.props,
-	                enabled = _a.enabled,
-	                text = _a.text,
-	                title = _a.title,
-	                className = _a.className,
+	                pre = _a.pre,
 	                style = _a.style,
-	                size = _a.size,
-	                width = _a.width,
-	                height = _a.height,
-	                iconSize = _a.iconSize,
-	                iconPath = _a.iconPath,
-	                useOpacityForHover = _a.useOpacityForHover,
-	                hasCheckbox = _a.hasCheckbox,
-	                checked = _a.checked,
-	                checkboxStyle = _a.checkboxStyle,
-	                checkboxLabelStyle = _a.checkboxLabelStyle,
-	                onCheckedChanged = _a.onCheckedChanged,
-	                onLeftClick = _a.onLeftClick,
-	                children = _a.children,
-	                rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "iconSize", "iconPath", "useOpacityForHover", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
-	            width = width || size;
-	            height = height || size;
-	            var padding = "5px 15px";
-	            if (height) {
-	                var baseHeight = 20;
-	                var heightDifPerSide = (height - baseHeight) / 2;
-	                padding = heightDifPerSide + "px 15px";
-	            }
-	            var finalStyle = E(styles.root, useOpacityForHover && styles.root_opacityHover, { padding: padding }, (width || height) && {
-	                padding: 0, width: width, height: height,
-	                backgroundPosition: (width - iconSize) / 2 + "px " + (height - iconSize) / 2 + "px",
-	                backgroundSize: iconSize
-	            }, iconPath && { backgroundImage: "url(" + iconPath + ")" }, hasCheckbox && styles.root_hasCheckbox, !enabled && styles.root_disabled, style);
-	            // experimental pseudo-selector-capable styling system
-	            var pseudoSelectors = [":hover"];
-	            var currentPseudoSelectorStyleKeys = [];
-	            if (enabled) {
-	                var _iteratorNormalCompletion = true;
-	                var _didIteratorError = false;
-	                var _iteratorError = undefined;
-
-	                try {
-	                    for (var _iterator = pseudoSelectors[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                        var selector = _step.value;
-
-	                        if (finalStyle[selector] == null) continue;
-	                        var styleText = (0, _CSSPropertyOperations.createMarkupForStyles)(finalStyle[selector]);
-	                        var styleKey = (0, _General.ToJSON)(selector + "---" + styleText); // get a unique identifier for this particular pseudo-style
-	                        styleKey = styleKey.replace(/[^a-zA-Z0-9-]/g, ""); // make sure key is a valid class-name
-	                        currentPseudoSelectorStyleKeys.push(styleKey);
-	                        // if <style> element for the given style-composite has not been created yet, create it 
-	                        if (pseudoSelectorStyleKeys[styleKey] == null) {
-	                            pseudoSelectorStyleKeys[styleKey] = true;
-	                            (0, _reactVextensions.AddGlobalStyle)("\n\t\t\t.Button." + styleKey + selector + " {\n\t\t\t\t" + styleText.replace(/([^ ]+?);/g, "$1 !important;") + "\n\t\t\t}\n\t\t\t\t\t\t\t");
-	                        }
-	                    }
-	                } catch (err) {
-	                    _didIteratorError = true;
-	                    _iteratorError = err;
-	                } finally {
-	                    try {
-	                        if (!_iteratorNormalCompletion && _iterator.return) {
-	                            _iterator.return();
-	                        }
-	                    } finally {
-	                        if (_didIteratorError) {
-	                            throw _iteratorError;
-	                        }
-	                    }
-	                }
-	            }
-	            return React.createElement("div", Object.assign({}, rest, { title: title, onClick: this.OnClick, className: "Button " + currentPseudoSelectorStyleKeys.join(" ") + " " + (className || ""), style: finalStyle }), hasCheckbox ? React.createElement("span", { style: { verticalAlign: 4 } }, text) : text, children);
-	        }
-	    }, {
-	        key: "OnClick",
-	        value: function OnClick(e) {
-	            var _props = this.props,
-	                enabled = _props.enabled,
-	                onClick = _props.onClick,
-	                onLeftClick = _props.onLeftClick,
-	                onDirectClick = _props.onDirectClick;
-
-	            if (!enabled) return;
-	            if (onDirectClick && (e.target == e.currentTarget || e.target.parentElement == e.currentTarget)) onDirectClick(e);
-	            if (onClick) onClick(e);
-	            if (onLeftClick && e.button == 0) onLeftClick(e);
+	                rest = __rest(_a, ["pre", "style"]);
+	            return React.createElement("span", Object.assign({}, rest, { style: E(style, pre && { whiteSpace: "pre" }) }));
 	        }
 	    }]);
 
-	    return Button;
+	    return Span;
 	}(_reactVextensions.BaseComponent);
-	Button.defaultProps = { enabled: true };
-	exports.Button = Button = __decorate([_reactVextensions.ApplyBasicStyles], Button);
-	exports.Button = Button;
+	exports.Span = Span = __decorate([Global,
+	//@SimpleShouldUpdate_Overridable // we can't make these "pure", as their children may need updating
+
+	_reactVextensions.ApplyBasicStyles], Span);
+	exports.Span = Span;
+
+	var Pre = function (_BaseComponent2) {
+	    _inherits(Pre, _BaseComponent2);
+
+	    function Pre() {
+	        _classCallCheck(this, Pre);
+
+	        return _possibleConstructorReturn(this, (Pre.__proto__ || Object.getPrototypeOf(Pre)).apply(this, arguments));
+	    }
+
+	    _createClass(Pre, [{
+	        key: "render",
+	        value: function render() {
+	            var _a = this.props,
+	                allowWrap = _a.allowWrap,
+	                style = _a.style,
+	                children = _a.children,
+	                rest = __rest(_a, ["allowWrap", "style", "children"]);
+	            return React.createElement("span", Object.assign({}, rest, { style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
+	        }
+	    }]);
+
+	    return Pre;
+	}(_reactVextensions.BaseComponent);
+	exports.Pre = Pre = __decorate([Global, _reactVextensions.ApplyBasicStyles], Pre);
+	exports.Pre = Pre;
+
+	var Div = function (_BaseComponent3) {
+	    _inherits(Div, _BaseComponent3);
+
+	    function Div() {
+	        _classCallCheck(this, Div);
+
+	        return _possibleConstructorReturn(this, (Div.__proto__ || Object.getPrototypeOf(Div)).apply(this, arguments));
+	    }
+
+	    _createClass(Div, [{
+	        key: "shouldComponentUpdate",
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            var shouldUpdate = this.props.shouldUpdate;
+
+	            return shouldUpdate ? shouldUpdate(nextProps, nextState) : true;
+	            //return (shouldUpdate && shouldUpdate(nextProps, nextState)) || ShallowCompare(this, nextProps, nextState);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _a = this.props,
+	                shouldUpdate = _a.shouldUpdate,
+	                style = _a.style,
+	                rest = __rest(_a, ["shouldUpdate", "style"]);
+	            return React.createElement("div", Object.assign({}, rest, { style: style }));
+	        }
+	    }]);
+
+	    return Div;
+	}(_reactVextensions.BaseComponent);
+	exports.Div = Div = __decorate([Global, _reactVextensions.ApplyBasicStyles], Div);
+	exports.Div = Div;
 
 /***/ },
 /* 3 */
@@ -1685,6 +1630,193 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Button = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _reactVextensions = __webpack_require__(3);
+
+	var _CSSPropertyOperations = __webpack_require__(7);
+
+	var _General = __webpack_require__(31);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+	    var c = arguments.length,
+	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+	        d;
+	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __rest = undefined && undefined.__rest || function (s, e) {
+	    var t = {};
+	    for (var p in s) {
+	        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+	    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+	        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+	    }return t;
+	};
+
+	var styles = {
+	    root: {
+	        //display: "inline-block",
+	        display: "inline-flex",
+	        alignItems: "center",
+	        justifyContent: "center",
+	        backgroundColor: "rgba(90,100,110,.6)",
+	        backgroundRepeat: "no-repeat",
+	        borderRadius: 5,
+	        border: "1px solid rgba(210,210,230,.12)",
+	        color: "#AAA",
+	        /*fontFamily: "fancyFontSemibold, Trebuchet MS, Tahoma, sans-serif",*/
+	        fontSize: 14, textAlign: "center",
+	        cursor: "pointer",
+	        ":hover": {
+	            //backgroundColor: "rgba(0,0,0,.7)"
+	            backgroundColor: "rgba(90,100,110,.8)"
+	        }
+	    },
+	    root_opacityHover: {
+	        opacity: .6,
+	        ":hover": {
+	            opacity: 1
+	        }
+	    },
+	    root_hasCheckbox: { paddingTop: 4, verticalAlign: 1 },
+	    root_disabled: {
+	        opacity: .5, cursor: "default"
+	    },
+	    checkbox: { marginLeft: -6 }
+	};
+	/*AddGlobalStyle(`
+	.Button:hover { background-color: rgba(90,100,110,.8) !important; }
+	`);*/
+	var pseudoSelectorStyleKeys = {};
+	//@Radium
+	var Button = function (_BaseComponent) {
+	    _inherits(Button, _BaseComponent);
+
+	    function Button() {
+	        _classCallCheck(this, Button);
+
+	        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+	    }
+
+	    _createClass(Button, [{
+	        key: "render",
+	        value: function render() {
+	            var _a = this.props,
+	                enabled = _a.enabled,
+	                text = _a.text,
+	                title = _a.title,
+	                className = _a.className,
+	                style = _a.style,
+	                size = _a.size,
+	                width = _a.width,
+	                height = _a.height,
+	                iconSize = _a.iconSize,
+	                iconPath = _a.iconPath,
+	                useOpacityForHover = _a.useOpacityForHover,
+	                hasCheckbox = _a.hasCheckbox,
+	                checked = _a.checked,
+	                checkboxStyle = _a.checkboxStyle,
+	                checkboxLabelStyle = _a.checkboxLabelStyle,
+	                onCheckedChanged = _a.onCheckedChanged,
+	                onLeftClick = _a.onLeftClick,
+	                children = _a.children,
+	                rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "iconSize", "iconPath", "useOpacityForHover", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
+	            width = width || size;
+	            height = height || size;
+	            var padding = "5px 15px";
+	            if (height) {
+	                var baseHeight = 20;
+	                var heightDifPerSide = (height - baseHeight) / 2;
+	                padding = heightDifPerSide + "px 15px";
+	            }
+	            var finalStyle = E(styles.root, useOpacityForHover && styles.root_opacityHover, { padding: padding }, (width || height) && {
+	                padding: 0, width: width, height: height,
+	                backgroundPosition: (width - iconSize) / 2 + "px " + (height - iconSize) / 2 + "px",
+	                backgroundSize: iconSize
+	            }, iconPath && { backgroundImage: "url(" + iconPath + ")" }, hasCheckbox && styles.root_hasCheckbox, !enabled && styles.root_disabled, style);
+	            // experimental pseudo-selector-capable styling system
+	            var pseudoSelectors = [":hover"];
+	            var currentPseudoSelectorStyleKeys = [];
+	            if (enabled) {
+	                var _iteratorNormalCompletion = true;
+	                var _didIteratorError = false;
+	                var _iteratorError = undefined;
+
+	                try {
+	                    for (var _iterator = pseudoSelectors[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                        var selector = _step.value;
+
+	                        if (finalStyle[selector] == null) continue;
+	                        var styleText = (0, _CSSPropertyOperations.createMarkupForStyles)(finalStyle[selector]);
+	                        var styleKey = (0, _General.ToJSON)(selector + "---" + styleText); // get a unique identifier for this particular pseudo-style
+	                        styleKey = styleKey.replace(/[^a-zA-Z0-9-]/g, ""); // make sure key is a valid class-name
+	                        currentPseudoSelectorStyleKeys.push(styleKey);
+	                        // if <style> element for the given style-composite has not been created yet, create it 
+	                        if (pseudoSelectorStyleKeys[styleKey] == null) {
+	                            pseudoSelectorStyleKeys[styleKey] = true;
+	                            (0, _reactVextensions.AddGlobalStyle)("\n\t\t\t.Button." + styleKey + selector + " {\n\t\t\t\t" + styleText.replace(/([^ ]+?);/g, "$1 !important;") + "\n\t\t\t}\n\t\t\t\t\t\t\t");
+	                        }
+	                    }
+	                } catch (err) {
+	                    _didIteratorError = true;
+	                    _iteratorError = err;
+	                } finally {
+	                    try {
+	                        if (!_iteratorNormalCompletion && _iterator.return) {
+	                            _iterator.return();
+	                        }
+	                    } finally {
+	                        if (_didIteratorError) {
+	                            throw _iteratorError;
+	                        }
+	                    }
+	                }
+	            }
+	            return React.createElement("div", Object.assign({}, rest, { title: title, onClick: this.OnClick, className: "Button " + currentPseudoSelectorStyleKeys.join(" ") + " " + (className || ""), style: finalStyle }), hasCheckbox ? React.createElement("span", { style: { verticalAlign: 4 } }, text) : text, children);
+	        }
+	    }, {
+	        key: "OnClick",
+	        value: function OnClick(e) {
+	            var _props = this.props,
+	                enabled = _props.enabled,
+	                onClick = _props.onClick,
+	                onLeftClick = _props.onLeftClick,
+	                onDirectClick = _props.onDirectClick;
+
+	            if (!enabled) return;
+	            if (onDirectClick && (e.target == e.currentTarget || e.target.parentElement == e.currentTarget)) onDirectClick(e);
+	            if (onClick) onClick(e);
+	            if (onLeftClick && e.button == 0) onLeftClick(e);
+	        }
+	    }]);
+
+	    return Button;
+	}(_reactVextensions.BaseComponent);
+	Button.defaultProps = { enabled: true };
+	exports.Button = Button = __decorate([_reactVextensions.ApplyBasicStyles], Button);
+	exports.Button = Button;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {/**
 	 * Copyright 2013-present, Facebook, Inc.
 	 * All rights reserved.
@@ -1697,15 +1829,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CSSProperty = __webpack_require__(8);
-	var ExecutionEnvironment = __webpack_require__(9);
-	var ReactInstrumentation = __webpack_require__(10);
+	var CSSProperty = __webpack_require__(9);
+	var ExecutionEnvironment = __webpack_require__(10);
+	var ReactInstrumentation = __webpack_require__(11);
 
-	var camelizeStyleName = __webpack_require__(24);
-	var dangerousStyleValue = __webpack_require__(26);
-	var hyphenateStyleName = __webpack_require__(27);
-	var memoizeStringOnly = __webpack_require__(29);
-	var warning = __webpack_require__(13);
+	var camelizeStyleName = __webpack_require__(25);
+	var dangerousStyleValue = __webpack_require__(27);
+	var hyphenateStyleName = __webpack_require__(28);
+	var memoizeStringOnly = __webpack_require__(30);
+	var warning = __webpack_require__(14);
 
 	var processStyleName = memoizeStringOnly(function (styleName) {
 	  return hyphenateStyleName(styleName);
@@ -1893,10 +2025,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	module.exports = CSSPropertyOperations;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -2082,7 +2214,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	/**
@@ -2234,7 +2366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = CSSProperty;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	/**
@@ -2274,7 +2406,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ExecutionEnvironment;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2295,15 +2427,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	var debugTool = null;
 
 	if (process.env.NODE_ENV !== 'production') {
-	  var ReactDebugTool = __webpack_require__(11);
+	  var ReactDebugTool = __webpack_require__(12);
 	  debugTool = ReactDebugTool;
 	}
 
 	module.exports = { debugTool: debugTool };
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2319,13 +2451,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ReactInvalidSetStateWarningHook = __webpack_require__(12);
-	var ReactHostOperationHistoryHook = __webpack_require__(15);
-	var ReactComponentTreeHook = __webpack_require__(16);
-	var ExecutionEnvironment = __webpack_require__(9);
+	var ReactInvalidSetStateWarningHook = __webpack_require__(13);
+	var ReactHostOperationHistoryHook = __webpack_require__(16);
+	var ReactComponentTreeHook = __webpack_require__(17);
+	var ExecutionEnvironment = __webpack_require__(10);
 
-	var performanceNow = __webpack_require__(22);
-	var warning = __webpack_require__(13);
+	var performanceNow = __webpack_require__(23);
+	var warning = __webpack_require__(14);
 
 	var hooks = [];
 	var didHookThrowForEvent = {};
@@ -2666,10 +2798,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = ReactDebugTool;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2685,7 +2817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var warning = __webpack_require__(13);
+	var warning = __webpack_require__(14);
 
 	if (process.env.NODE_ENV !== 'production') {
 	  var processingChildContext = false;
@@ -2708,10 +2840,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	module.exports = ReactInvalidSetStateWarningHook;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2726,7 +2858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(14);
+	var emptyFunction = __webpack_require__(15);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -2780,10 +2912,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = warning;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2826,7 +2958,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = emptyFunction;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	/**
@@ -2864,7 +2996,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactHostOperationHistoryHook;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2880,12 +3012,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _prodInvariant = __webpack_require__(17);
+	var _prodInvariant = __webpack_require__(18);
 
-	var ReactCurrentOwner = __webpack_require__(18);
+	var ReactCurrentOwner = __webpack_require__(19);
 
-	var invariant = __webpack_require__(19);
-	var warning = __webpack_require__(20);
+	var invariant = __webpack_require__(20);
+	var warning = __webpack_require__(21);
 
 	function isNative(fn) {
 	  // Based on isNative() from Lodash
@@ -3200,10 +3332,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	module.exports = ReactComponentTreeHook;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -3246,7 +3378,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = reactProdInvariant;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	/**
@@ -3281,7 +3413,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactCurrentOwner;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3339,10 +3471,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3357,7 +3489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(21);
+	var emptyFunction = __webpack_require__(22);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -3411,10 +3543,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = warning;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3457,7 +3589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = emptyFunction;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3473,7 +3605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	var performance = __webpack_require__(23);
+	var performance = __webpack_require__(24);
 
 	var performanceNow;
 
@@ -3495,33 +3627,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = performanceNow;
 
 /***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @typechecks
-	 */
-
-	'use strict';
-
-	var ExecutionEnvironment = __webpack_require__(9);
-
-	var performance;
-
-	if (ExecutionEnvironment.canUseDOM) {
-	  performance = window.performance || window.msPerformance || window.webkitPerformance;
-	}
-
-	module.exports = performance || {};
-
-/***/ },
 /* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -3538,7 +3643,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var camelize = __webpack_require__(25);
+	var ExecutionEnvironment = __webpack_require__(10);
+
+	var performance;
+
+	if (ExecutionEnvironment.canUseDOM) {
+	  performance = window.performance || window.msPerformance || window.webkitPerformance;
+	}
+
+	module.exports = performance || {};
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	var camelize = __webpack_require__(26);
 
 	var msPattern = /^-ms-/;
 
@@ -3566,7 +3698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camelizeStyleName;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3602,7 +3734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camelize;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3617,8 +3749,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CSSProperty = __webpack_require__(8);
-	var warning = __webpack_require__(13);
+	var CSSProperty = __webpack_require__(9);
+	var warning = __webpack_require__(14);
 
 	var isUnitlessNumber = CSSProperty.isUnitlessNumber;
 	var styleWarnings = {};
@@ -3683,10 +3815,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = dangerousStyleValue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3702,7 +3834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var hyphenate = __webpack_require__(28);
+	var hyphenate = __webpack_require__(29);
 
 	var msPattern = /^ms-/;
 
@@ -3729,7 +3861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = hyphenateStyleName;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3766,7 +3898,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = hyphenate;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	/**
@@ -3800,7 +3932,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = memoizeStringOnly;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3908,138 +4040,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
 	    console.warn("Assert-warn failed) " + message + "\n\nStackTrace)"); // ${GetStackTraceStr()}`);
 	}
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.Div = exports.Pre = exports.Span = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	var _reactVextensions = __webpack_require__(3);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
-	    var c = arguments.length,
-	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-	        d;
-	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __rest = undefined && undefined.__rest || function (s, e) {
-	    var t = {};
-	    for (var p in s) {
-	        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-	    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-	        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-	    }return t;
-	};
-
-	function Global(target) {
-	    Object.assign(window, _defineProperty({}, target.name, target));
-	}
-	var Span = function (_BaseComponent) {
-	    _inherits(Span, _BaseComponent);
-
-	    function Span() {
-	        _classCallCheck(this, Span);
-
-	        return _possibleConstructorReturn(this, (Span.__proto__ || Object.getPrototypeOf(Span)).apply(this, arguments));
-	    }
-
-	    _createClass(Span, [{
-	        key: "render",
-	        value: function render() {
-	            var _a = this.props,
-	                pre = _a.pre,
-	                style = _a.style,
-	                rest = __rest(_a, ["pre", "style"]);
-	            return React.createElement("span", Object.assign({}, rest, { style: E(style, pre && { whiteSpace: "pre" }) }));
-	        }
-	    }]);
-
-	    return Span;
-	}(_reactVextensions.BaseComponent);
-	exports.Span = Span = __decorate([Global,
-	//@SimpleShouldUpdate_Overridable // we can't make these "pure", as their children may need updating
-
-	_reactVextensions.ApplyBasicStyles], Span);
-	exports.Span = Span;
-
-	var Pre = function (_BaseComponent2) {
-	    _inherits(Pre, _BaseComponent2);
-
-	    function Pre() {
-	        _classCallCheck(this, Pre);
-
-	        return _possibleConstructorReturn(this, (Pre.__proto__ || Object.getPrototypeOf(Pre)).apply(this, arguments));
-	    }
-
-	    _createClass(Pre, [{
-	        key: "render",
-	        value: function render() {
-	            var _a = this.props,
-	                allowWrap = _a.allowWrap,
-	                style = _a.style,
-	                children = _a.children,
-	                rest = __rest(_a, ["allowWrap", "style", "children"]);
-	            return React.createElement("span", Object.assign({}, rest, { style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
-	        }
-	    }]);
-
-	    return Pre;
-	}(_reactVextensions.BaseComponent);
-	exports.Pre = Pre = __decorate([Global, _reactVextensions.ApplyBasicStyles], Pre);
-	exports.Pre = Pre;
-
-	var Div = function (_BaseComponent3) {
-	    _inherits(Div, _BaseComponent3);
-
-	    function Div() {
-	        _classCallCheck(this, Div);
-
-	        return _possibleConstructorReturn(this, (Div.__proto__ || Object.getPrototypeOf(Div)).apply(this, arguments));
-	    }
-
-	    _createClass(Div, [{
-	        key: "shouldComponentUpdate",
-	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            var shouldUpdate = this.props.shouldUpdate;
-
-	            return shouldUpdate ? shouldUpdate(nextProps, nextState) : true;
-	            //return (shouldUpdate && shouldUpdate(nextProps, nextState)) || ShallowCompare(this, nextProps, nextState);
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            var _a = this.props,
-	                shouldUpdate = _a.shouldUpdate,
-	                style = _a.style,
-	                rest = __rest(_a, ["shouldUpdate", "style"]);
-	            return React.createElement("div", Object.assign({}, rest, { style: style }));
-	        }
-	    }]);
-
-	    return Div;
-	}(_reactVextensions.BaseComponent);
-	exports.Div = Div = __decorate([Global, _reactVextensions.ApplyBasicStyles], Div);
-	exports.Div = Div;
 
 /***/ },
 /* 32 */
@@ -4505,7 +4505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactVextensions = __webpack_require__(3);
 
-	var _General = __webpack_require__(30);
+	var _General = __webpack_require__(31);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5451,7 +5451,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = TextareaAutosize;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 41 */
@@ -5486,7 +5486,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  module.exports = __webpack_require__(49)();
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 42 */
@@ -6035,7 +6035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return ReactPropTypes;
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 43 */
@@ -6135,7 +6135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 45 */
@@ -6203,7 +6203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = warning;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 46 */
@@ -6383,7 +6383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = checkPropTypes;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 49 */

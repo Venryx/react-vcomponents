@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-export default class Row extends BaseComponent<{
+export declare class Row extends BaseComponent<{
     style?;
 } & React.HTMLProps<HTMLDivElement>, {}> {
     render(): JSX.Element;

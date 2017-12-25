@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-export default class Spinner extends BaseComponent<{
+export declare class Spinner extends BaseComponent<{
     step?;
     min?;
     max?;

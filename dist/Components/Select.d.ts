@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-export default class Select extends BaseComponent<{
+export declare class Select extends BaseComponent<{
     options: {
         name: string;
         value;

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-export default class DropDown extends BaseComponent<{
+export declare class DropDown extends BaseComponent<{
     className?;
     onShow?;
     onHide?;
