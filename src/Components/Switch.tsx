@@ -1,7 +1,7 @@
 import React from "react";
 import {BaseComponent} from "react-vextensions";
 
-export class Switch extends BaseComponent<{preferLater: boolean}, {}> {
+export class Switch extends BaseComponent<{preferLater?: boolean}, {}> {
 	static defaultProps = {preferLater: true};
 	render() {
 		let {preferLater, children} = this.props;
