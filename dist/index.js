@@ -3956,10 +3956,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.RemoveDuplicates = RemoveDuplicates;
 	exports.Assert = Assert;
 	exports.AssertWarn = AssertWarn;
-	function G(entries) {
-	    Object.assign(window, entries);
-	}
-	G({ E: E });
 	function E(e1, e2, e3, e4, e5, e6, e7, e8) {
 	    var result = {};
 	    var _iteratorNormalCompletion = true;
@@ -4027,7 +4023,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return result;
 	}
-	G({ Assert: Assert });
 	function Assert(condition, messageOrMessageFunc) {
 	    if (condition) return;
 	    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
@@ -4036,7 +4031,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    debugger;
 	    throw new Error("Assert failed) " + message);
 	}
-	G({ AssertWarn: AssertWarn });
 	function AssertWarn(condition, messageOrMessageFunc) {
 	    if (condition) return;
 	    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
@@ -4183,6 +4177,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactVextensions = __webpack_require__(4);
 
+	var _General = __webpack_require__(32);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4283,7 +4279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                rightStyle = _a.rightStyle,
 	                children = _a.children,
 	                rest = __rest(_a, ["splitAt", "height", "className", "style", "leftStyle", "rightStyle", "children"]);
-	            Assert(children.length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
+	            (0, _General.Assert)(children.length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
 	            return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexShrink: 0 }, style) }), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, children[1]));
 	        }
 	    }]);
@@ -4695,7 +4691,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: "GetSelectedOption",
 	        value: function GetSelectedOption() {
-	            Assert(this.props.displayType == "dropdown");
+	            (0, _General.Assert)(this.props.displayType == "dropdown");
 	            var selectedIndex = (0, _reactVextensions.FindDOM)(this.refs.root).selectedIndex;
 	            return this.OptionsList[selectedIndex];
 	        }
@@ -4721,7 +4717,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _onChange = _props.onChange;
 
 	            var options = this.OptionsList;
-	            Assert((0, _General.RemoveDuplicates)(options.map(function (a) {
+	            (0, _General.Assert)((0, _General.RemoveDuplicates)(options.map(function (a) {
 	                return a.name;
 	            })).length == options.length, function () {
 	                var optionsWithNonUniqueNames = options.filter(function (a) {
@@ -4736,7 +4732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var valueValid = this.GetIndexOfValue(value) != -1;
 	            // if there are no options yet, or value provided is null, don't require match, since this may be a pre-data render
 	            if (options.length && value != null && verifyValue) {
-	                AssertWarn(valueValid, "Select's value must match one of the options. @options(" + options.map(function (a) {
+	                (0, _General.AssertWarn)(valueValid, "Select's value must match one of the options. @options(" + options.map(function (a) {
 	                    return a.name + ":" + a.value;
 	                }).join(", ") + ") @value(" + value + ")");
 	            }

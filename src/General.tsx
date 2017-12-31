@@ -1,9 +1,4 @@
-function G(entries) {
-	Object.assign(window, entries);
-}
-
-G({E}); declare global { function E		<E1,E2,E3,E4,E5,E6,E7,E8>(e1?:E1,e2?:E2,e3?:E3,e4?:E4,e5?:E5,e6?:E6,e7?:E7,e8?:E8):E1&E2&E3&E4&E5&E6&E7&E8; }
-export function E								<E1,E2,E3,E4,E5,E6,E7,E8>(e1?:E1,e2?:E2,e3?:E3,e4?:E4,e5?:E5,e6?:E6,e7?:E7,e8?:E8):E1&E2&E3&E4&E5&E6&E7&E8 {
+export function E<E1,E2,E3,E4,E5,E6,E7,E8>(e1?:E1,e2?:E2,e3?:E3,e4?:E4,e5?:E5,e6?:E6,e7?:E7,e8?:E8):E1&E2&E3&E4&E5&E6&E7&E8 {
 	var result = {} as any;
 	for (var extend of arguments)
 		result.Extend(extend);
@@ -24,7 +19,6 @@ export function RemoveDuplicates(items: any) {
 	return result;
 }
 
-G({Assert}); declare global { function Assert(condition, messageOrMessageFunc?: string | Function); }
 export function Assert(condition, messageOrMessageFunc?: string | Function) {
 	if (condition) return;
 
@@ -35,7 +29,6 @@ export function Assert(condition, messageOrMessageFunc?: string | Function) {
 	debugger;
 	throw new Error("Assert failed) " + message);
 }
-G({AssertWarn}); declare global { function AssertWarn(condition, messageOrMessageFunc?: string | Function); }
 export function AssertWarn(condition, messageOrMessageFunc?: string | Function) {
 	if (condition) return;
 
