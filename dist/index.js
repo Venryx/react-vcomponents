@@ -3765,7 +3765,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                preferLater = _props.preferLater,
 	                children = _props.children;
 
-	            var existentChildren = children.filter(function (a) {
+	            var existentChildren = this.FlattenedChildren.filter(function (a) {
 	                return !!a;
 	            });
 	            return preferLater ? existentChildren[existentChildren.length - 1] : existentChildren[0];

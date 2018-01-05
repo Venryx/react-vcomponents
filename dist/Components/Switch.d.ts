@@ -5,5 +5,5 @@ export declare class Switch extends BaseComponent<{
     static defaultProps: {
         preferLater: boolean;
     };
-    render(): any;
+    render(): JSX.Element;
 }
