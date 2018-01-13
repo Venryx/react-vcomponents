@@ -2846,6 +2846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return CheckBox;
 	}(_reactVextensions.BaseComponent);
+	CheckBox.defaultProps = { enabled: true };
 	CheckBox.lastID = -1;
 	exports.CheckBox = CheckBox = CheckBox_1 = __decorate([_reactVextensions.ApplyBasicStyles], CheckBox);
 	exports.CheckBox = CheckBox;

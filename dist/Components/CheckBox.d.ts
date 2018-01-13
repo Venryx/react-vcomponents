@@ -12,6 +12,9 @@ export declare class CheckBox extends BaseComponent<{
 }, {
     editedValue: boolean;
 }> {
+    static defaultProps: {
+        enabled: boolean;
+    };
     static lastID: number;
     constructor(props: any);
     id: any;

@@ -8,12 +8,13 @@ export class CheckBox extends BaseComponent
 			text?, title?, checked: boolean, indeterminate?: boolean,
 			enabled?: boolean, style?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void},
 		{editedValue: boolean}> {
+	static defaultProps = {enabled: true};
 	static lastID = -1;
 	
-    constructor(props) {
-        super(props);
-        this.id = ++CheckBox.lastID;
-    }
+	constructor(props) {
+		super(props);
+		this.id = ++CheckBox.lastID;
+	}
 
 	id;
 	input: HTMLInputElement;
