@@ -22,7 +22,7 @@ export class CheckBox extends BaseComponent
 		let {editedValue} = this.state;
 		return (
 			<Row style={E({position: "relative"}, style)}>
-				<input ref={c=>this.input = c} id={"checkBox_" + this.id} type="checkbox" checked={checked}
+				<input ref={c=>this.input = c} id={"checkBox_" + this.id} type="checkbox" disabled={!enabled} checked={checked}
 					onChange={e=>onChange && onChange(this.input.checked, e)}/>
 				<label htmlFor={"checkBox_" + this.id} title={title} style={E({marginLeft: 3}, labelStyle)}><span/>{text}</label>
 			</Row>

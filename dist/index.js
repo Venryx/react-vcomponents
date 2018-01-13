@@ -2826,7 +2826,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(_Row.Row, { style: E({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
 	                    return _this2.input = c;
-	                }, id: "checkBox_" + this.id, type: "checkbox", checked: checked, onChange: function onChange(e) {
+	                }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked, onChange: function onChange(e) {
 	                    return _onChange && _onChange(_this2.input.checked, e);
 	                } }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: E({ marginLeft: 3 }, labelStyle) }, _react2.default.createElement("span", null), text));
 	        }
