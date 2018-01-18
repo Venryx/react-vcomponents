@@ -9,6 +9,7 @@ export declare class TextArea extends BaseComponent<{
     style?;
     onChange?: (newVal, event) => void;
     delayChangeTillDefocus?: boolean;
+    useEscape?: boolean;
 } & React.HTMLProps<HTMLTextAreaElement>, {
     editedValue: string;
 }> {
@@ -21,6 +22,10 @@ export declare class TextArea_AutoSize extends BaseComponent<{
     enabled?: boolean;
     style?;
     onChange?;
-} & React.HTMLProps<HTMLTextAreaElement>, {}> {
+    delayChangeTillDefocus?: boolean;
+    useEscape?: boolean;
+} & React.HTMLProps<HTMLTextAreaElement>, {
+    editedValue: string;
+}> {
     render(): JSX.Element;
 }

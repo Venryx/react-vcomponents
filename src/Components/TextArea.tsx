@@ -1,6 +1,7 @@
 import React from "react";
 import {BaseComponent} from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
+import * as keycode from "keycode";
 
 var styles = {
 	root: {
@@ -31,15 +32,13 @@ var styles = {
 export class TextArea extends BaseComponent
 		<{
 			value?, defaultValue?, editable?, className?, style?, onChange?: (newVal, event)=>void,
-			delayChangeTillDefocus?: boolean,
+			delayChangeTillDefocus?: boolean, useEscape?: boolean,
 		} & React.HTMLProps<HTMLTextAreaElement>,
 		{editedValue: string}> {
-	static defaultProps = {
-		editable: true
-	};
+	static defaultProps = {editable: true};
 	
 	render() {
-		var {value, defaultValue, editable, className, style, onChange, delayChangeTillDefocus, ...rest} = this.props;
+		var {value, defaultValue, editable, className, style, onChange, delayChangeTillDefocus, useEscape, ...rest} = this.props;
 		var {editedValue} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
@@ -66,12 +65,39 @@ export class TextArea extends BaseComponent
 	}
 }
 
-export class TextArea_AutoSize extends BaseComponent<{enabled?: boolean, style?, onChange?} & React.HTMLProps<HTMLTextAreaElement>, {}> {
+export class TextArea_AutoSize extends BaseComponent
+		<{enabled?: boolean, style?, onChange?, delayChangeTillDefocus?: boolean, useEscape?: boolean} & React.HTMLProps<HTMLTextAreaElement>,
+		{editedValue: string}> {
 	render() {
-		var {enabled, style, onChange, ...rest} = this.props;
+		let {value, defaultValue, enabled, style, onChange, delayChangeTillDefocus, useEscape, onKeyDown, ...rest} = this.props;
+		let {editedValue} = this.state;
+
+		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
+		if (defaultValue === undefined && value == null) value = "";
+
 		return (
 			<TextAreaAutoSize {...rest} ref="root" disabled={enabled == false} style={E({resize: "none"}, style)}
-				onChange={e=>onChange(this.refs.root.value)}/>
+				value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
+				onChange={e=> {
+					var newVal = e.target.value;
+					if (delayChangeTillDefocus) {
+						this.SetState({editedValue: newVal});
+					} else {
+						onChange(newVal, e);
+						this.SetState({editedValue: null});
+					}
+				}}
+				onBlur={e=> {
+					var newVal = e.target["value"];
+					if (delayChangeTillDefocus && onChange) {
+						onChange(newVal, e);
+						this.SetState({editedValue: null});
+					}
+				}}
+				onKeyDown={e=> {
+					if (useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
+					if (onKeyDown) return onKeyDown(e);
+				}}/>
 		);
 	}
 }

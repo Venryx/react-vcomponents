@@ -3801,6 +3801,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactTextareaAutosize2 = _interopRequireDefault(_reactTextareaAutosize);
 
+	var _keycode = __webpack_require__(51);
+
+	var keycode = _interopRequireWildcard(_keycode);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3863,7 +3869,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                style = _a.style,
 	                _onChange = _a.onChange,
 	                delayChangeTillDefocus = _a.delayChangeTillDefocus,
-	                rest = __rest(_a, ["value", "defaultValue", "editable", "className", "style", "onChange", "delayChangeTillDefocus"]);var editedValue = this.state.editedValue;
+	                useEscape = _a.useEscape,
+	                rest = __rest(_a, ["value", "defaultValue", "editable", "className", "style", "onChange", "delayChangeTillDefocus", "useEscape"]);var editedValue = this.state.editedValue;
 	            // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 
 	            if (defaultValue === undefined && value == null) value = "";
@@ -3888,9 +3895,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return TextArea;
 	}(_reactVextensions.BaseComponent);
 
-	TextArea.defaultProps = {
-	    editable: true
-	};
+	TextArea.defaultProps = { editable: true };
 
 	var TextArea_AutoSize = exports.TextArea_AutoSize = function (_BaseComponent2) {
 	    _inherits(TextArea_AutoSize, _BaseComponent2);
@@ -3907,12 +3912,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _this4 = this;
 
 	            var _a = this.props,
+	                value = _a.value,
+	                defaultValue = _a.defaultValue,
 	                enabled = _a.enabled,
 	                style = _a.style,
 	                _onChange2 = _a.onChange,
-	                rest = __rest(_a, ["enabled", "style", "onChange"]);
-	            return _react2.default.createElement(_reactTextareaAutosize2.default, Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ resize: "none" }, style), onChange: function onChange(e) {
-	                    return _onChange2(_this4.refs.root.value);
+	                delayChangeTillDefocus = _a.delayChangeTillDefocus,
+	                useEscape = _a.useEscape,
+	                _onKeyDown = _a.onKeyDown,
+	                rest = __rest(_a, ["value", "defaultValue", "enabled", "style", "onChange", "delayChangeTillDefocus", "useEscape", "onKeyDown"]);var editedValue = this.state.editedValue;
+	            // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
+
+	            if (defaultValue === undefined && value == null) value = "";
+	            return _react2.default.createElement(_reactTextareaAutosize2.default, Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ resize: "none" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+	                    var newVal = e.target.value;
+	                    if (delayChangeTillDefocus) {
+	                        _this4.SetState({ editedValue: newVal });
+	                    } else {
+	                        _onChange2(newVal, e);
+	                        _this4.SetState({ editedValue: null });
+	                    }
+	                }, onBlur: function onBlur(e) {
+	                    var newVal = e.target["value"];
+	                    if (delayChangeTillDefocus && _onChange2) {
+	                        _onChange2(newVal, e);
+	                        _this4.SetState({ editedValue: null });
+	                    }
+	                }, onKeyDown: function onKeyDown(e) {
+	                    if (useEscape && e.keyCode == keycode.codes.esc) return void _this4.SetState({ editedValue: null });
+	                    if (_onKeyDown) return _onKeyDown(e);
 	                } }));
 	        }
 	    }]);

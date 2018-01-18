@@ -5,7 +5,6 @@ export declare class TextInput extends BaseComponent<{
     value: string;
     enabled?: boolean;
     onChange?: (newVal, event) => void;
-    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => any;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
     style?;

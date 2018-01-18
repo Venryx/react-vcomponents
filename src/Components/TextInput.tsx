@@ -5,7 +5,7 @@ import * as keycode from "keycode";
 @ApplyBasicStyles
 export class TextInput extends BaseComponent
 		<{
-			value: string, enabled?: boolean, onChange?: (newVal, event)=>void, onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>)=>any,
+			value: string, enabled?: boolean, onChange?: (newVal, event)=>void,
 			delayChangeTillDefocus?: boolean, useEscape?: boolean,
 			style?
 		} & React.HTMLProps<HTMLInputElement>,
