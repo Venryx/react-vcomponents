@@ -187,7 +187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _TextInput = __webpack_require__(50);
+	var _TextInput = __webpack_require__(51);
 
 	Object.keys(_TextInput).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -3801,7 +3801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactTextareaAutosize2 = _interopRequireDefault(_reactTextareaAutosize);
 
-	var _keycode = __webpack_require__(51);
+	var _keycode = __webpack_require__(50);
 
 	var keycode = _interopRequireWildcard(_keycode);
 
@@ -3917,15 +3917,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	                enabled = _a.enabled,
 	                style = _a.style,
 	                _onChange2 = _a.onChange,
+	                allowLineBreaks = _a.allowLineBreaks,
 	                delayChangeTillDefocus = _a.delayChangeTillDefocus,
 	                useEscape = _a.useEscape,
 	                _onKeyDown = _a.onKeyDown,
-	                rest = __rest(_a, ["value", "defaultValue", "enabled", "style", "onChange", "delayChangeTillDefocus", "useEscape", "onKeyDown"]);var editedValue = this.state.editedValue;
+	                rest = __rest(_a, ["value", "defaultValue", "enabled", "style", "onChange", "allowLineBreaks", "delayChangeTillDefocus", "useEscape", "onKeyDown"]);var editedValue = this.state.editedValue;
 	            // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 
 	            if (defaultValue === undefined && value == null) value = "";
-	            return _react2.default.createElement(_reactTextareaAutosize2.default, Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ resize: "none" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+	            return _react2.default.createElement(_reactTextareaAutosize2.default, Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ resize: "none", overflow: "hidden" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
 	                    var newVal = e.target.value;
+	                    if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
+	                    if (newVal == editedValue) return; // if no text change, ignore event
 	                    if (delayChangeTillDefocus) {
 	                        _this4.SetState({ editedValue: newVal });
 	                    } else {
@@ -3947,6 +3950,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return TextArea_AutoSize;
 	}(_reactVextensions.BaseComponent);
+
+	TextArea_AutoSize.defaultProps = { allowLineBreaks: true };
 
 /***/ },
 /* 40 */
@@ -5350,143 +5355,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.TextInput = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactVextensions = __webpack_require__(4);
-
-	var _keycode = __webpack_require__(51);
-
-	var keycode = _interopRequireWildcard(_keycode);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
-	    var c = arguments.length,
-	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-	        d;
-	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __rest = undefined && undefined.__rest || function (s, e) {
-	    var t = {};
-	    for (var p in s) {
-	        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-	    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-	        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-	    }return t;
-	};
-
-	var TextInput = function (_BaseComponent) {
-	    _inherits(TextInput, _BaseComponent);
-
-	    function TextInput() {
-	        _classCallCheck(this, TextInput);
-
-	        return _possibleConstructorReturn(this, (TextInput.__proto__ || Object.getPrototypeOf(TextInput)).apply(this, arguments));
-	    }
-
-	    _createClass(TextInput, [{
-	        key: "render",
-
-	        /*ComponentWillReceiveProps(props) {
-	            // if value changing, and "delayChangeTillDefocus" is not enabled
-	            if (!props.delayChangeTillDefocus && props.value != this.props.value) {
-	                this.SetState({editedValue: null});
-	            }
-	        }*/
-	        value: function render() {
-	            var _this2 = this;
-
-	            var _a = this.props,
-	                value = _a.value,
-	                enabled = _a.enabled,
-	                _onChange = _a.onChange,
-	                _onKeyDown = _a.onKeyDown,
-	                delayChangeTillDefocus = _a.delayChangeTillDefocus,
-	                useEscape = _a.useEscape,
-	                style = _a.style,
-	                rest = __rest(_a, ["value", "enabled", "onChange", "onKeyDown", "delayChangeTillDefocus", "useEscape", "style"]);var editedValue = this.state.editedValue;
-
-	            return _react2.default.createElement("input", Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
-	                    var newVal = e.target.value;
-	                    if (delayChangeTillDefocus) {
-	                        _this2.SetState({ editedValue: newVal });
-	                    } else {
-	                        _onChange(newVal, e);
-	                        _this2.SetState({ editedValue: null });
-	                    }
-	                }, onBlur: function onBlur(e) {
-	                    var newVal = e.target["value"];
-	                    if (delayChangeTillDefocus && _onChange) {
-	                        _onChange(newVal, e);
-	                        _this2.SetState({ editedValue: null });
-	                    }
-	                }, onKeyDown: function onKeyDown(e) {
-	                    if (useEscape && e.keyCode == keycode.codes.esc) return void _this2.SetState({ editedValue: null });
-	                    if (_onKeyDown) return _onKeyDown(e);
-	                } }));
-	        }
-	    }, {
-	        key: "GetValue",
-	        value: function GetValue() {
-	            return this.refs.root.value;
-	        }
-	    }]);
-
-	    return TextInput;
-	}(_reactVextensions.BaseComponent);
-	TextInput.defaultProps = { type: "text" };
-	exports.TextInput = TextInput = __decorate([_reactVextensions.ApplyBasicStyles], TextInput);
-	exports.TextInput = TextInput;
-	/*export class TextInput_Auto extends BaseComponent<
-	        {style?, delayChangeTillDefocus?,
-	            path: ()=>any, onChange?: (val: string)=>void}, {}> {
-	    ComponentWillMountOrReceiveProps(props) {
-	        var {path} = props;
-	        let {node, key: propName} = path();
-	        this.AddChangeListeners(node,
-	            (propName + "_PostSet").Func(this.Update),
-	        );
-	    }
-
-	    render() {
-	        var {path, onChange, ...rest} = this.props;
-	        let {node, key: propName} = path();
-	        return (
-	            <TextInput {...rest} value={node[propName]} onChange={val=> {
-	                node.a(propName).set = val;
-	                if (onChange) onChange(val);
-	            }}/>
-	        );
-	    }
-	}*/
-
-/***/ },
-/* 51 */
 /***/ function(module, exports) {
 
 	// Source: http://jsfiddle.net/vWx8V/
@@ -5636,6 +5504,143 @@ return /******/ (function(modules) { // webpackBootstrap
 	  codes[alias] = aliases[alias]
 	}
 
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.TextInput = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactVextensions = __webpack_require__(4);
+
+	var _keycode = __webpack_require__(50);
+
+	var keycode = _interopRequireWildcard(_keycode);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+	    var c = arguments.length,
+	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+	        d;
+	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __rest = undefined && undefined.__rest || function (s, e) {
+	    var t = {};
+	    for (var p in s) {
+	        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+	    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+	        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+	    }return t;
+	};
+
+	var TextInput = function (_BaseComponent) {
+	    _inherits(TextInput, _BaseComponent);
+
+	    function TextInput() {
+	        _classCallCheck(this, TextInput);
+
+	        return _possibleConstructorReturn(this, (TextInput.__proto__ || Object.getPrototypeOf(TextInput)).apply(this, arguments));
+	    }
+
+	    _createClass(TextInput, [{
+	        key: "render",
+
+	        /*ComponentWillReceiveProps(props) {
+	            // if value changing, and "delayChangeTillDefocus" is not enabled
+	            if (!props.delayChangeTillDefocus && props.value != this.props.value) {
+	                this.SetState({editedValue: null});
+	            }
+	        }*/
+	        value: function render() {
+	            var _this2 = this;
+
+	            var _a = this.props,
+	                value = _a.value,
+	                enabled = _a.enabled,
+	                _onChange = _a.onChange,
+	                _onKeyDown = _a.onKeyDown,
+	                delayChangeTillDefocus = _a.delayChangeTillDefocus,
+	                useEscape = _a.useEscape,
+	                style = _a.style,
+	                rest = __rest(_a, ["value", "enabled", "onChange", "onKeyDown", "delayChangeTillDefocus", "useEscape", "style"]);var editedValue = this.state.editedValue;
+
+	            return _react2.default.createElement("input", Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
+	                    var newVal = e.target.value;
+	                    if (delayChangeTillDefocus) {
+	                        _this2.SetState({ editedValue: newVal });
+	                    } else {
+	                        _onChange(newVal, e);
+	                        _this2.SetState({ editedValue: null });
+	                    }
+	                }, onBlur: function onBlur(e) {
+	                    var newVal = e.target["value"];
+	                    if (delayChangeTillDefocus && _onChange) {
+	                        _onChange(newVal, e);
+	                        _this2.SetState({ editedValue: null });
+	                    }
+	                }, onKeyDown: function onKeyDown(e) {
+	                    if (useEscape && e.keyCode == keycode.codes.esc) return void _this2.SetState({ editedValue: null });
+	                    if (_onKeyDown) return _onKeyDown(e);
+	                } }));
+	        }
+	    }, {
+	        key: "GetValue",
+	        value: function GetValue() {
+	            return this.refs.root.value;
+	        }
+	    }]);
+
+	    return TextInput;
+	}(_reactVextensions.BaseComponent);
+	TextInput.defaultProps = { type: "text" };
+	exports.TextInput = TextInput = __decorate([_reactVextensions.ApplyBasicStyles], TextInput);
+	exports.TextInput = TextInput;
+	/*export class TextInput_Auto extends BaseComponent<
+	        {style?, delayChangeTillDefocus?,
+	            path: ()=>any, onChange?: (val: string)=>void}, {}> {
+	    ComponentWillMountOrReceiveProps(props) {
+	        var {path} = props;
+	        let {node, key: propName} = path();
+	        this.AddChangeListeners(node,
+	            (propName + "_PostSet").Func(this.Update),
+	        );
+	    }
+
+	    render() {
+	        var {path, onChange, ...rest} = this.props;
+	        let {node, key: propName} = path();
+	        return (
+	            <TextInput {...rest} value={node[propName]} onChange={val=> {
+	                node.a(propName).set = val;
+	                if (onChange) onChange(val);
+	            }}/>
+	        );
+	    }
+	}*/
 
 /***/ }
 /******/ ])

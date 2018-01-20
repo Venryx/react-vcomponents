@@ -66,20 +66,24 @@ export class TextArea extends BaseComponent
 }
 
 export class TextArea_AutoSize extends BaseComponent
-		<{enabled?: boolean, style?, onChange?, delayChangeTillDefocus?: boolean, useEscape?: boolean} & React.HTMLProps<HTMLTextAreaElement>,
+		<{enabled?: boolean, style?, onChange?, allowLineBreaks?: boolean, delayChangeTillDefocus?: boolean, useEscape?: boolean} & React.HTMLProps<HTMLTextAreaElement>,
 		{editedValue: string}> {
+	static defaultProps = {allowLineBreaks: true};
 	render() {
-		let {value, defaultValue, enabled, style, onChange, delayChangeTillDefocus, useEscape, onKeyDown, ...rest} = this.props;
+		let {value, defaultValue, enabled, style, onChange, allowLineBreaks, delayChangeTillDefocus, useEscape, onKeyDown, ...rest} = this.props;
 		let {editedValue} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 		if (defaultValue === undefined && value == null) value = "";
 
 		return (
-			<TextAreaAutoSize {...rest} ref="root" disabled={enabled == false} style={E({resize: "none"}, style)}
+			<TextAreaAutoSize {...rest} ref="root" disabled={enabled == false} style={E({resize: "none", overflow: "hidden"}, style)}
 				value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
 				onChange={e=> {
 					var newVal = e.target.value;
+					if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
+					if (newVal == editedValue) return; // if no text change, ignore event
+
 					if (delayChangeTillDefocus) {
 						this.SetState({editedValue: newVal});
 					} else {
