@@ -31,23 +31,31 @@ var styles = {
 
 export class TextArea extends BaseComponent
 		<{
-			value?, defaultValue?, editable?, className?, style?, onChange?: (newVal, event)=>void,
+			enabled?: boolean, editable?: boolean, className?: string, style?, onChange?: (newVal, event)=>void,
 			delayChangeTillDefocus?: boolean, useEscape?: boolean,
 		} & React.HTMLProps<HTMLTextAreaElement>,
 		{editedValue: string}> {
 	static defaultProps = {editable: true};
 	
 	render() {
-		var {value, defaultValue, editable, className, style, onChange, delayChangeTillDefocus, useEscape, ...rest} = this.props;
+		var {value, defaultValue, pattern, enabled, editable, className, style, onChange, delayChangeTillDefocus, useEscape, ...rest} = this.props;
 		var {editedValue} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 		if (defaultValue === undefined && value == null) value = "";
 
-		return <textarea {...rest} ref="root" readOnly={!editable} className={"simpleText selectable " + className} style={E(styles.root, style)}
+		return <textarea {...rest} ref="root" disabled={enabled == false} readOnly={!editable} className={"simpleText selectable " + className} style={E(styles.root, style)}
 			value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
 			onChange={e=> {
 				var newVal = e.target.value;
+
+				if (pattern) {
+					let valid = newVal.match(pattern) != null;
+					if (this.DOM && this.DOM["setCustomValidity"]) {
+						this.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
+					}
+				}
+
 				if (delayChangeTillDefocus) {
 					this.SetState({editedValue: newVal});
 				} else {
@@ -70,7 +78,7 @@ export class TextArea_AutoSize extends BaseComponent
 		{editedValue: string}> {
 	static defaultProps = {allowLineBreaks: true};
 	render() {
-		let {value, defaultValue, enabled, style, onChange, allowLineBreaks, delayChangeTillDefocus, useEscape, onKeyDown, ...rest} = this.props;
+		let {value, defaultValue, enabled, pattern, style, onChange, allowLineBreaks, delayChangeTillDefocus, useEscape, onKeyDown, ...rest} = this.props;
 		let {editedValue} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
@@ -78,11 +86,18 @@ export class TextArea_AutoSize extends BaseComponent
 
 		return (
 			<TextAreaAutoSize {...rest} ref="root" disabled={enabled == false} style={E({resize: "none", overflow: "hidden"}, style)}
-				value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
+				value={editedValue != null ? editedValue : value} defaultValue={defaultValue}
 				onChange={e=> {
 					var newVal = e.target.value;
 					if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
 					if (newVal == editedValue) return; // if no text change, ignore event
+
+					if (pattern) {
+						let valid = newVal.match(pattern) != null;
+						if (this.DOM && this.DOM["setCustomValidity"]) {
+							this.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
+						}
+					}
 
 					if (delayChangeTillDefocus) {
 						this.SetState({editedValue: newVal});

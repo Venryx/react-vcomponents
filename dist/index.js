@@ -3864,18 +3864,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _a = this.props,
 	                value = _a.value,
 	                defaultValue = _a.defaultValue,
+	                pattern = _a.pattern,
+	                enabled = _a.enabled,
 	                editable = _a.editable,
 	                className = _a.className,
 	                style = _a.style,
 	                _onChange = _a.onChange,
 	                delayChangeTillDefocus = _a.delayChangeTillDefocus,
 	                useEscape = _a.useEscape,
-	                rest = __rest(_a, ["value", "defaultValue", "editable", "className", "style", "onChange", "delayChangeTillDefocus", "useEscape"]);var editedValue = this.state.editedValue;
+	                rest = __rest(_a, ["value", "defaultValue", "pattern", "enabled", "editable", "className", "style", "onChange", "delayChangeTillDefocus", "useEscape"]);var editedValue = this.state.editedValue;
 	            // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 
 	            if (defaultValue === undefined && value == null) value = "";
-	            return _react2.default.createElement("textarea", Object.assign({}, rest, { ref: "root", readOnly: !editable, className: "simpleText selectable " + className, style: E(styles.root, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+	            return _react2.default.createElement("textarea", Object.assign({}, rest, { ref: "root", disabled: enabled == false, readOnly: !editable, className: "simpleText selectable " + className, style: E(styles.root, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
 	                    var newVal = e.target.value;
+	                    if (pattern) {
+	                        var valid = newVal.match(pattern) != null;
+	                        if (_this2.DOM && _this2.DOM["setCustomValidity"]) {
+	                            _this2.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
+	                        }
+	                    }
 	                    if (delayChangeTillDefocus) {
 	                        _this2.SetState({ editedValue: newVal });
 	                    } else {
@@ -3915,13 +3923,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                value = _a.value,
 	                defaultValue = _a.defaultValue,
 	                enabled = _a.enabled,
+	                pattern = _a.pattern,
 	                style = _a.style,
 	                _onChange2 = _a.onChange,
 	                allowLineBreaks = _a.allowLineBreaks,
 	                delayChangeTillDefocus = _a.delayChangeTillDefocus,
 	                useEscape = _a.useEscape,
 	                _onKeyDown = _a.onKeyDown,
-	                rest = __rest(_a, ["value", "defaultValue", "enabled", "style", "onChange", "allowLineBreaks", "delayChangeTillDefocus", "useEscape", "onKeyDown"]);var editedValue = this.state.editedValue;
+	                rest = __rest(_a, ["value", "defaultValue", "enabled", "pattern", "style", "onChange", "allowLineBreaks", "delayChangeTillDefocus", "useEscape", "onKeyDown"]);var editedValue = this.state.editedValue;
 	            // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 
 	            if (defaultValue === undefined && value == null) value = "";
@@ -3929,6 +3938,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var newVal = e.target.value;
 	                    if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
 	                    if (newVal == editedValue) return; // if no text change, ignore event
+	                    if (pattern) {
+	                        var valid = newVal.match(pattern) != null;
+	                        if (_this4.DOM && _this4.DOM["setCustomValidity"]) {
+	                            _this4.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
+	                        }
+	                    }
 	                    if (delayChangeTillDefocus) {
 	                        _this4.SetState({ editedValue: newVal });
 	                    } else {

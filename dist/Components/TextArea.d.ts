@@ -2,10 +2,9 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare class TextArea extends BaseComponent<{
-    value?;
-    defaultValue?;
-    editable?;
-    className?;
+    enabled?: boolean;
+    editable?: boolean;
+    className?: string;
     style?;
     onChange?: (newVal, event) => void;
     delayChangeTillDefocus?: boolean;
