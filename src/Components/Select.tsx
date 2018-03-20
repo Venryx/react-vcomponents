@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Props } from "react";
 import autoBind from "react-autobind";
 import {BaseComponent, FindDOM} from "react-vextensions";
 import {RemoveDuplicates, AssertWarn, Assert} from "../General";
@@ -14,20 +14,29 @@ import {RemoveDuplicates, AssertWarn, Assert} from "../General";
 	style;
 }*/
 
-export class Select extends BaseComponent
-		<{options: {name: string, value, style?}[] | {name: string}[] | string[] | any[] | /*(new()=>Enum) |*/ {[s: string]: any},
-			displayType?: "dropdown" | "button bar",
-			compareBy?: "name" | "value" | "value toString",
-			value, verifyValue?: boolean,
-			enabled?: boolean, className?, title?, style?, childStyle?, onChange}, {}> {
+export type Select_Props = {
+	options: {name: string, value, style?}[] | {name: string}[] | string[] | any[] | /*(new()=>Enum) |*/ {[s: string]: any},
+	displayType?: "dropdown" | "button bar",
+	compareBy?: "name" | "value" | "value toString",
+	value, verifyValue?: boolean,
+	enabled?: boolean, className?, title?, style?, childStyle?, onChange
+};
+export class Select extends BaseComponent<Select_Props, {}> {
 	static defaultProps = {
 		displayType: "dropdown",
 		compareBy: "value",
 		verifyValue: true,
 	};
-
-	get OptionsList() {
-		let {options: options_raw} = this.props;
+	static ValidateProps(props: Select_Props) {
+		let options = this.GetOptionsListFromProps(props);
+		Assert(RemoveDuplicates(options.map(a=>a.name)).length == options.length, ()=> {
+			var optionsWithNonUniqueNames = options.filter(a=>options.filter(b=>b.name == a.name).length > 1);
+			return `Select options must have unique names. (shared: ${optionsWithNonUniqueNames.map(a=>a.name).join(", ")})`;
+		});
+	}
+	
+	static GetOptionsListFromProps(props: Select_Props) {
+		let {options: options_raw} = props;
 
 		let result = [] as {name: string, value, style?}[];
 		if (options_raw instanceof Array) {
@@ -49,6 +58,9 @@ export class Select extends BaseComponent
 			}
 		}
 		return result;
+	}
+	get OptionsList() {
+		return Select.GetOptionsListFromProps(this.props);
 	}
 	
 	GetIndexOfOption(option) {
@@ -76,10 +88,7 @@ export class Select extends BaseComponent
 	render() {
 		var {displayType, value, verifyValue, enabled, className, title, style, childStyle, onChange} = this.props;
 		var options = this.OptionsList;
-		Assert(RemoveDuplicates(options.map(a=>a.name)).length == options.length, ()=> {
-			var optionsWithNonUniqueNames = options.filter(a=>options.filter(b=>b.name == a.name).length > 1);
-			return `Select options must have unique names. (shared: ${optionsWithNonUniqueNames.map(a=>a.name).join(", ")})`;
-		});
+		
 		let valueValid = this.GetIndexOfValue(value) != -1;
 		// if there are no options yet, or value provided is null, don't require match, since this may be a pre-data render
 		if (options.length && value != null && verifyValue) {

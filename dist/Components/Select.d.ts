@@ -1,5 +1,5 @@
 import { BaseComponent } from "react-vextensions";
-export declare class Select extends BaseComponent<{
+export declare type Select_Props = {
     options: {
         name: string;
         value;
@@ -19,12 +19,19 @@ export declare class Select extends BaseComponent<{
     style?;
     childStyle?;
     onChange;
-}, {}> {
+};
+export declare class Select extends BaseComponent<Select_Props, {}> {
     static defaultProps: {
         displayType: string;
         compareBy: string;
         verifyValue: boolean;
     };
+    static ValidateProps(props: Select_Props): void;
+    static GetOptionsListFromProps(props: Select_Props): {
+        name: string;
+        value: any;
+        style?: any;
+    }[];
     readonly OptionsList: {
         name: string;
         value: any;

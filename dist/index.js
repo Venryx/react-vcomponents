@@ -3370,16 +3370,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	/*export class Option {
-	    constructor(name, value, style?) {
-	        this.name = name;
-	        this.value = value;
-	        this.style = style;
-	    }
-	    name;
-	    value;
-	    style;
-	}*/
 	var Select = exports.Select = function (_BaseComponent) {
 	    _inherits(Select, _BaseComponent);
 
@@ -3437,18 +3427,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _onChange = _props.onChange;
 
 	            var options = this.OptionsList;
-	            (0, _General.Assert)((0, _General.RemoveDuplicates)(options.map(function (a) {
-	                return a.name;
-	            })).length == options.length, function () {
-	                var optionsWithNonUniqueNames = options.filter(function (a) {
-	                    return options.filter(function (b) {
-	                        return b.name == a.name;
-	                    }).length > 1;
-	                });
-	                return "Select options must have unique names. (shared: " + optionsWithNonUniqueNames.map(function (a) {
-	                    return a.name;
-	                }).join(", ") + ")";
-	            });
 	            var valueValid = this.GetIndexOfValue(value) != -1;
 	            // if there are no options yet, or value provided is null, don't require match, since this may be a pre-data render
 	            if (options.length && value != null && verifyValue) {
@@ -3476,7 +3454,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: "OptionsList",
 	        get: function get() {
-	            var options_raw = this.props.options;
+	            return Select.GetOptionsListFromProps(this.props);
+	        }
+	    }], [{
+	        key: "ValidateProps",
+	        value: function ValidateProps(props) {
+	            var options = this.GetOptionsListFromProps(props);
+	            (0, _General.Assert)((0, _General.RemoveDuplicates)(options.map(function (a) {
+	                return a.name;
+	            })).length == options.length, function () {
+	                var optionsWithNonUniqueNames = options.filter(function (a) {
+	                    return options.filter(function (b) {
+	                        return b.name == a.name;
+	                    }).length > 1;
+	                });
+	                return "Select options must have unique names. (shared: " + optionsWithNonUniqueNames.map(function (a) {
+	                    return a.name;
+	                }).join(", ") + ")";
+	            });
+	        }
+	    }, {
+	        key: "GetOptionsListFromProps",
+	        value: function GetOptionsListFromProps(props) {
+	            var options_raw = props.options;
 
 	            var result = [];
 	            if (options_raw instanceof Array) {
