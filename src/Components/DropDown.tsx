@@ -1,5 +1,5 @@
 import {cloneElement} from "react";
-import {BaseComponent, FindDOM, AddGlobalStyle} from "react-vextensions";
+import {BaseComponent, AddGlobalStyle} from "react-vextensions";
 import React from "react";
 import classNames from "classnames";
 
@@ -65,7 +65,7 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & Rea
 	}
 
 	_onWindowClick(event) {
-		const dropdownElement = FindDOM(this);
+		const dropdownElement = GetDOM(this);
 		if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && this.isActive()) {
 			this.hide();
 		}

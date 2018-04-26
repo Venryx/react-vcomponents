@@ -1,6 +1,6 @@
 import React, { Props } from "react";
 import autoBind from "react-autobind";
-import {BaseComponent, FindDOM} from "react-vextensions";
+import {BaseComponent} from "react-vextensions";
 import {RemoveDuplicates, AssertWarn, Assert} from "../General";
 
 /*export class Option {
@@ -78,7 +78,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	//GetIndexForValue(value) { return this.FlattenedChildren.FindIndex(a=>a.props.value == value); }
 	GetSelectedOption() {
 		Assert(this.props.displayType == "dropdown");
-	    var selectedIndex = (FindDOM(this.refs.root) as HTMLSelectElement).selectedIndex;
+	    var selectedIndex = (GetDOM(this.refs.root) as HTMLSelectElement).selectedIndex;
 		return this.OptionsList[selectedIndex];
 	}
 	GetSelectedValue() {
