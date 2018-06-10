@@ -69,6 +69,8 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			var heightDifPerSide = (height - baseHeight) / 2;
 			padding = (`${heightDifPerSide}px 15px`);
 		}
+
+		let borderThickness = (style || {}).borderWidth || 1;
 		
 		let finalStyle = E(
 			styles.root,
@@ -76,7 +78,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			{padding},
 			(width || height) && {
 				padding: 0, width, height,
-				backgroundPosition: `${(width - iconSize) / 2}px ${(height - iconSize) / 2}px`,
+				backgroundPosition: `${(width - borderThickness*2 - iconSize) / 2}px ${(height - borderThickness*2 - iconSize) / 2}px`,
 				backgroundSize: iconSize
 			},
 			iconPath && {backgroundImage: `url(${iconPath})`},
