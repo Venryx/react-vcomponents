@@ -75,9 +75,9 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 		let finalStyle = E(
 			styles.root,
 			useOpacityForHover && styles.root_opacityHover,
-			{padding},
-			(width || height) && {
-				padding: 0, width, height,
+			{padding, width, height},
+			(iconSize && (width || height)) && {
+				padding: 0,
 				backgroundPosition: `${(width - borderThickness*2 - iconSize) / 2}px ${(height - borderThickness*2 - iconSize) / 2}px`,
 				backgroundSize: iconSize
 			},

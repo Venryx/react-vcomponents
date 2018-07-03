@@ -508,8 +508,8 @@ var Button = function (_BaseComponent) {
                 padding = heightDifPerSide + "px 15px";
             }
             var borderThickness = (style || {}).borderWidth || 1;
-            var finalStyle = E(styles.root, useOpacityForHover && styles.root_opacityHover, { padding: padding }, (width || height) && {
-                padding: 0, width: width, height: height,
+            var finalStyle = E(styles.root, useOpacityForHover && styles.root_opacityHover, { padding: padding, width: width, height: height }, iconSize && (width || height) && {
+                padding: 0,
                 backgroundPosition: (width - borderThickness * 2 - iconSize) / 2 + "px " + (height - borderThickness * 2 - iconSize) / 2 + "px",
                 backgroundSize: iconSize
             }, iconPath && { backgroundImage: "url(" + iconPath + ")" }, hasCheckbox && styles.root_hasCheckbox, !enabled && styles.root_disabled, style);
