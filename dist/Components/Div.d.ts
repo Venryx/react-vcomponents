@@ -1,8 +1,7 @@
-/// <reference types="react" />
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare class Span extends BaseComponent<{
-    pre?;
+    pre?: any;
 } & React.HTMLProps<HTMLSpanElement>, {}> {
     render(): JSX.Element;
 }
@@ -12,7 +11,7 @@ export declare class Pre extends BaseComponent<{
     render(): JSX.Element;
 }
 export declare class Div extends BaseComponent<{
-    shouldUpdate?;
+    shouldUpdate?: any;
 } & React.HTMLProps<HTMLDivElement>, {}> {
     shouldComponentUpdate(nextProps: any, nextState: any): any;
     render(): JSX.Element;

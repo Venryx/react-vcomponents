@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare type ButtonProps = {
@@ -6,7 +5,7 @@ export declare type ButtonProps = {
     text?: string | JSX.Element;
     title?: string;
     className?: string;
-    style?;
+    style?: any;
     size?: number;
     width?: number;
     height?: number;
@@ -15,12 +14,12 @@ export declare type ButtonProps = {
     useOpacityForHover?: boolean;
     hasCheckbox?: boolean;
     checked?: boolean;
-    checkboxStyle?;
-    checkboxLabelStyle?;
-    onCheckedChanged?;
-    onClick?;
-    onLeftClick?;
-    onDirectClick?;
+    checkboxStyle?: any;
+    checkboxLabelStyle?: any;
+    onCheckedChanged?: any;
+    onClick?: any;
+    onLeftClick?: any;
+    onDirectClick?: any;
 } & React.HTMLProps<HTMLDivElement>;
 export declare class Button extends BaseComponent<ButtonProps, {}> {
     static defaultProps: {

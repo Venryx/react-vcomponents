@@ -1,13 +1,12 @@
-/// <reference types="react" />
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare class TextInput extends BaseComponent<{
     value: string;
     enabled?: boolean;
-    onChange?: (newVal, event) => void;
+    onChange?: (newVal: any, event: any) => void;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
-    style?;
+    style?: any;
 } & React.HTMLProps<HTMLInputElement>, {
     editedValue: string;
 }> {

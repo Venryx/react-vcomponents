@@ -4,6 +4,7 @@ export * from "./Components/Button";
 export * from "./Components/CheckBox";
 export * from "./Components/Column";
 export * from "./Components/DropDown";
+export * from "./Components/ResizeSensor";
 export * from "./Components/Row";
 export * from "./Components/Select";
 export * from "./Components/Spinner";

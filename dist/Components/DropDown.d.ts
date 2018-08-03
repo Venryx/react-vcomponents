@@ -1,10 +1,9 @@
-/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
 import React from "react";
 export declare class DropDown extends BaseComponent<{
-    className?;
-    onShow?;
-    onHide?;
+    className?: any;
+    onShow?: any;
+    onHide?: any;
 } & React.HTMLProps<HTMLDivElement>, {
     active: boolean;
 }> {
@@ -19,13 +18,13 @@ export declare class DropDown extends BaseComponent<{
     render(): JSX.Element;
 }
 export declare class DropDownTrigger extends BaseComponent<{
-    className?;
+    className?: any;
 } & React.HTMLProps<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }
 export declare class DropDownContent extends BaseComponent<{
-    className?;
-    style?;
+    className?: any;
+    style?: any;
 } & React.HTMLProps<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }

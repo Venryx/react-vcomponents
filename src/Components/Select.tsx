@@ -78,7 +78,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	//GetIndexForValue(value) { return this.FlattenedChildren.FindIndex(a=>a.props.value == value); }
 	GetSelectedOption() {
 		Assert(this.props.displayType == "dropdown");
-	    var selectedIndex = (GetDOM(this.refs.root) as HTMLSelectElement).selectedIndex;
+		var selectedIndex = (GetDOM(this.refs.root) as HTMLSelectElement).selectedIndex;
 		return this.OptionsList[selectedIndex];
 	}
 	GetSelectedValue() {

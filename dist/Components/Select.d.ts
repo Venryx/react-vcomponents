@@ -2,23 +2,23 @@ import { BaseComponent } from "react-vextensions";
 export declare type Select_Props = {
     options: {
         name: string;
-        value;
-        style?;
+        value: any;
+        style?: any;
     }[] | {
         name: string;
-    }[] | string[] | any[] | {
+    }[] | string[] | any[] | /*(new()=>Enum) |*/ {
         [s: string]: any;
     };
     displayType?: "dropdown" | "button bar";
     compareBy?: "name" | "value" | "value toString";
-    value;
+    value: any;
     verifyValue?: boolean;
     enabled?: boolean;
-    className?;
-    title?;
-    style?;
-    childStyle?;
-    onChange;
+    className?: any;
+    title?: any;
+    style?: any;
+    childStyle?: any;
+    onChange: any;
 };
 export declare class Select extends BaseComponent<Select_Props, {}> {
     static defaultProps: {
@@ -48,17 +48,17 @@ export declare class Select extends BaseComponent<Select_Props, {}> {
     render(): JSX.Element;
 }
 export declare class Dropdown_OptionUI extends BaseComponent<{
-    index;
-    style;
+    index: any;
+    style: any;
 }, {}> {
     render(): JSX.Element;
 }
 export declare class ButtonBar_OptionUI extends BaseComponent<{
-    first;
-    last;
-    selected;
-    onSelect;
-    style;
+    first: any;
+    last: any;
+    selected: any;
+    onSelect: any;
+    style: any;
 }, {
     hovered: boolean;
 }> {

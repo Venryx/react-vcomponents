@@ -1,14 +1,14 @@
 import { BaseComponent } from "react-vextensions";
 export declare class CheckBox extends BaseComponent<{
-    text?;
-    title?;
+    text?: any;
+    title?: any;
     checked: boolean;
     indeterminate?: boolean;
     enabled?: boolean;
-    style?;
-    labelStyle?;
+    style?: any;
+    labelStyle?: any;
     internalChanging?: boolean;
-    onChange?: (val: boolean, e) => void;
+    onChange?: (val: boolean, e: any) => void;
 }, {
     editedValue: boolean;
 }> {

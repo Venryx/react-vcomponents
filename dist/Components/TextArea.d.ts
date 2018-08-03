@@ -1,12 +1,11 @@
-/// <reference types="react" />
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare class TextArea extends BaseComponent<{
     enabled?: boolean;
     editable?: boolean;
     className?: string;
-    style?;
-    onChange?: (newVal, event) => void;
+    style?: any;
+    onChange?: (newVal: any, event: any) => void;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
 } & React.HTMLProps<HTMLTextAreaElement>, {
@@ -19,8 +18,8 @@ export declare class TextArea extends BaseComponent<{
 }
 export declare class TextArea_AutoSize extends BaseComponent<{
     enabled?: boolean;
-    style?;
-    onChange?;
+    style?: any;
+    onChange?: any;
     allowLineBreaks?: boolean;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
