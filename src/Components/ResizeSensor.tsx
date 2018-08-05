@@ -35,6 +35,6 @@ export class ResizeSensor extends BaseComponent<{onResize: (width: number, heigh
 
 	NotifyResized() {
 		let {onResize} = this.props;
-		onResize(this.DOM.clientWidth, this.DOM.clientHeight)
+		onResize(this.DOM.clientWidth, this.DOM.clientHeight);
 	}
 }

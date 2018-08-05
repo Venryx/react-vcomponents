@@ -6,6 +6,7 @@
 		//"outDir": "dist",
 		/*"module": "system", // needed only for outFile prop, which is needed only for dist.d.ts file
 		"outFile": "dist/dist.js",*/
+		//"module": "esnext",
 
 		// general
 		"sourceMap": true,
