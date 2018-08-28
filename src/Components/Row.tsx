@@ -46,6 +46,12 @@ export class RowLR extends BaseComponent<{splitAt?: number | string, height?: nu
 	render() {
 		var {splitAt, height, className, style, leftStyle, rightStyle, children, ...rest} = this.props;
 		Assert((children as any).length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
+
+		// if a child has "just-wrapper" tag, take out the wrapper and use its children directly (temp helper for React <16)
+		/*if (children[1].props.className && children[1].props.className == "just-wrapper") {
+			children[1] = children[1].props.children;
+		}*/
+
 		return (
 			<div {...rest} style={E({display: "flex", flexShrink: 0}, style)}>
 				<div style={E(

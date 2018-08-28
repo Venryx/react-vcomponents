@@ -2810,6 +2810,10 @@ var RowLR = function (_BaseComponent2) {
                 children = _a.children,
                 rest = __rest(_a, ["splitAt", "height", "className", "style", "leftStyle", "rightStyle", "children"]);
             (0, _General.Assert)(children.length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
+            // if a child has "just-wrapper" tag, take out the wrapper and use its children directly (temp helper for React <16)
+            /*if (children[1].props.className && children[1].props.className == "just-wrapper") {
+                children[1] = children[1].props.children;
+            }*/
             return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexShrink: 0 }, style) }), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, children[1]));
         }
     }]);
@@ -2904,7 +2908,9 @@ var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
         value: function render() {
             var _this2 = this;
 
-            var onChange = this.props.onChange;
+            var _props = this.props,
+                onChange = _props.onChange,
+                popupStyle = _props.popupStyle;
             var _state = this.state,
                 show = _state.show,
                 color = _state.color;
@@ -2921,7 +2927,7 @@ var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
             }
             return _react2.default.createElement("div", null, _react2.default.createElement("div", { style: { padding: 5, background: "#fff", borderRadius: 1, boxShadow: "0 0 0 1px rgba(0,0,0,.1)", display: "inline-block", cursor: "pointer" }, onClick: function onClick() {
                     return _this2.SetState({ show: !show });
-                } }, _react2.default.createElement("div", { style: { width: 36, height: 14, borderRadius: 2, background: "rgba(" + color + ")" } })), show && _react2.default.createElement("div", { style: { position: "absolute", zIndex: 2 } }, _react2.default.createElement("div", { style: { position: "fixed", top: 0, right: 0, bottom: 0, left: 0 }, onClick: function onClick() {
+                } }, _react2.default.createElement("div", { style: { width: 36, height: 14, borderRadius: 2, background: "rgba(" + color + ")" } })), show && _react2.default.createElement("div", { style: E({ position: "absolute", zIndex: 2 }, popupStyle) }, _react2.default.createElement("div", { style: { position: "fixed", top: 0, right: 0, bottom: 0, left: 0 }, onClick: function onClick() {
                     return _this2.SetState({ show: false });
                 } }), _react2.default.createElement(SketchPicker, { presetColors: presetColors, color: { r: color.split(",")[0], g: color.split(",")[1], b: color.split(",")[2], a: color.split(",")[3] }, onChange: function onChange(color) {
                     var colorStr = color.rgb.VValues().join(",");

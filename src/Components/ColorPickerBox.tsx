@@ -19,7 +19,9 @@ let SketchPicker, chroma;
 	chroma = req("chroma-js");
 }*/
 
-export class ColorPickerBox extends BaseComponent<{color: string, onChange: (color: string)=>void}, {show: boolean, color: string}> {
+export class ColorPickerBox extends BaseComponent<
+			{color: string, onChange: (color: string)=>void, popupStyle?: any},
+			{show: boolean, color: string}> {
 	/*constructor(props) {
 		DynamicImports();
 		super(props);
@@ -39,7 +41,7 @@ export class ColorPickerBox extends BaseComponent<{color: string, onChange: (col
 	}
 
   	render() {
-	  	let {onChange} = this.props;
+	  	let {onChange, popupStyle} = this.props;
 		let {show, color} = this.state;
 
 		let presetColors = [chroma.hsl(0, 0, 0).css(), chroma.hsl(0, 0, .5).css(), chroma.hsl(0, 0, 1).css()];
@@ -58,7 +60,7 @@ export class ColorPickerBox extends BaseComponent<{color: string, onChange: (col
 					<div style={{width: 36, height: 14, borderRadius: 2, background: `rgba(${color})`}}/>
 				</div>
 				{show &&
-					<div style={{position: "absolute", zIndex: 2}}>
+					<div style={E({position: "absolute", zIndex: 2}, popupStyle)}>
 						<div style={{position: "fixed", top: 0, right: 0, bottom: 0, left: 0}} onClick={()=>this.SetState({show: false})}/>
 						<SketchPicker
 							presetColors={presetColors}

@@ -2,6 +2,7 @@ import { BaseComponent } from "react-vextensions";
 export declare class ColorPickerBox extends BaseComponent<{
     color: string;
     onChange: (color: string) => void;
+    popupStyle?: any;
 }, {
     show: boolean;
     color: string;
