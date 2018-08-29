@@ -3825,7 +3825,7 @@ Switch.defaultProps = { preferLater: true };
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.TextArea_AutoSize = exports.TextArea = undefined;
+exports.TextArea = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -3910,12 +3910,18 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
                 _onChange = _a.onChange,
                 delayChangeTillDefocus = _a.delayChangeTillDefocus,
                 useEscape = _a.useEscape,
-                rest = __rest(_a, ["value", "defaultValue", "pattern", "enabled", "editable", "className", "style", "onChange", "delayChangeTillDefocus", "useEscape"]);var editedValue = this.state.editedValue;
+                autoSize = _a.autoSize,
+                allowLineBreaks = _a.allowLineBreaks,
+                _onKeyDown = _a.onKeyDown,
+                rest = __rest(_a, ["value", "defaultValue", "pattern", "enabled", "editable", "className", "style", "onChange", "delayChangeTillDefocus", "useEscape", "autoSize", "allowLineBreaks", "onKeyDown"]);var editedValue = this.state.editedValue;
             // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 
             if (defaultValue === undefined && value == null) value = "";
-            return _react2.default.createElement("textarea", Object.assign({}, rest, { ref: "root", disabled: enabled == false, readOnly: !editable, className: "simpleText selectable " + className, style: E(styles.root, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+            var Comp = autoSize ? _reactTextareaAutosize2.default : "textarea";
+            return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: "root", disabled: enabled == false, readOnly: !editable, className: "simpleText selectable " + className, style: E(styles.root, autoSize && { resize: "none", overflow: "hidden" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
                     var newVal = e.target.value;
+                    if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
+                    if (newVal == editedValue) return; // if no text change, ignore event
                     if (pattern) {
                         var valid = newVal.match(pattern) != null;
                         if (_this2.DOM && _this2.DOM["setCustomValidity"]) {
@@ -3930,10 +3936,14 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
                     }
                 }, onBlur: function onBlur(e) {
                     var newVal = e.target["value"];
+                    if (newVal == value) return; // if no text change, ignore event
                     if (delayChangeTillDefocus && _onChange) {
                         _onChange(newVal, e);
                         _this2.SetState({ editedValue: null });
                     }
+                }, onKeyDown: function onKeyDown(e) {
+                    if (useEscape && e.keyCode == keycode.codes.esc) return void _this2.SetState({ editedValue: null });
+                    if (_onKeyDown) return _onKeyDown(e);
                 } }));
         }
     }]);
@@ -3941,70 +3951,7 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
     return TextArea;
 }(_reactVextensions.BaseComponent);
 
-TextArea.defaultProps = { editable: true };
-
-var TextArea_AutoSize = exports.TextArea_AutoSize = function (_BaseComponent2) {
-    _inherits(TextArea_AutoSize, _BaseComponent2);
-
-    function TextArea_AutoSize() {
-        _classCallCheck(this, TextArea_AutoSize);
-
-        return _possibleConstructorReturn(this, (TextArea_AutoSize.__proto__ || Object.getPrototypeOf(TextArea_AutoSize)).apply(this, arguments));
-    }
-
-    _createClass(TextArea_AutoSize, [{
-        key: "render",
-        value: function render() {
-            var _this4 = this;
-
-            var _a = this.props,
-                value = _a.value,
-                defaultValue = _a.defaultValue,
-                enabled = _a.enabled,
-                pattern = _a.pattern,
-                style = _a.style,
-                _onChange2 = _a.onChange,
-                allowLineBreaks = _a.allowLineBreaks,
-                delayChangeTillDefocus = _a.delayChangeTillDefocus,
-                useEscape = _a.useEscape,
-                _onKeyDown = _a.onKeyDown,
-                rest = __rest(_a, ["value", "defaultValue", "enabled", "pattern", "style", "onChange", "allowLineBreaks", "delayChangeTillDefocus", "useEscape", "onKeyDown"]);var editedValue = this.state.editedValue;
-            // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
-
-            if (defaultValue === undefined && value == null) value = "";
-            return _react2.default.createElement(_reactTextareaAutosize2.default, Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ resize: "none", overflow: "hidden" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
-                    var newVal = e.target.value;
-                    if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
-                    if (newVal == editedValue) return; // if no text change, ignore event
-                    if (pattern) {
-                        var valid = newVal.match(pattern) != null;
-                        if (_this4.DOM && _this4.DOM["setCustomValidity"]) {
-                            _this4.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
-                        }
-                    }
-                    if (delayChangeTillDefocus) {
-                        _this4.SetState({ editedValue: newVal });
-                    } else {
-                        _onChange2(newVal, e);
-                        _this4.SetState({ editedValue: null });
-                    }
-                }, onBlur: function onBlur(e) {
-                    var newVal = e.target["value"];
-                    if (delayChangeTillDefocus && _onChange2) {
-                        _onChange2(newVal, e);
-                        _this4.SetState({ editedValue: null });
-                    }
-                }, onKeyDown: function onKeyDown(e) {
-                    if (useEscape && e.keyCode == keycode.codes.esc) return void _this4.SetState({ editedValue: null });
-                    if (_onKeyDown) return _onKeyDown(e);
-                } }));
-        }
-    }]);
-
-    return TextArea_AutoSize;
-}(_reactVextensions.BaseComponent);
-
-TextArea_AutoSize.defaultProps = { allowLineBreaks: true };
+TextArea.defaultProps = { editable: true, allowLineBreaks: true };
 
 /***/ }),
 /* 39 */
@@ -5484,6 +5431,7 @@ var TextInput = function (_BaseComponent) {
 
             return _react2.default.createElement("input", Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
                     var newVal = e.target.value;
+                    if (newVal == editedValue) return; // if no text change, ignore event
                     if (delayChangeTillDefocus) {
                         _this2.SetState({ editedValue: newVal });
                     } else {
@@ -5492,6 +5440,7 @@ var TextInput = function (_BaseComponent) {
                     }
                 }, onBlur: function onBlur(e) {
                     var newVal = e.target["value"];
+                    if (newVal == value) return; // if no text change, ignore event
                     if (delayChangeTillDefocus && _onChange) {
                         _onChange(newVal, e);
                         _this2.SetState({ editedValue: null });

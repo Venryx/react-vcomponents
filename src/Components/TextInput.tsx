@@ -25,6 +25,8 @@ export class TextInput extends BaseComponent
 				value={editedValue != null ? editedValue : (value || "")}
 				onChange={e=> {
 					var newVal = e.target.value;
+					if (newVal == editedValue) return; // if no text change, ignore event
+
 					if (delayChangeTillDefocus) {
 						this.SetState({editedValue: newVal});
 					} else {
@@ -34,6 +36,8 @@ export class TextInput extends BaseComponent
 				}}
 				onBlur={e=> {
 					var newVal = e.target["value"];
+					if (newVal == value) return; // if no text change, ignore event
+					
 					if (delayChangeTillDefocus && onChange) {
 						onChange(newVal, e);
 						this.SetState({editedValue: null});

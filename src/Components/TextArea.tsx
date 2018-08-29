@@ -32,22 +32,27 @@ var styles = {
 export class TextArea extends BaseComponent
 		<{
 			enabled?: boolean, editable?: boolean, className?: string, style?, onChange?: (newVal, event)=>void,
-			delayChangeTillDefocus?: boolean, useEscape?: boolean,
+			delayChangeTillDefocus?: boolean, useEscape?: boolean, autoSize?: boolean, allowLineBreaks?: boolean,
 		} & React.HTMLProps<HTMLTextAreaElement>,
 		{editedValue: string}> {
-	static defaultProps = {editable: true};
+	static defaultProps = {editable: true, allowLineBreaks: true};
 	
 	render() {
-		var {value, defaultValue, pattern, enabled, editable, className, style, onChange, delayChangeTillDefocus, useEscape, ...rest} = this.props;
+		var {value, defaultValue, pattern, enabled, editable, className, style, onChange, delayChangeTillDefocus, useEscape, autoSize, allowLineBreaks, onKeyDown, ...rest} = this.props;
 		var {editedValue} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 		if (defaultValue === undefined && value == null) value = "";
 
-		return <textarea {...rest} ref="root" disabled={enabled == false} readOnly={!editable} className={"simpleText selectable " + className} style={E(styles.root, style)}
+		let Comp = autoSize ? TextAreaAutoSize : "textarea";
+
+		return <Comp {...rest} ref="root" disabled={enabled == false} readOnly={!editable} className={"simpleText selectable " + className}
+			style={E(styles.root, autoSize && {resize: "none", overflow: "hidden"}, style)}
 			value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
 			onChange={e=> {
 				var newVal = e.target.value;
+				if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
+				if (newVal == editedValue) return; // if no text change, ignore event
 
 				if (pattern) {
 					let valid = newVal.match(pattern) != null;
@@ -65,58 +70,16 @@ export class TextArea extends BaseComponent
 			}}
 			onBlur={e=> {
 				var newVal = e.target["value"];
+				if (newVal == value) return; // if no text change, ignore event
+
 				if (delayChangeTillDefocus && onChange) {
 					onChange(newVal, e);
 					this.SetState({editedValue: null});
 				}
+			}}
+			onKeyDown={e=> {
+				if (useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
+				if (onKeyDown) return onKeyDown(e);
 			}}/>;
-	}
-}
-
-export class TextArea_AutoSize extends BaseComponent
-		<{enabled?: boolean, style?, onChange?, allowLineBreaks?: boolean, delayChangeTillDefocus?: boolean, useEscape?: boolean} & React.HTMLProps<HTMLTextAreaElement>,
-		{editedValue: string}> {
-	static defaultProps = {allowLineBreaks: true};
-	render() {
-		let {value, defaultValue, enabled, pattern, style, onChange, allowLineBreaks, delayChangeTillDefocus, useEscape, onKeyDown, ...rest} = this.props;
-		let {editedValue} = this.state;
-
-		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
-		if (defaultValue === undefined && value == null) value = "";
-
-		return (
-			<TextAreaAutoSize {...rest} ref="root" disabled={enabled == false} style={E({resize: "none", overflow: "hidden"}, style)}
-				value={editedValue != null ? editedValue : value} defaultValue={defaultValue}
-				onChange={e=> {
-					var newVal = e.target.value;
-					if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
-					if (newVal == editedValue) return; // if no text change, ignore event
-
-					if (pattern) {
-						let valid = newVal.match(pattern) != null;
-						if (this.DOM && this.DOM["setCustomValidity"]) {
-							this.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
-						}
-					}
-
-					if (delayChangeTillDefocus) {
-						this.SetState({editedValue: newVal});
-					} else {
-						onChange(newVal, e);
-						this.SetState({editedValue: null});
-					}
-				}}
-				onBlur={e=> {
-					var newVal = e.target["value"];
-					if (delayChangeTillDefocus && onChange) {
-						onChange(newVal, e);
-						this.SetState({editedValue: null});
-					}
-				}}
-				onKeyDown={e=> {
-					if (useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
-					if (onKeyDown) return onKeyDown(e);
-				}}/>
-		);
 	}
 }
