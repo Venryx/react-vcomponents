@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, CreateGlobalPseudoStyleAndReturnClassName} from "react-vextensions";
 import {createMarkupForStyles} from "react-dom/lib/CSSPropertyOperations";
 import { ToJSON } from "../General";
 
@@ -43,7 +43,6 @@ var styles = {
 /*AddGlobalStyle(`
 .Button:hover { background-color: rgba(90,100,110,.8) !important; }
 `);*/
-let pseudoSelectorStyleKeys = {};
 
 export type ButtonProps = {enabled?: boolean, text?: string | JSX.Element, title?: string, className?: string, style?,
 	size?: number, width?: number, height?: number, iconSize?: number, iconPath?: string, useOpacityForHover?: boolean,
@@ -87,33 +86,13 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			style,
 		);
 
-		// experimental pseudo-selector-capable styling system
-		let pseudoSelectors = [":hover"];
-		let currentPseudoSelectorStyleKeys = [];
-		if (enabled) {
-			for (let selector of pseudoSelectors) {
-				if (finalStyle[selector] == null) continue;
-				let styleText = createMarkupForStyles(finalStyle[selector]);
-
-				var styleKey = ToJSON(selector + "---" + styleText); // get a unique identifier for this particular pseudo-style
-				styleKey = styleKey.replace(/[^a-zA-Z0-9-]/g, ""); // make sure key is a valid class-name
-				currentPseudoSelectorStyleKeys.push(styleKey);
-
-				// if <style> element for the given style-composite has not been created yet, create it 
-				if (pseudoSelectorStyleKeys[styleKey] == null) {
-					pseudoSelectorStyleKeys[styleKey] = true;
-					AddGlobalStyle(`
-			.Button.${styleKey}${selector} {
-				${styleText.replace(/([^ ]+?);/g, "$1 !important;")}
-			}
-							`);
-				}
-			}
-		}
+		let extraClassnames = [
+			enabled && finalStyle[":hover"] && CreateGlobalPseudoStyleAndReturnClassName("hover", finalStyle[":hover"]),
+		].filter(a=>a);
 
 	    return (
 			<div {...rest} title={title} onClick={this.OnClick}
-					className={`Button ${currentPseudoSelectorStyleKeys.join(" ")} ${className || ""}`}
+					className={`Button ${extraClassnames.join(" ")} ${className || ""}`}
 					style={finalStyle}>
 				{/*hasCheckbox && <CheckBox checked={checked} style={E(styles.checkbox, checkboxStyle)} labelStyle={checkboxLabelStyle}
 					onChange={checked=>onCheckedChanged && onCheckedChanged(checked)}/>*/}
