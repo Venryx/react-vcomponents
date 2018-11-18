@@ -1985,7 +1985,7 @@ var styles = {
         border: "none",
         //background: "url(/Main/Packages/Images/Tiling/Menu/Menu.png)",
         //color: "#888",
-        cursor: "text",
+        //cursor: "text",
         resize: "none",
         display: "inline-block",
         boxSizing: "border-box",
