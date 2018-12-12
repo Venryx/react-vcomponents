@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 
 @ApplyBasicStyles
 export class Column extends BaseComponent<{style?} & React.HTMLProps<HTMLDivElement>, {}> {

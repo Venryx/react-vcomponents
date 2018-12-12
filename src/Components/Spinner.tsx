@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent} from "react-vextensions";
+import {BaseComponent, E} from "react-vextensions";
 
 export class Spinner extends BaseComponent
 		<{step?, min?, max?, value?, enabled?, title?, style?, onChange, onFocus?}, {}> {

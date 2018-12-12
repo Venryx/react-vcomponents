@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, CreateGlobalPseudoStyleAndReturnClassName} from "react-vextensions";
+import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, CreateGlobalPseudoStyleAndReturnClassName, E} from "react-vextensions";
 import {createMarkupForStyles} from "react-dom/lib/CSSPropertyOperations";
 import { ToJSON } from "../General";
 

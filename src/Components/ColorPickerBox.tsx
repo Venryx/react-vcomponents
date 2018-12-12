@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent} from "react-vextensions";
+import {BaseComponent, E} from "react-vextensions";
 import { Assert } from "../General";
 
 //declare var require;

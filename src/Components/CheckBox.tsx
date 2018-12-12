@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import {Row} from "./Row";
 
 @ApplyBasicStyles

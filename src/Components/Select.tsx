@@ -1,6 +1,6 @@
 import React, { Props } from "react";
 import autoBind from "react-autobind";
-import {BaseComponent} from "react-vextensions";
+import {BaseComponent, GetDOM, E} from "react-vextensions";
 import {RemoveDuplicates, AssertWarn, Assert} from "../General";
 
 /*export class Option {

@@ -1,5 +1,5 @@
 import {cloneElement} from "react";
-import {BaseComponent, AddGlobalStyle} from "react-vextensions";
+import {BaseComponent, AddGlobalStyle, GetDOM, E} from "react-vextensions";
 import React from "react";
 import classNames from "classnames";
 

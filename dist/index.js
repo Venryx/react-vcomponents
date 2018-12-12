@@ -336,7 +336,7 @@ var Span = function (_BaseComponent) {
                 pre = _a.pre,
                 style = _a.style,
                 rest = __rest(_a, ["pre", "style"]);
-            return _react2.default.createElement("span", Object.assign({}, rest, { style: E(style, pre && { whiteSpace: "pre" }) }));
+            return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)(style, pre && { whiteSpace: "pre" }) }));
         }
     }]);
 
@@ -362,7 +362,7 @@ var Pre = function (_BaseComponent2) {
                 style = _a.style,
                 children = _a.children,
                 rest = __rest(_a, ["allowWrap", "style", "children"]);
-            return _react2.default.createElement("span", Object.assign({}, rest, { style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
+            return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
         }
     }]);
 
@@ -539,7 +539,7 @@ var Button = function (_BaseComponent) {
                 padding = heightDifPerSide + "px 15px";
             }
             var borderThickness = (style || {}).borderWidth || 1;
-            var finalStyle = E(styles.root, useOpacityForHover && styles.root_opacityHover, { padding: padding, width: width, height: height }, iconSize && (width || height) && {
+            var finalStyle = (0, _reactVextensions.E)(styles.root, useOpacityForHover && styles.root_opacityHover, { padding: padding, width: width, height: height }, iconSize && (width || height) && {
                 padding: 0,
                 backgroundPosition: (width - borderThickness * 2 - iconSize) / 2 + "px " + (height - borderThickness * 2 - iconSize) / 2 + "px",
                 backgroundSize: iconSize
@@ -641,11 +641,11 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
                 _onChange = _props.onChange;
             var editedValue = this.state.editedValue;
 
-            return _react2.default.createElement(_Row.Row, { style: E({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
+            return _react2.default.createElement(_Row.Row, { style: (0, _reactVextensions.E)({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
                     return _this2.input = c;
                 }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked || false, onChange: function onChange(e) {
                     return _onChange && _onChange(_this2.input.checked, e);
-                } }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: E({ marginLeft: 3 }, labelStyle) }, _react2.default.createElement("span", null), text))
+                } }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3 }, labelStyle) }, _react2.default.createElement("span", null), text))
             /*<input ref={c=>this.input = c} type="checkbox"
                 checked={editedValue != null ? editedValue : (checked || false)}
                 disabled={enabled == false}
@@ -797,7 +797,7 @@ var Row = function (_BaseComponent) {
             var _a = this.props,
                 style = _a.style,
                 rest = __rest(_a, ["style"]);
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", alignItems: "center" }, style) }));
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, style) }));
         }
     }]);
 
@@ -832,7 +832,7 @@ var RowLR = function (_BaseComponent2) {
             /*if (children[1].props.className && children[1].props.className == "just-wrapper") {
                 children[1] = children[1].props.children;
             }*/
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexShrink: 0 }, style) }), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), _react2.default.createElement("div", { style: E({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, children[1]));
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexShrink: 0 }, style) }), _react2.default.createElement("div", { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), _react2.default.createElement("div", { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, children[1]));
         }
     }]);
 
@@ -852,23 +852,30 @@ exports.RowLR = RowLR;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.E = E;
 exports.ToJSON = ToJSON;
 exports.FromJSON = FromJSON;
 exports.RemoveDuplicates = RemoveDuplicates;
 exports.Assert = Assert;
 exports.AssertWarn = AssertWarn;
-function E(e1, e2, e3, e4, e5, e6, e7, e8) {
-    var result = {};
+function ToJSON(obj) {
+    return JSON.stringify(obj);
+}
+function FromJSON(json) {
+    return JSON.parse(json);
+}
+function RemoveDuplicates(items) {
+    var result = [];
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
-        for (var _iterator = arguments[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var extend = _step.value;
+        for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var item = _step.value;
 
-            result.Extend(extend);
+            if (result.indexOf(item) == -1) {
+                result.push(item);
+            }
         }
     } catch (err) {
         _didIteratorError = true;
@@ -881,44 +888,6 @@ function E(e1, e2, e3, e4, e5, e6, e7, e8) {
         } finally {
             if (_didIteratorError) {
                 throw _iteratorError;
-            }
-        }
-    }
-
-    return result;
-    //return StyleSheet.create(result);
-}
-function ToJSON(obj) {
-    return JSON.stringify(obj);
-}
-function FromJSON(json) {
-    return JSON.parse(json);
-}
-function RemoveDuplicates(items) {
-    var result = [];
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-        for (var _iterator2 = items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var item = _step2.value;
-
-            if (result.indexOf(item) == -1) {
-                result.push(item);
-            }
-        }
-    } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
-            }
-        } finally {
-            if (_didIteratorError2) {
-                throw _iteratorError2;
             }
         }
     }
@@ -1042,7 +1011,7 @@ var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
             }
             return _react2.default.createElement("div", null, _react2.default.createElement("div", { style: { padding: 5, background: "#fff", borderRadius: 1, boxShadow: "0 0 0 1px rgba(0,0,0,.1)", display: "inline-block", cursor: "pointer" }, onClick: function onClick() {
                     return _this2.SetState({ show: !show });
-                } }, _react2.default.createElement("div", { style: { width: 36, height: 14, borderRadius: 2, background: "rgba(" + color + ")" } })), show && _react2.default.createElement("div", { style: E({ position: "absolute", zIndex: 2 }, popupStyle) }, _react2.default.createElement("div", { style: { position: "fixed", top: 0, right: 0, bottom: 0, left: 0 }, onClick: function onClick() {
+                } }, _react2.default.createElement("div", { style: { width: 36, height: 14, borderRadius: 2, background: "rgba(" + color + ")" } })), show && _react2.default.createElement("div", { style: (0, _reactVextensions.E)({ position: "absolute", zIndex: 2 }, popupStyle) }, _react2.default.createElement("div", { style: { position: "fixed", top: 0, right: 0, bottom: 0, left: 0 }, onClick: function onClick() {
                     return _this2.SetState({ show: false });
                 } }), _react2.default.createElement(SketchPicker, { presetColors: presetColors, color: { r: color.split(",")[0], g: color.split(",")[1], b: color.split(",")[2], a: color.split(",")[3] }, onChange: function onChange(color) {
                     var colorStr = color.rgb.VValues().join(",");
@@ -1119,7 +1088,7 @@ var Column = function (_BaseComponent) {
             var _a = this.props,
                 style = _a.style,
                 rest = __rest(_a, ["style"]);
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexDirection: "column", flexShrink: 0 }, style) }));
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexDirection: "column", flexShrink: 0 }, style) }));
         }
     }]);
 
@@ -1235,7 +1204,7 @@ var DropDown = exports.DropDown = function (_BaseComponent) {
     }, {
         key: "_onWindowClick",
         value: function _onWindowClick(event) {
-            var dropdownElement = GetDOM(this);
+            var dropdownElement = (0, _reactVextensions.GetDOM)(this);
             if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && this.isActive()) {
                 this.hide();
             }
@@ -1329,7 +1298,7 @@ var DropDownContent = exports.DropDownContent = function (_BaseComponent3) {
                 className = _a.className,
                 style = _a.style,
                 rest = __rest(_a, ["children", "className", "style"]);
-            return _react2.default.createElement("div", Object.assign({}, rest, { className: (0, _classnames2.default)("dropdown__content", className), style: E({ padding: 10, background: "rgba(0,0,0,.7)", borderRadius: "0 0 0 5px" }, style) }), children);
+            return _react2.default.createElement("div", Object.assign({}, rest, { className: (0, _classnames2.default)("dropdown__content", className), style: (0, _reactVextensions.E)({ padding: 10, background: "rgba(0,0,0,.7)", borderRadius: "0 0 0 5px" }, style) }), children);
         }
     }]);
 
@@ -1552,7 +1521,7 @@ var Select = exports.Select = function (_BaseComponent) {
         key: "GetSelectedOption",
         value: function GetSelectedOption() {
             (0, _General.Assert)(this.props.displayType == "dropdown");
-            var selectedIndex = GetDOM(this.refs.root).selectedIndex;
+            var selectedIndex = (0, _reactVextensions.GetDOM)(this.refs.root).selectedIndex;
             return this.OptionsList[selectedIndex];
         }
     }, {
@@ -1589,14 +1558,14 @@ var Select = exports.Select = function (_BaseComponent) {
                 return <Option key={index} index={index} style={child.props.style}>{child.props.children}</Option>;
             });*/
             if (displayType == "dropdown") {
-                return _react2.default.createElement("select", { ref: "root", disabled: enabled == false, value: "value" + this.GetIndexOfValue(value), className: className, title: title, style: E({ color: "#000" }, style), onChange: function onChange(e) {
+                return _react2.default.createElement("select", { ref: "root", disabled: enabled == false, value: "value" + this.GetIndexOfValue(value), className: className, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: function onChange(e) {
                         return _onChange(_this2.GetSelectedValue());
                     } }, options.map(function (option, index) {
-                    return _react2.default.createElement(Dropdown_OptionUI, { key: option.name, index: index, style: E(childStyle, option.style) }, option.name);
+                    return _react2.default.createElement(Dropdown_OptionUI, { key: option.name, index: index, style: (0, _reactVextensions.E)(childStyle, option.style) }, option.name);
                 }));
             }
-            return _react2.default.createElement("div", { style: E({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map(function (option, index) {
-                return _react2.default.createElement(ButtonBar_OptionUI, { key: option.name, first: index == 0, last: index == options.length - 1, selected: option.value === value, style: E(childStyle, option.style), onSelect: function onSelect(e) {
+            return _react2.default.createElement("div", { style: (0, _reactVextensions.E)({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map(function (option, index) {
+                return _react2.default.createElement(ButtonBar_OptionUI, { key: option.name, first: index == 0, last: index == options.length - 1, selected: option.value === value, style: (0, _reactVextensions.E)(childStyle, option.style), onSelect: function onSelect(e) {
                         return _onChange(option.value);
                     } }, option.name);
             }));
@@ -1722,7 +1691,7 @@ var Dropdown_OptionUI = exports.Dropdown_OptionUI = function (_BaseComponent2) {
                 style = _props2.style,
                 children = _props2.children;
 
-            return _react2.default.createElement("option", { value: "value" + index, style: E({ color: "#000" }, style) }, children);
+            return _react2.default.createElement("option", { value: "value" + index, style: (0, _reactVextensions.E)({ color: "#000" }, style) }, children);
         }
     }]);
 
@@ -1756,7 +1725,7 @@ var ButtonBar_OptionUI = exports.ButtonBar_OptionUI = function (_BaseComponent3)
                     return _this5.SetState({ hovered: true });
                 }, onMouseLeave: function onMouseLeave() {
                     return _this5.SetState({ hovered: false });
-                }, style: E({ display: "inline-block", background: "rgba(255,255,255,.3)", padding: "5px 12px", cursor: "pointer" }, hovered && { background: "rgba(255,255,255,.5)" }, first && { borderRadius: "4px 0 0 4px" }, !first && { border: "solid #222", borderWidth: "0 0 0 1px" }, last && { borderRadius: "0 4px 4px 0" }, first && last && { borderRadius: "4px" }, selected && { background: "rgba(255,255,255,.5)" }, style), onClick: onSelect }, children);
+                }, style: (0, _reactVextensions.E)({ display: "inline-block", background: "rgba(255,255,255,.3)", padding: "5px 12px", cursor: "pointer" }, hovered && { background: "rgba(255,255,255,.5)" }, first && { borderRadius: "4px 0 0 4px" }, !first && { border: "solid #222", borderWidth: "0 0 0 1px" }, last && { borderRadius: "0 4px 4px 0" }, first && last && { borderRadius: "4px" }, selected && { background: "rgba(255,255,255,.5)" }, style), onClick: onSelect }, children);
         }
     }]);
 
@@ -1839,7 +1808,7 @@ var Spinner = exports.Spinner = function (_BaseComponent) {
                 onChange = _props.onChange,
                 onFocus = _props.onFocus;
 
-            return _react2.default.createElement("input", { ref: "root", type: "number", step: step, min: min, max: max, value: value, disabled: !enabled, title: title, style: E({ color: "#000" }, style), onChange: this.OnChange, onFocus: onFocus });
+            return _react2.default.createElement("input", { ref: "root", type: "number", step: step, min: min, max: max, value: value, disabled: !enabled, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: this.OnChange, onFocus: onFocus });
         }
     }, {
         key: "OnChange",
@@ -2033,7 +2002,7 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
 
             if (defaultValue === undefined && value == null) value = "";
             var Comp = autoSize ? _reactTextareaAutosize2.default : "textarea";
-            return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: "root", disabled: enabled == false, readOnly: !editable, className: "simpleText selectable " + className, style: E(styles.root, autoSize && { resize: "none", overflow: "hidden" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+            return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: "root", disabled: enabled == false, readOnly: !editable, className: "simpleText selectable " + className, style: (0, _reactVextensions.E)(styles.root, autoSize && { resize: "none", overflow: "hidden" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
                     var newVal = e.target.value;
                     if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
                     if (newVal == editedValue) return; // if no text change, ignore event
@@ -3544,7 +3513,7 @@ var TextInput = function (_BaseComponent) {
                 style = _a.style,
                 rest = __rest(_a, ["value", "enabled", "onChange", "onKeyDown", "delayChangeTillDefocus", "useEscape", "style"]);var editedValue = this.state.editedValue;
 
-            return _react2.default.createElement("input", Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: E({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
+            return _react2.default.createElement("input", Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: (0, _reactVextensions.E)({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
                     var newVal = e.target.value;
                     if (newVal == editedValue) return; // if no text change, ignore event
                     if (delayChangeTillDefocus) {
