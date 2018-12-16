@@ -1,6 +1,6 @@
 import React, { Props } from "react";
 import autoBind from "react-autobind";
-import {BaseComponent, GetDOM, E} from "react-vextensions";
+import {BaseComponent, GetDOM, E, ApplyBasicStyles} from "react-vextensions";
 import {RemoveDuplicates, AssertWarn, Assert} from "../General";
 
 /*export class Option {
@@ -21,6 +21,8 @@ export type Select_Props = {
 	value, verifyValue?: boolean,
 	enabled?: boolean, className?, title?, style?, childStyle?, onChange
 };
+
+@ApplyBasicStyles
 export class Select extends BaseComponent<Select_Props, {}> {
 	static defaultProps = {
 		displayType: "dropdown",

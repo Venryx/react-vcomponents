@@ -645,7 +645,7 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
                     return _this2.input = c;
                 }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked || false, onChange: function onChange(e) {
                     return _onChange && _onChange(_this2.input.checked, e);
-                } }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3 }, labelStyle) }, _react2.default.createElement("span", null), text))
+                } }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3, whiteSpace: "pre" }, labelStyle) }, _react2.default.createElement("span", null), text))
             /*<input ref={c=>this.input = c} type="checkbox"
                 checked={editedValue != null ? editedValue : (checked || false)}
                 disabled={enabled == false}
@@ -1473,6 +1473,8 @@ exports.ButtonBar_OptionUI = exports.Dropdown_OptionUI = exports.Select = undefi
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1489,7 +1491,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Select = exports.Select = function (_BaseComponent) {
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var Select_1;
+
+var Select = Select_1 = function (_BaseComponent) {
     _inherits(Select, _BaseComponent);
 
     function Select() {
@@ -1573,7 +1585,7 @@ var Select = exports.Select = function (_BaseComponent) {
     }, {
         key: "OptionsList",
         get: function get() {
-            return Select.GetOptionsListFromProps(this.props);
+            return Select_1.GetOptionsListFromProps(this.props);
         }
     }], [{
         key: "ValidateProps",
@@ -1667,12 +1679,13 @@ var Select = exports.Select = function (_BaseComponent) {
 
     return Select;
 }(_reactVextensions.BaseComponent);
-
 Select.defaultProps = {
     displayType: "dropdown",
     compareBy: "value",
     verifyValue: true
 };
+exports.Select = Select = Select_1 = __decorate([_reactVextensions.ApplyBasicStyles], Select);
+exports.Select = Select;
 
 var Dropdown_OptionUI = exports.Dropdown_OptionUI = function (_BaseComponent2) {
     _inherits(Dropdown_OptionUI, _BaseComponent2);
@@ -1771,6 +1784,8 @@ exports.Spinner = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1785,7 +1800,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Spinner = exports.Spinner = function (_BaseComponent) {
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var Spinner = function (_BaseComponent) {
     _inherits(Spinner, _BaseComponent);
 
     function Spinner() {
@@ -1822,8 +1846,9 @@ var Spinner = exports.Spinner = function (_BaseComponent) {
 
     return Spinner;
 }(_reactVextensions.BaseComponent);
-
 Spinner.defaultProps = { step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true };
+exports.Spinner = Spinner = __decorate([_reactVextensions.ApplyBasicStyles], Spinner);
+exports.Spinner = Spinner;
 /*export class Spinner_Auto extends BaseComponent
         <{step?, min?, max?, enabled?, title?, style?, onFocus?,
             path: ()=>any, onChange?: (val: number)=>void}, {}> {
