@@ -17,11 +17,13 @@ export class TextInput extends BaseComponent
 			this.SetState({editedValue: null});
 		}
 	}*/
+
+	root: HTMLInputElement;
 	render() {
 		var {value, enabled, onChange, onKeyDown, delayChangeTillDefocus, useEscape, style, ...rest} = this.props;
 		var {editedValue} = this.state;
 		return (
-			<input {...rest} ref="root" disabled={enabled == false} style={E({color: "black"}, style)}
+			<input {...rest} ref={c=>this.root = c} disabled={enabled == false} style={E({color: "black"}, style)}
 				value={editedValue != null ? editedValue : (value || "")}
 				onChange={e=> {
 					var newVal = e.target.value;
@@ -50,7 +52,7 @@ export class TextInput extends BaseComponent
 		);
 	}
 	GetValue() {
-		return this.refs.root.value;
+		return this.root.value;
 	}
 }
 

@@ -13,6 +13,7 @@ export declare class TextInput extends BaseComponent<{
     static defaultProps: {
         type: string;
     };
+    root: HTMLInputElement;
     render(): JSX.Element;
-    GetValue(): any;
+    GetValue(): string;
 }

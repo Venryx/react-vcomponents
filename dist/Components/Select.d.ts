@@ -45,6 +45,7 @@ export declare class Select extends BaseComponent<Select_Props, {}> {
         style?: any;
     };
     GetSelectedValue(): any;
+    root: HTMLSelectElement;
     render(): JSX.Element;
 }
 export declare class Dropdown_OptionUI extends BaseComponent<{

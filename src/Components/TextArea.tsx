@@ -37,6 +37,7 @@ export class TextArea extends BaseComponent
 		{editedValue: string}> {
 	static defaultProps = {editable: true, allowLineBreaks: true};
 	
+	root: TextAreaAutoSize | HTMLTextAreaElement;
 	render() {
 		var {value, defaultValue, pattern, enabled, editable, className, style, onChange, delayChangeTillDefocus, useEscape, autoSize, allowLineBreaks, onKeyDown, ...rest} = this.props;
 		var {editedValue} = this.state;
@@ -46,7 +47,7 @@ export class TextArea extends BaseComponent
 
 		let Comp = autoSize ? TextAreaAutoSize : "textarea";
 
-		return <Comp {...rest} ref="root" disabled={enabled == false} readOnly={!editable} className={"simpleText selectable " + className}
+		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} className={"simpleText selectable " + className}
 			style={E(styles.root, autoSize && {resize: "none", overflow: "hidden"}, style)}
 			value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
 			onChange={e=> {

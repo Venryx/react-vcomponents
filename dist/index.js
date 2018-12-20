@@ -1533,7 +1533,7 @@ var Select = Select_1 = function (_BaseComponent) {
         key: "GetSelectedOption",
         value: function GetSelectedOption() {
             (0, _General.Assert)(this.props.displayType == "dropdown");
-            var selectedIndex = (0, _reactVextensions.GetDOM)(this.refs.root).selectedIndex;
+            var selectedIndex = this.root.selectedIndex;
             return this.OptionsList[selectedIndex];
         }
     }, {
@@ -1570,7 +1570,9 @@ var Select = Select_1 = function (_BaseComponent) {
                 return <Option key={index} index={index} style={child.props.style}>{child.props.children}</Option>;
             });*/
             if (displayType == "dropdown") {
-                return _react2.default.createElement("select", { ref: "root", disabled: enabled == false, value: "value" + this.GetIndexOfValue(value), className: className, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: function onChange(e) {
+                return _react2.default.createElement("select", { ref: function ref(c) {
+                        return _this2.root = c;
+                    }, disabled: enabled == false, value: "value" + this.GetIndexOfValue(value), className: className, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: function onChange(e) {
                         return _onChange(_this2.GetSelectedValue());
                     } }, options.map(function (option, index) {
                     return _react2.default.createElement(Dropdown_OptionUI, { key: option.name, index: index, style: (0, _reactVextensions.E)(childStyle, option.style) }, option.name);
@@ -1821,6 +1823,8 @@ var Spinner = function (_BaseComponent) {
     _createClass(Spinner, [{
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             var _props = this.props,
                 step = _props.step,
                 min = _props.min,
@@ -1832,14 +1836,16 @@ var Spinner = function (_BaseComponent) {
                 onChange = _props.onChange,
                 onFocus = _props.onFocus;
 
-            return _react2.default.createElement("input", { ref: "root", type: "number", step: step, min: min, max: max, value: value, disabled: !enabled, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: this.OnChange, onFocus: onFocus });
+            return _react2.default.createElement("input", { ref: function ref(c) {
+                    return _this2.root = c;
+                }, type: "number", step: step, min: min, max: max, value: value, disabled: !enabled, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: this.OnChange, onFocus: onFocus });
         }
     }, {
         key: "OnChange",
         value: function OnChange(e) {
             var onChange = this.props.onChange;
 
-            this.value = this.refs.root.value;
+            this.value = this.root.value;
             if (onChange) onChange(parseFloat(this.value), e);
         }
     }]);
@@ -2027,7 +2033,9 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
 
             if (defaultValue === undefined && value == null) value = "";
             var Comp = autoSize ? _reactTextareaAutosize2.default : "textarea";
-            return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: "root", disabled: enabled == false, readOnly: !editable, className: "simpleText selectable " + className, style: (0, _reactVextensions.E)(styles.root, autoSize && { resize: "none", overflow: "hidden" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+            return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: function ref(c) {
+                    return _this2.root = c;
+                }, disabled: enabled == false, readOnly: !editable, className: "simpleText selectable " + className, style: (0, _reactVextensions.E)(styles.root, autoSize && { resize: "none", overflow: "hidden" }, style), value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
                     var newVal = e.target.value;
                     if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
                     if (newVal == editedValue) return; // if no text change, ignore event
@@ -3518,13 +3526,6 @@ var TextInput = function (_BaseComponent) {
 
     _createClass(TextInput, [{
         key: "render",
-
-        /*ComponentWillReceiveProps(props) {
-            // if value changing, and "delayChangeTillDefocus" is not enabled
-            if (!props.delayChangeTillDefocus && props.value != this.props.value) {
-                this.SetState({editedValue: null});
-            }
-        }*/
         value: function render() {
             var _this2 = this;
 
@@ -3538,7 +3539,9 @@ var TextInput = function (_BaseComponent) {
                 style = _a.style,
                 rest = __rest(_a, ["value", "enabled", "onChange", "onKeyDown", "delayChangeTillDefocus", "useEscape", "style"]);var editedValue = this.state.editedValue;
 
-            return _react2.default.createElement("input", Object.assign({}, rest, { ref: "root", disabled: enabled == false, style: (0, _reactVextensions.E)({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
+            return _react2.default.createElement("input", Object.assign({}, rest, { ref: function ref(c) {
+                    return _this2.root = c;
+                }, disabled: enabled == false, style: (0, _reactVextensions.E)({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
                     var newVal = e.target.value;
                     if (newVal == editedValue) return; // if no text change, ignore event
                     if (delayChangeTillDefocus) {
@@ -3562,7 +3565,7 @@ var TextInput = function (_BaseComponent) {
     }, {
         key: "GetValue",
         value: function GetValue() {
-            return this.refs.root.value;
+            return this.root.value;
         }
     }]);
 

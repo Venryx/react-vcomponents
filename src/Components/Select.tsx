@@ -1,4 +1,4 @@
-import React, { Props } from "react";
+import React, { Props, ReactElement } from "react";
 import autoBind from "react-autobind";
 import {BaseComponent, GetDOM, E, ApplyBasicStyles} from "react-vextensions";
 import {RemoveDuplicates, AssertWarn, Assert} from "../General";
@@ -80,13 +80,14 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	//GetIndexForValue(value) { return this.FlattenedChildren.FindIndex(a=>a.props.value == value); }
 	GetSelectedOption() {
 		Assert(this.props.displayType == "dropdown");
-		var selectedIndex = (GetDOM(this.refs.root) as HTMLSelectElement).selectedIndex;
+		var selectedIndex = this.root.selectedIndex;
 		return this.OptionsList[selectedIndex];
 	}
 	GetSelectedValue() {
 		return this.GetSelectedOption().value;
 	}
 	
+	root: HTMLSelectElement;
 	render() {
 		var {displayType, value, verifyValue, enabled, className, title, style, childStyle, onChange} = this.props;
 		var options = this.OptionsList;
@@ -105,7 +106,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 
 		if (displayType == "dropdown") {
 			return (
-				<select ref="root" disabled={enabled == false} value={"value" + this.GetIndexOfValue(value)}
+				<select ref={c=>this.root = c} disabled={enabled == false} value={"value" + this.GetIndexOfValue(value)}
 						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=>onChange(this.GetSelectedValue())}>
 					{options.map((option, index)=> {
 						return <Dropdown_OptionUI key={option.name} index={index} style={E(childStyle, option.style)}>
