@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import {BaseComponent} from "react-vextensions";
 
 export class ResizeSensor extends BaseComponent<{onResize: (width: number, height: number)=>void, callForMount?: boolean}, {}> {
@@ -37,4 +37,4 @@ export class ResizeSensor extends BaseComponent<{onResize: (width: number, heigh
 		let {onResize} = this.props;
 		onResize(this.DOM.clientWidth, this.DOM.clientHeight);
 	}
-}
+}*/

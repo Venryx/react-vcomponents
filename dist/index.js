@@ -184,18 +184,6 @@ Object.keys(_DropDown).forEach(function (key) {
   });
 });
 
-var _ResizeSensor = __webpack_require__(13);
-
-Object.keys(_ResizeSensor).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _ResizeSensor[key];
-    }
-  });
-});
-
 var _Row = __webpack_require__(7);
 
 Object.keys(_Row).forEach(function (key) {
@@ -208,7 +196,7 @@ Object.keys(_Row).forEach(function (key) {
   });
 });
 
-var _Select = __webpack_require__(14);
+var _Select = __webpack_require__(13);
 
 Object.keys(_Select).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -220,7 +208,7 @@ Object.keys(_Select).forEach(function (key) {
   });
 });
 
-var _Spinner = __webpack_require__(15);
+var _Spinner = __webpack_require__(14);
 
 Object.keys(_Spinner).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -232,7 +220,7 @@ Object.keys(_Spinner).forEach(function (key) {
   });
 });
 
-var _Switch = __webpack_require__(16);
+var _Switch = __webpack_require__(15);
 
 Object.keys(_Switch).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -244,7 +232,7 @@ Object.keys(_Switch).forEach(function (key) {
   });
 });
 
-var _TextArea = __webpack_require__(17);
+var _TextArea = __webpack_require__(16);
 
 Object.keys(_TextArea).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -256,7 +244,7 @@ Object.keys(_TextArea).forEach(function (key) {
   });
 });
 
-var _TextInput = __webpack_require__(25);
+var _TextInput = __webpack_require__(24);
 
 Object.keys(_TextInput).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -1372,103 +1360,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.ResizeSensor = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactVextensions = __webpack_require__(4);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ResizeSensor = exports.ResizeSensor = function (_BaseComponent) {
-    _inherits(ResizeSensor, _BaseComponent);
-
-    function ResizeSensor() {
-        _classCallCheck(this, ResizeSensor);
-
-        return _possibleConstructorReturn(this, (ResizeSensor.__proto__ || Object.getPrototypeOf(ResizeSensor)).apply(this, arguments));
-    }
-
-    _createClass(ResizeSensor, [{
-        key: "render",
-        value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement("iframe", { ref: function ref(c) {
-                    return _this2.iframe = c;
-                }, style: {
-                    height: '100%',
-                    width: '100%',
-                    border: 'none',
-                    background: 'transparent',
-                    position: 'absolute',
-                    zIndex: -1,
-                    top: 0,
-                    left: 0,
-                    pointerEvents: "none"
-                } });
-        }
-    }, {
-        key: "ComponentDidMount",
-        value: function ComponentDidMount() {
-            var _this3 = this;
-
-            var callForMount = this.props.callForMount;
-
-            this.iframe.contentWindow.addEventListener("resize", function () {
-                return _this3.NotifyResized();
-            });
-            if (callForMount) {
-                setTimeout(function () {
-                    return _this3.NotifyResized();
-                });
-            }
-        }
-    }, {
-        key: "ComponentWillUnmount",
-        value: function ComponentWillUnmount() {
-            var _this4 = this;
-
-            var onResize = this.props.onResize;
-
-            this.iframe.contentWindow.removeEventListener("resize", function () {
-                return _this4.NotifyResized();
-            });
-        }
-    }, {
-        key: "NotifyResized",
-        value: function NotifyResized() {
-            var onResize = this.props.onResize;
-
-            onResize(this.DOM.clientWidth, this.DOM.clientHeight);
-        }
-    }]);
-
-    return ResizeSensor;
-}(_reactVextensions.BaseComponent);
-
-ResizeSensor.defaultProps = { callForMount: true };
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 exports.ButtonBar_OptionUI = exports.Dropdown_OptionUI = exports.Select = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1773,7 +1664,7 @@ var ButtonBar_OptionUI = exports.ButtonBar_OptionUI = function (_BaseComponent3)
 }*/
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1881,7 +1772,7 @@ exports.Spinner = Spinner;
 }*/
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1931,7 +1822,7 @@ var Switch = exports.Switch = function (_BaseComponent) {
 Switch.defaultProps = { preferLater: true };
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1950,11 +1841,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _reactTextareaAutosize = __webpack_require__(18);
+var _reactTextareaAutosize = __webpack_require__(17);
 
 var _reactTextareaAutosize2 = _interopRequireDefault(_reactTextareaAutosize);
 
-var _keycode = __webpack_require__(24);
+var _keycode = __webpack_require__(23);
 
 var keycode = _interopRequireWildcard(_keycode);
 
@@ -2071,14 +1962,14 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
 TextArea.defaultProps = { editable: true, allowLineBreaks: true };
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -2476,7 +2367,7 @@ TextareaAutosize.defaultProps = {
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2501,12 +2392,12 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(20)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(19)(isValidElement, throwOnDirectAccess);
 } else {}
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2519,10 +2410,10 @@ if (true) {
 
 
 
-var assign = __webpack_require__(21);
+var assign = __webpack_require__(20);
 
-var ReactPropTypesSecret = __webpack_require__(22);
-var checkPropTypes = __webpack_require__(23);
+var ReactPropTypesSecret = __webpack_require__(21);
+var checkPropTypes = __webpack_require__(22);
 
 var printWarning = function() {};
 
@@ -3068,7 +2959,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3165,7 +3056,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3184,7 +3075,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3200,7 +3091,7 @@ module.exports = ReactPropTypesSecret;
 var printWarning = function() {};
 
 if (true) {
-  var ReactPropTypesSecret = __webpack_require__(22);
+  var ReactPropTypesSecret = __webpack_require__(21);
   var loggedTypeFailures = {};
 
   printWarning = function(text) {
@@ -3282,7 +3173,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports) {
 
 // Source: http://jsfiddle.net/vWx8V/
@@ -3463,7 +3354,7 @@ for (var alias in aliases) {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3484,7 +3375,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _keycode = __webpack_require__(24);
+var _keycode = __webpack_require__(23);
 
 var keycode = _interopRequireWildcard(_keycode);
 
