@@ -244,7 +244,7 @@ Object.keys(_TextArea).forEach(function (key) {
   });
 });
 
-var _TextInput = __webpack_require__(24);
+var _TextInput = __webpack_require__(28);
 
 Object.keys(_TextInput).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -532,10 +532,7 @@ var Button = function (_BaseComponent) {
                 backgroundPosition: (width - borderThickness * 2 - iconSize) / 2 + "px " + (height - borderThickness * 2 - iconSize) / 2 + "px",
                 backgroundSize: iconSize
             }, iconPath && { backgroundImage: "url(" + iconPath + ")" }, hasCheckbox && styles.root_hasCheckbox, !enabled && styles.root_disabled, style);
-            var extraClassnames = [enabled && finalStyle[":hover"] && (0, _reactVextensions.CreateGlobalPseudoStyleAndReturnClassName)("hover", finalStyle[":hover"])].filter(function (a) {
-                return a;
-            });
-            return _react2.default.createElement("div", Object.assign({}, rest, { title: title, onClick: this.OnClick, className: "Button " + extraClassnames.join(" ") + " " + (className || ""), style: finalStyle }), hasCheckbox ? _react2.default.createElement("span", { style: { verticalAlign: 4 } }, text) : text, children);
+            return _react2.default.createElement("div", Object.assign({}, rest, { title: title, onClick: this.OnClick, className: "Button " + (enabled ? (0, _reactVextensions.ClassBasedStyles)(finalStyle) : "") + " " + (className || ""), style: finalStyle }), hasCheckbox ? _react2.default.createElement("span", { style: { verticalAlign: 4 } }, text) : text, children);
         }
     }, {
         key: "OnClick",
@@ -1337,7 +1334,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		return classes.join(' ');
 	}
 
-	if (typeof module !== 'undefined' && module.exports) {
+	if ( true && module.exports) {
 		classNames.default = classNames;
 		module.exports = classNames;
 	} else if (true) {
@@ -1845,7 +1842,7 @@ var _reactTextareaAutosize = __webpack_require__(17);
 
 var _reactTextareaAutosize2 = _interopRequireDefault(_reactTextareaAutosize);
 
-var _keycode = __webpack_require__(23);
+var _keycode = __webpack_require__(27);
 
 var keycode = _interopRequireWildcard(_keycode);
 
@@ -1967,67 +1964,22 @@ TextArea.defaultProps = { editable: true, allowLineBreaks: true };
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
+/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(22);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
 
-    return target;
-  };
 
-  return _extends.apply(this, arguments);
-}
 
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
-
-var isIE = isBrowser ? !!document.documentElement.currentStyle : false;
-var hiddenTextarea = isBrowser && document.createElement('textarea');
+var isIE = !!document.documentElement.currentStyle;
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
   'max-height': 'none',
@@ -2041,6 +1993,18 @@ var HIDDEN_TEXTAREA_STYLE = {
 };
 var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'font-style', 'tab-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'box-sizing'];
 var computedStyleCache = {};
+var hiddenTextarea = document.createElement('textarea');
+
+var forceHiddenStyles = function forceHiddenStyles(node) {
+  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(function (key) {
+    node.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
+  });
+};
+
+{
+  forceHiddenStyles(hiddenTextarea);
+}
+
 function calculateNodeHeight(uiTextNode, uid, useCache, minRows, maxRows) {
   if (useCache === void 0) {
     useCache = false;
@@ -2076,9 +2040,7 @@ function calculateNodeHeight(uiTextNode, uid, useCache, minRows, maxRows) {
   Object.keys(sizingStyle).forEach(function (key) {
     hiddenTextarea.style[key] = sizingStyle[key];
   });
-  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(function (key) {
-    hiddenTextarea.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
-  });
+  forceHiddenStyles(hiddenTextarea);
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || 'x';
   var minHeight = -Infinity;
   var maxHeight = Infinity;
@@ -2094,28 +2056,29 @@ function calculateNodeHeight(uiTextNode, uid, useCache, minRows, maxRows) {
 
 
   hiddenTextarea.value = 'x';
-  var singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+  var singleRowHeight = hiddenTextarea.scrollHeight - paddingSize; // Stores the value's rows count rendered in `hiddenTextarea`,
+  // regardless if `maxRows` or `minRows` props are passed
 
-  if (minRows !== null || maxRows !== null) {
-    if (minRows !== null) {
-      minHeight = singleRowHeight * minRows;
+  var valueRowCount = Math.floor(height / singleRowHeight);
 
-      if (boxSizing === 'border-box') {
-        minHeight = minHeight + paddingSize + borderSize;
-      }
+  if (minRows !== null) {
+    minHeight = singleRowHeight * minRows;
 
-      height = Math.max(minHeight, height);
+    if (boxSizing === 'border-box') {
+      minHeight = minHeight + paddingSize + borderSize;
     }
 
-    if (maxRows !== null) {
-      maxHeight = singleRowHeight * maxRows;
+    height = Math.max(minHeight, height);
+  }
 
-      if (boxSizing === 'border-box') {
-        maxHeight = maxHeight + paddingSize + borderSize;
-      }
+  if (maxRows !== null) {
+    maxHeight = singleRowHeight * maxRows;
 
-      height = Math.min(maxHeight, height);
+    if (boxSizing === 'border-box') {
+      maxHeight = maxHeight + paddingSize + borderSize;
     }
+
+    height = Math.min(maxHeight, height);
   }
 
   var rowCount = Math.floor(height / singleRowHeight);
@@ -2123,7 +2086,8 @@ function calculateNodeHeight(uiTextNode, uid, useCache, minRows, maxRows) {
     height: height,
     minHeight: minHeight,
     maxHeight: maxHeight,
-    rowCount: rowCount
+    rowCount: rowCount,
+    valueRowCount: valueRowCount
   };
 }
 
@@ -2146,8 +2110,13 @@ function calculateNodeStyling(node, uid, useCache) {
     obj[name] = style.getPropertyValue(name);
     return obj;
   }, {});
-  var boxSizing = sizingStyle['box-sizing']; // IE (Edge has already correct behaviour) returns content width as computed width
+  var boxSizing = sizingStyle['box-sizing']; // probably node is detached from DOM, can't read computed dimensions
+
+  if (boxSizing === '') {
+    return null;
+  } // IE (Edge has already correct behaviour) returns content width as computed width
   // so we need to add manually padding and border widths
+
 
   if (isIE && boxSizing === 'border-box') {
     sizingStyle.width = parseFloat(sizingStyle.width) + parseFloat(style['border-right-width']) + parseFloat(style['border-left-width']) + parseFloat(style['padding-right']) + parseFloat(style['padding-left']) + 'px';
@@ -2170,50 +2139,33 @@ function calculateNodeStyling(node, uid, useCache) {
 }
 
 var purgeCache = function purgeCache(uid) {
-  return delete computedStyleCache[uid];
+  delete computedStyleCache[uid];
 };
 
-function autoInc(seed) {
-  if (seed === void 0) {
-    seed = 0;
-  }
+var noop = function noop() {};
 
-  return function () {
-    return ++seed;
-  };
-}
-
-var uid = autoInc();
-
-/**
- * <TextareaAutosize />
- */
-var noop = function noop() {}; // IE11 has a problem with eval source maps, can be reproduced with:
-// eval('"use strict"; var onNextFrame = window.cancelAnimationFrame; onNextFrame(4);')
-// so we bind window as context in dev modes
-
-
-var _ref = isBrowser && window.requestAnimationFrame ?  true ? [window.requestAnimationFrame, window.cancelAnimationFrame] : undefined : [setTimeout, clearTimeout];
-var onNextFrame = _ref[0];
-var clearNextFrameAction = _ref[1];
+var uid = 0;
 
 var TextareaAutosize =
 /*#__PURE__*/
 function (_React$Component) {
-  _inheritsLoose(TextareaAutosize, _React$Component);
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(TextareaAutosize, _React$Component);
 
   function TextareaAutosize(props) {
     var _this;
 
     _this = _React$Component.call(this, props) || this;
-    _this._resizeLock = false;
 
-    _this._onRootDOMNode = function (node) {
-      _this._rootDOMNode = node;
+    _this._onRef = function (node) {
+      _this._ref = node;
+      var inputRef = _this.props.inputRef;
 
-      if (_this.props.inputRef) {
-        _this.props.inputRef(node);
+      if (typeof inputRef === 'function') {
+        inputRef(node);
+        return;
       }
+
+      inputRef.current = node;
     };
 
     _this._onChange = function (event) {
@@ -2221,7 +2173,7 @@ function (_React$Component) {
         _this._resizeComponent();
       }
 
-      _this.props.onChange(event);
+      _this.props.onChange(event, Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__["default"])(_this)));
     };
 
     _this._resizeComponent = function (callback) {
@@ -2229,12 +2181,7 @@ function (_React$Component) {
         callback = noop;
       }
 
-      if (typeof _this._rootDOMNode === 'undefined') {
-        callback();
-        return;
-      }
-
-      var nodeHeight = calculateNodeHeight(_this._rootDOMNode, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows);
+      var nodeHeight = calculateNodeHeight(_this._ref, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows);
 
       if (nodeHeight === null) {
         callback();
@@ -2244,8 +2191,10 @@ function (_React$Component) {
       var height = nodeHeight.height,
           minHeight = nodeHeight.minHeight,
           maxHeight = nodeHeight.maxHeight,
-          rowCount = nodeHeight.rowCount;
+          rowCount = nodeHeight.rowCount,
+          valueRowCount = nodeHeight.valueRowCount;
       _this.rowCount = rowCount;
+      _this.valueRowCount = valueRowCount;
 
       if (_this.state.height !== height || _this.state.minHeight !== minHeight || _this.state.maxHeight !== maxHeight) {
         _this.setState({
@@ -2265,22 +2214,24 @@ function (_React$Component) {
       minHeight: -Infinity,
       maxHeight: Infinity
     };
-    _this._uid = uid();
-    _this._controlled = typeof props.value === 'string';
+    _this._uid = uid++;
+    _this._controlled = props.value !== undefined;
+    _this._resizeLock = false;
     return _this;
   }
 
   var _proto = TextareaAutosize.prototype;
 
   _proto.render = function render() {
-    var _props = this.props,
-        _minRows = _props.minRows,
-        _maxRows = _props.maxRows,
-        _onHeightChange = _props.onHeightChange,
-        _useCacheForDOMMeasurements = _props.useCacheForDOMMeasurements,
-        _inputRef = _props.inputRef,
-        props = _objectWithoutProperties(_props, ["minRows", "maxRows", "onHeightChange", "useCacheForDOMMeasurements", "inputRef"]);
-    props.style = _extends({}, props.style, {
+    var _this$props = this.props,
+        _inputRef = _this$props.inputRef,
+        _maxRows = _this$props.maxRows,
+        _minRows = _this$props.minRows,
+        _onHeightChange = _this$props.onHeightChange,
+        _useCacheForDOMMeasurements = _this$props.useCacheForDOMMeasurements,
+        props = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_this$props, ["inputRef", "maxRows", "minRows", "onHeightChange", "useCacheForDOMMeasurements"]);
+
+    props.style = Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props.style, {
       height: this.state.height
     });
     var maxHeight = Math.max(props.style.maxHeight || Infinity, this.state.maxHeight);
@@ -2289,9 +2240,9 @@ function (_React$Component) {
       props.style.overflow = 'hidden';
     }
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", _extends({}, props, {
+    return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("textarea", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
       onChange: this._onChange,
-      ref: this._onRootDOMNode
+      ref: this._onRef
     }));
   };
 
@@ -2311,63 +2262,130 @@ function (_React$Component) {
       _this2._resizeLock = true;
 
       _this2._resizeComponent(function () {
-        return _this2._resizeLock = false;
+        _this2._resizeLock = false;
       });
     };
 
     window.addEventListener('resize', this._resizeListener);
   };
 
-  _proto.componentWillReceiveProps = function componentWillReceiveProps() {
-    var _this3 = this;
-
-    this._clearNextFrame();
-
-    this._onNextFrameActionId = onNextFrame(function () {
-      return _this3._resizeComponent();
-    });
-  };
-
   _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      this._resizeComponent();
+    }
+
     if (this.state.height !== prevState.height) {
       this.props.onHeightChange(this.state.height, this);
     }
   };
 
   _proto.componentWillUnmount = function componentWillUnmount() {
-    this._clearNextFrame();
-
     window.removeEventListener('resize', this._resizeListener);
     purgeCache(this._uid);
   };
 
-  _proto._clearNextFrame = function _clearNextFrame() {
-    clearNextFrameAction(this._onNextFrameActionId);
-  };
-
   return TextareaAutosize;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_4___default.a.Component);
 
-TextareaAutosize.propTypes = {
-  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onHeightChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  useCacheForDOMMeasurements: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  minRows: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  maxRows: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
-  inputRef: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
-};
 TextareaAutosize.defaultProps = {
+  inputRef: noop,
   onChange: noop,
   onHeightChange: noop,
   useCacheForDOMMeasurements: false
 };
+ true ? TextareaAutosize.propTypes = {
+  inputRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.shape({
+    current: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.any
+  })]),
+  maxRows: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number,
+  minRows: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func,
+  onHeightChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func,
+  style: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object,
+  useCacheForDOMMeasurements: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool,
+  value: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string
+} : undefined;
 
 /* harmony default export */ __webpack_exports__["default"] = (TextareaAutosize);
 
 
 /***/ }),
 /* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutPropertiesLoose; });
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _assertThisInitialized; });
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2392,12 +2410,12 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(19)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(23)(isValidElement, throwOnDirectAccess);
 } else {}
 
 
 /***/ }),
-/* 19 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2410,10 +2428,10 @@ if (true) {
 
 
 
-var assign = __webpack_require__(20);
+var assign = __webpack_require__(24);
 
-var ReactPropTypesSecret = __webpack_require__(21);
-var checkPropTypes = __webpack_require__(22);
+var ReactPropTypesSecret = __webpack_require__(25);
+var checkPropTypes = __webpack_require__(26);
 
 var printWarning = function() {};
 
@@ -2585,7 +2603,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
           );
           err.name = 'Invariant Violation';
           throw err;
-        } else if ("none" !== 'production' && typeof console !== 'undefined') {
+        } else if ( true && typeof console !== 'undefined') {
           // Old behavior for people using React.PropTypes
           var cacheKey = componentName + ':' + propName;
           if (
@@ -2959,7 +2977,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 20 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3056,7 +3074,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 21 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3075,7 +3093,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3091,7 +3109,7 @@ module.exports = ReactPropTypesSecret;
 var printWarning = function() {};
 
 if (true) {
-  var ReactPropTypesSecret = __webpack_require__(21);
+  var ReactPropTypesSecret = __webpack_require__(25);
   var loggedTypeFailures = {};
 
   printWarning = function(text) {
@@ -3173,7 +3191,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports) {
 
 // Source: http://jsfiddle.net/vWx8V/
@@ -3354,7 +3372,7 @@ for (var alias in aliases) {
 
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3375,7 +3393,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _keycode = __webpack_require__(23);
+var _keycode = __webpack_require__(27);
 
 var keycode = _interopRequireWildcard(_keycode);
 

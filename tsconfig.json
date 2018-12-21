@@ -22,7 +22,7 @@
 		"experimentalDecorators": true,
 		"allowSyntheticDefaultImports": true,
 		"declaration": true,
-		"declarationDir": "."
+		"declarationDir": "dist"
 	},
 	"files": ["src/index.ts"],
 	"include": [

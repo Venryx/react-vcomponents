@@ -1,7 +1,5 @@
 import React from "react";
-import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, CreateGlobalPseudoStyleAndReturnClassName, E} from "react-vextensions";
-import {createMarkupForStyles} from "react-dom/lib/CSSPropertyOperations";
-import { ToJSON } from "../General";
+import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, E, ClassBasedStyles} from "react-vextensions";
 
 var styles = {
 	root: {
@@ -86,13 +84,9 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			style,
 		);
 
-		let extraClassnames = [
-			enabled && finalStyle[":hover"] && CreateGlobalPseudoStyleAndReturnClassName("hover", finalStyle[":hover"]),
-		].filter(a=>a);
-
 	    return (
 			<div {...rest} title={title} onClick={this.OnClick}
-					className={`Button ${extraClassnames.join(" ")} ${className || ""}`}
+					className={`Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`}
 					style={finalStyle}>
 				{/*hasCheckbox && <CheckBox checked={checked} style={E(styles.checkbox, checkboxStyle)} labelStyle={checkboxLabelStyle}
 					onChange={checked=>onCheckedChanged && onCheckedChanged(checked)}/>*/}
