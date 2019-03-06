@@ -6,7 +6,7 @@ import {Row} from "./Row";
 export class CheckBox extends BaseComponent
 		<{
 			text?, title?, checked: boolean, indeterminate?: boolean,
-			enabled?: boolean, style?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void},
+			enabled?: boolean, style?, checkboxStyle?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void},
 		{editedValue: boolean}> {
 	static defaultProps = {enabled: true};
 	static lastID = -1;
@@ -19,12 +19,12 @@ export class CheckBox extends BaseComponent
 	id;
 	input: HTMLInputElement;
 	render() {
-		var {text, title, checked, enabled, style, labelStyle, internalChanging, onChange} = this.props;
+		var {text, title, checked, enabled, style, checkboxStyle, labelStyle, internalChanging, onChange} = this.props;
 		let {editedValue} = this.state;
 		return (
 			<Row style={E({position: "relative"}, style)}>
 				<input ref={c=>this.input = c} id={"checkBox_" + this.id} type="checkbox" disabled={!enabled} checked={checked || false}
-					onChange={e=>onChange && onChange(this.input.checked, e)}/>
+					onChange={e=>onChange && onChange(this.input.checked, e)} style={checkboxStyle}/>
 				<label htmlFor={"checkBox_" + this.id} title={title} style={E({marginLeft: 3, whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>
 			</Row>
 			/*<input ref={c=>this.input = c} type="checkbox"

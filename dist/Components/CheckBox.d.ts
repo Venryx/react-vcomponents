@@ -6,6 +6,7 @@ export declare class CheckBox extends BaseComponent<{
     indeterminate?: boolean;
     enabled?: boolean;
     style?: any;
+    checkboxStyle?: any;
     labelStyle?: any;
     internalChanging?: boolean;
     onChange?: (val: boolean, e: any) => void;

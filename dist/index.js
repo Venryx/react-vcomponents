@@ -621,6 +621,7 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
                 checked = _props.checked,
                 enabled = _props.enabled,
                 style = _props.style,
+                checkboxStyle = _props.checkboxStyle,
                 labelStyle = _props.labelStyle,
                 internalChanging = _props.internalChanging,
                 _onChange = _props.onChange;
@@ -630,7 +631,7 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
                     return _this2.input = c;
                 }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked || false, onChange: function onChange(e) {
                     return _onChange && _onChange(_this2.input.checked, e);
-                } }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3, whiteSpace: "pre" }, labelStyle) }, _react2.default.createElement("span", null), text))
+                }, style: checkboxStyle }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3, whiteSpace: "pre" }, labelStyle) }, _react2.default.createElement("span", null), text))
             /*<input ref={c=>this.input = c} type="checkbox"
                 checked={editedValue != null ? editedValue : (checked || false)}
                 disabled={enabled == false}
