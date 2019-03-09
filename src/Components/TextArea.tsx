@@ -16,7 +16,7 @@ var styles = {
 
 		display: "inline-block",
 		boxSizing: "border-box",
-		whiteSpace: "pre",
+		//whiteSpace: "pre",
 		wordWrap: "normal",
 		width: "100%",
 		//height: "100%",
