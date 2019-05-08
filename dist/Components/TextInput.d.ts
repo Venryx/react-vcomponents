@@ -3,10 +3,10 @@ import { BaseComponent } from "react-vextensions";
 export declare type TextInputProps = {
     value: string;
     enabled?: boolean;
-    onChange?: (newVal: any, event: any) => void;
+    style?: any;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
-    style?: any;
+    onChange?: (newVal: any, event: any) => void;
 } & React.HTMLProps<HTMLInputElement>;
 export declare class TextInput extends BaseComponent<TextInputProps, {
     editedValue: string;

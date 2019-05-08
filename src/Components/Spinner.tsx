@@ -1,18 +1,53 @@
 import React from "react";
 import {BaseComponent, E, ApplyBasicStyles} from "react-vextensions";
+import keycode from "keycode";
+
+export type SpinnerProps = {
+	step?, min?, max?, value?, enabled?, title?, style?,
+	delayChangeTillDefocus?: boolean, useEscape?: boolean,
+	onChange,
+} & React.HTMLProps<HTMLInputElement>;
 
 @ApplyBasicStyles
-export class Spinner extends BaseComponent
-		<{step?, min?, max?, value?, enabled?, title?, style?, onChange, onFocus?}, {}> {
+export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> {
 	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true};
 
 	root: HTMLInputElement;
 	render() {
-	    var {step, min, max, value, enabled, title, style, onChange, onFocus} = this.props;
-	    return (
-			<input ref={c=>this.root = c} type="number" step={step} min={min} max={max} value={value} disabled={!enabled}
+		let {
+			step, min, max, value, enabled, title, style, delayChangeTillDefocus, useEscape,
+			onChange, onBlur, onKeyDown,
+			...rest
+		} = this.props;
+		let {editedValue} = this.state;
+		return (
+			<input {...rest} ref={c=>this.root = c} type="number" step={step} min={min} max={max} value={editedValue != null ? editedValue : (value || 0)} disabled={!enabled}
 				title={title} style={E({color: "#000"}, style)}
-				onChange={this.OnChange} onFocus={onFocus}/>
+				onChange={e=> {
+					var newVal = Number(e.target.value);
+					if (newVal == editedValue) return; // if no change, ignore event
+
+					if (delayChangeTillDefocus) {
+						this.SetState({editedValue: newVal});
+					} else {
+						onChange(newVal, e);
+						this.SetState({editedValue: null});
+					}
+				}}
+				onBlur={e=> {
+					var newVal = e.target.value;
+					if (newVal == value) return; // if no change, ignore event
+					
+					if (delayChangeTillDefocus && onChange) {
+						onChange(newVal, e);
+						this.SetState({editedValue: null});
+					}
+					if (onBlur) return onBlur(e);
+				}}
+				onKeyDown={e=> {
+					if (useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
+					if (onKeyDown) return onKeyDown(e);
+				}}/>
 		);
 	}
 	value;

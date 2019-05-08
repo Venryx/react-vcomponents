@@ -1,5 +1,6 @@
+import React from "react";
 import { BaseComponent } from "react-vextensions";
-export declare class Spinner extends BaseComponent<{
+export declare type SpinnerProps = {
     step?: any;
     min?: any;
     max?: any;
@@ -7,9 +8,13 @@ export declare class Spinner extends BaseComponent<{
     enabled?: any;
     title?: any;
     style?: any;
+    delayChangeTillDefocus?: boolean;
+    useEscape?: boolean;
     onChange: any;
-    onFocus?: any;
-}, {}> {
+} & React.HTMLProps<HTMLInputElement>;
+export declare class Spinner extends BaseComponent<SpinnerProps, {
+    editedValue: number;
+}> {
     static defaultProps: {
         step: number;
         min: number;

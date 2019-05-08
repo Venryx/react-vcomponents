@@ -3,9 +3,9 @@ import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import * as keycode from "keycode";
 
 export type TextInputProps = {
-	value: string, enabled?: boolean, onChange?: (newVal, event)=>void,
+	value: string, enabled?: boolean, style?,
 	delayChangeTillDefocus?: boolean, useEscape?: boolean,
-	style?,
+	onChange?: (newVal, event)=>void,
 } & React.HTMLProps<HTMLInputElement>;
 
 @ApplyBasicStyles
@@ -20,7 +20,11 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 
 	root: HTMLInputElement;
 	render() {
-		var {value, enabled, onChange, onKeyDown, delayChangeTillDefocus, useEscape, style, ...rest} = this.props;
+		var {
+			value, enabled, onChange, delayChangeTillDefocus, useEscape, style,
+			onBlur, onKeyDown,
+			...rest
+		} = this.props;
 		var {editedValue} = this.state;
 		return (
 			<input {...rest} ref={c=>this.root = c} disabled={enabled == false} style={E({color: "black"}, style)}
@@ -44,6 +48,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 						onChange(newVal, e);
 						this.SetState({editedValue: null});
 					}
+					if (onBlur) return onBlur(e);
 				}}
 				onKeyDown={e=> {
 					if (useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
