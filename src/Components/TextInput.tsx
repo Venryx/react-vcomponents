@@ -2,14 +2,14 @@ import React from "react";
 import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import * as keycode from "keycode";
 
+export type TextInputProps = {
+	value: string, enabled?: boolean, onChange?: (newVal, event)=>void,
+	delayChangeTillDefocus?: boolean, useEscape?: boolean,
+	style?,
+} & React.HTMLProps<HTMLInputElement>;
+
 @ApplyBasicStyles
-export class TextInput extends BaseComponent
-		<{
-			value: string, enabled?: boolean, onChange?: (newVal, event)=>void,
-			delayChangeTillDefocus?: boolean, useEscape?: boolean,
-			style?
-		} & React.HTMLProps<HTMLInputElement>,
-		{editedValue: string}> {
+export class TextInput extends BaseComponent<TextInputProps, {editedValue: string}> {
 	static defaultProps = {type: "text"};
 	/*ComponentWillReceiveProps(props) {
 		// if value changing, and "delayChangeTillDefocus" is not enabled

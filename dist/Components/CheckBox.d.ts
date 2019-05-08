@@ -1,5 +1,5 @@
 import { BaseComponent } from "react-vextensions";
-export declare class CheckBox extends BaseComponent<{
+export declare type CheckBoxProps = {
     text?: any;
     title?: any;
     checked: boolean;
@@ -10,7 +10,8 @@ export declare class CheckBox extends BaseComponent<{
     labelStyle?: any;
     internalChanging?: boolean;
     onChange?: (val: boolean, e: any) => void;
-}, {
+};
+export declare class CheckBox extends BaseComponent<CheckBoxProps, {
     editedValue: boolean;
 }> {
     static defaultProps: {

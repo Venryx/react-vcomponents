@@ -1,3 +1,6 @@
+// instead of using this directly, usually just use React.PropsWithoutRef<BaseCompProps>
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
 export function ToJSON(obj) { return JSON.stringify(obj); }
 export function FromJSON(json) { return JSON.parse(json); }
 

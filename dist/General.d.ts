@@ -1,3 +1,4 @@
+export declare type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export declare function ToJSON(obj: any): string;
 export declare function FromJSON(json: any): any;
 export declare function RemoveDuplicates(items: any): any[];

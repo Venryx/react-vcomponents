@@ -2,12 +2,13 @@ import React from "react";
 import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import {Row} from "./Row";
 
+export type CheckBoxProps = {
+	text?, title?, checked: boolean, indeterminate?: boolean,
+	enabled?: boolean, style?, checkboxStyle?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void
+};
+
 @ApplyBasicStyles
-export class CheckBox extends BaseComponent
-		<{
-			text?, title?, checked: boolean, indeterminate?: boolean,
-			enabled?: boolean, style?, checkboxStyle?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void},
-		{editedValue: boolean}> {
+export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean}> {
 	static defaultProps = {enabled: true};
 	static lastID = -1;
 	
