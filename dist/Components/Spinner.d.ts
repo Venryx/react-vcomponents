@@ -24,6 +24,4 @@ export declare class Spinner extends BaseComponent<SpinnerProps, {
     };
     root: HTMLInputElement;
     render(): JSX.Element;
-    value: any;
-    OnChange(e: any): void;
 }

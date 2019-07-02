@@ -35,7 +35,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 					}
 				}}
 				onBlur={e=> {
-					var newVal = e.target.value;
+					var newVal = Number(e.target.value);
 					if (newVal == value) return; // if no change, ignore event
 					
 					if (delayChangeTillDefocus && onChange) {
@@ -49,12 +49,6 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 					if (onKeyDown) return onKeyDown(e);
 				}}/>
 		);
-	}
-	value;
-	OnChange(e) {
-		var {onChange} = this.props;
-		this.value = this.root.value;
-		if (onChange) onChange(parseFloat(this.value), e);
 	}
 }
 

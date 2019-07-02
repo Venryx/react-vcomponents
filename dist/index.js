@@ -1753,7 +1753,7 @@ var Spinner = function (_BaseComponent) {
                         _this2.SetState({ editedValue: null });
                     }
                 }, onBlur: function onBlur(e) {
-                    var newVal = e.target.value;
+                    var newVal = Number(e.target.value);
                     if (newVal == value) return; // if no change, ignore event
                     if (delayChangeTillDefocus && _onChange) {
                         _onChange(newVal, e);
@@ -1764,14 +1764,6 @@ var Spinner = function (_BaseComponent) {
                     if (useEscape && e.keyCode == _keycode2.default.codes.esc) return void _this2.SetState({ editedValue: null });
                     if (_onKeyDown) return _onKeyDown(e);
                 } }));
-        }
-    }, {
-        key: "OnChange",
-        value: function OnChange(e) {
-            var onChange = this.props.onChange;
-
-            this.value = this.root.value;
-            if (onChange) onChange(parseFloat(this.value), e);
         }
     }]);
 
