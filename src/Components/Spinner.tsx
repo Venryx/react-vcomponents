@@ -20,9 +20,15 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 			...rest
 		} = this.props;
 		let {editedValue} = this.state;
+
+		style = E({color: "#000"}, style);
+		if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
+			style.width = 70;
+		}
+
 		return (
 			<input {...rest} ref={c=>this.root = c} type="number" step={step} min={min} max={max} value={editedValue != null ? editedValue : (value || 0)} disabled={!enabled}
-				title={title} style={E({color: "#000"}, style)}
+				title={title} style={style}
 				onChange={e=> {
 					var newVal = Number(e.target.value);
 					if (newVal == editedValue) return; // if no change, ignore event

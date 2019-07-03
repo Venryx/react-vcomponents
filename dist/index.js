@@ -1741,9 +1741,13 @@ var Spinner = function (_BaseComponent) {
                 _onKeyDown = _a.onKeyDown,
                 rest = __rest(_a, ["step", "min", "max", "value", "enabled", "title", "style", "delayChangeTillDefocus", "useEscape", "onChange", "onBlur", "onKeyDown"]);var editedValue = this.state.editedValue;
 
+            style = (0, _reactVextensions.E)({ color: "#000" }, style);
+            if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
+                style.width = 70;
+            }
             return _react2.default.createElement("input", Object.assign({}, rest, { ref: function ref(c) {
                     return _this2.root = c;
-                }, type: "number", step: step, min: min, max: max, value: editedValue != null ? editedValue : value || 0, disabled: !enabled, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: function onChange(e) {
+                }, type: "number", step: step, min: min, max: max, value: editedValue != null ? editedValue : value || 0, disabled: !enabled, title: title, style: style, onChange: function onChange(e) {
                     var newVal = Number(e.target.value);
                     if (newVal == editedValue) return; // if no change, ignore event
                     if (delayChangeTillDefocus) {
