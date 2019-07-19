@@ -9,5 +9,6 @@ export * from "./Components/Row";
 export * from "./Components/Select";
 export * from "./Components/Spinner";
 export * from "./Components/Switch";
+export * from "./Components/Text";
 export * from "./Components/TextArea";
 export * from "./Components/TextInput";

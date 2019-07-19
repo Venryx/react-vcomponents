@@ -1,8 +1,8 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
-export declare class Column extends BaseComponent<{
-    center?: any;
+export declare class Text extends BaseComponent<{
+    wrap?: any;
     style?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLProps<HTMLSpanElement>, {}> {
     render(): JSX.Element;
 }

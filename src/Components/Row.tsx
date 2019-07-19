@@ -34,10 +34,10 @@ export class RowLR extends BaseComponent<{height?, className?, rowStyle?, leftSt
 }*/
 
 @ApplyBasicStyles
-export class Row extends BaseComponent<{style?} & React.HTMLProps<HTMLDivElement>, {}> {
+export class Row extends BaseComponent<{center?, style?} & React.HTMLProps<HTMLDivElement>, {}> {
 	render() {
-		let {style, ...rest} = this.props;
-		return <div {...rest} style={E({display: "flex", alignItems: "center"}, style)}/>
+		let {center, style, ...rest} = this.props;
+		return <div {...rest} style={E({display: "flex"}, center && {alignItems: "center"}, style)}/>
 	}
 }
 @ApplyBasicStyles

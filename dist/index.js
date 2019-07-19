@@ -232,6 +232,18 @@ Object.keys(_Switch).forEach(function (key) {
   });
 });
 
+var _Text = __webpack_require__(29);
+
+Object.keys(_Text).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Text[key];
+    }
+  });
+});
+
 var _TextArea = __webpack_require__(17);
 
 Object.keys(_TextArea).forEach(function (key) {
@@ -627,7 +639,7 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
                 _onChange = _props.onChange;
             var editedValue = this.state.editedValue;
 
-            return _react2.default.createElement(_Row.Row, { style: (0, _reactVextensions.E)({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
+            return _react2.default.createElement(_Row.Row, { center: true, style: (0, _reactVextensions.E)({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
                     return _this2.input = c;
                 }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked || false, onChange: function onChange(e) {
                     return _onChange && _onChange(_this2.input.checked, e);
@@ -781,9 +793,10 @@ var Row = function (_BaseComponent) {
         key: "render",
         value: function render() {
             var _a = this.props,
+                center = _a.center,
                 style = _a.style,
-                rest = __rest(_a, ["style"]);
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, style) }));
+                rest = __rest(_a, ["center", "style"]);
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex" }, center && { alignItems: "center" }, style) }));
         }
     }]);
 
@@ -1072,9 +1085,10 @@ var Column = function (_BaseComponent) {
         key: "render",
         value: function render() {
             var _a = this.props,
+                center = _a.center,
                 style = _a.style,
-                rest = __rest(_a, ["style"]);
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexDirection: "column", flexShrink: 0 }, style) }));
+                rest = __rest(_a, ["center", "style"]);
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexDirection: "column", flexShrink: 0 }, center && { alignItems: "center" }, style) }));
         }
     }]);
 
@@ -3540,6 +3554,78 @@ exports.TextInput = TextInput;
         );
     }
 }*/
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Text = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactVextensions = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __rest = undefined && undefined.__rest || function (s, e) {
+    var t = {};
+    for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+    }return t;
+};
+
+var Text = function (_BaseComponent) {
+    _inherits(Text, _BaseComponent);
+
+    function Text() {
+        _classCallCheck(this, Text);
+
+        return _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).apply(this, arguments));
+    }
+
+    _createClass(Text, [{
+        key: "render",
+        value: function render() {
+            var _a = this.props,
+                wrap = _a.wrap,
+                style = _a.style,
+                rest = __rest(_a, ["wrap", "style"]);
+            return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, !wrap && { whiteSpace: "pre" }, style) }));
+        }
+    }]);
+
+    return Text;
+}(_reactVextensions.BaseComponent);
+exports.Text = Text = __decorate([_reactVextensions.ApplyBasicStyles], Text);
+exports.Text = Text;
 
 /***/ })
 /******/ ]);
