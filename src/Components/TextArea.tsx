@@ -61,11 +61,11 @@ export class TextArea extends BaseComponent
 				autoSize_minHeight && minHeight != null && {minHeight},
 				style,
 			)}
-			onHeightChange={height=> {
+			{...autoSize_minHeight && {onHeightChange: height=> {
 				if (autoSize_minHeight) {
 					this.SetState({minHeight: height});
 				}
-			}}
+			}}}
 			value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
 			onChange={e=> {
 				var newVal = e.target.value;

@@ -2321,11 +2321,11 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
             var Comp = autoSize ? _reactTextareaAutosize2.default : "textarea";
             return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: function ref(c) {
                     return _this2.root = c;
-                }, disabled: enabled == false, readOnly: !editable, className: (0, _classnames2.default)("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: (0, _reactVextensions.E)(styles.root, autoSize && { resize: "none", overflow: "hidden" }, autoSize_minHeight && minHeight != null && { minHeight: minHeight }, style), onHeightChange: function onHeightChange(height) {
+                }, disabled: enabled == false, readOnly: !editable, className: (0, _classnames2.default)("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: (0, _reactVextensions.E)(styles.root, autoSize && { resize: "none", overflow: "hidden" }, autoSize_minHeight && minHeight != null && { minHeight: minHeight }, style) }, autoSize_minHeight && { onHeightChange: function onHeightChange(height) {
                     if (autoSize_minHeight) {
                         _this2.SetState({ minHeight: height });
                     }
-                }, value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
+                } }, { value: editedValue != null ? editedValue : value, defaultValue: defaultValue, onChange: function onChange(e) {
                     var newVal = e.target.value;
                     if (!allowLineBreaks) newVal = newVal.replace(/[\r\n]/g, "");
                     if (newVal == editedValue) return; // if no text change, ignore event
