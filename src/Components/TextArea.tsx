@@ -1,7 +1,8 @@
 import React from "react";
-import {BaseComponent, E} from "react-vextensions";
+import {BaseComponent, E, AddGlobalStyle} from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
 import * as keycode from "keycode";
+import classnames from "classnames";
 
 var styles = {
 	root: {
@@ -29,26 +30,42 @@ var styles = {
 	}
 };
 
+AddGlobalStyle(`
+.autoSize_minHeight {
+	height: unset !important;
+}
+`);
+
 export class TextArea extends BaseComponent
 		<{
 			enabled?: boolean, editable?: boolean, className?: string, style?, onChange?: (newVal, event)=>void,
-			delayChangeTillDefocus?: boolean, useEscape?: boolean, autoSize?: boolean, allowLineBreaks?: boolean,
+			delayChangeTillDefocus?: boolean, useEscape?: boolean, autoSize?: boolean, autoSize_minHeight?: boolean, allowLineBreaks?: boolean,
 		} & React.HTMLProps<HTMLTextAreaElement>,
-		{editedValue: string}> {
+		{editedValue: string, minHeight: number}> {
 	static defaultProps = {editable: true, allowLineBreaks: true};
 	
 	root: TextAreaAutoSize | HTMLTextAreaElement;
 	render() {
-		var {value, defaultValue, pattern, enabled, editable, className, style, onChange, delayChangeTillDefocus, useEscape, autoSize, allowLineBreaks, onKeyDown, ...rest} = this.props;
-		var {editedValue} = this.state;
+		var {value, defaultValue, pattern, enabled, editable, className, style, onChange, delayChangeTillDefocus, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, ...rest} = this.props;
+		var {editedValue, minHeight} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 		if (defaultValue === undefined && value == null) value = "";
 
 		let Comp = autoSize ? TextAreaAutoSize : "textarea";
 
-		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} className={"simpleText selectable " + className}
-			style={E(styles.root, autoSize && {resize: "none", overflow: "hidden"}, style)}
+		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
+			style={E(
+				styles.root,
+				autoSize && {resize: "none", overflow: "hidden"},
+				autoSize_minHeight && minHeight != null && {minHeight},
+				style,
+			)}
+			onHeightChange={height=> {
+				if (autoSize_minHeight) {
+					this.SetState({minHeight: height});
+				}
+			}}
 			value={editedValue != null ? editedValue : value} defaultValue={defaultValue} 
 			onChange={e=> {
 				var newVal = e.target.value;

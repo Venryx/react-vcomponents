@@ -10,9 +10,11 @@ export declare class TextArea extends BaseComponent<{
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
     autoSize?: boolean;
+    autoSize_minHeight?: boolean;
     allowLineBreaks?: boolean;
 } & React.HTMLProps<HTMLTextAreaElement>, {
     editedValue: string;
+    minHeight: number;
 }> {
     static defaultProps: {
         editable: boolean;
