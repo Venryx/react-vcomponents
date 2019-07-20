@@ -148,7 +148,7 @@ Object.keys(_CheckBox).forEach(function (key) {
   });
 });
 
-var _ColorPickerBox = __webpack_require__(9);
+var _ColorPickerBox = __webpack_require__(8);
 
 Object.keys(_ColorPickerBox).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -232,7 +232,7 @@ Object.keys(_Switch).forEach(function (key) {
   });
 });
 
-var _Text = __webpack_require__(29);
+var _Text = __webpack_require__(17);
 
 Object.keys(_Text).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -244,7 +244,7 @@ Object.keys(_Text).forEach(function (key) {
   });
 });
 
-var _TextArea = __webpack_require__(17);
+var _TextArea = __webpack_require__(18);
 
 Object.keys(_TextArea).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -256,7 +256,7 @@ Object.keys(_TextArea).forEach(function (key) {
   });
 });
 
-var _TextInput = __webpack_require__(28);
+var _TextInput = __webpack_require__(29);
 
 Object.keys(_TextInput).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -723,8 +723,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _General = __webpack_require__(8);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -826,12 +824,13 @@ var RowLR = function (_BaseComponent2) {
                 rightStyle = _a.rightStyle,
                 children = _a.children,
                 rest = __rest(_a, ["splitAt", "height", "className", "style", "leftStyle", "rightStyle", "children"]);
-            (0, _General.Assert)(children.length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
+            //Assert((children as any).length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
             // if a child has "just-wrapper" tag, take out the wrapper and use its children directly (temp helper for React <16)
             /*if (children[1].props.className && children[1].props.className == "just-wrapper") {
                 children[1] = children[1].props.children;
             }*/
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexShrink: 0 }, style) }), _react2.default.createElement("div", { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), _react2.default.createElement("div", { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, { width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, children[1]));
+            var childrenList = children;
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexShrink: 0 }, style) }), _react2.default.createElement(Row, { center: true, style: (0, _reactVextensions.E)({ width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]), _react2.default.createElement(Row, { center: true, style: (0, _reactVextensions.E)({ width: typeof splitAt == "string" ? 100 - parseInt(splitAt.slice(0, -1)) + "%" : "calc(100% - " + splitAt + "px)" }, rightStyle) }, childrenList.length == 2 && childrenList[1], childrenList.length > 2 && childrenList.slice(1)));
         }
     }]);
 
@@ -851,72 +850,6 @@ exports.RowLR = RowLR;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.ToJSON = ToJSON;
-exports.FromJSON = FromJSON;
-exports.RemoveDuplicates = RemoveDuplicates;
-exports.Assert = Assert;
-exports.AssertWarn = AssertWarn;
-function ToJSON(obj) {
-    return JSON.stringify(obj);
-}
-function FromJSON(json) {
-    return JSON.parse(json);
-}
-function RemoveDuplicates(items) {
-    var result = [];
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var item = _step.value;
-
-            if (result.indexOf(item) == -1) {
-                result.push(item);
-            }
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
-
-    return result;
-}
-function Assert(condition, messageOrMessageFunc) {
-    if (condition) return;
-    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
-    //console.log(`Assert failed) ${message}\n\nStackTrace) ${GetStackTraceStr()}`);
-    console.error("Assert failed) " + message);
-    debugger;
-    throw new Error("Assert failed) " + message);
-}
-function AssertWarn(condition, messageOrMessageFunc) {
-    if (condition) return;
-    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
-    console.warn("Assert-warn failed) " + message + "\n\nStackTrace)"); // ${GetStackTraceStr()}`);
-}
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 exports.ColorPickerBox = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -927,7 +860,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _General = __webpack_require__(8);
+var _General = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1024,6 +957,72 @@ var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
 
     return ColorPickerBox;
 }(_reactVextensions.BaseComponent);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ToJSON = ToJSON;
+exports.FromJSON = FromJSON;
+exports.RemoveDuplicates = RemoveDuplicates;
+exports.Assert = Assert;
+exports.AssertWarn = AssertWarn;
+function ToJSON(obj) {
+    return JSON.stringify(obj);
+}
+function FromJSON(json) {
+    return JSON.parse(json);
+}
+function RemoveDuplicates(items) {
+    var result = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var item = _step.value;
+
+            if (result.indexOf(item) == -1) {
+                result.push(item);
+            }
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    return result;
+}
+function Assert(condition, messageOrMessageFunc) {
+    if (condition) return;
+    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
+    //console.log(`Assert failed) ${message}\n\nStackTrace) ${GetStackTraceStr()}`);
+    console.error("Assert failed) " + message);
+    debugger;
+    throw new Error("Assert failed) " + message);
+}
+function AssertWarn(condition, messageOrMessageFunc) {
+    if (condition) return;
+    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
+    console.warn("Assert-warn failed) " + message + "\n\nStackTrace)"); // ${GetStackTraceStr()}`);
+}
 
 /***/ }),
 /* 10 */
@@ -1384,7 +1383,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _General = __webpack_require__(8);
+var _General = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2056,6 +2055,78 @@ Switch.defaultProps = { preferLater: true };
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Text = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactVextensions = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __rest = undefined && undefined.__rest || function (s, e) {
+    var t = {};
+    for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+    }return t;
+};
+
+var Text = function (_BaseComponent) {
+    _inherits(Text, _BaseComponent);
+
+    function Text() {
+        _classCallCheck(this, Text);
+
+        return _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).apply(this, arguments));
+    }
+
+    _createClass(Text, [{
+        key: "render",
+        value: function render() {
+            var _a = this.props,
+                wrap = _a.wrap,
+                style = _a.style,
+                rest = __rest(_a, ["wrap", "style"]);
+            return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, !wrap && { whiteSpace: "pre" }, style) }));
+        }
+    }]);
+
+    return Text;
+}(_reactVextensions.BaseComponent);
+exports.Text = Text = __decorate([_reactVextensions.ApplyBasicStyles], Text);
+exports.Text = Text;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.TextArea = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2066,7 +2137,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _reactTextareaAutosize = __webpack_require__(18);
+var _reactTextareaAutosize = __webpack_require__(19);
 
 var _reactTextareaAutosize2 = _interopRequireDefault(_reactTextareaAutosize);
 
@@ -2187,18 +2258,18 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
 TextArea.defaultProps = { editable: true, allowLineBreaks: true };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21);
-/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21);
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
+/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(23);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(24);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 
 
@@ -2538,7 +2609,7 @@ TextareaAutosize.defaultProps = {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2563,7 +2634,7 @@ function _extends() {
 }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2585,7 +2656,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2598,7 +2669,7 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2613,7 +2684,7 @@ function _assertThisInitialized(self) {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2638,12 +2709,12 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(24)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(25)(isValidElement, throwOnDirectAccess);
 } else {}
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2656,10 +2727,10 @@ if (true) {
 
 
 
-var assign = __webpack_require__(25);
+var assign = __webpack_require__(26);
 
-var ReactPropTypesSecret = __webpack_require__(26);
-var checkPropTypes = __webpack_require__(27);
+var ReactPropTypesSecret = __webpack_require__(27);
+var checkPropTypes = __webpack_require__(28);
 
 var printWarning = function() {};
 
@@ -3205,7 +3276,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3302,7 +3373,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3321,7 +3392,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3337,7 +3408,7 @@ module.exports = ReactPropTypesSecret;
 var printWarning = function() {};
 
 if (true) {
-  var ReactPropTypesSecret = __webpack_require__(26);
+  var ReactPropTypesSecret = __webpack_require__(27);
   var loggedTypeFailures = {};
 
   printWarning = function(text) {
@@ -3419,7 +3490,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3554,78 +3625,6 @@ exports.TextInput = TextInput;
         );
     }
 }*/
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Text = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactVextensions = __webpack_require__(4);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    }return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __rest = undefined && undefined.__rest || function (s, e) {
-    var t = {};
-    for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
-};
-
-var Text = function (_BaseComponent) {
-    _inherits(Text, _BaseComponent);
-
-    function Text() {
-        _classCallCheck(this, Text);
-
-        return _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).apply(this, arguments));
-    }
-
-    _createClass(Text, [{
-        key: "render",
-        value: function render() {
-            var _a = this.props,
-                wrap = _a.wrap,
-                style = _a.style,
-                rest = __rest(_a, ["wrap", "style"]);
-            return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, !wrap && { whiteSpace: "pre" }, style) }));
-        }
-    }]);
-
-    return Text;
-}(_reactVextensions.BaseComponent);
-exports.Text = Text = __decorate([_reactVextensions.ApplyBasicStyles], Text);
-exports.Text = Text;
 
 /***/ })
 /******/ ]);

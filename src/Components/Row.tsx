@@ -45,29 +45,29 @@ export class RowLR extends BaseComponent<{splitAt?: number | string, height?: nu
 	static defaultProps = {splitAt: "50%"};
 	render() {
 		var {splitAt, height, className, style, leftStyle, rightStyle, children, ...rest} = this.props;
-		Assert((children as any).length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
+		//Assert((children as any).length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
 
 		// if a child has "just-wrapper" tag, take out the wrapper and use its children directly (temp helper for React <16)
 		/*if (children[1].props.className && children[1].props.className == "just-wrapper") {
 			children[1] = children[1].props.children;
 		}*/
 
+		let childrenList = children as any[];
 		return (
 			<div {...rest} style={E({display: "flex", flexShrink: 0}, style)}>
-				<div style={E(
-					{display: "flex", alignItems: "center"},
+				<Row center style={E(
 					{width: typeof splitAt == "string" ? splitAt + "%" : splitAt},
 					leftStyle
 				)}>
 					{children[0]}
-				</div>
-				<div style={E(
-					{display: "flex", alignItems: "center"},
+				</Row>
+				<Row center style={E(
 					{width: typeof splitAt == "string" ? (100 - parseInt(splitAt.slice(0, -1))) + "%" : `calc(100% - ${splitAt}px)`},
 					rightStyle
 				)}>
-					{children[1]}
-				</div>
+					{childrenList.length == 2 && childrenList[1]}
+					{childrenList.length > 2 && childrenList.slice(1)}
+				</Row>
 			</div>
 		);
 	}
