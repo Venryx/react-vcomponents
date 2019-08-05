@@ -803,10 +803,11 @@ var Row = function (_BaseComponent) {
         key: "render",
         value: function render() {
             var _a = this.props,
+                noShrink = _a.noShrink,
                 center = _a.center,
                 style = _a.style,
-                rest = __rest(_a, ["center", "style"]);
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex" }, center && { alignItems: "center" }, style) }));
+                rest = __rest(_a, ["noShrink", "center", "style"]);
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
         }
     }]);
 
@@ -1096,10 +1097,11 @@ var Column = function (_BaseComponent) {
         key: "render",
         value: function render() {
             var _a = this.props,
+                noShrink = _a.noShrink,
                 center = _a.center,
                 style = _a.style,
-                rest = __rest(_a, ["center", "style"]);
-            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexDirection: "column", flexShrink: 0 }, center && { alignItems: "center" }, style) }));
+                rest = __rest(_a, ["noShrink", "center", "style"]);
+            return _react2.default.createElement("div", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", flexDirection: "column" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
         }
     }]);
 

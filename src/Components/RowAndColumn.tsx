@@ -3,6 +3,7 @@ import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import {Column, Row} from "..";
 
 @ApplyBasicStyles
+// todo: maybe add rowNoShrink and columnNoShrink
 export class RowAndColumn extends BaseComponent<{outerComp?: "Row" | "Column", rowCenter?, columnCenter?, rowStyle?, columnStyle?, rowProps?, columnProps?} & React.HTMLProps<HTMLDivElement>, {}> {
 	static defaultProps = {outerComp: "Row"};
 	render() {
