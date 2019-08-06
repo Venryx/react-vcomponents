@@ -325,8 +325,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 function Global(target) {
@@ -474,8 +475,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 var styles = {
@@ -655,7 +657,7 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
                     return _this2.input = c;
                 }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked || false, onChange: function onChange(e) {
                     return _onChange && _onChange(_this2.input.checked, e);
-                }, style: checkboxStyle }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3, whiteSpace: "pre" }, labelStyle) }, _react2.default.createElement("span", null), text))
+                }, style: checkboxStyle }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3 }, labelStyle) }, _react2.default.createElement("span", null), text))
             /*<input ref={c=>this.input = c} type="checkbox"
                 checked={editedValue != null ? editedValue : (checked || false)}
                 disabled={enabled == false}
@@ -756,8 +758,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 /*export class Row extends BaseComponent<any, any> {
@@ -1080,8 +1083,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 var Column = function (_BaseComponent) {
@@ -1147,8 +1151,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 (0, _reactVextensions.AddGlobalStyle)("\n.dropdown {\n    display: inline-block;\n}\n.dropdown__content {\n    display: none;\n    position: absolute;\n}\n.dropdown--active > .dropdown__content {\n    display: block;\n}\n/*\n.dropdown__content > * { pointer-events: auto; }\n.dropdown__content { pointer-events: none; }\n*/\n");
@@ -1422,8 +1427,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 (0, _reactVextensions.AddGlobalStyle)("\n.Grid_WithSingleItem > * { grid-area: 1/1/1/1; }\n");
@@ -1814,8 +1820,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 var Spinner = function (_BaseComponent) {
@@ -2181,10 +2188,19 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
+function IsArrayOfStrings(obj) {
+    return obj instanceof Array && obj.every(function (a) {
+        return IsString(a);
+    });
+}
+function IsString(obj) {
+    return typeof obj == "string";
+}
 var Text = function (_BaseComponent) {
     _inherits(Text, _BaseComponent);
 
@@ -2200,8 +2216,13 @@ var Text = function (_BaseComponent) {
             var _a = this.props,
                 wrap = _a.wrap,
                 style = _a.style,
-                rest = __rest(_a, ["wrap", "style"]);
-            return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, !wrap && { whiteSpace: "pre" }, style) }));
+                children = _a.children,
+                rest = __rest(_a, ["wrap", "style", "children"]);
+            var text = IsString(children) ? children : IsArrayOfStrings(children) ? children.join("") : "";
+            var textHasEdgeSpaces = text.startsWith(" ") || text.endsWith(" ");
+            // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
+            var applyPre = wrap == false || wrap != true && textHasEdgeSpaces;
+            return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, applyPre && { whiteSpace: "pre" }, style) }), children);
         }
     }]);
 
@@ -2257,8 +2278,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 var styles = {
@@ -3643,8 +3665,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     for (var p in s) {
         if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
     }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    }return t;
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
 };
 
 var TextInput = function (_BaseComponent) {

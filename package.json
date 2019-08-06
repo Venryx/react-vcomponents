@@ -41,7 +41,7 @@
     "react-dom": "^16.7.0",
     "react-vextensions": "^0.0.1",
     "ts-loader": "^5.3.2",
-    "typescript": "^3.2.2",
+    "typescript": "^3.5.3",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
