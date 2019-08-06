@@ -148,7 +148,7 @@ Object.keys(_CheckBox).forEach(function (key) {
   });
 });
 
-var _ColorPickerBox = __webpack_require__(8);
+var _ColorPickerBox = __webpack_require__(9);
 
 Object.keys(_ColorPickerBox).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -606,6 +606,8 @@ var _reactVextensions = __webpack_require__(4);
 
 var _Row = __webpack_require__(7);
 
+var _General = __webpack_require__(8);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -643,6 +645,7 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
 
             var _props = this.props,
                 text = _props.text,
+                wrap = _props.wrap,
                 title = _props.title,
                 checked = _props.checked,
                 enabled = _props.enabled,
@@ -653,11 +656,15 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
                 _onChange = _props.onChange;
             var editedValue = this.state.editedValue;
 
+            var textStr = (0, _General.ReactChildrenAsText)(text, "");
+            var textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
+            // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
+            var applyPre = wrap == false || wrap != true && textHasEdgeSpaces;
             return _react2.default.createElement(_Row.Row, { center: true, style: (0, _reactVextensions.E)({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
                     return _this2.input = c;
                 }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked || false, onChange: function onChange(e) {
                     return _onChange && _onChange(_this2.input.checked, e);
-                }, style: checkboxStyle }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3 }, labelStyle) }, _react2.default.createElement("span", null), text))
+                }, style: checkboxStyle }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3 }, applyPre && { whiteSpace: "pre" }, labelStyle) }, _react2.default.createElement("span", null), text))
             /*<input ref={c=>this.input = c} type="checkbox"
                 checked={editedValue != null ? editedValue : (checked || false)}
                 disabled={enabled == false}
@@ -866,6 +873,86 @@ exports.RowLR = RowLR;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.ToJSON = ToJSON;
+exports.FromJSON = FromJSON;
+exports.RemoveDuplicates = RemoveDuplicates;
+exports.Assert = Assert;
+exports.AssertWarn = AssertWarn;
+exports.ReactChildrenAsText = ReactChildrenAsText;
+function ToJSON(obj) {
+    return JSON.stringify(obj);
+}
+function FromJSON(json) {
+    return JSON.parse(json);
+}
+function RemoveDuplicates(items) {
+    var result = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var item = _step.value;
+
+            if (result.indexOf(item) == -1) {
+                result.push(item);
+            }
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    return result;
+}
+function Assert(condition, messageOrMessageFunc) {
+    if (condition) return;
+    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
+    //console.log(`Assert failed) ${message}\n\nStackTrace) ${GetStackTraceStr()}`);
+    console.error("Assert failed) " + message);
+    debugger;
+    throw new Error("Assert failed) " + message);
+}
+function AssertWarn(condition, messageOrMessageFunc) {
+    if (condition) return;
+    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
+    console.warn("Assert-warn failed) " + message + "\n\nStackTrace)"); // ${GetStackTraceStr()}`);
+}
+function IsArrayOfStrings(obj) {
+    return obj instanceof Array && obj.every(function (a) {
+        return IsString(a);
+    });
+}
+function IsString(obj) {
+    return typeof obj == "string";
+}
+function ReactChildrenAsText(children, valueIfFailed) {
+    if (IsString(children)) return children;
+    if (IsArrayOfStrings(children)) return children.join("");
+    return valueIfFailed;
+}
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.ColorPickerBox = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -876,7 +963,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _General = __webpack_require__(9);
+var _General = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -973,72 +1060,6 @@ var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
 
     return ColorPickerBox;
 }(_reactVextensions.BaseComponent);
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.ToJSON = ToJSON;
-exports.FromJSON = FromJSON;
-exports.RemoveDuplicates = RemoveDuplicates;
-exports.Assert = Assert;
-exports.AssertWarn = AssertWarn;
-function ToJSON(obj) {
-    return JSON.stringify(obj);
-}
-function FromJSON(json) {
-    return JSON.parse(json);
-}
-function RemoveDuplicates(items) {
-    var result = [];
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var item = _step.value;
-
-            if (result.indexOf(item) == -1) {
-                result.push(item);
-            }
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
-
-    return result;
-}
-function Assert(condition, messageOrMessageFunc) {
-    if (condition) return;
-    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
-    //console.log(`Assert failed) ${message}\n\nStackTrace) ${GetStackTraceStr()}`);
-    console.error("Assert failed) " + message);
-    debugger;
-    throw new Error("Assert failed) " + message);
-}
-function AssertWarn(condition, messageOrMessageFunc) {
-    if (condition) return;
-    var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
-    console.warn("Assert-warn failed) " + message + "\n\nStackTrace)"); // ${GetStackTraceStr()}`);
-}
 
 /***/ }),
 /* 10 */
@@ -1482,7 +1503,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
-var _General = __webpack_require__(9);
+var _General = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2167,6 +2188,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactVextensions = __webpack_require__(4);
 
+var _General = __webpack_require__(8);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2193,14 +2216,6 @@ var __rest = undefined && undefined.__rest || function (s, e) {
     return t;
 };
 
-function IsArrayOfStrings(obj) {
-    return obj instanceof Array && obj.every(function (a) {
-        return IsString(a);
-    });
-}
-function IsString(obj) {
-    return typeof obj == "string";
-}
 var Text = function (_BaseComponent) {
     _inherits(Text, _BaseComponent);
 
@@ -2218,8 +2233,8 @@ var Text = function (_BaseComponent) {
                 style = _a.style,
                 children = _a.children,
                 rest = __rest(_a, ["wrap", "style", "children"]);
-            var text = IsString(children) ? children : IsArrayOfStrings(children) ? children.join("") : "";
-            var textHasEdgeSpaces = text.startsWith(" ") || text.endsWith(" ");
+            var textStr = (0, _General.ReactChildrenAsText)(children, "");
+            var textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
             // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
             var applyPre = wrap == false || wrap != true && textHasEdgeSpaces;
             return _react2.default.createElement("span", Object.assign({}, rest, { style: (0, _reactVextensions.E)({ display: "flex", alignItems: "center" }, applyPre && { whiteSpace: "pre" }, style) }), children);

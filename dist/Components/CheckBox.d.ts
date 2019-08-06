@@ -1,7 +1,9 @@
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare type CheckBoxProps = {
-    text?: any;
-    title?: any;
+    text?: React.ReactNode;
+    wrap?: boolean;
+    title?: string;
     checked: boolean;
     indeterminate?: boolean;
     enabled?: boolean;

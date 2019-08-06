@@ -1,9 +1,10 @@
 import React from "react";
 import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import {Row} from "./Row";
+import {ReactChildrenAsText} from "../General";
 
 export type CheckBoxProps = {
-	text?, title?, checked: boolean, indeterminate?: boolean,
+	text?: React.ReactNode, wrap?: boolean, title?: string, checked: boolean, indeterminate?: boolean,
 	enabled?: boolean, style?, checkboxStyle?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void
 };
 
@@ -20,13 +21,19 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 	id;
 	input: HTMLInputElement;
 	render() {
-		var {text, title, checked, enabled, style, checkboxStyle, labelStyle, internalChanging, onChange} = this.props;
+		var {text, wrap, title, checked, enabled, style, checkboxStyle, labelStyle, internalChanging, onChange} = this.props;
 		let {editedValue} = this.state;
+
+		let textStr = ReactChildrenAsText(text, "");
+		let textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
+		// if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
+		let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
+
 		return (
 			<Row center style={E({position: "relative"}, style)}>
 				<input ref={c=>this.input = c} id={"checkBox_" + this.id} type="checkbox" disabled={!enabled} checked={checked || false}
 					onChange={e=>onChange && onChange(this.input.checked, e)} style={checkboxStyle}/>
-				<label htmlFor={"checkBox_" + this.id} title={title} style={E({marginLeft: 3, /*whiteSpace: "pre"*/}, labelStyle)}><span/>{text}</label>
+				<label htmlFor={"checkBox_" + this.id} title={title} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>
 			</Row>
 			/*<input ref={c=>this.input = c} type="checkbox"
 				checked={editedValue != null ? editedValue : (checked || false)}

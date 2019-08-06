@@ -31,3 +31,11 @@ export function AssertWarn(condition, messageOrMessageFunc?: string | Function) 
 
 	console.warn(`Assert-warn failed) ${message}\n\nStackTrace)`); // ${GetStackTraceStr()}`);
 }
+
+function IsArrayOfStrings(obj): obj is string[] { return obj instanceof Array && obj.every(a=>IsString(a)); }
+function IsString(obj): obj is string { return typeof obj == "string"; }
+export function ReactChildrenAsText(children: React.ReactNode, valueIfFailed: string) {
+	if (IsString(children)) return children;
+	if (IsArrayOfStrings(children)) return children.join("");
+	return valueIfFailed;
+}
