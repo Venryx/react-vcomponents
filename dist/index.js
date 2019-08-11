@@ -1597,11 +1597,11 @@ var Select = Select_1 = function (_BaseComponent) {
                     }, disabled: enabled == false, value: "value" + this.GetIndexOfValue(value), className: className, title: title, style: (0, _reactVextensions.E)({ color: "#000" }, style), onChange: function onChange(e) {
                         return _onChange(_this2.GetSelectedValue());
                     } }, options.map(function (option, index) {
-                    return _react2.default.createElement(Dropdown_OptionUI, { key: option.name, index: index, style: (0, _reactVextensions.E)(childStyle, option.style) }, option.name);
+                    return _react2.default.createElement(Dropdown_OptionUI, { key: index, index: index, style: (0, _reactVextensions.E)(childStyle, option.style) }, option.name);
                 }));
             }
             return _react2.default.createElement("div", { style: (0, _reactVextensions.E)({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map(function (option, index) {
-                return _react2.default.createElement(ButtonBar_OptionUI, { key: option.name, first: index == 0, last: index == options.length - 1, selected: option.value === value, style: (0, _reactVextensions.E)(childStyle, option.style), onSelect: function onSelect(e) {
+                return _react2.default.createElement(ButtonBar_OptionUI, { key: index, first: index == 0, last: index == options.length - 1, selected: option.value === value, style: (0, _reactVextensions.E)(childStyle, option.style), onSelect: function onSelect(e) {
                         return _onChange(option.value);
                     } }, option.name);
             }));

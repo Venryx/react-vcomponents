@@ -109,7 +109,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 				<select ref={c=>this.root = c} disabled={enabled == false} value={"value" + this.GetIndexOfValue(value)}
 						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=>onChange(this.GetSelectedValue())}>
 					{options.map((option, index)=> {
-						return <Dropdown_OptionUI key={option.name} index={index} style={E(childStyle, option.style)}>
+						return <Dropdown_OptionUI key={index} index={index} style={E(childStyle, option.style)}>
 							{option.name}
 						</Dropdown_OptionUI>;
 					})}
@@ -120,7 +120,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		return (
 			<div /*disabled={enabled == false}*/ style={E({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style)}>
 				{options.map((option, index)=> {
-					return <ButtonBar_OptionUI key={option.name}
+					return <ButtonBar_OptionUI key={index}
 							first={index == 0} last={index == options.length - 1} selected={option.value === value}
 							style={E(childStyle, option.style)} onSelect={e=>onChange(option.value)}>
 						{option.name}
