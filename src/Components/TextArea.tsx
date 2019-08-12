@@ -18,7 +18,7 @@ var styles = {
 		display: "inline-block",
 		boxSizing: "border-box",
 		//whiteSpace: "pre",
-		wordWrap: "normal",
+		overflowWrap: "normal",
 		width: "100%",
 		//height: "100%",
 		/*overflow: "auto",*/
@@ -57,7 +57,11 @@ export class TextArea extends BaseComponent
 		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
 			style={E(
 				styles.root,
-				autoSize && {resize: "none", overflow: "hidden"},
+				autoSize && {
+					resize: "none",
+					overflow: "hidden", // this is done to prevent measuring issues?
+					//overflowWrap: null,
+				},
 				autoSize_minHeight && minHeight != null && {minHeight},
 				style,
 			)}
