@@ -3702,17 +3702,18 @@ var TextInput = function (_BaseComponent) {
             var _a = this.props,
                 value = _a.value,
                 enabled = _a.enabled,
+                editable = _a.editable,
                 _onChange = _a.onChange,
                 delayChangeTillDefocus = _a.delayChangeTillDefocus,
                 useEscape = _a.useEscape,
                 style = _a.style,
                 _onBlur = _a.onBlur,
                 _onKeyDown = _a.onKeyDown,
-                rest = __rest(_a, ["value", "enabled", "onChange", "delayChangeTillDefocus", "useEscape", "style", "onBlur", "onKeyDown"]);var editedValue = this.state.editedValue;
+                rest = __rest(_a, ["value", "enabled", "editable", "onChange", "delayChangeTillDefocus", "useEscape", "style", "onBlur", "onKeyDown"]);var editedValue = this.state.editedValue;
 
             return _react2.default.createElement("input", Object.assign({}, rest, { ref: function ref(c) {
                     return _this2.root = c;
-                }, disabled: enabled == false, style: (0, _reactVextensions.E)({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
+                }, disabled: enabled == false, readOnly: !editable, style: (0, _reactVextensions.E)({ color: "black" }, style), value: editedValue != null ? editedValue : value || "", onChange: function onChange(e) {
                     var newVal = e.target.value;
                     if (newVal == editedValue) return; // if no text change, ignore event
                     if (delayChangeTillDefocus) {
@@ -3743,7 +3744,7 @@ var TextInput = function (_BaseComponent) {
 
     return TextInput;
 }(_reactVextensions.BaseComponent);
-TextInput.defaultProps = { type: "text" };
+TextInput.defaultProps = { editable: true, type: "text" };
 exports.TextInput = TextInput = __decorate([_reactVextensions.ApplyBasicStyles], TextInput);
 exports.TextInput = TextInput;
 /*export class TextInput_Auto extends BaseComponent<

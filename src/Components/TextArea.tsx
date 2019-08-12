@@ -40,7 +40,7 @@ export class TextArea extends BaseComponent
 		<{
 			enabled?: boolean, editable?: boolean, className?: string, style?, onChange?: (newVal, event)=>void,
 			delayChangeTillDefocus?: boolean, useEscape?: boolean, autoSize?: boolean, autoSize_minHeight?: boolean, allowLineBreaks?: boolean,
-		} & React.HTMLProps<HTMLTextAreaElement>,
+		} & Exclude<React.HTMLProps<HTMLTextAreaElement>, "disabled" | "readOnly">,
 		{editedValue: string, minHeight: number}> {
 	static defaultProps = {editable: true, allowLineBreaks: true};
 	

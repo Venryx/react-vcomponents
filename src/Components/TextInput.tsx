@@ -3,14 +3,14 @@ import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import * as keycode from "keycode";
 
 export type TextInputProps = {
-	value: string, enabled?: boolean, style?,
+	value: string, enabled?: boolean, editable?: boolean, style?,
 	delayChangeTillDefocus?: boolean, useEscape?: boolean,
 	onChange?: (newVal, event)=>void,
-} & React.HTMLProps<HTMLInputElement>;
+} & Exclude<React.HTMLProps<HTMLInputElement>, "disabled" | "readOnly">;
 
 @ApplyBasicStyles
 export class TextInput extends BaseComponent<TextInputProps, {editedValue: string}> {
-	static defaultProps = {type: "text"};
+	static defaultProps = {editable: true, type: "text"};
 	/*ComponentWillReceiveProps(props) {
 		// if value changing, and "delayChangeTillDefocus" is not enabled
 		if (!props.delayChangeTillDefocus && props.value != this.props.value) {
@@ -21,13 +21,13 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 	root: HTMLInputElement;
 	render() {
 		var {
-			value, enabled, onChange, delayChangeTillDefocus, useEscape, style,
+			value, enabled, editable, onChange, delayChangeTillDefocus, useEscape, style,
 			onBlur, onKeyDown,
 			...rest
 		} = this.props;
 		var {editedValue} = this.state;
 		return (
-			<input {...rest} ref={c=>this.root = c} disabled={enabled == false} style={E({color: "black"}, style)}
+			<input {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} style={E({color: "black"}, style)}
 				value={editedValue != null ? editedValue : (value || "")}
 				onChange={e=> {
 					var newVal = e.target.value;

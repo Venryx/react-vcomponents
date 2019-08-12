@@ -12,7 +12,7 @@ export declare class TextArea extends BaseComponent<{
     autoSize?: boolean;
     autoSize_minHeight?: boolean;
     allowLineBreaks?: boolean;
-} & React.HTMLProps<HTMLTextAreaElement>, {
+} & Exclude<React.HTMLProps<HTMLTextAreaElement>, "disabled" | "readOnly">, {
     editedValue: string;
     minHeight: number;
 }> {
