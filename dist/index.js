@@ -957,6 +957,8 @@ exports.ColorPickerBox = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
@@ -972,6 +974,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 
 //declare var require;
 //declare var __webpack_require__;
@@ -989,22 +1000,8 @@ var SketchPicker = void 0,
     Assert(typeof req("chroma-js") != "string", "chroma-js package must be installed (and imported) to use the ColorPickerBox component.");
     chroma = req("chroma-js");
 }*/
-
-var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
+var ColorPickerBox = function (_BaseComponent) {
     _inherits(ColorPickerBox, _BaseComponent);
-
-    _createClass(ColorPickerBox, null, [{
-        key: "Init",
-
-        /*constructor(props) {
-            DynamicImports();
-            super(props);
-        }*/
-        value: function Init(react_color, chroma_js) {
-            SketchPicker = react_color.SketchPicker;
-            chroma = chroma_js;
-        }
-    }]);
 
     function ColorPickerBox(props) {
         _classCallCheck(this, ColorPickerBox);
@@ -1014,6 +1011,11 @@ var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
         (0, _General.Assert)(SketchPicker != null && chroma != null, "You must call ColorPickerBox.Init with the react-color and chroma-js module-exports before creating an instance.");
         return _this;
     }
+    /*constructor(props) {
+        DynamicImports();
+        super(props);
+    }*/
+
 
     _createClass(ColorPickerBox, [{
         key: "ComponentWillMountOrReceiveProps",
@@ -1056,10 +1058,18 @@ var ColorPickerBox = exports.ColorPickerBox = function (_BaseComponent) {
                     onChange(colorStr);
                 } })));
         }
+    }], [{
+        key: "Init",
+        value: function Init(react_color, chroma_js) {
+            SketchPicker = react_color.SketchPicker;
+            chroma = chroma_js;
+        }
     }]);
 
     return ColorPickerBox;
 }(_reactVextensions.BaseComponent);
+exports.ColorPickerBox = ColorPickerBox = __decorate([_reactVextensions.ApplyBasicStyles], ColorPickerBox);
+exports.ColorPickerBox = ColorPickerBox;
 
 /***/ }),
 /* 10 */
@@ -2260,6 +2270,8 @@ exports.TextArea = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
@@ -2288,6 +2300,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __rest = undefined && undefined.__rest || function (s, e) {
     var t = {};
     for (var p in s) {
@@ -2311,7 +2331,7 @@ var styles = {
         display: "inline-block",
         boxSizing: "border-box",
         //whiteSpace: "pre",
-        wordWrap: "normal",
+        overflowWrap: "normal",
         width: "100%"
     },
     root_disabled: {
@@ -2321,8 +2341,7 @@ var styles = {
     }
 };
 (0, _reactVextensions.AddGlobalStyle)("\n.autoSize_minHeight {\n\theight: unset !important;\n}\n");
-
-var TextArea = exports.TextArea = function (_BaseComponent) {
+var TextArea = function (_BaseComponent) {
     _inherits(TextArea, _BaseComponent);
 
     function TextArea() {
@@ -2360,7 +2379,10 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
             var Comp = autoSize ? _reactTextareaAutosize2.default : "textarea";
             return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: function ref(c) {
                     return _this2.root = c;
-                }, disabled: enabled == false, readOnly: !editable, className: (0, _classnames2.default)("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: (0, _reactVextensions.E)(styles.root, autoSize && { resize: "none", overflow: "hidden" }, autoSize_minHeight && minHeight != null && { minHeight: minHeight }, style) }, autoSize_minHeight && { onHeightChange: function onHeightChange(height) {
+                }, disabled: enabled == false, readOnly: !editable, className: (0, _classnames2.default)("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: (0, _reactVextensions.E)(styles.root, autoSize && {
+                    resize: "none",
+                    overflow: "hidden"
+                }, autoSize_minHeight && minHeight != null && { minHeight: minHeight }, style) }, autoSize_minHeight && { onHeightChange: function onHeightChange(height) {
                     if (autoSize_minHeight) {
                         _this2.SetState({ minHeight: height });
                     }
@@ -2396,8 +2418,9 @@ var TextArea = exports.TextArea = function (_BaseComponent) {
 
     return TextArea;
 }(_reactVextensions.BaseComponent);
-
 TextArea.defaultProps = { editable: true, allowLineBreaks: true };
+exports.TextArea = TextArea = __decorate([_reactVextensions.ApplyBasicStyles], TextArea);
+exports.TextArea = TextArea;
 
 /***/ }),
 /* 20 */

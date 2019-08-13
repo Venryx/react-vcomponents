@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, E, AddGlobalStyle} from "react-vextensions";
+import {BaseComponent, E, AddGlobalStyle, ApplyBasicStyles} from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
 import * as keycode from "keycode";
 import classnames from "classnames";
@@ -36,6 +36,7 @@ AddGlobalStyle(`
 }
 `);
 
+@ApplyBasicStyles
 export class TextArea extends BaseComponent
 		<{
 			enabled?: boolean, editable?: boolean, className?: string, style?, onChange?: (newVal, event)=>void,

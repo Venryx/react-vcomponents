@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, E} from "react-vextensions";
+import {BaseComponent, E, ApplyBasicStyles} from "react-vextensions";
 import { Assert } from "../General";
 
 //declare var require;
@@ -19,6 +19,7 @@ let SketchPicker, chroma;
 	chroma = req("chroma-js");
 }*/
 
+@ApplyBasicStyles
 export class ColorPickerBox extends BaseComponent<
 			{color: string, onChange: (color: string)=>void, popupStyle?: any},
 			{show: boolean, color: string}> {
