@@ -3,10 +3,10 @@ import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
 import * as keycode from "keycode";
 
 export type TextInputProps = {
-	value: string, enabled?: boolean, editable?: boolean, style?,
+	value: string, enabled?: boolean, editable?: boolean,
 	delayChangeTillDefocus?: boolean, useEscape?: boolean,
-	onChange?: (newVal, event)=>void,
-} & Exclude<React.HTMLProps<HTMLInputElement>, "disabled" | "readOnly">;
+	onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>)=>void,
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "disabled" | "readOnly">;
 
 @ApplyBasicStyles
 export class TextInput extends BaseComponent<TextInputProps, {editedValue: string}> {

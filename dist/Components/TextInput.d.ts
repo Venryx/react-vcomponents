@@ -4,11 +4,10 @@ export declare type TextInputProps = {
     value: string;
     enabled?: boolean;
     editable?: boolean;
-    style?: any;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
-    onChange?: (newVal: any, event: any) => void;
-} & Exclude<React.HTMLProps<HTMLInputElement>, "disabled" | "readOnly">;
+    onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "disabled" | "readOnly">;
 export declare class TextInput extends BaseComponent<TextInputProps, {
     editedValue: string;
 }> {

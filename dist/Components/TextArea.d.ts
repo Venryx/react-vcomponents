@@ -4,15 +4,14 @@ import TextAreaAutoSize from "react-textarea-autosize";
 export declare class TextArea extends BaseComponent<{
     enabled?: boolean;
     editable?: boolean;
-    className?: string;
-    style?: any;
-    onChange?: (newVal: any, event: any) => void;
+    pattern?: string;
+    onChange?: (newVal: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
     autoSize?: boolean;
     autoSize_minHeight?: boolean;
     allowLineBreaks?: boolean;
-} & Exclude<React.HTMLProps<HTMLTextAreaElement>, "disabled" | "readOnly">, {
+} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange" | "disabled" | "readOnly">, {
     editedValue: string;
     minHeight: number;
 }> {

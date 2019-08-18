@@ -39,21 +39,23 @@ AddGlobalStyle(`
 @ApplyBasicStyles
 export class TextArea extends BaseComponent
 		<{
-			enabled?: boolean, editable?: boolean, className?: string, style?, onChange?: (newVal, event)=>void,
+			enabled?: boolean, editable?: boolean, pattern?: string, onChange?: (newVal: string, event: React.ChangeEvent<HTMLTextAreaElement>)=>void,
 			delayChangeTillDefocus?: boolean, useEscape?: boolean, autoSize?: boolean, autoSize_minHeight?: boolean, allowLineBreaks?: boolean,
-		} & Exclude<React.HTMLProps<HTMLTextAreaElement>, "disabled" | "readOnly">,
+		} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange" | "disabled" | "readOnly">,
 		{editedValue: string, minHeight: number}> {
 	static defaultProps = {editable: true, allowLineBreaks: true};
 	
 	root: TextAreaAutoSize | HTMLTextAreaElement;
 	render() {
-		var {value, defaultValue, pattern, enabled, editable, className, style, onChange, delayChangeTillDefocus, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, ...rest} = this.props;
+		var {value, defaultValue, enabled, editable, className, style, pattern, onChange, delayChangeTillDefocus, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, ...rest} = this.props;
 		var {editedValue, minHeight} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 		if (defaultValue === undefined && value == null) value = "";
 
-		let Comp = autoSize ? TextAreaAutoSize : "textarea";
+		//let Comp = autoSize ? TextAreaAutoSize : "textarea";
+		//let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
+		let Comp: React.DetailedHTMLFactory<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
 
 		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
 			style={E(
@@ -92,7 +94,7 @@ export class TextArea extends BaseComponent
 				}
 			}}
 			onBlur={e=> {
-				var newVal = e.target["value"];
+				var newVal = e.target.value as string;
 				if (newVal == value) return; // if no text change, ignore event
 
 				if (delayChangeTillDefocus && onChange) {

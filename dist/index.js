@@ -2358,11 +2358,11 @@ var TextArea = function (_BaseComponent) {
             var _a = this.props,
                 value = _a.value,
                 defaultValue = _a.defaultValue,
-                pattern = _a.pattern,
                 enabled = _a.enabled,
                 editable = _a.editable,
                 className = _a.className,
                 style = _a.style,
+                pattern = _a.pattern,
                 _onChange = _a.onChange,
                 delayChangeTillDefocus = _a.delayChangeTillDefocus,
                 useEscape = _a.useEscape,
@@ -2370,12 +2370,14 @@ var TextArea = function (_BaseComponent) {
                 autoSize_minHeight = _a.autoSize_minHeight,
                 allowLineBreaks = _a.allowLineBreaks,
                 _onKeyDown = _a.onKeyDown,
-                rest = __rest(_a, ["value", "defaultValue", "pattern", "enabled", "editable", "className", "style", "onChange", "delayChangeTillDefocus", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown"]);var _state = this.state,
+                rest = __rest(_a, ["value", "defaultValue", "enabled", "editable", "className", "style", "pattern", "onChange", "delayChangeTillDefocus", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown"]);var _state = this.state,
                 editedValue = _state.editedValue,
                 minHeight = _state.minHeight;
             // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
 
             if (defaultValue === undefined && value == null) value = "";
+            //let Comp = autoSize ? TextAreaAutoSize : "textarea";
+            //let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
             var Comp = autoSize ? _reactTextareaAutosize2.default : "textarea";
             return _react2.default.createElement(Comp, Object.assign({}, rest, { ref: function ref(c) {
                     return _this2.root = c;
@@ -2403,7 +2405,7 @@ var TextArea = function (_BaseComponent) {
                         _this2.SetState({ editedValue: null });
                     }
                 }, onBlur: function onBlur(e) {
-                    var newVal = e.target["value"];
+                    var newVal = e.target.value;
                     if (newVal == value) return; // if no text change, ignore event
                     if (delayChangeTillDefocus && _onChange) {
                         _onChange(newVal, e);
