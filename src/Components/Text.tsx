@@ -3,7 +3,7 @@ import {ApplyBasicStyles, BaseComponent, E} from "react-vextensions";
 import {ReactChildrenAsText} from "../General";
 
 @ApplyBasicStyles
-export class Text extends BaseComponent<{wrap?, style?} & React.HTMLProps<HTMLSpanElement>, {}> {
+export class Text extends BaseComponent<{wrap?, style?} & React.HTMLAttributes<HTMLSpanElement>, {}> {
 	render() {
 		let {wrap, style, children, ...rest} = this.props;
 

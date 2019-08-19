@@ -17,10 +17,9 @@ export declare type ButtonProps = {
     checkboxStyle?: any;
     checkboxLabelStyle?: any;
     onCheckedChanged?: any;
-    onClick?: any;
     onLeftClick?: any;
     onDirectClick?: any;
-} & React.HTMLProps<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLDivElement>;
 export declare class Button extends BaseComponent<ButtonProps, {}> {
     static defaultProps: {
         enabled: boolean;

@@ -11,7 +11,7 @@ export declare type SpinnerProps = {
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
     onChange: any;
-} & React.HTMLProps<HTMLInputElement>;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 export declare class Spinner extends BaseComponent<SpinnerProps, {
     editedValue: number;
 }> {

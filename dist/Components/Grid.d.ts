@@ -4,6 +4,6 @@ export declare class Grid extends BaseComponent<{
     single?: any;
     centerY?: any;
     style?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLAttributes<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }

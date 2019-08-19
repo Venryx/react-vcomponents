@@ -8,7 +8,7 @@ export declare class RowAndColumn extends BaseComponent<{
     columnStyle?: any;
     rowProps?: any;
     columnProps?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLAttributes<HTMLDivElement>, {}> {
     static defaultProps: {
         outerComp: string;
     };

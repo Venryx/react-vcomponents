@@ -2341,6 +2341,7 @@ var styles = {
     }
 };
 (0, _reactVextensions.AddGlobalStyle)("\n.autoSize_minHeight {\n\theight: unset !important;\n}\n");
+// Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "React.HTMLAttributes<HTMLDivElement>"
 var TextArea = function (_BaseComponent) {
     _inherits(TextArea, _BaseComponent);
 

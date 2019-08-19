@@ -4,7 +4,7 @@ export declare class Row extends BaseComponent<{
     noShrink?: any;
     center?: any;
     style?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLAttributes<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }
 export declare class RowLR extends BaseComponent<{
@@ -14,7 +14,7 @@ export declare class RowLR extends BaseComponent<{
     style?: any;
     leftStyle?: any;
     rightStyle?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLAttributes<HTMLDivElement>, {}> {
     static defaultProps: {
         splitAt: string;
     };

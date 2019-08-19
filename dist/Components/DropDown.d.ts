@@ -4,7 +4,7 @@ export declare class DropDown extends BaseComponent<{
     className?: any;
     onShow?: any;
     onHide?: any;
-} & React.HTMLProps<HTMLDivElement>, {
+} & React.HTMLAttributes<HTMLDivElement>, {
     active: boolean;
 }> {
     ComponentDidMount(): void;
@@ -19,12 +19,12 @@ export declare class DropDown extends BaseComponent<{
 }
 export declare class DropDownTrigger extends BaseComponent<{
     className?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLAttributes<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }
 export declare class DropDownContent extends BaseComponent<{
     className?: any;
     style?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLAttributes<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }

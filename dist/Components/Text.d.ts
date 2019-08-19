@@ -3,6 +3,6 @@ import { BaseComponent } from "react-vextensions";
 export declare class Text extends BaseComponent<{
     wrap?: any;
     style?: any;
-} & React.HTMLProps<HTMLSpanElement>, {}> {
+} & React.HTMLAttributes<HTMLSpanElement>, {}> {
     render(): JSX.Element;
 }

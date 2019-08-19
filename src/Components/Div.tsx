@@ -7,7 +7,7 @@ function Global(target) {
 
 @Global
 @ApplyBasicStyles
-export class Span extends BaseComponent<{pre?} & React.HTMLProps<HTMLSpanElement>, {}> {
+export class Span extends BaseComponent<{pre?} & React.HTMLAttributes<HTMLSpanElement>, {}> {
     render() {
 		var {pre, style, ...rest} = this.props;
         return <span {...rest} style={E(style, pre && {whiteSpace: "pre"})}/>;
@@ -16,7 +16,7 @@ export class Span extends BaseComponent<{pre?} & React.HTMLProps<HTMLSpanElement
 
 @Global
 @ApplyBasicStyles
-export class Pre extends BaseComponent<{allowWrap?: boolean} & React.HTMLProps<HTMLSpanElement>, {}> {
+export class Pre extends BaseComponent<{allowWrap?: boolean} & React.HTMLAttributes<HTMLSpanElement>, {}> {
 	render() {
 		let {allowWrap, style, children, ...rest} = this.props;
 		return <span {...rest} style={E({whiteSpace: allowWrap ? "pre-wrap" : "pre"}, style)}>{children}</span>;
@@ -26,7 +26,7 @@ export class Pre extends BaseComponent<{allowWrap?: boolean} & React.HTMLProps<H
 @Global
 //@SimpleShouldUpdate_Overridable // we can't make these "pure", as their children may need updating
 @ApplyBasicStyles
-export class Div extends BaseComponent<{shouldUpdate?} & React.HTMLProps<HTMLDivElement>, {}> {
+export class Div extends BaseComponent<{shouldUpdate?} & React.HTMLAttributes<HTMLDivElement>, {}> {
 	shouldComponentUpdate(nextProps, nextState) {
 		let {shouldUpdate} = this.props;
 		return shouldUpdate ? shouldUpdate(nextProps, nextState) : true;

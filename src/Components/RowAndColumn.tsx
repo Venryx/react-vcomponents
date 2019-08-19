@@ -4,7 +4,7 @@ import {Column, Row} from "..";
 
 @ApplyBasicStyles
 // todo: maybe add rowNoShrink and columnNoShrink
-export class RowAndColumn extends BaseComponent<{outerComp?: "Row" | "Column", rowCenter?, columnCenter?, rowStyle?, columnStyle?, rowProps?, columnProps?} & React.HTMLProps<HTMLDivElement>, {}> {
+export class RowAndColumn extends BaseComponent<{outerComp?: "Row" | "Column", rowCenter?, columnCenter?, rowStyle?, columnStyle?, rowProps?, columnProps?} & React.HTMLAttributes<HTMLDivElement>, {}> {
 	static defaultProps = {outerComp: "Row"};
 	render() {
 		let {outerComp, rowCenter, columnCenter, rowStyle, columnStyle, rowProps, columnProps, children, ...rest} = this.props;

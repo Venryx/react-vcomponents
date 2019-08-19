@@ -20,7 +20,7 @@ AddGlobalStyle(`
 */
 `);
 
-export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & React.HTMLProps<HTMLDivElement>, {active: boolean}> {
+export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & React.HTMLAttributes<HTMLDivElement>, {active: boolean}> {
 	ComponentDidMount() {
 		window.addEventListener("click", this._onWindowClick);
 		window.addEventListener("touchstart", this._onWindowClick);
@@ -112,7 +112,7 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & Rea
 	}
 }
 
-export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLProps<HTMLDivElement>, {}> {
+export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLAttributes<HTMLDivElement>, {}> {
 	render() {
 		const {children, className, ...rest} = this.props;
 		return (
@@ -123,7 +123,7 @@ export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLProp
 	}
 }
 
-export class DropDownContent extends BaseComponent<{className?, style?} & React.HTMLProps<HTMLDivElement>, {}> {
+export class DropDownContent extends BaseComponent<{className?, style?} & React.HTMLAttributes<HTMLDivElement>, {}> {
 	render() {
 		const {children, className, style, ...rest} = this.props;
 		return (

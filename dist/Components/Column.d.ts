@@ -4,6 +4,6 @@ export declare class Column extends BaseComponent<{
     noShrink?: any;
     center?: any;
     style?: any;
-} & React.HTMLProps<HTMLDivElement>, {}> {
+} & React.HTMLAttributes<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }

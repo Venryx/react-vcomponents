@@ -6,7 +6,7 @@ export type SpinnerProps = {
 	step?, min?, max?, value?, enabled?, title?, style?,
 	delayChangeTillDefocus?: boolean, useEscape?: boolean,
 	onChange,
-} & React.HTMLProps<HTMLInputElement>;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 @ApplyBasicStyles
 export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> {
