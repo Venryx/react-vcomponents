@@ -33,15 +33,18 @@ export class RowLR extends BaseComponent<{height?, className?, rowStyle?, leftSt
     }
 }*/
 
+export type RowProps = {noShrink?, center?, style?} & React.HTMLAttributes<HTMLDivElement>;
 @ApplyBasicStyles
-export class Row extends BaseComponent<{noShrink?, center?, style?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+export class Row extends BaseComponent<RowProps, {}> {
 	render() {
 		let {noShrink, center, style, ...rest} = this.props;
 		return <div {...rest} style={E({display: "flex"}, noShrink && {flexShrink: 0}, center && {alignItems: "center"}, style)}/>
 	}
 }
+
+export type RowLRProps = {splitAt?: number | string, height?: number, className?: string, style?, leftStyle?, rightStyle?} & React.HTMLAttributes<HTMLDivElement>;
 @ApplyBasicStyles
-export class RowLR extends BaseComponent<{splitAt?: number | string, height?: number, className?: string, style?, leftStyle?, rightStyle?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+export class RowLR extends BaseComponent<RowLRProps, {}> {
 	static defaultProps = {splitAt: "50%"};
 	render() {
 		var {splitAt, height, className, style, leftStyle, rightStyle, children, ...rest} = this.props;

@@ -1,10 +1,11 @@
 import React from "react";
 import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
-import {Column, Row} from "..";
+import {Column, Row, RowProps} from "..";
+import {ColumnProps} from "./Column";
 
 @ApplyBasicStyles
 // todo: maybe add rowNoShrink and columnNoShrink
-export class RowAndColumn extends BaseComponent<{outerComp?: "Row" | "Column", rowCenter?, columnCenter?, rowStyle?, columnStyle?, rowProps?, columnProps?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+export class RowAndColumn extends BaseComponent<{outerComp?: "Row" | "Column", rowCenter?, columnCenter?, rowStyle?, columnStyle?, rowProps?: Partial<RowProps>, columnProps?: Partial<ColumnProps>}, {}> {
 	static defaultProps = {outerComp: "Row"};
 	render() {
 		let {outerComp, rowCenter, columnCenter, rowStyle, columnStyle, rowProps, columnProps, children, ...rest} = this.props;
