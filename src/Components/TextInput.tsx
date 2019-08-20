@@ -44,8 +44,8 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 					var newVal = e.target["value"];
 					if (newVal == value) return; // if no text change, ignore event
 					
-					if (delayChangeTillDefocus && onChange) {
-						onChange(newVal, e);
+					if (delayChangeTillDefocus) {
+						if (onChange) onChange(newVal, e);
 						this.SetState({editedValue: null});
 					}
 					if (onBlur) return onBlur(e);

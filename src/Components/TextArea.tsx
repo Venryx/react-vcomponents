@@ -99,8 +99,8 @@ export class TextArea extends BaseComponent
 				var newVal = e.target.value as string;
 				if (newVal == value) return; // if no text change, ignore event
 
-				if (delayChangeTillDefocus && onChange) {
-					onChange(newVal, e);
+				if (delayChangeTillDefocus) {
+					if (onChange) onChange(newVal, e);
 					this.SetState({editedValue: null});
 				}
 			}}

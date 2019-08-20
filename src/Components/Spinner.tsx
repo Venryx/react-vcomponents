@@ -44,8 +44,8 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 					var newVal = Number(e.target.value);
 					if (newVal == value) return; // if no change, ignore event
 					
-					if (delayChangeTillDefocus && onChange) {
-						onChange(newVal, e);
+					if (delayChangeTillDefocus) {
+						if (onChange) onChange(newVal, e);
 						this.SetState({editedValue: null});
 					}
 					if (onBlur) return onBlur(e);
