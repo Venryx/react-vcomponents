@@ -13,3 +13,4 @@ export * from "./Components/Switch";
 export * from "./Components/Text";
 export * from "./Components/TextArea";
 export * from "./Components/TextInput";
+export * from "./Components/TimeSpanInput";
