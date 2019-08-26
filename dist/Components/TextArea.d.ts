@@ -18,6 +18,7 @@ export declare class TextArea extends BaseComponent<{
     static defaultProps: {
         editable: boolean;
         allowLineBreaks: boolean;
+        useEscape: boolean;
     };
     root: TextAreaAutoSize | HTMLTextAreaElement;
     render(): JSX.Element;

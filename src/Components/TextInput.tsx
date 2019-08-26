@@ -10,7 +10,7 @@ export type TextInputProps = {
 
 @ApplyBasicStyles
 export class TextInput extends BaseComponent<TextInputProps, {editedValue: string}> {
-	static defaultProps = {editable: true, type: "text"};
+	static defaultProps = {editable: true, type: "text", useEscape: true};
 	/*ComponentWillReceiveProps(props) {
 		// if value changing, and "delayChangeTillDefocus" is not enabled
 		if (!props.delayChangeTillDefocus && props.value != this.props.value) {
@@ -51,7 +51,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 					if (onBlur) return onBlur(e);
 				}}
 				onKeyDown={e=> {
-					if (useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
+					if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
 					if (onKeyDown) return onKeyDown(e);
 				}}/>
 		);

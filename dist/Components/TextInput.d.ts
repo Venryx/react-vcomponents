@@ -14,6 +14,7 @@ export declare class TextInput extends BaseComponent<TextInputProps, {
     static defaultProps: {
         editable: boolean;
         type: string;
+        useEscape: boolean;
     };
     root: HTMLInputElement;
     render(): JSX.Element;

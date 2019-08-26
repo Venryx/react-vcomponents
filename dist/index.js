@@ -1873,13 +1873,13 @@ var Spinner = function (_BaseComponent) {
                 }, onBlur: function onBlur(e) {
                     var newVal = Number(e.target.value);
                     if (newVal == value) return; // if no change, ignore event
-                    if (delayChangeTillDefocus && _onChange) {
-                        _onChange(newVal, e);
+                    if (delayChangeTillDefocus) {
+                        if (_onChange) _onChange(newVal, e);
                         _this2.SetState({ editedValue: null });
                     }
                     if (_onBlur) return _onBlur(e);
                 }, onKeyDown: function onKeyDown(e) {
-                    if (useEscape && e.keyCode == _keycode2.default.codes.esc) return void _this2.SetState({ editedValue: null });
+                    if (delayChangeTillDefocus && useEscape && e.keyCode == _keycode2.default.codes.esc) return void _this2.SetState({ editedValue: null });
                     if (_onKeyDown) return _onKeyDown(e);
                 } }));
         }
@@ -1887,7 +1887,7 @@ var Spinner = function (_BaseComponent) {
 
     return Spinner;
 }(_reactVextensions.BaseComponent);
-Spinner.defaultProps = { step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true };
+Spinner.defaultProps = { step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true, useEscape: true };
 exports.Spinner = Spinner = __decorate([_reactVextensions.ApplyBasicStyles], Spinner);
 exports.Spinner = Spinner;
 /*export class Spinner_Auto extends BaseComponent
@@ -2378,12 +2378,12 @@ var TextArea = function (_BaseComponent) {
                 }, onBlur: function onBlur(e) {
                     var newVal = e.target.value;
                     if (newVal == value) return; // if no text change, ignore event
-                    if (delayChangeTillDefocus && _onChange) {
-                        _onChange(newVal, e);
+                    if (delayChangeTillDefocus) {
+                        if (_onChange) _onChange(newVal, e);
                         _this2.SetState({ editedValue: null });
                     }
                 }, onKeyDown: function onKeyDown(e) {
-                    if (useEscape && e.keyCode == keycode.codes.esc) return void _this2.SetState({ editedValue: null });
+                    if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc) return void _this2.SetState({ editedValue: null });
                     if (_onKeyDown) return _onKeyDown(e);
                 } }));
         }
@@ -2391,7 +2391,7 @@ var TextArea = function (_BaseComponent) {
 
     return TextArea;
 }(_reactVextensions.BaseComponent);
-TextArea.defaultProps = { editable: true, allowLineBreaks: true };
+TextArea.defaultProps = { editable: true, allowLineBreaks: true, useEscape: true };
 exports.TextArea = TextArea = __decorate([_reactVextensions.ApplyBasicStyles], TextArea);
 exports.TextArea = TextArea;
 
@@ -3721,13 +3721,13 @@ var TextInput = function (_BaseComponent) {
                 }, onBlur: function onBlur(e) {
                     var newVal = e.target["value"];
                     if (newVal == value) return; // if no text change, ignore event
-                    if (delayChangeTillDefocus && _onChange) {
-                        _onChange(newVal, e);
+                    if (delayChangeTillDefocus) {
+                        if (_onChange) _onChange(newVal, e);
                         _this2.SetState({ editedValue: null });
                     }
                     if (_onBlur) return _onBlur(e);
                 }, onKeyDown: function onKeyDown(e) {
-                    if (useEscape && e.keyCode == keycode.codes.esc) return void _this2.SetState({ editedValue: null });
+                    if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc) return void _this2.SetState({ editedValue: null });
                     if (_onKeyDown) return _onKeyDown(e);
                 } }));
         }
@@ -3740,7 +3740,7 @@ var TextInput = function (_BaseComponent) {
 
     return TextInput;
 }(_reactVextensions.BaseComponent);
-TextInput.defaultProps = { editable: true, type: "text" };
+TextInput.defaultProps = { editable: true, type: "text", useEscape: true };
 exports.TextInput = TextInput = __decorate([_reactVextensions.ApplyBasicStyles], TextInput);
 exports.TextInput = TextInput;
 /*export class TextInput_Auto extends BaseComponent<

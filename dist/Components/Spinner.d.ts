@@ -21,6 +21,7 @@ export declare class Spinner extends BaseComponent<SpinnerProps, {
         max: number;
         value: number;
         enabled: boolean;
+        useEscape: boolean;
     };
     root: HTMLInputElement;
     render(): JSX.Element;

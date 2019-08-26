@@ -10,7 +10,7 @@ export type SpinnerProps = {
 
 @ApplyBasicStyles
 export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> {
-	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true};
+	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true, useEscape: true};
 
 	root: HTMLInputElement;
 	render() {
@@ -51,7 +51,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 					if (onBlur) return onBlur(e);
 				}}
 				onKeyDown={e=> {
-					if (useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
+					if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
 					if (onKeyDown) return onKeyDown(e);
 				}}/>
 		);
