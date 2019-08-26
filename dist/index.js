@@ -660,11 +660,11 @@ var CheckBox = CheckBox_1 = function (_BaseComponent) {
             var textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
             // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
             var applyPre = wrap == false || wrap != true && textHasEdgeSpaces;
-            return _react2.default.createElement(_Row.Row, { center: true, style: (0, _reactVextensions.E)({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
+            return _react2.default.createElement(_Row.Row, { center: true, title: title, style: (0, _reactVextensions.E)({ position: "relative" }, style) }, _react2.default.createElement("input", { ref: function ref(c) {
                     return _this2.input = c;
                 }, id: "checkBox_" + this.id, type: "checkbox", disabled: !enabled, checked: checked || false, onChange: function onChange(e) {
                     return _onChange && _onChange(_this2.input.checked, e);
-                }, style: checkboxStyle }), _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, title: title, style: (0, _reactVextensions.E)({ marginLeft: 3 }, applyPre && { whiteSpace: "pre" }, labelStyle) }, _react2.default.createElement("span", null), text))
+                }, style: checkboxStyle }), text && _react2.default.createElement("label", { htmlFor: "checkBox_" + this.id, style: (0, _reactVextensions.E)({ marginLeft: 3 }, applyPre && { whiteSpace: "pre" }, labelStyle) }, _react2.default.createElement("span", null), text))
             /*<input ref={c=>this.input = c} type="checkbox"
                 checked={editedValue != null ? editedValue : (checked || false)}
                 disabled={enabled == false}
