@@ -3,9 +3,9 @@ import {BaseComponent, E, ApplyBasicStyles} from "react-vextensions";
 import keycode from "keycode";
 
 export type SpinnerProps = {
-	step?, min?, max?, value?, enabled?, title?, style?,
+	enabled?: boolean, autoSize?: boolean,
 	delayChangeTillDefocus?: boolean, useEscape?: boolean,
-	onChange,
+	onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>)=>any,
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 @ApplyBasicStyles
@@ -15,15 +15,16 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 	root: HTMLInputElement;
 	render() {
 		let {
-			step, min, max, value, enabled, title, style, delayChangeTillDefocus, useEscape,
+			step, min, max, value, enabled, title, autoSize, style, delayChangeTillDefocus, useEscape,
 			onChange, onBlur, onKeyDown,
 			...rest
 		} = this.props;
 		let {editedValue} = this.state;
 
 		style = E({color: "#000"}, style);
-		if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
-			style.width = 70;
+		//if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
+		if (!autoSize && !("width" in style)) {
+			style.width = 60;
 		}
 
 		return (

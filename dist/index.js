@@ -2062,21 +2062,22 @@ function (_BaseComponent) {
           value = _this$props.value,
           enabled = _this$props.enabled,
           title = _this$props.title,
+          autoSize = _this$props.autoSize,
           style = _this$props.style,
           delayChangeTillDefocus = _this$props.delayChangeTillDefocus,
           useEscape = _this$props.useEscape,
           _onChange = _this$props.onChange,
           _onBlur = _this$props.onBlur,
           _onKeyDown = _this$props.onKeyDown,
-          rest = _objectWithoutProperties(_this$props, ["step", "min", "max", "value", "enabled", "title", "style", "delayChangeTillDefocus", "useEscape", "onChange", "onBlur", "onKeyDown"]);
+          rest = _objectWithoutProperties(_this$props, ["step", "min", "max", "value", "enabled", "title", "autoSize", "style", "delayChangeTillDefocus", "useEscape", "onChange", "onBlur", "onKeyDown"]);
 
       var editedValue = this.state.editedValue;
       style = Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["E"])({
         color: "#000"
-      }, style);
+      }, style); //if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
 
-      if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
-        style.width = 70;
+      if (!autoSize && !("width" in style)) {
+        style.width = 60;
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", Object.assign({}, rest, {
@@ -4156,7 +4157,7 @@ function (_BaseComponent) {
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TextInput__WEBPACK_IMPORTED_MODULE_2__["TextInput"], Object.assign({}, rest, {
         style: {
-          width: 50
+          width: 60
         },
         value: "".concat(Math.floor(value / 60), ":").concat((value % 60).toString().padStart(2, "0")),
         onChange: function onChange(val) {
