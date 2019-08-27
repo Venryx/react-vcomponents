@@ -57,3 +57,8 @@ export function ToNumber(stringOrFloatVal: string | number, valIfConversionFails
 	if (IsString(stringOrFloatVal) && stringOrFloatVal.length == 0) return valIfConversionFails;
 	return Number(stringOrFloatVal);
 }
+
+/*export function Math_Truncate(value: number) {
+	if (value >= 0) return Math.floor(value);
+	return Math.ceil(value);
+}*/

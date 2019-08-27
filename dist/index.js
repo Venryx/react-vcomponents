@@ -951,6 +951,10 @@ function ToNumber(stringOrFloatVal) {
   if (IsString(stringOrFloatVal) && stringOrFloatVal.length == 0) return valIfConversionFails;
   return Number(stringOrFloatVal);
 }
+/*export function Math_Truncate(value: number) {
+    if (value >= 0) return Math.floor(value);
+    return Math.ceil(value);
+}*/
 
 /***/ }),
 /* 9 */
@@ -4104,12 +4108,12 @@ TextInput = __decorate([react_vextensions__WEBPACK_IMPORTED_MODULE_1__["ApplyBas
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeSpanInput", function() { return TimeSpanInput; });
-/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_vextensions__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(30);
-/* harmony import */ var _General__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_vextensions__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _General__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(30);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -4155,16 +4159,19 @@ function (_BaseComponent) {
           _onChange = _this$props.onChange,
           rest = _objectWithoutProperties(_this$props, ["value", "onChange"]);
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TextInput__WEBPACK_IMPORTED_MODULE_2__["TextInput"], Object.assign({}, rest, {
+      var valueAbs = Math.abs(value);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TextInput__WEBPACK_IMPORTED_MODULE_3__["TextInput"], Object.assign({}, rest, {
         style: {
           width: 60
         },
-        value: "".concat(Math.floor(value / 60), ":").concat((value % 60).toString().padStart(2, "0")),
-        onChange: function onChange(val) {
-          var parts = val.includes(":") ? val.split(":") : [val, "0"];
-          var minutes = Object(_General__WEBPACK_IMPORTED_MODULE_3__["ToNumber"])(parts[0], 0);
-          var seconds = Object(_General__WEBPACK_IMPORTED_MODULE_3__["ToNumber"])(parts[1], 0);
-          var totalSeconds = Math.round(seconds + minutes * 60);
+        value: "".concat(value >= 0 ? "" : "-").concat(Math.floor(valueAbs / 60), ":").concat((valueAbs % 60).toString().padStart(2, "0")),
+        onChange: function onChange(valStr) {
+          var isNegative = valStr.includes("-");
+          var strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
+          var parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
+          var minutes = Object(_General__WEBPACK_IMPORTED_MODULE_2__["ToNumber"])(parts[0], 0);
+          var seconds = Object(_General__WEBPACK_IMPORTED_MODULE_2__["ToNumber"])(parts[1], 0);
+          var totalSeconds = Math.round(seconds + minutes * 60) * (isNegative ? -1 : 1);
           if (_onChange) _onChange(totalSeconds);
         }
       }));
@@ -4172,7 +4179,7 @@ function (_BaseComponent) {
   }]);
 
   return TimeSpanInput;
-}(react_vextensions__WEBPACK_IMPORTED_MODULE_0__["BaseComponent"]);
+}(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
 
 /***/ })
 /******/ ]);

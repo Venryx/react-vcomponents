@@ -1,7 +1,7 @@
-import {BaseComponent} from "react-vextensions";
 import React from "react";
+import {BaseComponent} from "react-vextensions";
+import {ToNumber} from "../General";
 import {TextInput, TextInputProps} from "./TextInput";
-import {Clone, ToNumber} from "../General";
 
 export type TimeSpanProps = {
 	/** Total time-span length in seconds. */
@@ -10,13 +10,17 @@ export type TimeSpanProps = {
 } & Omit<TextInputProps, "value" | "onChange">;
 export class TimeSpanInput extends BaseComponent<TimeSpanProps, {}> {
 	render() {
-		let {value, onChange, ...rest} = this.props;
+		const {value, onChange, ...rest} = this.props;
+		const valueAbs = Math.abs(value);
 		return (
-			<TextInput {...rest} style={{width: 60}} value={`${Math.floor(value / 60)}:${(value % 60).toString().padStart(2, "0")}`} onChange={val=>{
-				const parts = val.includes(":") ? val.split(":") : [val, "0"];
+			<TextInput {...rest} style={{width: 60}} value={`${value >= 0 ? "" : "-"}${Math.floor(valueAbs / 60)}:${(valueAbs % 60).toString().padStart(2, "0")}`} onChange={valStr=>{
+				const isNegative = valStr.includes("-");
+				const strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
+				const parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
+
 				const minutes = ToNumber(parts[0], 0);
 				const seconds = ToNumber(parts[1], 0);
-				const totalSeconds = Math.round(seconds + (minutes * 60));
+				const totalSeconds = Math.round(seconds + (minutes * 60)) * (isNegative ? -1 : 1);
 				if (onChange) onChange(totalSeconds);
 			}}/>
 		);
