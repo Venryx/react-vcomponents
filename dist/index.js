@@ -4170,7 +4170,7 @@ function (_BaseComponent) {
         style: {
           width: 70
         },
-        value: "".concat(value >= 0 ? "" : "-").concat(Math.floor(valueAbs / 60)).concat(unitLabels[0], ":").concat(valueAbs % 60).concat(unitLabels[1]),
+        value: "".concat(value < 0 ? "-" : "").concat(Math.floor(valueAbs / 60)).concat(unitLabels[0], ":").concat(valueAbs % 60).concat(unitLabels[1]),
         onChange: function onChange(valStr) {
           var isNegative = valStr.includes("-");
           var strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr; //const parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
