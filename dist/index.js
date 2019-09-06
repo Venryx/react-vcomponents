@@ -4155,31 +4155,78 @@ function (_BaseComponent) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
+          smallUnit = _this$props.smallUnit,
+          showUnits = _this$props.showUnits,
           value = _this$props.value,
           _onChange = _this$props.onChange,
-          rest = _objectWithoutProperties(_this$props, ["value", "onChange"]);
+          rest = _objectWithoutProperties(_this$props, ["smallUnit", "showUnits", "value", "onChange"]);
 
       var valueAbs = Math.abs(value);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TextInput__WEBPACK_IMPORTED_MODULE_3__["TextInput"], Object.assign({}, rest, {
+      var unitLabels = showUnits ? {
+        minutes: ["h", "m"],
+        seconds: ["m", "s"]
+      }[smallUnit] : ["", ""];
+      var inputItself = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TextInput__WEBPACK_IMPORTED_MODULE_3__["TextInput"], Object.assign({}, rest, {
         style: {
-          width: 60
+          width: 70
         },
-        value: "".concat(value >= 0 ? "" : "-").concat(Math.floor(valueAbs / 60), ":").concat((valueAbs % 60).toString().padStart(2, "0")),
+        value: "".concat(value >= 0 ? "" : "-").concat(Math.floor(valueAbs / 60)).concat(unitLabels[0], ":").concat(valueAbs % 60).concat(unitLabels[1]),
         onChange: function onChange(valStr) {
           var isNegative = valStr.includes("-");
-          var strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
-          var parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
-          var minutes = Object(_General__WEBPACK_IMPORTED_MODULE_2__["ToNumber"])(parts[0], 0);
-          var seconds = Object(_General__WEBPACK_IMPORTED_MODULE_2__["ToNumber"])(parts[1], 0);
-          var totalSeconds = Math.round(seconds + minutes * 60) * (isNegative ? -1 : 1);
-          if (_onChange) _onChange(totalSeconds);
+          var strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr; //const parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
+
+          var parts = strNoSign.split(":").map(function (a) {
+            return a.trim();
+          });
+          /*let bigUnits = ToNumber(parts[0], 0);
+          let smallUnits = ToNumber(parts[1], 0);*/
+
+          var totalSeconds = 0;
+          parts.forEach(function (part) {
+            var hasUnitLabel = "hms".split("").includes(part[part.length - 1]);
+            var numberStr = hasUnitLabel ? part.slice(0, -1) : part;
+            var unitLabel = hasUnitLabel ? part[part.length - 1] : unitLabels[0]; // if no unit specified, assume it's the bigUnit
+
+            var unitAsSeconds = unitLabel == "h" ? 1 * 60 * 60 : unitLabel == "m" ? 1 * 60 :
+            /*unitLabel == "s" ?*/
+            1;
+            var valueAsSeconds = Object(_General__WEBPACK_IMPORTED_MODULE_2__["ToNumber"])(numberStr) * unitAsSeconds;
+            totalSeconds += valueAsSeconds;
+          }); //const totalSmallUnits = Math.round(smallUnits + (bigUnits * 60)) * (isNegative ? -1 : 1);
+
+          var totalSmallUnits = (smallUnit == "seconds" ? totalSeconds : totalSeconds / 60) * (isNegative ? -1 : 1);
+          if (_onChange) _onChange(totalSmallUnits);
         }
       }));
+      /*if (!showUnits) {
+          return inputItself;
+      }
+      /*return (
+          <Row style={{position: "relative"}}>
+              {inputItself}
+              <Row style={{position: "absolute", left: 0, bottom: 0, right: 0, height: 10, pointerEvents: "none"}}>
+                  <div style={{flex: 1, fontSize: 11, textAlign: "center", color: "black"}}>{smallUnit == "seconds" ? "m" : "h"}</div>
+                  <div style={{flex: 1, fontSize: 11, textAlign: "center", color: "black"}}>{smallUnit == "seconds" ? "s" : "m"}</div>
+              </Row>
+          </Row>
+      );*#/
+      return (
+          <Row center>
+              {inputItself}
+              <Text ml={3} style={{fontSize: 12}}>{smallUnit == "minutes" ? "h:m" : "m:s"}</Text>
+          </Row>
+      );*/
+
+      return inputItself;
     }
   }]);
 
   return TimeSpanInput;
 }(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
+TimeSpanInput.defaultProps = {
+  smallUnit: "seconds",
+  showUnits: true
+};
 
 /***/ })
 /******/ ]);
