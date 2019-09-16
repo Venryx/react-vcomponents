@@ -29,10 +29,10 @@ export class TimeSpanInput extends BaseComponent<TimeSpanProps, {}> {
 				/*let bigUnits = ToNumber(parts[0], 0);
 				let smallUnits = ToNumber(parts[1], 0);*/
 				let totalSeconds = 0;
-				parts.forEach(part=> {
+				parts.forEach((part, index)=> {
 					let hasUnitLabel = "hms".split("").includes(part[part.length - 1]);
 					let numberStr = hasUnitLabel ? part.slice(0, -1) : part;
-					let unitLabel = hasUnitLabel ? part[part.length - 1] : unitLabels[0]; // if no unit specified, assume it's the bigUnit
+					let unitLabel = hasUnitLabel ? part[part.length - 1] : unitLabels[index == 0 ? 0 : 1]; // if no unit specified, assume it's: bigUnit (if part 1), or smallUnit (if part 2+)
 
 					let unitAsSeconds =
 						unitLabel == "h" ? 1 * 60 * 60 :

@@ -4182,10 +4182,10 @@ function (_BaseComponent) {
           let smallUnits = ToNumber(parts[1], 0);*/
 
           var totalSeconds = 0;
-          parts.forEach(function (part) {
+          parts.forEach(function (part, index) {
             var hasUnitLabel = "hms".split("").includes(part[part.length - 1]);
             var numberStr = hasUnitLabel ? part.slice(0, -1) : part;
-            var unitLabel = hasUnitLabel ? part[part.length - 1] : unitLabels[0]; // if no unit specified, assume it's the bigUnit
+            var unitLabel = hasUnitLabel ? part[part.length - 1] : unitLabels[index == 0 ? 0 : 1]; // if no unit specified, assume it's: bigUnit (if part 1), or smallUnit (if part 2+)
 
             var unitAsSeconds = unitLabel == "h" ? 1 * 60 * 60 : unitLabel == "m" ? 1 * 60 :
             /*unitLabel == "s" ?*/
