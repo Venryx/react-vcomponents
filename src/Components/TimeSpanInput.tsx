@@ -10,7 +10,7 @@ export type TimeSpanProps = {
 
 	/** Total time-span length in small-units (seconds, by default). */
 	value: number,
-	onChange?: (totalSeconds: number)=>any,
+	onChange?: (totalSmallUnits: number)=>any,
 } & Omit<TextInputProps, "value" | "onChange">;
 export class TimeSpanInput extends BaseComponent<TimeSpanProps, {}> {
 	static defaultProps = {smallUnit: "seconds", showUnits: true};
