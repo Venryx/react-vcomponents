@@ -19,8 +19,13 @@ export class TimeSpanInput extends BaseComponent<TimeSpanProps, {}> {
 		const valueAbs = Math.abs(value);
 
 		let unitLabels = showUnits ? {minutes: ["h", "m"], seconds: ["m", "s"]}[smallUnit] : ["", ""];
+		let valueStr: string = null;
+		if (value != null) {
+			valueStr = `${value < 0 ? "-" : ""}${Math.floor(valueAbs / 60)}${unitLabels[0]}:${valueAbs % 60}${unitLabels[1]}`;
+		}
+		
 		let inputItself = (
-			<TextInput {...rest} style={{width: 70}} value={`${value < 0 ? "-" : ""}${Math.floor(valueAbs / 60)}${unitLabels[0]}:${valueAbs % 60}${unitLabels[1]}`} onChange={valStr=>{
+			<TextInput {...rest} style={{width: 70}} value={valueStr} onChange={valStr=>{
 				const isNegative = valStr.includes("-");
 				const strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
 				//const parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];

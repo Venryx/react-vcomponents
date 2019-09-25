@@ -4166,11 +4166,17 @@ function (_BaseComponent) {
         minutes: ["h", "m"],
         seconds: ["m", "s"]
       }[smallUnit] : ["", ""];
+      var valueStr = null;
+
+      if (value != null) {
+        valueStr = "".concat(value < 0 ? "-" : "").concat(Math.floor(valueAbs / 60)).concat(unitLabels[0], ":").concat(valueAbs % 60).concat(unitLabels[1]);
+      }
+
       var inputItself = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TextInput__WEBPACK_IMPORTED_MODULE_3__["TextInput"], Object.assign({}, rest, {
         style: {
           width: 70
         },
-        value: "".concat(value < 0 ? "-" : "").concat(Math.floor(valueAbs / 60)).concat(unitLabels[0], ":").concat(valueAbs % 60).concat(unitLabels[1]),
+        value: valueStr,
         onChange: function onChange(valStr) {
           var isNegative = valStr.includes("-");
           var strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr; //const parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
