@@ -91,7 +91,7 @@ export class TextArea extends BaseComponent
 				if (delayChangeTillDefocus) {
 					this.SetState({editedValue: newVal});
 				} else {
-					onChange(newVal, e);
+					if (onChange) onChange(newVal, e);
 					this.SetState({editedValue: null});
 				}
 			}}

@@ -1122,7 +1122,7 @@ function (_BaseComponent) {
         },
         onChangeComplete: function onChangeComplete(color) {
           var colorStr = color.rgb.VValues().join(",");
-          onChange(colorStr);
+          if (onChange) onChange(colorStr);
         }
       })));
     }
@@ -1737,7 +1737,7 @@ function (_BaseComponent) {
             color: "#000"
           }, style),
           onChange: function onChange(e) {
-            return _onChange(_this.GetSelectedValue());
+            return _onChange && _onChange(_this.GetSelectedValue());
           }
         }, options.map(function (option, index) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Dropdown_OptionUI, {
@@ -1760,7 +1760,7 @@ function (_BaseComponent) {
           selected: option.value === value,
           style: Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["E"])(childStyle, option.style),
           onSelect: function onSelect(e) {
-            return _onChange(option.value);
+            return _onChange && _onChange(option.value);
           }
         }, option.name);
       }));
@@ -2105,7 +2105,7 @@ function (_BaseComponent) {
               editedValue: newVal
             });
           } else {
-            _onChange(newVal, e);
+            if (_onChange) _onChange(newVal, e);
 
             _this.SetState({
               editedValue: null
@@ -2663,7 +2663,7 @@ function (_BaseComponent) {
               editedValue: newVal
             });
           } else {
-            _onChange(newVal, e);
+            if (_onChange) _onChange(newVal, e);
 
             _this.SetState({
               editedValue: null
@@ -4032,7 +4032,7 @@ function (_BaseComponent) {
               editedValue: newVal
             });
           } else {
-            _onChange(newVal, e);
+            if (_onChange) _onChange(newVal, e);
 
             _this.SetState({
               editedValue: null

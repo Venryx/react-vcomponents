@@ -21,7 +21,7 @@ let SketchPicker, chroma;
 
 @ApplyBasicStyles
 export class ColorPickerBox extends BaseComponent<
-			{color: string, onChange: (color: string)=>void, popupStyle?: any},
+			{color: string, onChange?: (color: string)=>void, popupStyle?: any},
 			{show: boolean, color: string}> {
 	/*constructor(props) {
 		DynamicImports();
@@ -72,7 +72,7 @@ export class ColorPickerBox extends BaseComponent<
 							}}
 							onChangeComplete={color=> {
 								let colorStr = color.rgb.VValues().join(",");
-								onChange(colorStr);
+								if (onChange) onChange(colorStr);
 							}}/>
 					</div>}
 			</div>

@@ -37,7 +37,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 					if (delayChangeTillDefocus) {
 						this.SetState({editedValue: newVal});
 					} else {
-						onChange(newVal, e);
+						if (onChange) onChange(newVal, e);
 						this.SetState({editedValue: null});
 					}
 				}}

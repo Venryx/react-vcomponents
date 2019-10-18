@@ -18,7 +18,7 @@ export declare type Select_Props = {
     title?: any;
     style?: any;
     childStyle?: any;
-    onChange: any;
+    onChange?: any;
 };
 export declare class Select extends BaseComponent<Select_Props, {}> {
     static defaultProps: {

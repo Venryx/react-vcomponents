@@ -19,7 +19,7 @@ export type Select_Props = {
 	displayType?: "dropdown" | "button bar",
 	compareBy?: "name" | "value" | "value toString",
 	value, verifyValue?: boolean,
-	enabled?: boolean, className?, title?, style?, childStyle?, onChange
+	enabled?: boolean, className?, title?, style?, childStyle?, onChange?
 };
 
 @ApplyBasicStyles
@@ -107,7 +107,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		if (displayType == "dropdown") {
 			return (
 				<select ref={c=>this.root = c} disabled={enabled == false} value={"value" + this.GetIndexOfValue(value)}
-						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=>onChange(this.GetSelectedValue())}>
+						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=>onChange && onChange(this.GetSelectedValue())}>
 					{options.map((option, index)=> {
 						return <Dropdown_OptionUI key={index} index={index} style={E(childStyle, option.style)}>
 							{option.name}
@@ -122,7 +122,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 				{options.map((option, index)=> {
 					return <ButtonBar_OptionUI key={index}
 							first={index == 0} last={index == options.length - 1} selected={option.value === value}
-							style={E(childStyle, option.style)} onSelect={e=>onChange(option.value)}>
+							style={E(childStyle, option.style)} onSelect={e=>onChange && onChange(option.value)}>
 						{option.name}
 					</ButtonBar_OptionUI>;
 				})}
