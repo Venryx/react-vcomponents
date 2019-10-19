@@ -53,7 +53,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 	static defaultProps = {enabled: true};
 	
 	render() {
-	    var {enabled, text, title, className, style, size, width, height, iconSize, iconPath, useOpacityForHover,
+		var {enabled, text, title, className, style, size, width, height, iconSize, iconPath, useOpacityForHover,
 			hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged,
 			onLeftClick, children, ...rest} = this.props;
 
