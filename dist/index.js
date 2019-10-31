@@ -1254,15 +1254,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -1275,87 +1275,79 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["AddGlobalStyle"])("\n.dropdown {\n    display: inline-block;\n}\n.dropdown__content {\n    display: none;\n    position: absolute;\n}\n.dropdown--active > .dropdown__content {\n    display: block;\n}\n/*\n.dropdown__content > * { pointer-events: auto; }\n.dropdown__content { pointer-events: none; }\n*/\n");
 var DropDown =
 /*#__PURE__*/
-function (_BaseComponent) {
-  _inherits(DropDown, _BaseComponent);
+function (_BaseComponentPlus) {
+  _inherits(DropDown, _BaseComponentPlus);
 
-  _createClass(DropDown, [{
-    key: "ComponentDidMount",
-    value: function ComponentDidMount() {
-      window.addEventListener("click", this._onWindowClick);
-      window.addEventListener("touchstart", this._onWindowClick);
-    }
-  }, {
-    key: "ComponentWillUnmount",
-    value: function ComponentWillUnmount() {
-      window.removeEventListener("click", this._onWindowClick);
-      window.removeEventListener("touchstart", this._onWindowClick);
-    }
-  }]);
-
-  function DropDown(props) {
+  function DropDown() {
     var _this;
 
     _classCallCheck(this, DropDown);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DropDown).call(this, props));
-    _this.state = {
-      active: false
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DropDown).apply(this, arguments));
+
+    _this.OnWindowClick = function (event) {
+      var dropdownElement = Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["GetDOM"])(_assertThisInitialized(_this));
+
+      if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && _this.IsActive()) {
+        _this.Hide();
+      }
     };
-    _this._onWindowClick = _this._onWindowClick.bind(_assertThisInitialized(_this));
-    _this._onToggleClick = _this._onToggleClick.bind(_assertThisInitialized(_this));
+
+    _this.OnToggleClick = function (event) {
+      event.preventDefault();
+
+      if (_this.IsActive()) {
+        _this.Hide();
+      } else {
+        _this.Show();
+      }
+    };
+
     return _this;
   }
 
   _createClass(DropDown, [{
-    key: "isActive",
-    value: function isActive() {
+    key: "ComponentDidMount",
+    value: function ComponentDidMount() {
+      window.addEventListener("click", this.OnWindowClick);
+      window.addEventListener("touchstart", this.OnWindowClick);
+    }
+  }, {
+    key: "ComponentWillUnmount",
+    value: function ComponentWillUnmount() {
+      window.removeEventListener("click", this.OnWindowClick);
+      window.removeEventListener("touchstart", this.OnWindowClick);
+    }
+  }, {
+    key: "IsActive",
+    value: function IsActive() {
       return this.props.active != null ? this.props.active : this.state.active;
     }
   }, {
-    key: "hide",
-    value: function hide() {
+    key: "Show",
+    value: function Show() {
       var _this2 = this;
-
-      this.SetState({
-        active: false
-      }, function () {
-        if (_this2.props.onHide) {
-          _this2.props.onHide();
-        }
-      });
-    }
-  }, {
-    key: "show",
-    value: function show() {
-      var _this3 = this;
 
       this.SetState({
         active: true
       }, function () {
-        if (_this3.props.onShow) {
-          _this3.props.onShow();
+        if (_this2.props.onShow) {
+          _this2.props.onShow();
         }
       });
     }
   }, {
-    key: "_onWindowClick",
-    value: function _onWindowClick(event) {
-      var dropdownElement = Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["GetDOM"])(this);
+    key: "Hide",
+    value: function Hide() {
+      var _this3 = this;
 
-      if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && this.isActive()) {
-        this.hide();
-      }
-    }
-  }, {
-    key: "_onToggleClick",
-    value: function _onToggleClick(event) {
-      event.preventDefault();
-
-      if (this.isActive()) {
-        this.hide();
-      } else {
-        this.show();
-      }
+      this.SetState({
+        active: false
+      }, function () {
+        if (_this3.props.onHide) {
+          _this3.props.onHide();
+        }
+      });
     }
   }, {
     key: "render",
@@ -1367,7 +1359,7 @@ function (_BaseComponent) {
           children = _this$props.children,
           className = _this$props.className; // create component classes
 
-      var active = this.isActive(); // stick callback on trigger element
+      var active = this.IsActive(); // stick callback on trigger element
 
       var boundChildren = react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.map(children, function (child) {
         if (child.type === DropDownTrigger) {
@@ -1375,7 +1367,7 @@ function (_BaseComponent) {
           child = Object(react__WEBPACK_IMPORTED_MODULE_0__["cloneElement"])(child, {
             ref: "trigger",
             onClick: function onClick(event) {
-              _this4._onToggleClick(event);
+              _this4.OnToggleClick(event);
 
               if (originalOnClick) {
                 originalOnClick.apply(child, _arguments);
@@ -1401,11 +1393,13 @@ function (_BaseComponent) {
   }]);
 
   return DropDown;
-}(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
+}(Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponentPlus"])({}, {
+  active: false
+}));
 var DropDownTrigger =
 /*#__PURE__*/
-function (_BaseComponent2) {
-  _inherits(DropDownTrigger, _BaseComponent2);
+function (_BaseComponent) {
+  _inherits(DropDownTrigger, _BaseComponent);
 
   function DropDownTrigger() {
     _classCallCheck(this, DropDownTrigger);
@@ -1431,8 +1425,8 @@ function (_BaseComponent2) {
 }(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
 var DropDownContent =
 /*#__PURE__*/
-function (_BaseComponent3) {
-  _inherits(DropDownContent, _BaseComponent3);
+function (_BaseComponent2) {
+  _inherits(DropDownContent, _BaseComponent2);
 
   function DropDownContent() {
     _classCallCheck(this, DropDownContent);

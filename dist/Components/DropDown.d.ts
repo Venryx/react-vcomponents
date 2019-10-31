@@ -1,20 +1,21 @@
 import { BaseComponent } from "react-vextensions";
 import React from "react";
-export declare class DropDown extends BaseComponent<{
+declare const DropDown_base: new (..._: any[]) => BaseComponent<{
     className?: any;
     onShow?: any;
     onHide?: any;
+    active?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>, {
     active: boolean;
-}> {
+}, unknown>;
+export declare class DropDown extends DropDown_base {
     ComponentDidMount(): void;
     ComponentWillUnmount(): void;
-    constructor(props: any);
-    isActive(): boolean;
-    hide(): void;
-    show(): void;
-    _onWindowClick(event: any): void;
-    _onToggleClick(event: any): void;
+    private OnWindowClick;
+    private OnToggleClick;
+    IsActive(): boolean;
+    Show(): void;
+    Hide(): void;
     render(): JSX.Element;
 }
 export declare class DropDownTrigger extends BaseComponent<{
@@ -28,3 +29,4 @@ export declare class DropDownContent extends BaseComponent<{
 } & React.HTMLAttributes<HTMLDivElement>, {}> {
     render(): JSX.Element;
 }
+export {};

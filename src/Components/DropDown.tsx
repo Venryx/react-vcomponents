@@ -1,5 +1,5 @@
 import {cloneElement} from "react";
-import {BaseComponent, AddGlobalStyle, GetDOM, E} from "react-vextensions";
+import {BaseComponent, AddGlobalStyle, GetDOM, E, BaseComponentPlus} from "react-vextensions";
 import React from "react";
 import classNames from "classnames";
 
@@ -20,31 +20,44 @@ AddGlobalStyle(`
 */
 `);
 
-export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & React.HTMLAttributes<HTMLDivElement>, {active: boolean}> {
+export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: false}) {
 	ComponentDidMount() {
-		window.addEventListener("click", this._onWindowClick);
-		window.addEventListener("touchstart", this._onWindowClick);
+		window.addEventListener("click", this.OnWindowClick);
+		window.addEventListener("touchstart", this.OnWindowClick);
 	}
-
 	ComponentWillUnmount() {
-		window.removeEventListener("click", this._onWindowClick);
-		window.removeEventListener("touchstart", this._onWindowClick);
+		window.removeEventListener("click", this.OnWindowClick);
+		window.removeEventListener("touchstart", this.OnWindowClick);
 	}
+	private OnWindowClick = (event)=> {
+		const dropdownElement = GetDOM(this);
+		if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && this.IsActive()) {
+			this.Hide();
+		}
+	};
+	private OnToggleClick = (event)=> {
+		event.preventDefault();
+		if (this.IsActive()) {
+			this.Hide();
+		} else {
+			this.Show();
+		}
+	};
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			active: false
-		};
-		this._onWindowClick = this._onWindowClick.bind(this);
-		this._onToggleClick = this._onToggleClick.bind(this);
-	}
-
-	isActive() {
+	IsActive() {
 		return this.props.active != null ? this.props.active : this.state.active;
 	}
 
-	hide() {
+	Show() {
+		this.SetState({
+			active: true
+		}, ()=> {
+			if (this.props.onShow) {
+				this.props.onShow();
+			}
+		});
+	}
+	Hide() {
 		this.SetState({
 			active: false
 		}, ()=> {
@@ -54,35 +67,10 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & Rea
 		});
 	}
 
-	show() {
-		this.SetState({
-			active: true
-		}, ()=> {
-			if (this.props.onShow) {
-				this.props.onShow();
-			}
-		});
-	}
-
-	_onWindowClick(event) {
-		const dropdownElement = GetDOM(this);
-		if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && this.isActive()) {
-			this.hide();
-		}
-	}
-	_onToggleClick(event) {
-		event.preventDefault();
-		if (this.isActive()) {
-			this.hide();
-		} else {
-			this.show();
-		}
-	}
-
 	render() {
 		const {children, className} = this.props;
 		// create component classes
-		const active = this.isActive();
+		const active = this.IsActive();
 		// stick callback on trigger element
 		const boundChildren = React.Children.map(children, (child: any)=> {
 			if (child.type === DropDownTrigger) {
@@ -90,7 +78,7 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?} & Rea
 				child = cloneElement(child, {
 					ref: "trigger",
 					onClick: (event) => {
-						this._onToggleClick(event);
+						this.OnToggleClick(event);
 						if (originalOnClick) {
 							originalOnClick.apply(child, arguments);
 						}
