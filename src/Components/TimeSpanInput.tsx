@@ -2,7 +2,6 @@ import React from "react";
 import {BaseComponent} from "react-vextensions";
 import {ToNumber} from "../General";
 import {TextInput, TextInputProps} from "./TextInput";
-import {Row, Text} from "..";
 
 export type TimeSpanProps = {
 	smallUnit?: "seconds" | "minutes",
