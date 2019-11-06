@@ -18,10 +18,9 @@ export declare class DropDown extends DropDown_base {
     Hide(): void;
     render(): JSX.Element;
 }
-export declare class DropDownTrigger extends BaseComponent<{
-    className?: any;
-} & React.HTMLAttributes<HTMLDivElement>, {}> {
-    render(): JSX.Element;
+declare const DropDownTrigger_base: new (..._: any[]) => BaseComponent<{}, {}, unknown>;
+export declare class DropDownTrigger extends DropDownTrigger_base {
+    render(): JSX.Element[];
 }
 export declare class DropDownContent extends BaseComponent<{
     className?: any;

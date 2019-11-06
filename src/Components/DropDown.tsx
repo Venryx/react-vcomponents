@@ -49,21 +49,19 @@ export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHi
 	}
 
 	Show() {
+		let {onShow} = this.props;
 		this.SetState({
 			active: true
 		}, ()=> {
-			if (this.props.onShow) {
-				this.props.onShow();
-			}
+			if (onShow) onShow();
 		});
 	}
 	Hide() {
+		let {onHide} = this.props;
 		this.SetState({
 			active: false
 		}, ()=> {
-			if (this.props.onHide) {
-				this.props.onHide();
-			}
+			if (onHide) onHide();
 		});
 	}
 
@@ -100,14 +98,19 @@ export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHi
 	}
 }
 
-export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+//export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+export class DropDownTrigger extends BaseComponentPlus({} as {}, {}) {
 	render() {
-		const {children, className, ...rest} = this.props;
+		/* const {children, className, ...rest} = this.props;
 		return (
 			<div {...rest} className={classNames("dropdown__trigger", className)}>
 				{children}
 			</div>
-		);
+		); */
+		const {children, ...rest} = this.props;
+		// whatever properties were passed to this DropDownTrigger (eg. the onClick handler from DropDown.render), add them onto the children
+		const childrenWithPassedProps = React.Children.map(children, (child: JSX.Element)=>cloneElement(child, rest));
+		return childrenWithPassedProps as JSX.Element[];
 	}
 }
 
@@ -115,8 +118,10 @@ export class DropDownContent extends BaseComponent<{className?, style?} & React.
 	render() {
 		const {children, className, style, ...rest} = this.props;
 		return (
-			<div {...rest} className={classNames("dropdown__content", className)}
-					style={E({padding: 10, background: "rgba(0,0,0,.7)", borderRadius: "0 0 0 5px"}, style)}>
+			<div {...rest}className={classNames("dropdown__content", className)} style={E(
+				{padding: 10, background: "rgba(0,0,0,.7)", borderRadius: "0 0 0 5px"},
+				style,
+			)}>
 				{children}
 			</div>
 		);
