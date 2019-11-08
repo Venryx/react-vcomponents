@@ -1,6 +1,6 @@
 import React from "react";
-import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
-import {Assert} from "../General";
+import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {E} from "../Internals/FromJSVE";
 
 /*export class Row extends BaseComponent<any, any> {
 	render() {

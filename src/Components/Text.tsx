@@ -1,6 +1,6 @@
 import React from "react";
-import {ApplyBasicStyles, BaseComponent, E} from "react-vextensions";
-import {ReactChildrenAsText} from "../General";
+import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
+import {ReactChildrenAsText, E} from "../Internals/FromJSVE";
 
 @ApplyBasicStyles
 export class Text extends BaseComponent<{wrap?, style?} & React.HTMLAttributes<HTMLSpanElement>, {}> {

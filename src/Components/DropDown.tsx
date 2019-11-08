@@ -1,7 +1,8 @@
 import {cloneElement} from "react";
-import {BaseComponent, AddGlobalStyle, GetDOM, E, BaseComponentPlus} from "react-vextensions";
+import {BaseComponent, AddGlobalStyle, GetDOM, BaseComponentPlus} from "react-vextensions";
 import React from "react";
 import classNames from "classnames";
+import {E} from "../Internals/FromJSVE";
 
 AddGlobalStyle(`
 .dropdown {
@@ -20,7 +21,11 @@ AddGlobalStyle(`
 */
 `);
 
-export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: false}) {
+// avoiding BaseComponentPlus for now, since seems to cause error when used in parent project (need to investigate)
+//export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: false}) {
+export class DropDown extends BaseComponent<{className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: boolean}> {
+	static defaultState = {active: false};
+	
 	ComponentDidMount() {
 		window.addEventListener("click", this.OnWindowClick);
 		window.addEventListener("touchstart", this.OnWindowClick);
@@ -99,7 +104,7 @@ export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHi
 }
 
 //export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLAttributes<HTMLDivElement>, {}> {
-export class DropDownTrigger extends BaseComponentPlus({} as {}, {}) {
+export class DropDownTrigger extends BaseComponent<{}, {}> {
 	render() {
 		/* const {children, className, ...rest} = this.props;
 		return (

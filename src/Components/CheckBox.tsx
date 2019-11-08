@@ -1,7 +1,7 @@
 import React from "react";
-import {BaseComponent, ApplyBasicStyles, E} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import {Row} from "./Row";
-import {ReactChildrenAsText} from "../General";
+import {ReactChildrenAsText, E} from "../Internals/FromJSVE";
 
 export type CheckBoxProps = {
 	text?: React.ReactNode, wrap?: boolean, title?: string, checked: boolean, indeterminate?: boolean,

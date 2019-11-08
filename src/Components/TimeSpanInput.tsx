@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent} from "react-vextensions";
-import {ToNumber} from "../General";
+import {ToNumber} from "../Internals/FromJSVE";
 import {TextInput, TextInputProps} from "./TextInput";
 
 export type TimeSpanProps = {

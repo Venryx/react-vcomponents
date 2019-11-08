@@ -1,8 +1,9 @@
 import React from "react";
-import {BaseComponent, E, AddGlobalStyle, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, AddGlobalStyle, ApplyBasicStyles} from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
 import * as keycode from "keycode";
 import classnames from "classnames";
+import {E} from "../Internals/FromJSVE";
 
 var styles = {
 	root: {

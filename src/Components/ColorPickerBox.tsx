@@ -1,6 +1,6 @@
 import React from "react";
-import {BaseComponent, E, ApplyBasicStyles} from "react-vextensions";
-import { Assert } from "../General";
+import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {Assert, E} from "../Internals/FromJSVE";
 
 //declare var require;
 //declare var __webpack_require__;

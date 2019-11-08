@@ -1,7 +1,6 @@
-import React, { Props, ReactElement } from "react";
-import autoBind from "react-autobind";
-import {BaseComponent, GetDOM, E, ApplyBasicStyles} from "react-vextensions";
-import {RemoveDuplicates, AssertWarn, Assert} from "../General";
+import React from "react";
+import {ApplyBasicStyles, BaseComponent, RemoveDuplicates} from "react-vextensions";
+import {Assert, AssertWarn, E} from "../Internals/FromJSVE";
 
 /*export class Option {
 	constructor(name, value, style?) {

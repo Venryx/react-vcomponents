@@ -1,4 +1,3 @@
-export {} from "./General";
 export * from "./Components/Button";
 export * from "./Components/CheckBox";
 export * from "./Components/ColorPickerBox";

@@ -1,5 +1,6 @@
 import React from "react";
-import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, E, ClassBasedStyles} from "react-vextensions";
+import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles} from "react-vextensions";
+import {E} from "../Internals/FromJSVE";
 
 var styles = {
 	root: {

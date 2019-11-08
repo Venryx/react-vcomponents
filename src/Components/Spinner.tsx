@@ -1,6 +1,7 @@
 import React from "react";
-import {BaseComponent, E, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import keycode from "keycode";
+import {E} from "../Internals/FromJSVE";
 
 export type SpinnerProps = {
 	enabled?: boolean, autoSize?: boolean,
