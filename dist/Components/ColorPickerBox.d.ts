@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
 export declare class ColorPickerBox extends BaseComponent<{
     color: string;

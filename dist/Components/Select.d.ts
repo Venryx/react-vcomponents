@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
 export declare type Select_Props = {
     options: {
@@ -32,7 +33,7 @@ export declare class Select extends BaseComponent<Select_Props, {}> {
         value: any;
         style?: any;
     }[];
-    readonly OptionsList: {
+    get OptionsList(): {
         name: string;
         value: any;
         style?: any;

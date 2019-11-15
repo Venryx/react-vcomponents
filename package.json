@@ -1,6 +1,6 @@
 {
   "name": "react-vcomponents",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Components for ReactJS, by Venryx.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -31,24 +31,24 @@
     "react-vextensions": "^0.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "@types/react": "^16.7.17",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@types/react": "^16.9.11",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.6",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-vextensions": "^0.0.1",
-    "ts-loader": "^5.3.2",
-    "typescript": "^3.5.3",
-    "webpack": "^4.28.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-vextensions": "0.0.7",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "keycode": "^2.1.9",
-    "react-textarea-autosize": "^7.1.0"
+    "react-textarea-autosize": "^7.1.2"
   }
 }

@@ -25,5 +25,5 @@ export declare class CheckBox extends BaseComponent<CheckBoxProps, {
     input: HTMLInputElement;
     render(): JSX.Element;
     PostRender(): void;
-    readonly Checked: boolean;
+    get Checked(): boolean;
 }

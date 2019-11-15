@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
 import { TextInputProps } from "./TextInput";
 export declare type TimeSpanProps = {
