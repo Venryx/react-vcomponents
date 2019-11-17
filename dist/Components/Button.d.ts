@@ -1,5 +1,40 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
+export declare const Button_styles: {
+    root: {
+        display: string;
+        alignItems: string;
+        justifyContent: string;
+        backgroundColor: string;
+        backgroundRepeat: string;
+        borderRadius: number;
+        border: string;
+        color: string;
+        fontSize: number;
+        textAlign: string;
+        cursor: string;
+        ":hover": {
+            backgroundColor: string;
+        };
+    };
+    root_opacityHover: {
+        opacity: number;
+        ":hover": {
+            opacity: number;
+        };
+    };
+    root_hasCheckbox: {
+        paddingTop: number;
+        verticalAlign: number;
+    };
+    root_disabled: {
+        opacity: number;
+        cursor: string;
+    };
+    checkbox: {
+        marginLeft: number;
+    };
+};
 export declare type ButtonProps = {
     enabled?: boolean;
     text?: string | JSX.Element;

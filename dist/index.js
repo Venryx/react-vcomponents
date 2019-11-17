@@ -108,6 +108,8 @@ module.exports = __webpack_require__(1);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Button_styles", function() { return _Components_Button__WEBPACK_IMPORTED_MODULE_0__["Button_styles"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return _Components_Button__WEBPACK_IMPORTED_MODULE_0__["Button"]; });
 
 /* harmony import */ var _Components_CheckBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
@@ -190,6 +192,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button_styles", function() { return Button_styles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return Button; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -231,7 +234,7 @@ var __decorate = undefined && undefined.__decorate || function (decorators, targ
 
 
 
-var styles = {
+var Button_styles = {
   root: {
     //display: "inline-block",
     display: "inline-flex",
@@ -317,7 +320,7 @@ function (_BaseComponent) {
       }
 
       var borderThickness = (style || {}).borderWidth || 1;
-      var finalStyle = Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["E"])(styles.root, useOpacityForHover && styles.root_opacityHover, {
+      var finalStyle = Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["E"])(Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, {
         padding: padding,
         width: width,
         height: height
@@ -327,7 +330,7 @@ function (_BaseComponent) {
         backgroundSize: iconSize
       }, iconPath && {
         backgroundImage: "url(".concat(iconPath, ")")
-      }, hasCheckbox && styles.root_hasCheckbox, !enabled && styles.root_disabled, style);
+      }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, style);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", Object.assign({}, rest, {
         title: title,
         onClick: this.OnClick,

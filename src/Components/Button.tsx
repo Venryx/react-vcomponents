@@ -2,7 +2,7 @@ import React from "react";
 import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles} from "react-vextensions";
 import {E} from "../Internals/FromJSVE";
 
-var styles = {
+export const Button_styles = {
 	root: {
 		//display: "inline-block",
 		display: "inline-flex",
@@ -71,8 +71,8 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 		let borderThickness = (style || {}).borderWidth || 1;
 		
 		let finalStyle = E(
-			styles.root,
-			useOpacityForHover && styles.root_opacityHover,
+			Button_styles.root,
+			useOpacityForHover && Button_styles.root_opacityHover,
 			{padding, width, height},
 			(iconSize && (width || height)) && {
 				padding: 0,
@@ -80,8 +80,8 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 				backgroundSize: iconSize
 			},
 			iconPath && {backgroundImage: `url(${iconPath})`},
-			hasCheckbox && styles.root_hasCheckbox,
-			!enabled && styles.root_disabled,
+			hasCheckbox && Button_styles.root_hasCheckbox,
+			!enabled && Button_styles.root_disabled,
 			style,
 		);
 
