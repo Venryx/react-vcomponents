@@ -39,7 +39,7 @@
     "babel-loader": "^8.0.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-vextensions": "0.0.7",
+    "react-vextensions": "^1.0.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "keycode": "^2.1.9",
+    "keycode": "^2.2.0",
     "react-textarea-autosize": "^7.1.2"
   }
 }

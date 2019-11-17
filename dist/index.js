@@ -401,7 +401,7 @@ function E(e1, e2, e3, e4, e5, e6, e7, e8) {
   try {
     for (var _iterator = arguments[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var extend = _step.value;
-      result.Extend(extend);
+      Object.assign(result, extend);
     }
   } catch (err) {
     _didIteratorError = true;

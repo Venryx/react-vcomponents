@@ -26,7 +26,7 @@ module.exports = {
 		"react-vextensions": "commonjs react-vextensions",
     },
     /*module: {
-        noParse: ["react"]
+		noParse: ["react"]
     },*/
     module: {
 		rules: [
