@@ -269,6 +269,7 @@ var Button_styles = {
     opacity: .5,
     cursor: "default"
   },
+  root_override: {},
   checkbox: {
     marginLeft: -6
   }
@@ -330,7 +331,7 @@ function (_BaseComponent) {
         backgroundSize: iconSize
       }, iconPath && {
         backgroundImage: "url(".concat(iconPath, ")")
-      }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, style);
+      }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, Button_styles.root_override, style);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", Object.assign({}, rest, {
         title: title,
         onClick: this.OnClick,
@@ -395,7 +396,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IsNaN", function() { return IsNaN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IsNumber", function() { return IsNumber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToNumber", function() { return ToNumber; });
-function E(e1, e2, e3, e4, e5, e6, e7, e8) {
+function E(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20) {
   var result = {};
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;

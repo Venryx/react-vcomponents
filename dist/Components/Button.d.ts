@@ -31,6 +31,7 @@ export declare const Button_styles: {
         opacity: number;
         cursor: string;
     };
+    root_override: {};
     checkbox: {
         marginLeft: number;
     };

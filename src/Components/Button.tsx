@@ -36,6 +36,7 @@ export const Button_styles = {
 		//pointerEvents: "none",
 		//":hover": {backgroundColor: "rgba(0,0,0,.3)"}
 	},
+	root_override: {},
 	checkbox: {marginLeft: -6},
 };
 
@@ -82,6 +83,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			iconPath && {backgroundImage: `url(${iconPath})`},
 			hasCheckbox && Button_styles.root_hasCheckbox,
 			!enabled && Button_styles.root_disabled,
+			Button_styles.root_override,
 			style,
 		);
 
