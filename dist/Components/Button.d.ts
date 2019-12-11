@@ -61,5 +61,4 @@ export declare class Button extends BaseComponent<ButtonProps, {}> {
         enabled: boolean;
     };
     render(): JSX.Element;
-    OnClick(e: any): void;
 }

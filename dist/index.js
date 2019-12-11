@@ -289,6 +289,8 @@ function (_BaseComponent) {
   _createClass(Button, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       var _this$props = this.props,
           enabled = _this$props.enabled,
           text = _this$props.text,
@@ -334,27 +336,24 @@ function (_BaseComponent) {
       }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, Button_styles.root_override, style);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", Object.assign({}, rest, {
         title: title,
-        onClick: this.OnClick,
         className: "Button ".concat(enabled ? Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["ClassBasedStyles"])(finalStyle) : "", " ").concat(className || ""),
-        style: finalStyle
+        style: finalStyle,
+        onClick: function onClick(e) {
+          var _this$props2 = _this.props,
+              enabled = _this$props2.enabled,
+              onClick = _this$props2.onClick,
+              onLeftClick = _this$props2.onLeftClick,
+              onDirectClick = _this$props2.onDirectClick;
+          if (!enabled) return;
+          if (onDirectClick && (e.target == e.currentTarget || e.target["parentElement"] == e.currentTarget)) onDirectClick(e);
+          if (onClick) onClick(e);
+          if (onLeftClick && e.button == 0) onLeftClick(e);
+        }
       }), hasCheckbox ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         style: {
           verticalAlign: 4
         }
       }, text) : text, children);
-    }
-  }, {
-    key: "OnClick",
-    value: function OnClick(e) {
-      var _this$props2 = this.props,
-          enabled = _this$props2.enabled,
-          onClick = _this$props2.onClick,
-          onLeftClick = _this$props2.onLeftClick,
-          onDirectClick = _this$props2.onDirectClick;
-      if (!enabled) return;
-      if (onDirectClick && (e.target == e.currentTarget || e.target.parentElement == e.currentTarget)) onDirectClick(e);
-      if (onClick) onClick(e);
-      if (onLeftClick && e.button == 0) onLeftClick(e);
     }
   }]);
 

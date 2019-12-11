@@ -88,9 +88,17 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 		);
 
 	    return (
-			<div {...rest} title={title} onClick={this.OnClick}
-					className={`Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`}
-					style={finalStyle}>
+			<div {...rest} title={title}
+				className={`Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`}
+				style={finalStyle}
+				onClick={e=> {
+					var {enabled, onClick, onLeftClick, onDirectClick} = this.props;
+					if (!enabled) return;
+					if (onDirectClick && (e.target == e.currentTarget || e.target["parentElement"] == e.currentTarget)) onDirectClick(e);
+					if (onClick) onClick(e);
+					if (onLeftClick && e.button == 0) onLeftClick(e);
+				}}
+			>
 				{/*hasCheckbox && <CheckBox checked={checked} style={E(styles.checkbox, checkboxStyle)} labelStyle={checkboxLabelStyle}
 					onChange={checked=>onCheckedChanged && onCheckedChanged(checked)}/>*/}
 				{hasCheckbox
@@ -99,12 +107,5 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 				{children}
 			</div>
 		);
-	}
-	OnClick(e) {
-		var {enabled, onClick, onLeftClick, onDirectClick} = this.props;
-		if (!enabled) return;
-		if (onDirectClick && (e.target == e.currentTarget || e.target.parentElement == e.currentTarget)) onDirectClick(e);
-		if (onClick) onClick(e);
-		if (onLeftClick && e.button == 0) onLeftClick(e);
 	}
 }
