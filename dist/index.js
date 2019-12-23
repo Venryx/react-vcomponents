@@ -1497,8 +1497,7 @@ function (_BaseComponent3) {
         className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("dropdown__content", className),
         style: Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_3__["E"])({
           padding: 10,
-          background: "rgba(0,0,0,.7)",
-          borderRadius: "0 0 0 5px"
+          background: "rgba(0,0,0,.7)"
         }, style)
       }), children);
     }

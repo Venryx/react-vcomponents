@@ -124,7 +124,7 @@ export class DropDownContent extends BaseComponent<{className?, style?} & React.
 		const {children, className, style, ...rest} = this.props;
 		return (
 			<div {...rest}className={classNames("dropdown__content", className)} style={E(
-				{padding: 10, background: "rgba(0,0,0,.7)", borderRadius: "0 0 0 5px"},
+				{padding: 10, background: "rgba(0,0,0,.7)"},
 				style,
 			)}>
 				{children}
