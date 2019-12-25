@@ -27,7 +27,7 @@ export declare class Select extends BaseComponent<Select_Props, {}> {
         compareBy: string;
         verifyValue: boolean;
     };
-    static ValidateProps(props: Select_Props): void;
+    constructor(props: any);
     static GetOptionsListFromProps(props: Select_Props): {
         name: string;
         value: any;

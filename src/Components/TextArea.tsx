@@ -60,7 +60,7 @@ export class TextArea extends BaseComponent
 		//let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
 		let Comp: React.DetailedHTMLFactory<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
 
-		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
+		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled != true} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
 			style={E(
 				styles.root,
 				autoSize && {

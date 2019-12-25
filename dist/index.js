@@ -578,7 +578,8 @@ function (_BaseComponent) {
     _classCallCheck(this, CheckBox);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CheckBox).call(this, props));
-    _this.id = ++CheckBox_1.lastID;
+    _this.id = ++CheckBox_1.lastID; //ValidateStandardProps(props);
+
     return _this;
   }
 
@@ -615,7 +616,7 @@ function (_BaseComponent) {
         },
         id: "checkBox_" + this.id,
         type: "checkbox",
-        disabled: !enabled,
+        disabled: enabled != true,
         checked: checked || false,
         onChange: function onChange(e) {
           return _onChange && _onChange(_this2.input.checked, e);
@@ -631,7 +632,7 @@ function (_BaseComponent) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), text))
       /*<input ref={c=>this.input = c} type="checkbox"
           checked={editedValue != null ? editedValue : (checked || false)}
-          disabled={enabled == false}
+          disabled={enabled != true}
           onChange={e=> {
               var newVal = this.input.checked;
               if (internalChanging) {
@@ -1705,11 +1706,36 @@ var Select = Select_1 =
 function (_BaseComponent) {
   _inherits(Select, _BaseComponent);
 
-  function Select() {
+  function Select(props) {
+    var _this;
+
     _classCallCheck(this, Select);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Select).apply(this, arguments));
-  }
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Select).call(this, props));
+    var options = Select_1.GetOptionsListFromProps(props);
+    Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["Assert"])(Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["RemoveDuplicates"])(options.map(function (a) {
+      return a.name;
+    })).length == options.length, function () {
+      var optionsWithNonUniqueNames = options.filter(function (a) {
+        return options.filter(function (b) {
+          return b.name == a.name;
+        }).length > 1;
+      });
+      return "Select options must have unique names. (shared: ".concat(optionsWithNonUniqueNames.map(function (a) {
+        return a.name;
+      }).join(", "), ")");
+    });
+    return _this;
+  } // ValidateProps gets called by vwebapp-framework, if project using it
+
+  /*static ValidateProps(props: Select_Props) {
+      let options = this.GetOptionsListFromProps(props);
+      Assert(RemoveDuplicates(options.map(a=>a.name)).length == options.length, ()=> {
+          var optionsWithNonUniqueNames = options.filter(a=>options.filter(b=>b.name == a.name).length > 1);
+          return `Select options must have unique names. (shared: ${optionsWithNonUniqueNames.map(a=>a.name).join(", ")})`;
+      });
+  }*/
+
 
   _createClass(Select, [{
     key: "GetIndexOfOption",
@@ -1743,7 +1769,7 @@ function (_BaseComponent) {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var _this$props = this.props,
           displayType = _this$props.displayType,
@@ -1772,9 +1798,9 @@ function (_BaseComponent) {
       if (displayType == "dropdown") {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
           ref: function ref(c) {
-            return _this.root = c;
+            return _this2.root = c;
           },
-          disabled: enabled == false,
+          disabled: enabled != true,
           value: "value" + this.GetIndexOfValue(value),
           className: className,
           title: title,
@@ -1782,7 +1808,7 @@ function (_BaseComponent) {
             color: "#000"
           }, style),
           onChange: function onChange(e) {
-            return _onChange && _onChange(_this.GetSelectedValue());
+            return _onChange && _onChange(_this2.GetSelectedValue());
           }
         }, options.map(function (option, index) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Dropdown_OptionUI, {
@@ -1816,23 +1842,6 @@ function (_BaseComponent) {
       return Select_1.GetOptionsListFromProps(this.props);
     }
   }], [{
-    key: "ValidateProps",
-    value: function ValidateProps(props) {
-      var options = this.GetOptionsListFromProps(props);
-      Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["Assert"])(Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["RemoveDuplicates"])(options.map(function (a) {
-        return a.name;
-      })).length == options.length, function () {
-        var optionsWithNonUniqueNames = options.filter(function (a) {
-          return options.filter(function (b) {
-            return b.name == a.name;
-          }).length > 1;
-        });
-        return "Select options must have unique names. (shared: ".concat(optionsWithNonUniqueNames.map(function (a) {
-          return a.name;
-        }).join(", "), ")");
-      });
-    }
-  }, {
     key: "GetOptionsListFromProps",
     value: function GetOptionsListFromProps(props) {
       var options_raw = props.options;
@@ -1965,7 +1974,7 @@ function (_BaseComponent3) {
   _createClass(ButtonBar_OptionUI, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _this$props3 = this.props,
           first = _this$props3.first,
@@ -1978,12 +1987,12 @@ function (_BaseComponent3) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ButtonBar_OptionUI",
         onMouseEnter: function onMouseEnter() {
-          return _this2.SetState({
+          return _this3.SetState({
             hovered: true
           });
         },
         onMouseLeave: function onMouseLeave() {
-          return _this2.SetState({
+          return _this3.SetState({
             hovered: false
           });
         },
@@ -2140,7 +2149,7 @@ function (_BaseComponent) {
         min: min,
         max: max,
         value: editedValue != null ? editedValue : value || 0,
-        disabled: !enabled,
+        disabled: enabled != true,
         title: title,
         style: style,
         onChange: function onChange(e) {
@@ -2674,7 +2683,7 @@ function (_BaseComponent) {
         ref: function ref(c) {
           return _this.root = c;
         },
-        disabled: enabled == false,
+        disabled: enabled != true,
         readOnly: !editable,
         className: classnames__WEBPACK_IMPORTED_MODULE_4___default()("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"),
         style: Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_5__["E"])(styles.root, autoSize && {
@@ -4070,7 +4079,7 @@ function (_BaseComponent) {
         ref: function ref(c) {
           return _this.root = c;
         },
-        disabled: enabled == false,
+        disabled: enabled != true,
         readOnly: !editable,
         style: Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_3__["E"])({
           color: "black"

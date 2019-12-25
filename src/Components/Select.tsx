@@ -28,13 +28,23 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		compareBy: "value",
 		verifyValue: true,
 	};
-	static ValidateProps(props: Select_Props) {
-		let options = this.GetOptionsListFromProps(props);
+
+	constructor(props) {
+		super(props);
+		let options = Select.GetOptionsListFromProps(props);
 		Assert(RemoveDuplicates(options.map(a=>a.name)).length == options.length, ()=> {
 			var optionsWithNonUniqueNames = options.filter(a=>options.filter(b=>b.name == a.name).length > 1);
 			return `Select options must have unique names. (shared: ${optionsWithNonUniqueNames.map(a=>a.name).join(", ")})`;
 		});
 	}
+	// ValidateProps gets called by vwebapp-framework, if project using it
+	/*static ValidateProps(props: Select_Props) {
+		let options = this.GetOptionsListFromProps(props);
+		Assert(RemoveDuplicates(options.map(a=>a.name)).length == options.length, ()=> {
+			var optionsWithNonUniqueNames = options.filter(a=>options.filter(b=>b.name == a.name).length > 1);
+			return `Select options must have unique names. (shared: ${optionsWithNonUniqueNames.map(a=>a.name).join(", ")})`;
+		});
+	}*/
 	
 	static GetOptionsListFromProps(props: Select_Props) {
 		let {options: options_raw} = props;
@@ -105,7 +115,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 
 		if (displayType == "dropdown") {
 			return (
-				<select ref={c=>this.root = c} disabled={enabled == false} value={"value" + this.GetIndexOfValue(value)}
+				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + this.GetIndexOfValue(value)}
 						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=>onChange && onChange(this.GetSelectedValue())}>
 					{options.map((option, index)=> {
 						return <Dropdown_OptionUI key={index} index={index} style={E(childStyle, option.style)}>
@@ -117,7 +127,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		}
 		
 		return (
-			<div /*disabled={enabled == false}*/ style={E({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style)}>
+			<div /*disabled={enabled != true}*/ style={E({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style)}>
 				{options.map((option, index)=> {
 					return <ButtonBar_OptionUI key={index}
 							first={index == 0} last={index == options.length - 1} selected={option.value === value}

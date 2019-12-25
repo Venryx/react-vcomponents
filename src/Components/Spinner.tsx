@@ -29,7 +29,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> 
 		}
 
 		return (
-			<input {...rest} ref={c=>this.root = c} type="number" step={step} min={min} max={max} value={editedValue != null ? editedValue : (value || 0)} disabled={!enabled}
+			<input {...rest} ref={c=>this.root = c} type="number" step={step} min={min} max={max} value={editedValue != null ? editedValue : (value || 0)} disabled={enabled != true}
 				title={title} style={style}
 				onChange={e=> {
 					var newVal = Number(e.target.value);

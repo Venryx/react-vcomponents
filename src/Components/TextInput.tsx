@@ -32,7 +32,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 		} = this.props;
 		var {editedValue} = this.state;
 		return (
-			<input {...rest} ref={c=>this.root = c} disabled={enabled == false} readOnly={!editable} style={E({color: "black"}, style)}
+			<input {...rest} ref={c=>this.root = c} disabled={enabled != true} readOnly={!editable} style={E({color: "black"}, style)}
 				value={editedValue != null ? editedValue : (value || "")}
 				onChange={e=> {
 					var newVal = e.target.value;
