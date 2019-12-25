@@ -1925,6 +1925,7 @@ function (_BaseComponent) {
 }(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
 
 Select.defaultProps = {
+  enabled: true,
   displayType: "dropdown",
   compareBy: "value",
   verifyValue: true
@@ -2754,6 +2755,7 @@ function (_BaseComponent) {
 }(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
 
 TextArea.defaultProps = {
+  enabled: true,
   editable: true,
   allowLineBreaks: true,
   useEscape: true
@@ -4134,6 +4136,7 @@ function (_BaseComponent) {
 }(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
 
 TextInput.defaultProps = {
+  enabled: true,
   editable: true,
   type: "text",
   useEscape: true

@@ -15,7 +15,7 @@ export type TextInputProps = {
 
 @ApplyBasicStyles
 export class TextInput extends BaseComponent<TextInputProps, {editedValue: string}> {
-	static defaultProps = {editable: true, type: "text", useEscape: true};
+	static defaultProps = {enabled: true, editable: true, type: "text", useEscape: true};
 	/*ComponentWillReceiveProps(props) {
 		// if value changing, and "delayChangeTillDefocus" is not enabled
 		if (!props.delayChangeTillDefocus && props.value != this.props.value) {

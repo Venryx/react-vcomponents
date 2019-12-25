@@ -16,6 +16,7 @@ export declare class TextArea extends BaseComponent<{
     minHeight: number;
 }> {
     static defaultProps: {
+        enabled: boolean;
         editable: boolean;
         allowLineBreaks: boolean;
         useEscape: boolean;

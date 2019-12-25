@@ -14,6 +14,7 @@ export declare class TextInput extends BaseComponent<TextInputProps, {
     editedValue: string;
 }> {
     static defaultProps: {
+        enabled: boolean;
         editable: boolean;
         type: string;
         useEscape: boolean;

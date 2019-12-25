@@ -23,6 +23,7 @@ export declare type Select_Props = {
 };
 export declare class Select extends BaseComponent<Select_Props, {}> {
     static defaultProps: {
+        enabled: boolean;
         displayType: string;
         compareBy: string;
         verifyValue: boolean;

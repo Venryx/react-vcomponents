@@ -46,7 +46,7 @@ export class TextArea extends BaseComponent
 			delayChangeTillDefocus?: boolean, useEscape?: boolean, autoSize?: boolean, autoSize_minHeight?: boolean, allowLineBreaks?: boolean,
 		} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange" | "disabled" | "readOnly">,
 		{editedValue: string, minHeight: number}> {
-	static defaultProps = {editable: true, allowLineBreaks: true, useEscape: true};
+	static defaultProps = {enabled: true, editable: true, allowLineBreaks: true, useEscape: true};
 	
 	root: TextAreaAutoSize | HTMLTextAreaElement;
 	render() {

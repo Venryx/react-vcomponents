@@ -24,6 +24,7 @@ export type Select_Props = {
 @ApplyBasicStyles
 export class Select extends BaseComponent<Select_Props, {}> {
 	static defaultProps = {
+		enabled: true,
 		displayType: "dropdown",
 		compareBy: "value",
 		verifyValue: true,
