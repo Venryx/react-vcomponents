@@ -1713,7 +1713,7 @@ function (_BaseComponent) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Select).call(this, props));
     var options = Select_1.GetOptionsListFromProps(props);
-    Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["Assert"])(Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["RemoveDuplicates"])(options.map(function (a) {
+    Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["Assert"])(Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["RemoveDuplicates"])(options.map(function (a) {
       return a.name;
     })).length == options.length, function () {
       var optionsWithNonUniqueNames = options.filter(function (a) {

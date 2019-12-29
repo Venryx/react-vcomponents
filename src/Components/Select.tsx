@@ -1,6 +1,6 @@
 import React from "react";
-import {ApplyBasicStyles, BaseComponent, RemoveDuplicates} from "react-vextensions";
-import {Assert, AssertWarn, E} from "../Internals/FromJSVE";
+import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
+import {Assert, AssertWarn, E, RemoveDuplicates} from "../Internals/FromJSVE";
 
 /*export class Option {
 	constructor(name, value, style?) {
