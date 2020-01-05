@@ -2710,7 +2710,7 @@ function (_BaseComponent) {
           if (newVal == editedValue) return; // if no text change, ignore event
 
           if (pattern) {
-            var valid = newVal.match(pattern) != null;
+            var valid = newVal.length ? newVal.match(pattern) != null : !_this.props.required;
 
             if (_this.DOM && _this.DOM["setCustomValidity"]) {
               _this.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");

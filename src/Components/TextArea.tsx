@@ -83,7 +83,7 @@ export class TextArea extends BaseComponent
 				if (newVal == editedValue) return; // if no text change, ignore event
 
 				if (pattern) {
-					let valid = newVal.match(pattern) != null;
+					let valid = newVal.length ? newVal.match(pattern) != null : !this.props.required;
 					if (this.DOM && this.DOM["setCustomValidity"]) {
 						this.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
 					}
