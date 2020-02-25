@@ -592,7 +592,7 @@ function (_BaseComponent) {
           text = _this$props.text,
           wrap = _this$props.wrap,
           title = _this$props.title,
-          checked = _this$props.checked,
+          value = _this$props.value,
           enabled = _this$props.enabled,
           style = _this$props.style,
           checkboxStyle = _this$props.checkboxStyle,
@@ -617,7 +617,7 @@ function (_BaseComponent) {
         id: "checkBox_" + this.id,
         type: "checkbox",
         disabled: enabled != true,
-        checked: checked || false,
+        checked: value || false,
         onChange: function onChange(e) {
           return _onChange && _onChange(_this2.input.checked, e);
         },

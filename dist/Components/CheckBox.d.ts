@@ -4,7 +4,7 @@ export declare type CheckBoxProps = {
     text?: React.ReactNode;
     wrap?: boolean;
     title?: string;
-    checked: boolean;
+    value: boolean;
     indeterminate?: boolean;
     enabled?: boolean;
     style?: any;

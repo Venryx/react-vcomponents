@@ -99,7 +99,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 					if (onLeftClick && e.button == 0) onLeftClick(e);
 				}}
 			>
-				{/*hasCheckbox && <CheckBox checked={checked} style={E(styles.checkbox, checkboxStyle)} labelStyle={checkboxLabelStyle}
+				{/*hasCheckbox && <CheckBox value={checked} style={E(styles.checkbox, checkboxStyle)} labelStyle={checkboxLabelStyle}
 					onChange={checked=>onCheckedChanged && onCheckedChanged(checked)}/>*/}
 				{hasCheckbox
 					? <span style={{verticalAlign: 4}}>{text}</span>

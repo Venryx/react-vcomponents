@@ -4,7 +4,7 @@ import {Row} from "./Row";
 import {ReactChildrenAsText, E, Assert} from "../Internals/FromJSVE";
 
 export type CheckBoxProps = {
-	text?: React.ReactNode, wrap?: boolean, title?: string, checked: boolean, indeterminate?: boolean,
+	text?: React.ReactNode, wrap?: boolean, title?: string, value: boolean, indeterminate?: boolean,
 	enabled?: boolean, style?, checkboxStyle?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void
 };
 
@@ -22,7 +22,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 	id;
 	input: HTMLInputElement;
 	render() {
-		var {text, wrap, title, checked, enabled, style, checkboxStyle, labelStyle, internalChanging, onChange} = this.props;
+		var {text, wrap, title, value, enabled, style, checkboxStyle, labelStyle, internalChanging, onChange} = this.props;
 		let {editedValue} = this.state;
 
 		let textStr = ReactChildrenAsText(text, "");
@@ -32,7 +32,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 
 		return (
 			<Row center title={title} style={E({position: "relative"}, style)}>
-				<input ref={c=>this.input = c} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={checked || false}
+				<input ref={c=>this.input = c} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value || false}
 					onChange={e=>onChange && onChange(this.input.checked, e)} style={checkboxStyle}/>
 				{text &&
 				<label htmlFor={"checkBox_" + this.id} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
