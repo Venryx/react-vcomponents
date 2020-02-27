@@ -1,26 +1,61 @@
 import React from "react";
-import {BaseComponent} from "react-vextensions";
-import {ToNumber} from "../Internals/FromJSVE";
+import {BaseComponent, BaseComponentPlus} from "react-vextensions";
+import {ToNumber, Assert} from "../Internals/FromJSVE";
 import {TextInput, TextInputProps} from "./TextInput";
 
+export const TimeUnit_values = ["second", "minute", "hour", "day", "week"] as const;
+export const TimeUnit_stepUpMultipliers = [0, 60, 60, 24, 7];
+export type TimeUnit = typeof TimeUnit_values[number];
+export const TimeUnit_labels = {second: "s", minute: "m", hour: "h", day: "d", week: "w"};
+
+export function GetTimeUnitFromLabel(unitLabel: string) {
+	return Object.entries(TimeUnit_labels).find(a=>a[1] == unitLabel)[0] as TimeUnit;
+}
+export function GetStepUpMultiplierBetweenXAndY(unitX: TimeUnit, unitY: TimeUnit){
+	let unitIndexes = [TimeUnit_values.indexOf(unitX), TimeUnit_values.indexOf(unitY)];
+	let stepUpMultipliers = TimeUnit_stepUpMultipliers.slice(Math.min(...unitIndexes) + 1, Math.max(...unitIndexes) + 1);
+	let stepUpMultipliers_combined = stepUpMultipliers.reduce((multiplier, result)=>result * multiplier, 1);
+	return stepUpMultipliers_combined;
+}
+export function ConvertFromUnitXToY(valueInX: number, unitX: TimeUnit, unitY: TimeUnit){
+	if (unitX == unitY) return valueInX;
+	let stepUpMultipliers_combined = GetStepUpMultiplierBetweenXAndY(unitX, unitY);
+	// if converting from large-unit to small-unit, multiply
+	if (TimeUnit_values.indexOf(unitX) > TimeUnit_values.indexOf(unitY)) {
+		return valueInX * stepUpMultipliers_combined;
+	}
+	// else (if converting from small-unit to large-unit), divide
+	return valueInX / stepUpMultipliers_combined;
+}
+
 export type TimeSpanProps = {
-	smallUnit?: "seconds" | "minutes",
+	largeUnit: TimeUnit,
+	smallUnit: TimeUnit,
 	showUnits?: boolean,
 
 	/** Total time-span length in small-units (seconds, by default). */
 	value: number,
 	onChange?: (totalSmallUnits: number)=>any,
 } & Omit<TextInputProps, "value" | "onChange">;
-export class TimeSpanInput extends BaseComponent<TimeSpanProps, {}> {
-	static defaultProps = {smallUnit: "seconds", showUnits: true};
+export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", smallUnit: "second", showUnits: true} as TimeSpanProps, {}) {
+	constructor(props) {
+		super(props);
+		let {largeUnit, smallUnit} = this.props;
+		Assert(TimeUnit_values.indexOf(largeUnit) > TimeUnit_values.indexOf(smallUnit), "Large-unit must be larger than small-unit!");
+		Assert(TimeUnit_values.indexOf(largeUnit) != TimeUnit_values.indexOf(smallUnit), "Large-unit cannot be the same as small-unit!");
+	}
+	
 	render() {
-		const {smallUnit, showUnits, value, onChange, ...rest} = this.props;
+		const {largeUnit, smallUnit, showUnits, value, onChange, ...rest} = this.props;
 		const valueAbs = Math.abs(value);
 
-		let unitLabels = showUnits ? {minutes: ["h", "m"], seconds: ["m", "s"]}[smallUnit] : ["", ""];
 		let valueStr: string = null;
 		if (value != null) {
-			valueStr = `${value < 0 ? "-" : ""}${Math.floor(valueAbs / 60)}${unitLabels[0]}:${valueAbs % 60}${unitLabels[1]}`;
+			const signStr = value < 0 ? "-" : "";
+			const stepUpMultiplier = GetStepUpMultiplierBetweenXAndY(smallUnit, largeUnit);
+			const largeUnitStr = `${Math.floor(valueAbs / stepUpMultiplier)}${TimeUnit_labels[largeUnit]}`;
+			const smallUnitStr = `${valueAbs % stepUpMultiplier}${TimeUnit_labels[smallUnit]}`;
+			valueStr = `${signStr}${largeUnitStr}:${smallUnitStr}`;
 		}
 		
 		let inputItself = (
@@ -30,24 +65,16 @@ export class TimeSpanInput extends BaseComponent<TimeSpanProps, {}> {
 				//const parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
 				const parts = strNoSign.split(":").map(a=>a.trim());
 
-				/*let bigUnits = ToNumber(parts[0], 0);
-				let smallUnits = ToNumber(parts[1], 0);*/
-				let totalSeconds = 0;
+				let totalSmallUnits = 0;
 				parts.forEach((part, index)=> {
-					let hasUnitLabel = "hms".split("").includes(part[part.length - 1]);
-					let numberStr = hasUnitLabel ? part.slice(0, -1) : part;
-					let unitLabel = hasUnitLabel ? part[part.length - 1] : unitLabels[index == 0 ? 0 : 1]; // if no unit specified, assume it's: bigUnit (if part 1), or smallUnit (if part 2+)
-
-					let unitAsSeconds =
-						unitLabel == "h" ? 1 * 60 * 60 :
-						unitLabel == "m" ? 1 * 60 :
-						/*unitLabel == "s" ?*/ 1;
-					let valueAsSeconds = ToNumber(numberStr) * unitAsSeconds;
-					totalSeconds += valueAsSeconds;
+					let hasUnitLabel = Object.values(TimeUnit_labels).includes(part[part.length - 1]);
+					let rawNumber = ToNumber(hasUnitLabel ? part.slice(0, -1) : part);
+					// if unit specified by text, use it; else, assume it's: largeUnit (if part 1), or smallUnit (if part 2+)
+					let unitName = hasUnitLabel ? GetTimeUnitFromLabel(part[part.length - 1]) : (index == 0 ? largeUnit : smallUnit);
+					totalSmallUnits += ConvertFromUnitXToY(rawNumber, unitName, smallUnit);
 				});
+				if (isNegative) totalSmallUnits *= -1; 
 
-				//const totalSmallUnits = Math.round(smallUnits + (bigUnits * 60)) * (isNegative ? -1 : 1);
-				let totalSmallUnits = (smallUnit == "seconds" ? totalSeconds : totalSeconds / 60) * (isNegative ? -1 : 1);
 				if (onChange) onChange(totalSmallUnits);
 			}}/>
 		);

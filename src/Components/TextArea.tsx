@@ -19,7 +19,7 @@ var styles = {
 		display: "inline-block",
 		boxSizing: "border-box",
 		//whiteSpace: "pre",
-		overflowWrap: "normal",
+		//overflowWrap: "normal", // removed; else text can overflow that cannot be scrolled to
 		width: "100%",
 		//height: "100%",
 		/*overflow: "auto",*/

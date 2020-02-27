@@ -166,6 +166,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextInput", function() { return _Components_TextInput__WEBPACK_IMPORTED_MODULE_13__["TextInput"]; });
 
 /* harmony import */ var _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(31);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeUnit_values", function() { return _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__["TimeUnit_values"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeUnit_stepUpMultipliers", function() { return _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__["TimeUnit_stepUpMultipliers"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeUnit_labels", function() { return _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__["TimeUnit_labels"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GetTimeUnitFromLabel", function() { return _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__["GetTimeUnitFromLabel"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GetStepUpMultiplierBetweenXAndY", function() { return _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__["GetStepUpMultiplierBetweenXAndY"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ConvertFromUnitXToY", function() { return _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__["ConvertFromUnitXToY"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeSpanInput", function() { return _Components_TimeSpanInput__WEBPACK_IMPORTED_MODULE_14__["TimeSpanInput"]; });
 
 
@@ -2628,7 +2640,7 @@ var styles = {
     display: "inline-block",
     boxSizing: "border-box",
     //whiteSpace: "pre",
-    overflowWrap: "normal",
+    //overflowWrap: "normal", // removed; else text can overflow that cannot be scrolled to
     width: "100%"
   },
   root_disabled: {
@@ -4172,6 +4184,12 @@ TextInput = __decorate([react_vextensions__WEBPACK_IMPORTED_MODULE_1__["ApplyBas
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeUnit_values", function() { return TimeUnit_values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeUnit_stepUpMultipliers", function() { return TimeUnit_stepUpMultipliers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeUnit_labels", function() { return TimeUnit_labels; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetTimeUnitFromLabel", function() { return GetTimeUnitFromLabel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetStepUpMultiplierBetweenXAndY", function() { return GetStepUpMultiplierBetweenXAndY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConvertFromUnitXToY", function() { return ConvertFromUnitXToY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeSpanInput", function() { return TimeSpanInput; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -4205,36 +4223,78 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+var TimeUnit_values = ["second", "minute", "hour", "day", "week"];
+var TimeUnit_stepUpMultipliers = [0, 60, 60, 24, 7];
+var TimeUnit_labels = {
+  second: "s",
+  minute: "m",
+  hour: "h",
+  day: "d",
+  week: "w"
+};
+function GetTimeUnitFromLabel(unitLabel) {
+  return Object.entries(TimeUnit_labels).find(function (a) {
+    return a[1] == unitLabel;
+  })[0];
+}
+function GetStepUpMultiplierBetweenXAndY(unitX, unitY) {
+  var unitIndexes = [TimeUnit_values.indexOf(unitX), TimeUnit_values.indexOf(unitY)];
+  var stepUpMultipliers = TimeUnit_stepUpMultipliers.slice(Math.min.apply(Math, unitIndexes) + 1, Math.max.apply(Math, unitIndexes) + 1);
+  var stepUpMultipliers_combined = stepUpMultipliers.reduce(function (multiplier, result) {
+    return result * multiplier;
+  }, 1);
+  return stepUpMultipliers_combined;
+}
+function ConvertFromUnitXToY(valueInX, unitX, unitY) {
+  if (unitX == unitY) return valueInX;
+  var stepUpMultipliers_combined = GetStepUpMultiplierBetweenXAndY(unitX, unitY); // if converting from large-unit to small-unit, multiply
+
+  if (TimeUnit_values.indexOf(unitX) > TimeUnit_values.indexOf(unitY)) {
+    return valueInX * stepUpMultipliers_combined;
+  } // else (if converting from small-unit to large-unit), divide
+
+
+  return valueInX / stepUpMultipliers_combined;
+}
 var TimeSpanInput =
 /*#__PURE__*/
-function (_BaseComponent) {
-  _inherits(TimeSpanInput, _BaseComponent);
+function (_BaseComponentPlus) {
+  _inherits(TimeSpanInput, _BaseComponentPlus);
 
-  function TimeSpanInput() {
+  function TimeSpanInput(props) {
+    var _this;
+
     _classCallCheck(this, TimeSpanInput);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(TimeSpanInput).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TimeSpanInput).call(this, props));
+    var _this$props = _this.props,
+        largeUnit = _this$props.largeUnit,
+        smallUnit = _this$props.smallUnit;
+    Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["Assert"])(TimeUnit_values.indexOf(largeUnit) > TimeUnit_values.indexOf(smallUnit), "Large-unit must be larger than small-unit!");
+    Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["Assert"])(TimeUnit_values.indexOf(largeUnit) != TimeUnit_values.indexOf(smallUnit), "Large-unit cannot be the same as small-unit!");
+    return _this;
   }
 
   _createClass(TimeSpanInput, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          smallUnit = _this$props.smallUnit,
-          showUnits = _this$props.showUnits,
-          value = _this$props.value,
-          _onChange = _this$props.onChange,
-          rest = _objectWithoutProperties(_this$props, ["smallUnit", "showUnits", "value", "onChange"]);
+      var _this$props2 = this.props,
+          largeUnit = _this$props2.largeUnit,
+          smallUnit = _this$props2.smallUnit,
+          showUnits = _this$props2.showUnits,
+          value = _this$props2.value,
+          _onChange = _this$props2.onChange,
+          rest = _objectWithoutProperties(_this$props2, ["largeUnit", "smallUnit", "showUnits", "value", "onChange"]);
 
       var valueAbs = Math.abs(value);
-      var unitLabels = showUnits ? {
-        minutes: ["h", "m"],
-        seconds: ["m", "s"]
-      }[smallUnit] : ["", ""];
       var valueStr = null;
 
       if (value != null) {
-        valueStr = "".concat(value < 0 ? "-" : "").concat(Math.floor(valueAbs / 60)).concat(unitLabels[0], ":").concat(valueAbs % 60).concat(unitLabels[1]);
+        var signStr = value < 0 ? "-" : "";
+        var stepUpMultiplier = GetStepUpMultiplierBetweenXAndY(smallUnit, largeUnit);
+        var largeUnitStr = "".concat(Math.floor(valueAbs / stepUpMultiplier)).concat(TimeUnit_labels[largeUnit]);
+        var smallUnitStr = "".concat(valueAbs % stepUpMultiplier).concat(TimeUnit_labels[smallUnit]);
+        valueStr = "".concat(signStr).concat(largeUnitStr, ":").concat(smallUnitStr);
       }
 
       var inputItself = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TextInput__WEBPACK_IMPORTED_MODULE_3__["TextInput"], Object.assign({}, rest, {
@@ -4249,23 +4309,15 @@ function (_BaseComponent) {
           var parts = strNoSign.split(":").map(function (a) {
             return a.trim();
           });
-          /*let bigUnits = ToNumber(parts[0], 0);
-          let smallUnits = ToNumber(parts[1], 0);*/
-
-          var totalSeconds = 0;
+          var totalSmallUnits = 0;
           parts.forEach(function (part, index) {
-            var hasUnitLabel = "hms".split("").includes(part[part.length - 1]);
-            var numberStr = hasUnitLabel ? part.slice(0, -1) : part;
-            var unitLabel = hasUnitLabel ? part[part.length - 1] : unitLabels[index == 0 ? 0 : 1]; // if no unit specified, assume it's: bigUnit (if part 1), or smallUnit (if part 2+)
+            var hasUnitLabel = Object.values(TimeUnit_labels).includes(part[part.length - 1]);
+            var rawNumber = Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["ToNumber"])(hasUnitLabel ? part.slice(0, -1) : part); // if unit specified by text, use it; else, assume it's: largeUnit (if part 1), or smallUnit (if part 2+)
 
-            var unitAsSeconds = unitLabel == "h" ? 1 * 60 * 60 : unitLabel == "m" ? 1 * 60 :
-            /*unitLabel == "s" ?*/
-            1;
-            var valueAsSeconds = Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_2__["ToNumber"])(numberStr) * unitAsSeconds;
-            totalSeconds += valueAsSeconds;
-          }); //const totalSmallUnits = Math.round(smallUnits + (bigUnits * 60)) * (isNegative ? -1 : 1);
-
-          var totalSmallUnits = (smallUnit == "seconds" ? totalSeconds : totalSeconds / 60) * (isNegative ? -1 : 1);
+            var unitName = hasUnitLabel ? GetTimeUnitFromLabel(part[part.length - 1]) : index == 0 ? largeUnit : smallUnit;
+            totalSmallUnits += ConvertFromUnitXToY(rawNumber, unitName, smallUnit);
+          });
+          if (isNegative) totalSmallUnits *= -1;
           if (_onChange) _onChange(totalSmallUnits);
         }
       }));
@@ -4293,11 +4345,11 @@ function (_BaseComponent) {
   }]);
 
   return TimeSpanInput;
-}(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]);
-TimeSpanInput.defaultProps = {
-  smallUnit: "seconds",
+}(Object(react_vextensions__WEBPACK_IMPORTED_MODULE_1__["BaseComponentPlus"])({
+  largeUnit: "minute",
+  smallUnit: "second",
   showUnits: true
-};
+}, {}));
 
 /***/ })
 /******/ ]);
