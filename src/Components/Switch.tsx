@@ -6,6 +6,6 @@ export class Switch extends BaseComponent<{preferLater?: boolean}, {}> {
 	render() {
 		let {preferLater, children} = this.props;
 		let existentChildren = this.FlattenedChildren.filter(a=>!!a) as JSX.Element[];
-		return preferLater ? existentChildren[existentChildren.length - 1] : existentChildren[0];
+		return (preferLater ? existentChildren[existentChildren.length - 1] : existentChildren[0]) || null;
 	}
 }

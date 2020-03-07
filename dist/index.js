@@ -2472,7 +2472,7 @@ function (_BaseComponent) {
       var existentChildren = this.FlattenedChildren.filter(function (a) {
         return !!a;
       });
-      return preferLater ? existentChildren[existentChildren.length - 1] : existentChildren[0];
+      return (preferLater ? existentChildren[existentChildren.length - 1] : existentChildren[0]) || null;
     }
   }]);
 
