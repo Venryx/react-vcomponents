@@ -1,17 +1,21 @@
-import React from "react";
+import React, { InputHTMLAttributes, LabelHTMLAttributes } from "react";
 import { BaseComponent } from "react-vextensions";
+import { RowProps } from "./Row";
 export declare type CheckBoxProps = {
     text?: React.ReactNode;
     wrap?: boolean;
-    title?: string;
-    value: boolean;
     indeterminate?: boolean;
     enabled?: boolean;
-    style?: any;
-    checkboxStyle?: any;
-    labelStyle?: any;
+    value: boolean;
     internalChanging?: boolean;
     onChange?: (val: boolean, e: any) => void;
+    containerProps?: RowProps;
+    title?: string;
+    style?: any;
+    checkboxProps?: InputHTMLAttributes<HTMLInputElement>;
+    checkboxStyle?: any;
+    labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+    labelStyle?: any;
 };
 export declare class CheckBox extends BaseComponent<CheckBoxProps, {
     editedValue: boolean;

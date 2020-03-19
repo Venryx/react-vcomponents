@@ -606,8 +606,11 @@ function (_BaseComponent) {
           title = _this$props.title,
           value = _this$props.value,
           enabled = _this$props.enabled,
+          containerProps = _this$props.containerProps,
           style = _this$props.style,
+          checkboxProps = _this$props.checkboxProps,
           checkboxStyle = _this$props.checkboxStyle,
+          labelProps = _this$props.labelProps,
           labelStyle = _this$props.labelStyle,
           internalChanging = _this$props.internalChanging,
           _onChange = _this$props.onChange;
@@ -616,16 +619,17 @@ function (_BaseComponent) {
       var textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" "); // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
 
       var applyPre = wrap == false || wrap != true && textHasEdgeSpaces;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Row__WEBPACK_IMPORTED_MODULE_2__["Row"], Object.assign({}, containerProps, {
         center: true,
         title: title,
         style: Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_3__["E"])({
           position: "relative"
         }, style)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", Object.assign({
         ref: function ref(c) {
           return _this2.input = c;
-        },
+        }
+      }, checkboxProps, {
         id: "checkBox_" + this.id,
         type: "checkbox",
         disabled: enabled != true,
@@ -634,14 +638,14 @@ function (_BaseComponent) {
           return _onChange && _onChange(_this2.input.checked, e);
         },
         style: checkboxStyle
-      }), text && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      })), text && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", Object.assign({}, labelProps, {
         htmlFor: "checkBox_" + this.id,
         style: Object(_Internals_FromJSVE__WEBPACK_IMPORTED_MODULE_3__["E"])({
           marginLeft: 3
         }, applyPre && {
           whiteSpace: "pre"
         }, labelStyle)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), text))
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), text))
       /*<input ref={c=>this.input = c} type="checkbox"
           checked={editedValue != null ? editedValue : (checked || false)}
           disabled={enabled != true}

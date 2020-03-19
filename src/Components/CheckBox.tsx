@@ -1,11 +1,14 @@
-import React from "react";
+import React, {InputHTMLAttributes, LabelHTMLAttributes} from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
-import {Row} from "./Row";
+import {Row, RowProps} from "./Row";
 import {ReactChildrenAsText, E, Assert} from "../Internals/FromJSVE";
 
 export type CheckBoxProps = {
-	text?: React.ReactNode, wrap?: boolean, title?: string, value: boolean, indeterminate?: boolean,
-	enabled?: boolean, style?, checkboxStyle?, labelStyle?, internalChanging?: boolean, onChange?: (val: boolean, e)=>void
+	text?: React.ReactNode, wrap?: boolean, indeterminate?: boolean, enabled?: boolean,
+	value: boolean, internalChanging?: boolean, onChange?: (val: boolean, e)=>void,
+	containerProps?: RowProps, title?: string, style?, // Why not "containerStyle"? Because if inherent props like "style" are exposed, it's always for the outermost element.
+	checkboxProps?: InputHTMLAttributes<HTMLInputElement>, checkboxStyle?,
+	labelProps?: LabelHTMLAttributes<HTMLLabelElement>, labelStyle?,
 };
 
 @ApplyBasicStyles
@@ -22,7 +25,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 	id;
 	input: HTMLInputElement;
 	render() {
-		var {text, wrap, title, value, enabled, style, checkboxStyle, labelStyle, internalChanging, onChange} = this.props;
+		var {text, wrap, title, value, enabled, containerProps, style, checkboxProps, checkboxStyle, labelProps, labelStyle, internalChanging, onChange} = this.props;
 		let {editedValue} = this.state;
 
 		let textStr = ReactChildrenAsText(text, "");
@@ -31,11 +34,11 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 		let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
 
 		return (
-			<Row center title={title} style={E({position: "relative"}, style)}>
-				<input ref={c=>this.input = c} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value || false}
+			<Row {...containerProps} center title={title} style={E({position: "relative"}, style)}>
+				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value || false}
 					onChange={e=>onChange && onChange(this.input.checked, e)} style={checkboxStyle}/>
 				{text &&
-				<label htmlFor={"checkBox_" + this.id} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
+				<label {...labelProps} htmlFor={"checkBox_" + this.id} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
 			</Row>
 			/*<input ref={c=>this.input = c} type="checkbox"
 				checked={editedValue != null ? editedValue : (checked || false)}
