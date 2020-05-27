@@ -15,8 +15,8 @@ export declare function GetTimeUnitFromLabel(unitLabel: string): "second" | "min
 export declare function GetStepUpMultiplierBetweenXAndY(unitX: TimeUnit, unitY: TimeUnit): number;
 export declare function ConvertFromUnitXToY(valueInX: number, unitX: TimeUnit, unitY: TimeUnit): number;
 export declare type TimeSpanProps = {
-    largeUnit: TimeUnit;
-    smallUnit: TimeUnit;
+    largeUnit?: TimeUnit;
+    smallUnit?: TimeUnit;
     showUnits?: boolean;
     /** Total time-span length in small-units (seconds, by default). */
     value: number;

@@ -29,8 +29,8 @@ export function ConvertFromUnitXToY(valueInX: number, unitX: TimeUnit, unitY: Ti
 }
 
 export type TimeSpanProps = {
-	largeUnit: TimeUnit,
-	smallUnit: TimeUnit,
+	largeUnit?: TimeUnit,
+	smallUnit?: TimeUnit,
 	showUnits?: boolean,
 
 	/** Total time-span length in small-units (seconds, by default). */
