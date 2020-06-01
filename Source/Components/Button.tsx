@@ -77,7 +77,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			{padding, width, height},
 			(iconSize && (width || height)) && {
 				padding: 0,
-				backgroundPosition: `${(width - borderThickness*2 - iconSize) / 2}px ${(height - borderThickness*2 - iconSize) / 2}px`,
+				backgroundPosition: `${(width! - borderThickness*2 - iconSize) / 2}px ${(height! - borderThickness*2 - iconSize) / 2}px`,
 				backgroundSize: iconSize
 			},
 			iconPath && {backgroundImage: `url(${iconPath})`},

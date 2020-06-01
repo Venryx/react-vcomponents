@@ -48,7 +48,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	}*/
 	
 	static GetOptionsListFromProps(props: Select_Props) {
-		let {options: options_raw} = props;
+		let {options: options_raw, value} = props;
 
 		let result = [] as {name: string, value, style?}[];
 		if (options_raw instanceof Array) {
@@ -69,6 +69,12 @@ export class Select extends BaseComponent<Select_Props, {}> {
 				result.push({name, value});
 			}
 		}
+
+		// if invalid value is supplied, add placeholder-option for it (so user can see that unlisted/invalid value is present)
+		if (result.find(a=>a.value === value) == null) {
+			result.push({name: `[invalid: "${value}"]`, value});
+		}
+
 		return result;
 	}
 	get OptionsList() {
@@ -78,7 +84,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	GetIndexOfOption(option) {
 		return this.OptionsList.indexOf(option);
 	}
-	GetIndexOfValue(value) {
+	GetIndexOfOptionMatchingValue(value = this.props.value) {
 		var {compareBy} = this.props;
 		var options = this.OptionsList;
 		return options.findIndex((option: any)=> {
@@ -88,21 +94,24 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		});
 	}
 	//GetIndexForValue(value) { return this.FlattenedChildren.FindIndex(a=>a.props.value == value); }
-	GetSelectedOption() {
-		Assert(this.props.displayType == "dropdown");
-		var selectedIndex = this.root.selectedIndex;
+	GetOptionMatchingValue(value = this.props.value) {
+		/*Assert(this.props.displayType == "dropdown");
+		var selectedIndex = this.root!.selectedIndex;
+		return this.OptionsList[selectedIndex];*/
+		var selectedIndex = this.GetIndexOfOptionMatchingValue(value);
 		return this.OptionsList[selectedIndex];
 	}
-	GetSelectedValue() {
-		return this.GetSelectedOption().value;
+	/** Finds the first "matching option", then returns that entry's "value" field. (vs this.props.value, which may only loosely match the entry's "value" field, as per "compareBy" property) */
+	GetOptionValueMatchingValue(value = this.props.value) {
+		return this.GetOptionMatchingValue(value).value;
 	}
 	
-	root: HTMLSelectElement;
+	root: HTMLSelectElement|null;
 	render() {
 		var {displayType, value, verifyValue, enabled, className, title, style, childStyle, onChange} = this.props;
 		var options = this.OptionsList;
 		
-		let valueValid = this.GetIndexOfValue(value) != -1;
+		let valueValid = this.GetIndexOfOptionMatchingValue(value) != -1 && !this.GetOptionMatchingValue()?.name.startsWith(`[invalid: "`);
 		// if there are no options yet, or value provided is null, don't require match, since this may be a pre-data render
 		if (options.length && value != null && verifyValue) {
 			AssertWarn((valueValid), `Select's value must match one of the options. @options(${
@@ -116,8 +125,13 @@ export class Select extends BaseComponent<Select_Props, {}> {
 
 		if (displayType == "dropdown") {
 			return (
-				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + this.GetIndexOfValue(value)}
-						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=>onChange && onChange(this.GetSelectedValue())}>
+				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + this.GetIndexOfOptionMatchingValue(value)}
+						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=> {
+							if (!onChange) return;
+							var newSelectedIndex = this.root!.selectedIndex;
+							let newSelectedOption = this.OptionsList[newSelectedIndex];
+							onChange(newSelectedOption.value);
+						}}>
 					{options.map((option, index)=> {
 						return <Dropdown_OptionUI key={index} index={index} style={E(childStyle, option.style)}>
 							{option.name}

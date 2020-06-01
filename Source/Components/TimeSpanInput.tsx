@@ -9,7 +9,7 @@ export type TimeUnit = typeof TimeUnit_values[number];
 export const TimeUnit_labels = {second: "s", minute: "m", hour: "h", day: "d", week: "w"};
 
 export function GetTimeUnitFromLabel(unitLabel: string) {
-	return Object.entries(TimeUnit_labels).find(a=>a[1] == unitLabel)[0] as TimeUnit;
+	return Object.entries(TimeUnit_labels).find(a=>a[1] == unitLabel)![0] as TimeUnit;
 }
 export function GetStepUpMultiplierBetweenXAndY(unitX: TimeUnit, unitY: TimeUnit){
 	let unitIndexes = [TimeUnit_values.indexOf(unitX), TimeUnit_values.indexOf(unitY)];
@@ -41,20 +41,20 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 	constructor(props) {
 		super(props);
 		let {largeUnit, smallUnit} = this.props;
-		Assert(TimeUnit_values.indexOf(largeUnit) > TimeUnit_values.indexOf(smallUnit), "Large-unit must be larger than small-unit!");
-		Assert(TimeUnit_values.indexOf(largeUnit) != TimeUnit_values.indexOf(smallUnit), "Large-unit cannot be the same as small-unit!");
+		Assert(TimeUnit_values.indexOf(largeUnit!) > TimeUnit_values.indexOf(smallUnit!), "Large-unit must be larger than small-unit!");
+		Assert(TimeUnit_values.indexOf(largeUnit!) != TimeUnit_values.indexOf(smallUnit!), "Large-unit cannot be the same as small-unit!");
 	}
 	
 	render() {
 		const {largeUnit, smallUnit, showUnits, value, onChange, ...rest} = this.props;
 		const valueAbs = Math.abs(value);
 
-		let valueStr: string = null;
+		let valueStr: string|null = null;
 		if (value != null) {
 			const signStr = value < 0 ? "-" : "";
-			const stepUpMultiplier = GetStepUpMultiplierBetweenXAndY(smallUnit, largeUnit);
-			const largeUnitStr = `${Math.floor(valueAbs / stepUpMultiplier)}${TimeUnit_labels[largeUnit]}`;
-			const smallUnitStr = `${valueAbs % stepUpMultiplier}${TimeUnit_labels[smallUnit]}`;
+			const stepUpMultiplier = GetStepUpMultiplierBetweenXAndY(smallUnit!, largeUnit!);
+			const largeUnitStr = `${Math.floor(valueAbs / stepUpMultiplier)}${TimeUnit_labels[largeUnit!]}`;
+			const smallUnitStr = `${valueAbs % stepUpMultiplier}${TimeUnit_labels[smallUnit!]}`;
 			valueStr = `${signStr}${largeUnitStr}:${smallUnitStr}`;
 		}
 		
@@ -71,7 +71,7 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 					let rawNumber = ToNumber(hasUnitLabel ? part.slice(0, -1) : part);
 					// if unit specified by text, use it; else, assume it's: largeUnit (if part 1), or smallUnit (if part 2+)
 					let unitName = hasUnitLabel ? GetTimeUnitFromLabel(part[part.length - 1]) : (index == 0 ? largeUnit : smallUnit);
-					totalSmallUnits += ConvertFromUnitXToY(rawNumber, unitName, smallUnit);
+					totalSmallUnits += ConvertFromUnitXToY(rawNumber, unitName!, smallUnit!);
 				});
 				if (isNegative) totalSmallUnits *= -1; 
 

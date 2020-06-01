@@ -26,7 +26,7 @@ export declare class CheckBox extends BaseComponent<CheckBoxProps, {
     static lastID: number;
     constructor(props: any);
     id: any;
-    input: HTMLInputElement;
+    input: HTMLInputElement | null;
     render(): JSX.Element;
     PostRender(): void;
     get Checked(): boolean;

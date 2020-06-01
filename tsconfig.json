@@ -1,38 +1,33 @@
 {
-    "compilerOptions": {
-		//"rootDir": ".", // technically, there's an "index.ts" file in root; we ignore because it's only needed for typescript type-resolving
-		"rootDir": "src",
-		//"baseUrl": "src", // keep commented; this way, we remember to always use relative paths (needed for in-node-modules typescript type-resolving)
-		//"outDir": "dist",
-		/*"module": "system", // needed only for outFile prop, which is needed only for dist.d.ts file
-		"outFile": "dist/dist.js",*/
-		//"module": "esnext",
-
-		// general
-		"sourceMap": true,
-		"watch": true,
+	"compilerOptions": {
+		"rootDir": "Source",
+		//"sourceMap": true, // commented; doesn't work currently, so keeping Dist folder cleaner
+		"module": "ES2015",
 		"moduleResolution": "node",
-		//"maxNodeModulesJsDepth": 1,
-
-		// compiler options
-		"target": "esnext",
-		//"allowJs": true,
+		"target": "ES2015",
 		"jsx": "react",
 		"noImplicitAny": false,
 		"experimentalDecorators": true,
-		"allowSyntheticDefaultImports": true,
+		"allowSyntheticDefaultImports": true, // doesn't modify output, *or* own import code (it's just for type-checking)
+		//"esModuleInterop": true, // doesn't modify output, only code for the stuff we import
+		"outDir": "Dist",
 		"declaration": true,
-		"declarationDir": "dist"
+		"declarationDir": "Dist",
+
+		//"strict": true, // enables all of the below (other than noImplicitReturns)
+		//"noImplicitAny": true,
+		//"noImplicitThis": true,
+		//"noImplicitReturns": true,
+		"alwaysStrict": true,
+		//"strictBindCallApply": true,
+		"strictNullChecks": true,
+		//"strictFunctionTypes": true,
+		//"strictPropertyInitialization": true,
 	},
-	"files": ["src/index.ts"],
 	"include": [
 		"Typings/**/*.d.ts",
-		"src/**/*.ts",
-		"src/**/*.tsx"
-	],
-	"exclude": [
-		"dist",
-		"node_modules"
+		"Source/**/*.ts",
+		"Source/**/*.tsx"
 	],
 	"compileOnSave": true
 }

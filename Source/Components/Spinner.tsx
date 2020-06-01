@@ -10,10 +10,10 @@ export type SpinnerProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 @ApplyBasicStyles
-export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number}> {
+export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|null}> {
 	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true, useEscape: true};
 
-	root: HTMLInputElement;
+	root: HTMLInputElement|null;
 	render() {
 		let {
 			step, min, max, value, enabled, title, autoSize, style, delayChangeTillDefocus, useEscape,

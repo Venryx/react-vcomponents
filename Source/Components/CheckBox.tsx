@@ -23,7 +23,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 	}
 
 	id;
-	input: HTMLInputElement;
+	input: HTMLInputElement|null;
 	render() {
 		var {text, wrap, title, value, enabled, containerProps, style, checkboxProps, checkboxStyle, labelProps, labelStyle, internalChanging, onChange} = this.props;
 		let {editedValue} = this.state;
@@ -36,7 +36,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 		return (
 			<Row {...containerProps} center title={title} style={E({position: "relative"}, style)}>
 				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value || false}
-					onChange={e=>onChange && onChange(this.input.checked, e)} style={checkboxStyle}/>
+					onChange={e=>onChange && onChange(this.input!.checked, e)} style={checkboxStyle}/>
 				{text &&
 				<label {...labelProps} htmlFor={"checkBox_" + this.id} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
 			</Row>
@@ -55,10 +55,10 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 	}
 	PostRender() {
 		let {indeterminate} = this.props;
-		this.input.indeterminate = indeterminate;
+		this.input!.indeterminate = indeterminate!;
 	}
 
-	get Checked() { return this.input.checked; }
+	get Checked() { return this.input!.checked; }
 }
 
 /*export class CheckBox_Auto extends BaseComponent<

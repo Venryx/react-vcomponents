@@ -62,7 +62,7 @@ export class RowLR extends BaseComponent<RowLRProps, {}> {
 					{width: typeof splitAt == "string" ? splitAt + "%" : splitAt},
 					leftStyle
 				)}>
-					{children[0]}
+					{children![0]}
 				</Row>
 				<Row center style={E(
 					{width: typeof splitAt == "string" ? (100 - parseInt(splitAt.slice(0, -1))) + "%" : `calc(100% - ${splitAt}px)`},

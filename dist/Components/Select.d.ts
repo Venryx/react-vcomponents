@@ -40,14 +40,15 @@ export declare class Select extends BaseComponent<Select_Props, {}> {
         style?: any;
     }[];
     GetIndexOfOption(option: any): number;
-    GetIndexOfValue(value: any): number;
-    GetSelectedOption(): {
+    GetIndexOfOptionMatchingValue(value?: any): number;
+    GetOptionMatchingValue(value?: any): {
         name: string;
         value: any;
         style?: any;
     };
-    GetSelectedValue(): any;
-    root: HTMLSelectElement;
+    /** Finds the first "matching option", then returns that entry's "value" field. (vs this.props.value, which may only loosely match the entry's "value" field, as per "compareBy" property) */
+    GetOptionValueMatchingValue(value?: any): any;
+    root: HTMLSelectElement | null;
     render(): JSX.Element;
 }
 export declare class Dropdown_OptionUI extends BaseComponent<{

@@ -8,7 +8,7 @@ export declare type SpinnerProps = {
     onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>) => any;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 export declare class Spinner extends BaseComponent<SpinnerProps, {
-    editedValue: number;
+    editedValue: number | null;
 }> {
     static defaultProps: {
         step: number;
@@ -18,6 +18,6 @@ export declare class Spinner extends BaseComponent<SpinnerProps, {
         enabled: boolean;
         useEscape: boolean;
     };
-    root: HTMLInputElement;
+    root: HTMLInputElement | null;
     render(): JSX.Element;
 }
