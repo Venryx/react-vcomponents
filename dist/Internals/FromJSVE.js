@@ -63,6 +63,16 @@ export function ToNumber(stringOrFloatVal, valIfConversionFails = NaN) {
         return valIfConversionFails;
     return Number(stringOrFloatVal);
 }
+export function NumberCES_KeepBetween(s, min, max, allowFixMinMax = true) {
+    if (min > max && allowFixMinMax) {
+        [min, max] = [max, min];
+    }
+    if (s < min)
+        return min;
+    if (s > max)
+        return max;
+    return s;
+}
 /*export function Math_Truncate(value: number) {
     if (value >= 0) return Math.floor(value);
     return Math.ceil(value);

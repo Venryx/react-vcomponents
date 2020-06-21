@@ -10,3 +10,4 @@ export declare function Clone(obj: any, keepPrototype?: boolean): any;
 export declare function IsNaN(obj: any): boolean;
 export declare function IsNumber(obj: any, allowNumberObj?: boolean, allowNaN?: boolean): obj is number;
 export declare function ToNumber(stringOrFloatVal: string | number, valIfConversionFails?: number): number;
+export declare function NumberCES_KeepBetween(s: Number, min: number, max: number, allowFixMinMax?: boolean): number;

@@ -1,11 +1,12 @@
 import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import keycode from "keycode";
-import {E} from "../Internals/FromJSVE";
+import {E, NumberCES_KeepBetween} from "../Internals/FromJSVE";
 
 export type SpinnerProps = {
 	enabled?: boolean, autoSize?: boolean,
 	delayChangeTillDefocus?: boolean, useEscape?: boolean,
+	enforceRange?: boolean, validator?: (value: number)=>boolean|string,
 	onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>)=>any,
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -13,11 +14,28 @@ export type SpinnerProps = {
 export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|null}> {
 	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true, useEscape: true};
 
+	ComponentDidMountOrUpdate() {
+		this.ValidateValue(this.props.value as number);
+	}
+	ValidateValue(value: number) {
+		const {validator} = this.props;
+		if (validator == null) {
+			/*if (this.root?.validity.customError) {
+				this.root?.setCustomValidity(null as any);
+			}*/
+			return;
+		}
+		const result = validator(value);
+		if (result == true) this.root?.setCustomValidity("");
+		else if (result == false) this.root?.setCustomValidity("Value is invalid.");
+		else this.root?.setCustomValidity(result);
+	}
+
 	root: HTMLInputElement|null;
 	render() {
 		let {
-			step, min, max, value, enabled, title, autoSize, style, delayChangeTillDefocus, useEscape,
-			onChange, onBlur, onKeyDown,
+			enabled, autoSize, delayChangeTillDefocus, useEscape, enforceRange, validator, onChange,
+			step, min, max, value, title, style, onBlur, onKeyDown,
 			...rest
 		} = this.props;
 		let {editedValue} = this.state;
@@ -33,7 +51,9 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|nu
 				title={title} style={style}
 				onChange={e=> {
 					var newVal = Number(e.target.value);
+					if (enforceRange) newVal = NumberCES_KeepBetween(newVal, min as number, max as number);
 					if (newVal == editedValue) return; // if no change, ignore event
+					this.ValidateValue(newVal);
 
 					if (delayChangeTillDefocus) {
 						this.SetState({editedValue: newVal});

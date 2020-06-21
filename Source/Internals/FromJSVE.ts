@@ -70,6 +70,15 @@ export function ToNumber(stringOrFloatVal: string | number, valIfConversionFails
 	return Number(stringOrFloatVal);
 }
 
+export function NumberCES_KeepBetween(s: Number, min: number, max: number, allowFixMinMax = true) {
+	if (min > max && allowFixMinMax) {
+		[min, max] = [max, min];
+	}
+	if (s < min) return min;
+	if (s > max) return max;
+	return s as number;
+}
+
 /*export function Math_Truncate(value: number) {
 	if (value >= 0) return Math.floor(value);
 	return Math.ceil(value);

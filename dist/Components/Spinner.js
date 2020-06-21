@@ -18,10 +18,30 @@ var __rest = (this && this.__rest) || function (s, e) {
 import React from "react";
 import { BaseComponent, ApplyBasicStyles } from "react-vextensions";
 import keycode from "keycode";
-import { E } from "../Internals/FromJSVE";
+import { E, NumberCES_KeepBetween } from "../Internals/FromJSVE";
 let Spinner = class Spinner extends BaseComponent {
+    ComponentDidMountOrUpdate() {
+        this.ValidateValue(this.props.value);
+    }
+    ValidateValue(value) {
+        var _a, _b, _c;
+        const { validator } = this.props;
+        if (validator == null) {
+            /*if (this.root?.validity.customError) {
+                this.root?.setCustomValidity(null as any);
+            }*/
+            return;
+        }
+        const result = validator(value);
+        if (result == true)
+            (_a = this.root) === null || _a === void 0 ? void 0 : _a.setCustomValidity("");
+        else if (result == false)
+            (_b = this.root) === null || _b === void 0 ? void 0 : _b.setCustomValidity("Value is invalid.");
+        else
+            (_c = this.root) === null || _c === void 0 ? void 0 : _c.setCustomValidity(result);
+    }
     render() {
-        let _a = this.props, { step, min, max, value, enabled, title, autoSize, style, delayChangeTillDefocus, useEscape, onChange, onBlur, onKeyDown } = _a, rest = __rest(_a, ["step", "min", "max", "value", "enabled", "title", "autoSize", "style", "delayChangeTillDefocus", "useEscape", "onChange", "onBlur", "onKeyDown"]);
+        let _a = this.props, { enabled, autoSize, delayChangeTillDefocus, useEscape, enforceRange, validator, onChange, step, min, max, value, title, style, onBlur, onKeyDown } = _a, rest = __rest(_a, ["enabled", "autoSize", "delayChangeTillDefocus", "useEscape", "enforceRange", "validator", "onChange", "step", "min", "max", "value", "title", "style", "onBlur", "onKeyDown"]);
         let { editedValue } = this.state;
         style = E({ color: "#000" }, style);
         //if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
@@ -30,8 +50,11 @@ let Spinner = class Spinner extends BaseComponent {
         }
         return (React.createElement("input", Object.assign({}, rest, { ref: c => this.root = c, type: "number", step: step, min: min, max: max, value: editedValue != null ? editedValue : (value || 0), disabled: enabled != true, title: title, style: style, onChange: e => {
                 var newVal = Number(e.target.value);
+                if (enforceRange)
+                    newVal = NumberCES_KeepBetween(newVal, min, max);
                 if (newVal == editedValue)
                     return; // if no change, ignore event
+                this.ValidateValue(newVal);
                 if (delayChangeTillDefocus) {
                     this.SetState({ editedValue: newVal });
                 }

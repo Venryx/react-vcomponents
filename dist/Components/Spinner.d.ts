@@ -5,6 +5,8 @@ export declare type SpinnerProps = {
     autoSize?: boolean;
     delayChangeTillDefocus?: boolean;
     useEscape?: boolean;
+    enforceRange?: boolean;
+    validator?: (value: number) => boolean | string;
     onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>) => any;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 export declare class Spinner extends BaseComponent<SpinnerProps, {
@@ -18,6 +20,8 @@ export declare class Spinner extends BaseComponent<SpinnerProps, {
         enabled: boolean;
         useEscape: boolean;
     };
+    ComponentDidMountOrUpdate(): void;
+    ValidateValue(value: number): void;
     root: HTMLInputElement | null;
     render(): JSX.Element;
 }
