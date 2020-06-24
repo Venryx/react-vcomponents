@@ -8,7 +8,7 @@ export type SpinnerProps = {
 	delayChangeTillDefocus?: boolean, useEscape?: boolean,
 	enforceRange?: boolean, validator?: (value: number)=>boolean|string,
 	onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>)=>any,
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
 
 @ApplyBasicStyles
 export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|null}> {
