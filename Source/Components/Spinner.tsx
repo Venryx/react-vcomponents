@@ -5,7 +5,7 @@ import {E, NumberCES_KeepBetween} from "../Internals/FromJSVE";
 
 export type SpinnerProps = {
 	enabled?: boolean, autoSize?: boolean,
-	delayChangeTillDefocus?: boolean, useEscape?: boolean,
+	instant?: boolean, useEscape?: boolean,
 	enforceRange?: boolean, validator?: (value: number)=>boolean|string,
 	onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>)=>any,
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
@@ -34,7 +34,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|nu
 	root: HTMLInputElement|null;
 	render() {
 		let {
-			enabled, autoSize, delayChangeTillDefocus, useEscape, enforceRange, validator, onChange,
+			enabled, autoSize, instant, useEscape, enforceRange, validator, onChange,
 			step, min, max, value, title, style, onBlur, onKeyDown,
 			...rest
 		} = this.props;
@@ -55,7 +55,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|nu
 					if (newVal == editedValue) return; // if no change, ignore event
 					this.ValidateValue(newVal);
 
-					if (delayChangeTillDefocus) {
+					if (!instant) {
 						this.SetState({editedValue: newVal});
 					} else {
 						if (onChange) onChange(newVal, e);
@@ -66,14 +66,14 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|nu
 					var newVal = Number(e.target.value);
 					if (newVal == value) return; // if no change, ignore event
 					
-					if (delayChangeTillDefocus) {
+					if (!instant) {
 						if (onChange) onChange(newVal, e);
 						this.SetState({editedValue: null});
 					}
 					if (onBlur) return onBlur(e);
 				}}
 				onKeyDown={e=> {
-					if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
+					if (!instant && useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
 					if (onKeyDown) return onKeyDown(e);
 				}}/>
 		);

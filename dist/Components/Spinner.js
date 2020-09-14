@@ -41,7 +41,7 @@ let Spinner = class Spinner extends BaseComponent {
             (_c = this.root) === null || _c === void 0 ? void 0 : _c.setCustomValidity(result);
     }
     render() {
-        let _a = this.props, { enabled, autoSize, delayChangeTillDefocus, useEscape, enforceRange, validator, onChange, step, min, max, value, title, style, onBlur, onKeyDown } = _a, rest = __rest(_a, ["enabled", "autoSize", "delayChangeTillDefocus", "useEscape", "enforceRange", "validator", "onChange", "step", "min", "max", "value", "title", "style", "onBlur", "onKeyDown"]);
+        let _a = this.props, { enabled, autoSize, instant, useEscape, enforceRange, validator, onChange, step, min, max, value, title, style, onBlur, onKeyDown } = _a, rest = __rest(_a, ["enabled", "autoSize", "instant", "useEscape", "enforceRange", "validator", "onChange", "step", "min", "max", "value", "title", "style", "onBlur", "onKeyDown"]);
         let { editedValue } = this.state;
         style = E({ color: "#000" }, style);
         //if (max == Number.MAX_SAFE_INTEGER && !("width" in style)) {
@@ -55,7 +55,7 @@ let Spinner = class Spinner extends BaseComponent {
                 if (newVal == editedValue)
                     return; // if no change, ignore event
                 this.ValidateValue(newVal);
-                if (delayChangeTillDefocus) {
+                if (!instant) {
                     this.SetState({ editedValue: newVal });
                 }
                 else {
@@ -67,7 +67,7 @@ let Spinner = class Spinner extends BaseComponent {
                 var newVal = Number(e.target.value);
                 if (newVal == value)
                     return; // if no change, ignore event
-                if (delayChangeTillDefocus) {
+                if (!instant) {
                     if (onChange)
                         onChange(newVal, e);
                     this.SetState({ editedValue: null });
@@ -75,7 +75,7 @@ let Spinner = class Spinner extends BaseComponent {
                 if (onBlur)
                     return onBlur(e);
             }, onKeyDown: e => {
-                if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc)
+                if (!instant && useEscape && e.keyCode == keycode.codes.esc)
                     return void this.SetState({ editedValue: null });
                 if (onKeyDown)
                     return onKeyDown(e);

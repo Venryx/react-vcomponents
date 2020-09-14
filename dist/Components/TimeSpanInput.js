@@ -62,7 +62,7 @@ export class TimeSpanInput extends BaseComponentPlus({ largeUnit: "minute", smal
                 let totalSmallUnits = 0;
                 parts.forEach((part, index) => {
                     let hasUnitLabel = Object.values(TimeUnit_labels).includes(part[part.length - 1]);
-                    let rawNumber = ToNumber(hasUnitLabel ? part.slice(0, -1) : part);
+                    let rawNumber = ToNumber(hasUnitLabel ? part.slice(0, -1) : part, 0);
                     // if unit specified by text, use it; else, assume it's: largeUnit (if part 1), or smallUnit (if part 2+)
                     let unitName = hasUnitLabel ? GetTimeUnitFromLabel(part[part.length - 1]) : (index == 0 ? largeUnit : smallUnit);
                     totalSmallUnits += ConvertFromUnitXToY(rawNumber, unitName, smallUnit);

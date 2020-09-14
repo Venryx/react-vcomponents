@@ -3,7 +3,7 @@ import { BaseComponent } from "react-vextensions";
 export declare type SpinnerProps = {
     enabled?: boolean;
     autoSize?: boolean;
-    delayChangeTillDefocus?: boolean;
+    instant?: boolean;
     useEscape?: boolean;
     enforceRange?: boolean;
     validator?: (value: number) => boolean | string;

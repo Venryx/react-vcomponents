@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent, BaseComponentPlus} from "react-vextensions";
-import {ToNumber, Assert} from "../Internals/FromJSVE";
+import {ToNumber, Assert, IsNaN} from "../Internals/FromJSVE";
 import {TextInput, TextInputProps} from "./TextInput";
 
 export const TimeUnit_values = ["second", "minute", "hour", "day", "week"] as const;
@@ -17,7 +17,7 @@ export function GetStepUpMultiplierBetweenXAndY(unitX: TimeUnit, unitY: TimeUnit
 	let stepUpMultipliers_combined = stepUpMultipliers.reduce((multiplier, result)=>result * multiplier, 1);
 	return stepUpMultipliers_combined;
 }
-export function ConvertFromUnitXToY(valueInX: number, unitX: TimeUnit, unitY: TimeUnit){
+export function ConvertFromUnitXToY(valueInX: number, unitX: TimeUnit, unitY: TimeUnit) {
 	if (unitX == unitY) return valueInX;
 	let stepUpMultipliers_combined = GetStepUpMultiplierBetweenXAndY(unitX, unitY);
 	// if converting from large-unit to small-unit, multiply
@@ -68,7 +68,7 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 				let totalSmallUnits = 0;
 				parts.forEach((part, index)=> {
 					let hasUnitLabel = Object.values(TimeUnit_labels).includes(part[part.length - 1]);
-					let rawNumber = ToNumber(hasUnitLabel ? part.slice(0, -1) : part);
+					let rawNumber = ToNumber(hasUnitLabel ? part.slice(0, -1) : part, 0);
 					// if unit specified by text, use it; else, assume it's: largeUnit (if part 1), or smallUnit (if part 2+)
 					let unitName = hasUnitLabel ? GetTimeUnitFromLabel(part[part.length - 1]) : (index == 0 ? largeUnit : smallUnit);
 					totalSmallUnits += ConvertFromUnitXToY(rawNumber, unitName!, smallUnit!);

@@ -5,7 +5,7 @@ import {E} from "../Internals/FromJSVE";
 
 export type TextInputProps = {
 	value: string|null, enabled?: boolean, editable?: boolean,
-	delayChangeTillDefocus?: boolean, useEscape?: boolean,
+	instant?: boolean, useEscape?: boolean,
 	onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>)=>void,
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>,
 	"value" | "onChange" | // overridden
@@ -17,8 +17,8 @@ export type TextInputProps = {
 export class TextInput extends BaseComponent<TextInputProps, {editedValue: string|null}> {
 	static defaultProps = {enabled: true, editable: true, type: "text", useEscape: true};
 	/*ComponentWillReceiveProps(props) {
-		// if value changing, and "delayChangeTillDefocus" is not enabled
-		if (!props.delayChangeTillDefocus && props.value != this.props.value) {
+		// if value changing, and "instant" is enabled
+		if (props.instant && props.value != this.props.value) {
 			this.SetState({editedValue: null});
 		}
 	}*/
@@ -26,7 +26,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 	root: HTMLInputElement|null;
 	render() {
 		var {
-			value, enabled, editable, onChange, delayChangeTillDefocus, useEscape, style,
+			value, enabled, editable, onChange, instant, useEscape, style,
 			onBlur, onKeyDown,
 			...rest
 		} = this.props;
@@ -38,7 +38,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 					var newVal = e.target.value;
 					if (newVal == editedValue) return; // if no text change, ignore event
 
-					if (delayChangeTillDefocus) {
+					if (!instant) {
 						this.SetState({editedValue: newVal});
 					} else {
 						if (onChange) onChange(newVal, e);
@@ -49,14 +49,14 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 					var newVal = e.target["value"];
 					if (newVal == value) return; // if no text change, ignore event
 					
-					if (delayChangeTillDefocus) {
+					if (!instant) {
 						if (onChange) onChange(newVal, e);
 						this.SetState({editedValue: null});
 					}
 					if (onBlur) return onBlur(e);
 				}}
 				onKeyDown={e=> {
-					if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
+					if (!instant && useEscape && e.keyCode == keycode.codes.esc) return void this.SetState({editedValue: null});
 					if (onKeyDown) return onKeyDown(e);
 				}}/>
 		);
@@ -67,7 +67,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 }
 
 /*export class TextInput_Auto extends BaseComponent<
-		{style?, delayChangeTillDefocus?,
+		{style?, instant?,
 			path: ()=>any, onChange?: (val: string)=>void}, {}> {
 	ComponentWillMountOrReceiveProps(props) {
 		var {path} = props;

@@ -6,7 +6,7 @@ export declare class TextArea extends BaseComponent<{
     editable?: boolean;
     pattern?: string;
     onChange?: (newVal: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    delayChangeTillDefocus?: boolean;
+    instant?: boolean;
     useEscape?: boolean;
     autoSize?: boolean;
     autoSize_minHeight?: boolean;

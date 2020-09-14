@@ -21,13 +21,13 @@ import * as keycode from "keycode";
 import { E } from "../Internals/FromJSVE";
 let TextInput = class TextInput extends BaseComponent {
     render() {
-        var _a = this.props, { value, enabled, editable, onChange, delayChangeTillDefocus, useEscape, style, onBlur, onKeyDown } = _a, rest = __rest(_a, ["value", "enabled", "editable", "onChange", "delayChangeTillDefocus", "useEscape", "style", "onBlur", "onKeyDown"]);
+        var _a = this.props, { value, enabled, editable, onChange, instant, useEscape, style, onBlur, onKeyDown } = _a, rest = __rest(_a, ["value", "enabled", "editable", "onChange", "instant", "useEscape", "style", "onBlur", "onKeyDown"]);
         var { editedValue } = this.state;
         return (React.createElement("input", Object.assign({}, rest, { ref: c => this.root = c, disabled: enabled != true, readOnly: !editable, style: E({ color: "black" }, style), value: editedValue != null ? editedValue : (value || ""), onChange: e => {
                 var newVal = e.target.value;
                 if (newVal == editedValue)
                     return; // if no text change, ignore event
-                if (delayChangeTillDefocus) {
+                if (!instant) {
                     this.SetState({ editedValue: newVal });
                 }
                 else {
@@ -39,7 +39,7 @@ let TextInput = class TextInput extends BaseComponent {
                 var newVal = e.target["value"];
                 if (newVal == value)
                     return; // if no text change, ignore event
-                if (delayChangeTillDefocus) {
+                if (!instant) {
                     if (onChange)
                         onChange(newVal, e);
                     this.SetState({ editedValue: null });
@@ -47,7 +47,7 @@ let TextInput = class TextInput extends BaseComponent {
                 if (onBlur)
                     return onBlur(e);
             }, onKeyDown: e => {
-                if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc)
+                if (!instant && useEscape && e.keyCode == keycode.codes.esc)
                     return void this.SetState({ editedValue: null });
                 if (onKeyDown)
                     return onKeyDown(e);
@@ -63,7 +63,7 @@ TextInput = __decorate([
 ], TextInput);
 export { TextInput };
 /*export class TextInput_Auto extends BaseComponent<
-        {style?, delayChangeTillDefocus?,
+        {style?, instant?,
             path: ()=>any, onChange?: (val: string)=>void}, {}> {
     ComponentWillMountOrReceiveProps(props) {
         var {path} = props;

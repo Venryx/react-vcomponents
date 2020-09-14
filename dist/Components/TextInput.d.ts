@@ -4,7 +4,7 @@ export declare type TextInputProps = {
     value: string | null;
     enabled?: boolean;
     editable?: boolean;
-    delayChangeTillDefocus?: boolean;
+    instant?: boolean;
     useEscape?: boolean;
     onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | // overridden

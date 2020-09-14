@@ -4,7 +4,7 @@
 		//"sourceMap": true, // commented; doesn't work currently, so keeping Dist folder cleaner
 		"module": "ES2015",
 		"moduleResolution": "node",
-		"target": "ES2015",
+		"target": "ES2017",
 		"jsx": "react",
 		"noImplicitAny": false,
 		"experimentalDecorators": true,

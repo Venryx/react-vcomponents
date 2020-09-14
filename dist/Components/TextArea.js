@@ -51,7 +51,7 @@ AddGlobalStyle(`
 // Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "React.HTMLAttributes<HTMLDivElement>"
 let TextArea = class TextArea extends BaseComponent {
     render() {
-        var _a = this.props, { value, defaultValue, enabled, editable, className, style, pattern, onChange, delayChangeTillDefocus, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown } = _a, rest = __rest(_a, ["value", "defaultValue", "enabled", "editable", "className", "style", "pattern", "onChange", "delayChangeTillDefocus", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown"]);
+        var _a = this.props, { value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown } = _a, rest = __rest(_a, ["value", "defaultValue", "enabled", "editable", "className", "style", "pattern", "onChange", "instant", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown"]);
         var { editedValue, minHeight } = this.state;
         // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
         if (defaultValue === undefined && value == null)
@@ -78,7 +78,7 @@ let TextArea = class TextArea extends BaseComponent {
                         this.DOM["setCustomValidity"](valid ? "" : "Please match the requested format.");
                     }
                 }
-                if (delayChangeTillDefocus) {
+                if (!instant) {
                     this.SetState({ editedValue: newVal });
                 }
                 else {
@@ -90,13 +90,13 @@ let TextArea = class TextArea extends BaseComponent {
                 var newVal = e.target.value;
                 if (newVal == value)
                     return; // if no text change, ignore event
-                if (delayChangeTillDefocus) {
+                if (!instant) {
                     if (onChange)
                         onChange(newVal, e);
                     this.SetState({ editedValue: null });
                 }
             }, onKeyDown: e => {
-                if (delayChangeTillDefocus && useEscape && e.keyCode == keycode.codes.esc)
+                if (!instant && useEscape && e.keyCode == keycode.codes.esc)
                     return void this.SetState({ editedValue: null });
                 if (onKeyDown)
                     return onKeyDown(e);

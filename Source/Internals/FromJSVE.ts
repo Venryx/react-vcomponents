@@ -64,10 +64,12 @@ export function IsNumber(obj, allowNumberObj = false, allowNaN = false): obj is 
 	if (!allowNaN && IsNaN(obj)) return false;
 	return typeof obj == "number" || (allowNumberObj && obj instanceof Number);
 }
-export function ToNumber(stringOrFloatVal: string | number, valIfConversionFails = NaN) {
+export function ToNumber(stringOrFloatVal: string | number, valIfConversionFails = NaN, allowParseNaN = false) {
 	if (!IsString(stringOrFloatVal) && !IsNumber(stringOrFloatVal)) return valIfConversionFails;
 	if (IsString(stringOrFloatVal) && stringOrFloatVal.length == 0) return valIfConversionFails;
-	return Number(stringOrFloatVal);
+	const result = Number(stringOrFloatVal);
+	if (IsNaN(result) && !allowParseNaN) return valIfConversionFails;
+	return result;
 }
 
 export function NumberCES_KeepBetween(s: Number, min: number, max: number, allowFixMinMax = true) {
