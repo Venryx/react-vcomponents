@@ -8,6 +8,22 @@ var Select_1;
 import React from "react";
 import { ApplyBasicStyles, BaseComponent } from "react-vextensions";
 import { Assert, AssertWarn, E, RemoveDuplicates } from "../Internals/FromJSVE";
+export const compareBy_defaultFuncs = {
+    name: (option, value) => option.name === value,
+    value: (option, value) => {
+        if (value == null && option.value == null)
+            return true;
+        return option.value === value;
+    },
+    value_strict: (option, value) => option.value === value,
+    value_toString: (option, value) => option.value == null ? value == null : option.value.toString() === value.toString(),
+};
+export function GetFinalCompareByFunc(props) {
+    const { compareBy, compareByFunc } = props;
+    if (compareByFunc)
+        return compareByFunc;
+    return compareBy_defaultFuncs[compareBy];
+}
 let Select = Select_1 = class Select extends BaseComponent {
     constructor(props) {
         super(props);
@@ -49,7 +65,8 @@ let Select = Select_1 = class Select extends BaseComponent {
             }
         }
         // if invalid value is supplied, add placeholder-option for it (so user can see that unlisted/invalid value is present)
-        if (result.find(a => a.value === value) == null) {
+        const compareByFunc_final = GetFinalCompareByFunc(props);
+        if (result.find(option => compareByFunc_final(option, value)) == null) {
             result.push({ name: `[invalid: "${value}"]`, value });
         }
         return result;
@@ -61,15 +78,9 @@ let Select = Select_1 = class Select extends BaseComponent {
         return this.OptionsList.indexOf(option);
     }
     GetIndexOfOptionMatchingValue(value = this.props.value) {
-        var { compareBy } = this.props;
         var options = this.OptionsList;
-        return options.findIndex((option) => {
-            if (compareBy == "name")
-                return option.name === value;
-            if (compareBy == "value")
-                return option.value === value;
-            return option.value == null ? value == null : option.value.toString() === value.toString();
-        });
+        const compareByFunc_final = GetFinalCompareByFunc(this.props);
+        return options.findIndex(option => compareByFunc_final(option, value));
     }
     //GetIndexForValue(value) { return this.FlattenedChildren.FindIndex(a=>a.props.value == value); }
     GetOptionMatchingValue(value = this.props.value) {
@@ -116,6 +127,7 @@ Select.defaultProps = {
     enabled: true,
     displayType: "dropdown",
     compareBy: "value",
+    equateNullAndUndefined: true,
     verifyValue: true,
 };
 Select = Select_1 = __decorate([

@@ -2,24 +2,33 @@ import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
 import {Assert, AssertWarn, E, RemoveDuplicates} from "../Internals/FromJSVE";
 
-/*export class Option {
-	constructor(name, value, style?) {
-		this.name = name;
-		this.value = value;
-		this.style = style;
-	}
-	name;
-	value;
-	style;
-}*/
-
 export type Select_Props = {
 	options: {name: string, value, style?}[] | {name: string}[] | string[] | any[] | /*(new()=>Enum) |*/ {[s: string]: any},
 	displayType?: "dropdown" | "button bar",
-	compareBy?: "name" | "value" | "value toString",
+	compareBy?: "name" | "value" | "value_strict" | "value_toString",
+	/** If set, overrides compareBy. */ compareByFunc?: CompareByFunc,
+	equateNullAndUndefined?: boolean,
 	value, verifyValue?: boolean,
 	enabled?: boolean, className?, title?, style?, childStyle?, onChange?
 };
+
+export type Select_Option = {name: string, value, style?};
+export type CompareByFunc = (option: Select_Option, value: any)=>boolean;
+
+export const compareBy_defaultFuncs = {
+	name: (option, value)=>option.name === value,
+	value: (option, value)=>{
+		if (value == null && option.value == null) return true;
+		return option.value === value;
+	},
+	value_strict: (option, value)=>option.value === value,
+	value_toString: (option, value)=>option.value == null ? value == null : option.value.toString() === value.toString(),
+} as {[key: string]: CompareByFunc};
+export function GetFinalCompareByFunc(props: Select_Props) {
+	const {compareBy, compareByFunc} = props;
+	if (compareByFunc) return compareByFunc;
+	return compareBy_defaultFuncs[compareBy!];
+}
 
 @ApplyBasicStyles
 export class Select extends BaseComponent<Select_Props, {}> {
@@ -27,6 +36,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		enabled: true,
 		displayType: "dropdown",
 		compareBy: "value",
+		equateNullAndUndefined: true,
 		verifyValue: true,
 	};
 
@@ -50,7 +60,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	static GetOptionsListFromProps(props: Select_Props) {
 		let {options: options_raw, value} = props;
 
-		let result = [] as {name: string, value, style?}[];
+		let result = [] as Select_Option[];
 		if (options_raw instanceof Array) {
 			for (let option_raw of options_raw) {
 				if (option_raw && option_raw instanceof Object && "name" in option_raw && "value" in option_raw) {
@@ -71,7 +81,8 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		}
 
 		// if invalid value is supplied, add placeholder-option for it (so user can see that unlisted/invalid value is present)
-		if (result.find(a=>a.value === value) == null) {
+		const compareByFunc_final = GetFinalCompareByFunc(props);
+		if (result.find(option=>compareByFunc_final(option, value)) == null) {
 			result.push({name: `[invalid: "${value}"]`, value});
 		}
 
@@ -85,13 +96,9 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		return this.OptionsList.indexOf(option);
 	}
 	GetIndexOfOptionMatchingValue(value = this.props.value) {
-		var {compareBy} = this.props;
 		var options = this.OptionsList;
-		return options.findIndex((option: any)=> {
-			if (compareBy == "name") return option.name === value;
-			if (compareBy == "value") return option.value === value;
-			return option.value == null ? value == null : option.value.toString() === value.toString();
-		});
+		const compareByFunc_final = GetFinalCompareByFunc(this.props);
+		return options.findIndex(option=>compareByFunc_final(option, value));
 	}
 	//GetIndexForValue(value) { return this.FlattenedChildren.FindIndex(a=>a.props.value == value); }
 	GetOptionMatchingValue(value = this.props.value) {
