@@ -18,6 +18,8 @@ export declare type TimeSpanProps = {
     largeUnit?: TimeUnit;
     smallUnit?: TimeUnit;
     showUnits?: boolean;
+    min?: number;
+    max?: number;
     /** Total time-span length in small-units (seconds, by default). */
     value: number;
     onChange?: (totalSmallUnits: number) => any;

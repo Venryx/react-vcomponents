@@ -11,7 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from "react";
 import { BaseComponentPlus } from "react-vextensions";
-import { ToNumber, Assert } from "../Internals/FromJSVE";
+import { ToNumber, Assert, NumberCES_KeepBetween } from "../Internals/FromJSVE";
 import { TextInput } from "./TextInput";
 export const TimeUnit_values = ["second", "minute", "hour", "day", "week"];
 export const TimeUnit_stepUpMultipliers = [0, 60, 60, 24, 7];
@@ -36,39 +36,62 @@ export function ConvertFromUnitXToY(valueInX, unitX, unitY) {
     // else (if converting from small-unit to large-unit), divide
     return valueInX / stepUpMultipliers_combined;
 }
-export class TimeSpanInput extends BaseComponentPlus({ largeUnit: "minute", smallUnit: "second", showUnits: true }, {}) {
+export class TimeSpanInput extends BaseComponentPlus({ largeUnit: "minute", smallUnit: "second", showUnits: true, min: 0, max: Number.MAX_SAFE_INTEGER }, {}) {
     constructor(props) {
         super(props);
         let { largeUnit, smallUnit } = this.props;
-        Assert(TimeUnit_values.indexOf(largeUnit) > TimeUnit_values.indexOf(smallUnit), "Large-unit must be larger than small-unit!");
-        Assert(TimeUnit_values.indexOf(largeUnit) != TimeUnit_values.indexOf(smallUnit), "Large-unit cannot be the same as small-unit!");
+        if (largeUnit) {
+            Assert(TimeUnit_values.indexOf(largeUnit) > TimeUnit_values.indexOf(smallUnit), "Large-unit must be larger than small-unit!");
+            Assert(TimeUnit_values.indexOf(largeUnit) != TimeUnit_values.indexOf(smallUnit), "Large-unit cannot be the same as small-unit!");
+        }
+        Assert(smallUnit != null, "Small-unit cannot be null!");
     }
     render() {
-        const _a = this.props, { largeUnit, smallUnit, showUnits, value, onChange } = _a, rest = __rest(_a, ["largeUnit", "smallUnit", "showUnits", "value", "onChange"]);
+        const _a = this.props, { largeUnit, smallUnit, showUnits, min, max, value, onChange } = _a, rest = __rest(_a, ["largeUnit", "smallUnit", "showUnits", "min", "max", "value", "onChange"]);
         const valueAbs = Math.abs(value);
         let valueStr = null;
         if (value != null) {
             const signStr = value < 0 ? "-" : "";
             const stepUpMultiplier = GetStepUpMultiplierBetweenXAndY(smallUnit, largeUnit);
-            const largeUnitStr = `${Math.floor(valueAbs / stepUpMultiplier)}${TimeUnit_labels[largeUnit]}`;
-            const smallUnitStr = `${valueAbs % stepUpMultiplier}${TimeUnit_labels[smallUnit]}`;
-            valueStr = `${signStr}${largeUnitStr}:${smallUnitStr}`;
+            if (largeUnit) {
+                const largeUnitStr = `${Math.floor(valueAbs / stepUpMultiplier)}${TimeUnit_labels[largeUnit]}`;
+                const smallUnitStr = `${valueAbs % stepUpMultiplier}${TimeUnit_labels[smallUnit]}`;
+                valueStr = `${signStr}${largeUnitStr}:${smallUnitStr}`;
+            }
+            else {
+                valueStr = `${signStr}${valueAbs}${TimeUnit_labels[smallUnit]}`;
+            }
         }
         let inputItself = (React.createElement(TextInput, Object.assign({}, rest, { style: { width: 70 }, value: valueStr, onChange: valStr => {
                 const isNegative = valStr.includes("-");
                 const strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
-                //const parts = strNoSign.includes(":") ? strNoSign.split(":") : [valStr, "0"];
-                const parts = strNoSign.split(":").map(a => a.trim());
+                const segments = strNoSign.split(":").map(a => a.trim());
+                function ConvertSegmentToSmallUnits(segment, unitForPos) {
+                    var _a;
+                    const [_, digitsStr, unitLabel] = (_a = segment.match(/(\d+)(\D+)?$/), (_a !== null && _a !== void 0 ? _a : [null, null, null]));
+                    let hasUnitLabel = Object.values(TimeUnit_labels).includes(unitLabel);
+                    let rawNumber = ToNumber(digitsStr, 0);
+                    // if unit specified by text, use it; else, assume it's: smallUnit (if last segment), else largeUnit (if exists)
+                    let unitName = hasUnitLabel ? GetTimeUnitFromLabel(unitLabel) : unitForPos;
+                    return ConvertFromUnitXToY(rawNumber, unitName, smallUnit);
+                }
                 let totalSmallUnits = 0;
-                parts.forEach((part, index) => {
-                    let hasUnitLabel = Object.values(TimeUnit_labels).includes(part[part.length - 1]);
-                    let rawNumber = ToNumber(hasUnitLabel ? part.slice(0, -1) : part, 0);
-                    // if unit specified by text, use it; else, assume it's: largeUnit (if part 1), or smallUnit (if part 2+)
-                    let unitName = hasUnitLabel ? GetTimeUnitFromLabel(part[part.length - 1]) : (index == 0 ? largeUnit : smallUnit);
-                    totalSmallUnits += ConvertFromUnitXToY(rawNumber, unitName, smallUnit);
-                });
+                if (largeUnit) {
+                    // if only one segment found, interpret the one segment as the large-unit (lets user input value as decimal, eg. 1.5h parsed as 1h:30m)
+                    if (segments.length == 1) {
+                        totalSmallUnits += ConvertSegmentToSmallUnits(segments[segments.length - 1], largeUnit);
+                    }
+                    else {
+                        totalSmallUnits += ConvertSegmentToSmallUnits(segments[segments.length - 1], smallUnit);
+                        totalSmallUnits += ConvertSegmentToSmallUnits(segments[segments.length - 2], largeUnit);
+                    }
+                }
+                else {
+                    totalSmallUnits += ConvertSegmentToSmallUnits(segments[segments.length - 1], smallUnit);
+                }
                 if (isNegative)
                     totalSmallUnits *= -1;
+                totalSmallUnits = NumberCES_KeepBetween(totalSmallUnits, min, max);
                 if (onChange)
                     onChange(totalSmallUnits);
             } })));
