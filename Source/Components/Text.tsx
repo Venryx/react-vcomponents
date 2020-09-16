@@ -2,8 +2,12 @@ import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
 import {ReactChildrenAsText, E} from "../Internals/FromJSVE";
 
+export type TextProps = {
+	wrap?: boolean, style?,
+} & React.HTMLAttributes<HTMLSpanElement>;
+
 @ApplyBasicStyles
-export class Text extends BaseComponent<{wrap?, style?} & React.HTMLAttributes<HTMLSpanElement>, {}> {
+export class Text extends BaseComponent<TextProps, {}> {
 	render() {
 		let {wrap, style, children, ...rest} = this.props;
 

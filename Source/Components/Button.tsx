@@ -44,10 +44,12 @@ export const Button_styles = {
 .Button:hover { background-color: rgba(90,100,110,.8) !important; }
 `);*/
 
-export type ButtonProps = {enabled?: boolean, text?: string | JSX.Element, title?: string, className?: string, style?,
+export type ButtonProps = {
+	enabled?: boolean, text?: string | JSX.Element, title?: string, className?: string, style?,
 	size?: number, width?: number, height?: number, iconSize?: number, iconPath?: string, useOpacityForHover?: boolean,
 	hasCheckbox?: boolean, checked?: boolean, checkboxStyle?, checkboxLabelStyle?, onCheckedChanged?,
-	onLeftClick?, onDirectClick?} & React.HTMLAttributes<HTMLDivElement>;
+	onLeftClick?, onDirectClick?
+} & React.HTMLAttributes<HTMLDivElement>;
 
 //@Radium
 @ApplyBasicStyles
