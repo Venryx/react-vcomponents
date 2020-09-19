@@ -45,9 +45,10 @@ export declare type ButtonProps = {
     size?: number;
     width?: number;
     height?: number;
-    iconSize?: number;
-    iconPath?: string;
     useOpacityForHover?: boolean;
+    iconPath?: string;
+    iconSize?: number;
+    faIcon?: string;
     hasCheckbox?: boolean;
     checked?: boolean;
     checkboxStyle?: any;

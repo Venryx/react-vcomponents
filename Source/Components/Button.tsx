@@ -46,7 +46,9 @@ export const Button_styles = {
 
 export type ButtonProps = {
 	enabled?: boolean, text?: string | JSX.Element, title?: string, className?: string, style?,
-	size?: number, width?: number, height?: number, iconSize?: number, iconPath?: string, useOpacityForHover?: boolean,
+	size?: number, width?: number, height?: number, useOpacityForHover?: boolean,
+	iconPath?: string, iconSize?: number, // custom icons
+	faIcon?: string, // font-awesome icons
 	hasCheckbox?: boolean, checked?: boolean, checkboxStyle?, checkboxLabelStyle?, onCheckedChanged?,
 	onLeftClick?, onDirectClick?
 } & React.HTMLAttributes<HTMLDivElement>;
@@ -57,41 +59,55 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 	static defaultProps = {enabled: true};
 	
 	render() {
-		var {enabled, text, title, className, style, size, width, height, iconSize, iconPath, useOpacityForHover,
+		var {
+			enabled, text, title, className, style,
+			size, width, height, useOpacityForHover,
+			iconPath, iconSize,
+			faIcon,
 			hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged,
-			onLeftClick, children, ...rest} = this.props;
+			onLeftClick, children,
+			...rest
+		} = this.props;
+
+		let padding: string|number = "5px 15px";
+		let borderThickness = (style || {}).borderWidth || 1;
 
 		width = width || size;
 		height = height || size;
-
-		var padding = "5px 15px";
 		if (height) {
 			var baseHeight = 20;
 			var heightDifPerSide = (height - baseHeight) / 2;
 			padding = (`${heightDifPerSide}px 15px`);
 		}
-
-		let borderThickness = (style || {}).borderWidth || 1;
+		if (faIcon) {
+			width = width ?? 28;
+			height = height ?? 28;
+			padding = 0;
+		}
 		
 		let finalStyle = E(
 			Button_styles.root,
 			useOpacityForHover && Button_styles.root_opacityHover,
 			{padding, width, height},
+			iconPath && {backgroundImage: `url(${iconPath})`},
 			(iconSize && (width || height)) && {
 				padding: 0,
 				backgroundPosition: `${(width! - borderThickness*2 - iconSize) / 2}px ${(height! - borderThickness*2 - iconSize) / 2}px`,
 				backgroundSize: iconSize
 			},
-			iconPath && {backgroundImage: `url(${iconPath})`},
 			hasCheckbox && Button_styles.root_hasCheckbox,
 			!enabled && Button_styles.root_disabled,
 			Button_styles.root_override,
 			style,
 		);
+		let className_final = `Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`;
+		if (faIcon) {
+			className_final = className_final + ` fas fa-${faIcon}`;
+		}
 
-	    return (
+		return (
 			<div {...rest} title={title}
-				className={`Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`}
+				className={className_final}
 				style={finalStyle}
 				onClick={e=> {
 					var {enabled, onClick, onLeftClick, onDirectClick} = this.props;

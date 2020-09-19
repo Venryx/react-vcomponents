@@ -53,22 +53,31 @@ export const Button_styles = {
 //@Radium
 let Button = class Button extends BaseComponent {
     render() {
-        var _a = this.props, { enabled, text, title, className, style, size, width, height, iconSize, iconPath, useOpacityForHover, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "iconSize", "iconPath", "useOpacityForHover", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
+        var _a = this.props, { enabled, text, title, className, style, size, width, height, useOpacityForHover, iconPath, iconSize, faIcon, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "useOpacityForHover", "iconPath", "iconSize", "faIcon", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
+        let padding = "5px 15px";
+        let borderThickness = (style || {}).borderWidth || 1;
         width = width || size;
         height = height || size;
-        var padding = "5px 15px";
         if (height) {
             var baseHeight = 20;
             var heightDifPerSide = (height - baseHeight) / 2;
             padding = (`${heightDifPerSide}px 15px`);
         }
-        let borderThickness = (style || {}).borderWidth || 1;
-        let finalStyle = E(Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { padding, width, height }, (iconSize && (width || height)) && {
+        if (faIcon) {
+            width = (width !== null && width !== void 0 ? width : 28);
+            height = (height !== null && height !== void 0 ? height : 28);
+            padding = 0;
+        }
+        let finalStyle = E(Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { padding, width, height }, iconPath && { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {
             padding: 0,
             backgroundPosition: `${(width - borderThickness * 2 - iconSize) / 2}px ${(height - borderThickness * 2 - iconSize) / 2}px`,
             backgroundSize: iconSize
-        }, iconPath && { backgroundImage: `url(${iconPath})` }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, Button_styles.root_override, style);
-        return (React.createElement("div", Object.assign({}, rest, { title: title, className: `Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`, style: finalStyle, onClick: e => {
+        }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, Button_styles.root_override, style);
+        let className_final = `Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`;
+        if (faIcon) {
+            className_final = className_final + ` fas fa-${faIcon}`;
+        }
+        return (React.createElement("div", Object.assign({}, rest, { title: title, className: className_final, style: finalStyle, onClick: e => {
                 var { enabled, onClick, onLeftClick, onDirectClick } = this.props;
                 if (!enabled)
                     return;
