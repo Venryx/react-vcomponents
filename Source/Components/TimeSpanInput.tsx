@@ -74,7 +74,7 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 				const segments = strNoSign.split(":").map(a=>a.trim());
 
 				function ConvertSegmentToSmallUnits(segment: string, unitForPos: TimeUnit) {
-					const [_, digitsStr, unitLabel] = segment.match(/(\d+)(\D+)?$/) ?? [null, null, null];
+					const [_, digitsStr, unitLabel] = segment.match(/([\d.]+)(\D+)?$/) ?? [null, null, null];
 					let hasUnitLabel = Object.values(TimeUnit_labels).includes(unitLabel!);
 
 					let rawNumber = ToNumber(digitsStr, 0);
