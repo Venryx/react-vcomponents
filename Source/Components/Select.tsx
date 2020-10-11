@@ -153,7 +153,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 				{options.map((option, index)=> {
 					return <ButtonBar_OptionUI key={index}
 							first={index == 0} last={index == options.length - 1} selected={option.value === value}
-							style={E(childStyle, option.style)} onSelect={e=>onChange && onChange(option.value)}>
+							enabled={enabled!} style={E(childStyle, option.style)} onSelect={e=>onChange && onChange(option.value)}>
 						{option.name}
 					</ButtonBar_OptionUI>;
 				})}
@@ -173,25 +173,27 @@ export class Dropdown_OptionUI extends BaseComponent<{index, style}, {}> {
 	}
 }
 
-export class ButtonBar_OptionUI extends BaseComponent<{first, last, selected, onSelect, style}, {hovered: boolean}> {
+export class ButtonBar_OptionUI extends BaseComponent<{first: boolean, last: boolean, selected: boolean, enabled: boolean, style, onSelect}, {hovered: boolean}> {
 	render() {
-		 let {first, last, selected, style, children, onSelect} = this.props;
+		 let {first, last, selected, enabled,style, onSelect, children} = this.props;
 		 let {hovered} = this.state;
 	    return (
 			<div className="ButtonBar_OptionUI"
-					onMouseEnter={()=>this.SetState({hovered: true})}
-					onMouseLeave={()=>this.SetState({hovered: false})}
-					style={E(
-						{display: "inline-block", background: "rgba(255,255,255,.3)", padding: "5px 12px", cursor: "pointer"},
-						hovered && {background: "rgba(255,255,255,.5)"},
-						first && {borderRadius: "4px 0 0 4px"},
-						!first && {border: "solid #222", borderWidth: "0 0 0 1px"},
-						last && {borderRadius: "0 4px 4px 0"},
-						first && last && {borderRadius: "4px"},
-						selected && {background: "rgba(255,255,255,.5)"},
-						style
-					)}
-					onClick={onSelect}>
+				onMouseEnter={()=>{ if (enabled) this.SetState({hovered: true}) }}
+				onMouseLeave={()=>{ if (enabled) this.SetState({hovered: false}) }}
+				style={E(
+					{display: "inline-block", background: "rgba(255,255,255,.3)", padding: "5px 12px", cursor: "pointer"},
+					hovered && {background: "rgba(255,255,255,.5)"},
+					first && {borderRadius: "4px 0 0 4px"},
+					!first && {border: "solid #222", borderWidth: "0 0 0 1px"},
+					last && {borderRadius: "0 4px 4px 0"},
+					first && last && {borderRadius: "4px"},
+					selected && {background: "rgba(255,255,255,.5)"},
+					!enabled && {opacity: .5, cursor: "default"},
+					style
+				)}
+				onClick={enabled ? onSelect : null}
+			>
 				{children}
 			</div>
 		);

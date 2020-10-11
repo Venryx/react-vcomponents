@@ -59,11 +59,12 @@ export declare class Dropdown_OptionUI extends BaseComponent<{
     render(): JSX.Element;
 }
 export declare class ButtonBar_OptionUI extends BaseComponent<{
-    first: any;
-    last: any;
-    selected: any;
-    onSelect: any;
+    first: boolean;
+    last: boolean;
+    selected: boolean;
+    enabled: boolean;
     style: any;
+    onSelect: any;
 }, {
     hovered: boolean;
 }> {
