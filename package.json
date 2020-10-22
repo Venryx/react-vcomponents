@@ -31,8 +31,8 @@
     "@types/react": "^16.9.11",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-vextensions": "^1.0.4",
-    "typescript": "^3.7.2"
+    "react-vextensions": "^1.0.5",
+    "typescript": "^4.0.3"
   },
   "dependencies": {
     "classnames": "^2.2.5",

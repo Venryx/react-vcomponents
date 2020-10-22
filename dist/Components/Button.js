@@ -64,8 +64,8 @@ let Button = class Button extends BaseComponent {
             padding = (`${heightDifPerSide}px 15px`);
         }
         if (faIcon) {
-            width = (width !== null && width !== void 0 ? width : 28);
-            height = (height !== null && height !== void 0 ? height : 28);
+            width = width !== null && width !== void 0 ? width : 28;
+            height = height !== null && height !== void 0 ? height : 28;
             padding = 0;
         }
         let finalStyle = E(Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { padding, width, height }, iconPath && { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {

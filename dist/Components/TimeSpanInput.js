@@ -11,7 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from "react";
 import { BaseComponentPlus } from "react-vextensions";
-import { ToNumber, Assert, NumberCES_KeepBetween } from "../Internals/FromJSVE";
+import { ToNumber, Assert, NumberCES_KeepBetween, E } from "../Internals/FromJSVE";
 import { TextInput } from "./TextInput";
 export const TimeUnit_values = ["second", "minute", "hour", "day", "week"];
 export const TimeUnit_stepUpMultipliers = [0, 60, 60, 24, 7];
@@ -47,7 +47,7 @@ export class TimeSpanInput extends BaseComponentPlus({ largeUnit: "minute", smal
         Assert(smallUnit != null, "Small-unit cannot be null!");
     }
     render() {
-        const _a = this.props, { largeUnit, smallUnit, showUnits, min, max, value, onChange } = _a, rest = __rest(_a, ["largeUnit", "smallUnit", "showUnits", "min", "max", "value", "onChange"]);
+        const _a = this.props, { largeUnit, smallUnit, showUnits, min, max, value, onChange, style } = _a, rest = __rest(_a, ["largeUnit", "smallUnit", "showUnits", "min", "max", "value", "onChange", "style"]);
         const valueAbs = Math.abs(value);
         let valueStr = null;
         if (value != null) {
@@ -62,13 +62,13 @@ export class TimeSpanInput extends BaseComponentPlus({ largeUnit: "minute", smal
                 valueStr = `${signStr}${valueAbs}${TimeUnit_labels[smallUnit]}`;
             }
         }
-        let inputItself = (React.createElement(TextInput, Object.assign({}, rest, { style: { width: 70 }, value: valueStr, onChange: valStr => {
+        let inputItself = (React.createElement(TextInput, Object.assign({}, rest, { style: E({ width: 70 }, style), value: valueStr, onChange: valStr => {
                 const isNegative = valStr.includes("-");
                 const strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
                 const segments = strNoSign.split(":").map(a => a.trim());
                 function ConvertSegmentToSmallUnits(segment, unitForPos) {
                     var _a;
-                    const [_, digitsStr, unitLabel] = (_a = segment.match(/([\d.]+)(\D+)?$/), (_a !== null && _a !== void 0 ? _a : [null, null, null]));
+                    const [_, digitsStr, unitLabel] = (_a = segment.match(/([\d.]+)(\D+)?$/)) !== null && _a !== void 0 ? _a : [null, null, null];
                     let hasUnitLabel = Object.values(TimeUnit_labels).includes(unitLabel);
                     let rawNumber = ToNumber(digitsStr, 0);
                     // if unit specified by text, use it; else, assume it's: smallUnit (if last segment), else largeUnit (if exists)

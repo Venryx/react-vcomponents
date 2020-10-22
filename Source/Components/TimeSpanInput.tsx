@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent, BaseComponentPlus} from "react-vextensions";
-import {ToNumber, Assert, IsNaN, NumberCES_KeepBetween} from "../Internals/FromJSVE";
+import {ToNumber, Assert, IsNaN, NumberCES_KeepBetween, E} from "../Internals/FromJSVE";
 import {TextInput, TextInputProps} from "./TextInput";
 
 export const TimeUnit_values = ["second", "minute", "hour", "day", "week"] as const;
@@ -51,7 +51,7 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 	}
 	
 	render() {
-		const {largeUnit, smallUnit, showUnits, min, max, value, onChange, ...rest} = this.props;
+		const {largeUnit, smallUnit, showUnits, min, max, value, onChange, style, ...rest} = this.props;
 		const valueAbs = Math.abs(value);
 
 		let valueStr: string|null = null;
@@ -68,7 +68,7 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 		}
 		
 		let inputItself = (
-			<TextInput {...rest} style={{width: 70}} value={valueStr} onChange={valStr=>{
+			<TextInput {...rest} style={E({width: 70}, style)} value={valueStr} onChange={valStr=>{
 				const isNegative = valStr.includes("-");
 				const strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
 				const segments = strNoSign.split(":").map(a=>a.trim());
