@@ -4,9 +4,8 @@ import { RowProps } from "./Row";
 export declare type CheckBoxProps = {
     text?: React.ReactNode;
     wrap?: boolean;
-    indeterminate?: boolean;
     enabled?: boolean;
-    value: boolean;
+    value: boolean | "partial";
     internalChanging?: boolean;
     onChange?: (val: boolean, e: any) => void;
     containerProps?: RowProps;

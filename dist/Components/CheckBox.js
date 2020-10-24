@@ -23,7 +23,11 @@ let CheckBox = CheckBox_1 = class CheckBox extends BaseComponent {
         // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
         let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
         return (React.createElement(Row, Object.assign({}, containerProps, { center: true, title: title, style: E({ position: "relative" }, style) }),
-            React.createElement("input", Object.assign({ ref: c => this.input = c }, checkboxProps, { id: "checkBox_" + this.id, type: "checkbox", disabled: enabled != true, checked: value || false, onChange: e => onChange && onChange(this.input.checked, e), style: checkboxStyle })),
+            React.createElement("input", Object.assign({ ref: c => this.input = c }, checkboxProps, { id: "checkBox_" + this.id, type: "checkbox", disabled: enabled != true, checked: value == true, onChange: e => {
+                    // if value was partial/indeterminate, and we click, set new-val to false (else, set new-value to new "checked" prop-value obtained from dom)
+                    const newVal = value == "partial" ? false : this.input.checked;
+                    onChange === null || onChange === void 0 ? void 0 : onChange(newVal, e);
+                }, style: checkboxStyle })),
             text &&
                 React.createElement("label", Object.assign({}, labelProps, { htmlFor: "checkBox_" + this.id, style: E({ marginLeft: 3 }, applyPre && { whiteSpace: "pre" }, labelStyle) }),
                     React.createElement("span", null),
@@ -42,8 +46,8 @@ let CheckBox = CheckBox_1 = class CheckBox extends BaseComponent {
         );
     }
     PostRender() {
-        let { indeterminate } = this.props;
-        this.input.indeterminate = indeterminate;
+        let { value } = this.props;
+        this.input.indeterminate = value == "partial";
     }
     get Checked() { return this.input.checked; }
 };

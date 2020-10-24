@@ -4,8 +4,8 @@ import {Row, RowProps} from "./Row";
 import {ReactChildrenAsText, E, Assert} from "../Internals/FromJSVE";
 
 export type CheckBoxProps = {
-	text?: React.ReactNode, wrap?: boolean, indeterminate?: boolean, enabled?: boolean,
-	value: boolean, internalChanging?: boolean, onChange?: (val: boolean, e)=>void,
+	text?: React.ReactNode, wrap?: boolean, enabled?: boolean,
+	value: boolean | "partial", internalChanging?: boolean, onChange?: (val: boolean, e)=>void,
 	containerProps?: RowProps, title?: string, style?, // Why not "containerStyle"? Because if inherent props like "style" are exposed, it's always for the outermost element.
 	checkboxProps?: InputHTMLAttributes<HTMLInputElement>, checkboxStyle?,
 	labelProps?: LabelHTMLAttributes<HTMLLabelElement>, labelStyle?,
@@ -35,8 +35,12 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 
 		return (
 			<Row {...containerProps} center title={title} style={E({position: "relative"}, style)}>
-				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value || false}
-					onChange={e=>onChange && onChange(this.input!.checked, e)} style={checkboxStyle}/>
+				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value == true}
+					onChange={e=>{
+						// if value was partial/indeterminate, and we click, set new-val to false (else, set new-value to new "checked" prop-value obtained from dom)
+						const newVal = value == "partial" ? false : this.input!.checked;
+						onChange?.(newVal, e);
+					}} style={checkboxStyle}/>
 				{text &&
 				<label {...labelProps} htmlFor={"checkBox_" + this.id} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
 			</Row>
@@ -54,8 +58,8 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 		);
 	}
 	PostRender() {
-		let {indeterminate} = this.props;
-		this.input!.indeterminate = indeterminate!;
+		let {value} = this.props;
+		this.input!.indeterminate = value == "partial";
 	}
 
 	get Checked() { return this.input!.checked; }
