@@ -37,9 +37,14 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 			<Row {...containerProps} center title={title} style={E({position: "relative"}, style)}>
 				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value == true}
 					onChange={e=>{
-						// if value was partial/indeterminate, and we click, set new-val to false (else, set new-value to new "checked" prop-value obtained from dom)
-						const newVal = value == "partial" ? false : this.input!.checked;
-						onChange?.(newVal, e);
+						// if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)
+						if (value == "partial") {
+							this.input!.checked = false; // this isn't really necessary (since props-change will update dom.checked), but we'll do it for consistency
+							onChange?.(false, e);
+							return;
+						}
+
+						onChange?.(this.input!.checked, e);
 					}} style={checkboxStyle}/>
 				{text &&
 				<label {...labelProps} htmlFor={"checkBox_" + this.id} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
