@@ -2,7 +2,7 @@ import {cloneElement} from "react";
 import {BaseComponent, AddGlobalStyle, GetDOM, BaseComponentPlus} from "react-vextensions";
 import React from "react";
 import classNames from "classnames";
-import {E} from "../Internals/FromJSVE";
+import {E} from "../Internals/FromJSVE.js";
 
 AddGlobalStyle(`
 .dropdown {

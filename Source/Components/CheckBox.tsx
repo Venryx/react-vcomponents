@@ -1,7 +1,7 @@
 import React, {InputHTMLAttributes, LabelHTMLAttributes} from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
-import {Row, RowProps} from "./Row";
-import {ReactChildrenAsText, E, Assert} from "../Internals/FromJSVE";
+import {Row, RowProps} from "./Row.js";
+import {ReactChildrenAsText, E, Assert} from "../Internals/FromJSVE.js";
 
 export type CheckBoxProps = {
 	text?: React.ReactNode, wrap?: boolean, enabled?: boolean,

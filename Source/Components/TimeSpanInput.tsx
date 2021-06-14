@@ -1,7 +1,7 @@
 import React from "react";
 import {BaseComponent, BaseComponentPlus} from "react-vextensions";
-import {ToNumber, Assert, IsNaN, NumberCES_KeepBetween, E} from "../Internals/FromJSVE";
-import {TextInput, TextInputProps} from "./TextInput";
+import {ToNumber, Assert, IsNaN, NumberCES_KeepBetween, E} from "../Internals/FromJSVE.js";
+import {TextInput, TextInputProps} from "./TextInput.js";
 
 export const TimeUnit_values = ["second", "minute", "hour", "day", "week"] as const;
 export const TimeUnit_stepUpMultipliers = [0, 60, 60, 24, 7];

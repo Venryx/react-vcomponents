@@ -1,7 +1,7 @@
 import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import keycode from "keycode";
-import {E, NumberCES_KeepBetween} from "../Internals/FromJSVE";
+import {E, NumberCES_KeepBetween} from "../Internals/FromJSVE.js";
 
 export type SpinnerProps = {
 	enabled?: boolean, autoSize?: boolean,

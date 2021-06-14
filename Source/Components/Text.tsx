@@ -1,6 +1,6 @@
 import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
-import {ReactChildrenAsText, E} from "../Internals/FromJSVE";
+import {ReactChildrenAsText, E} from "../Internals/FromJSVE.js";
 
 export type TextProps = {
 	wrap?: boolean, style?,

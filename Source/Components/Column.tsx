@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
-import {E} from "../Internals/FromJSVE";
+import {E} from "../Internals/FromJSVE.js";
 
 export type ColumnProps = {noShrink?, center?, style?} & React.HTMLAttributes<HTMLDivElement>;
 @ApplyBasicStyles

@@ -1,6 +1,6 @@
 import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
-import {E} from "../Internals/FromJSVE";
+import {E} from "../Internals/FromJSVE.js";
 
 function Global(target) {
 	Object.assign(window, {[target.name]: target});

@@ -1,6 +1,6 @@
 import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
-import {Assert, AssertWarn, E, RemoveDuplicates} from "../Internals/FromJSVE";
+import {Assert, AssertWarn, E, RemoveDuplicates} from "../Internals/FromJSVE.js";
 
 export type Select_Props = {
 	options: {name: string, value, style?}[] | {name: string}[] | string[] | any[] | /*(new()=>Enum) |*/ {[s: string]: any},

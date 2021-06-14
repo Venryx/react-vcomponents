@@ -1,7 +1,7 @@
 import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import * as keycode from "keycode";
-import {E} from "../Internals/FromJSVE";
+import {E} from "../Internals/FromJSVE.js";
 
 export type TextInputProps = {
 	value: string|null, enabled?: boolean, editable?: boolean,

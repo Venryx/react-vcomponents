@@ -1,7 +1,7 @@
 /* import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import {Column, Row, RowProps} from "..";
-import {ColumnProps} from "./Column";
+import {ColumnProps} from "./Column.js";
 
 @ApplyBasicStyles
 // todo: maybe add rowNoShrink and columnNoShrink
