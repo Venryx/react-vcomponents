@@ -49,7 +49,7 @@ export declare class Select extends BaseComponent<Select_Props, {}> {
     GetOptionMatchingValue(value?: any): Select_Option;
     /** Finds the first "matching option", then returns that entry's "value" field. (vs this.props.value, which may only loosely match the entry's "value" field, as per "compareBy" property) */
     GetOptionValueMatchingValue(value?: any): any;
-    root: HTMLSelectElement | null;
+    root: HTMLSelectElement | n;
     render(): JSX.Element;
 }
 export declare class Dropdown_OptionUI extends BaseComponent<{

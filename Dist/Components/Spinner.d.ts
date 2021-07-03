@@ -10,7 +10,7 @@ export declare type SpinnerProps = {
     onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>) => any;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
 export declare class Spinner extends BaseComponent<SpinnerProps, {
-    editedValue: number | null;
+    editedValue: number | n;
 }> {
     static defaultProps: {
         step: number;
@@ -22,6 +22,6 @@ export declare class Spinner extends BaseComponent<SpinnerProps, {
     };
     ComponentDidMountOrUpdate(): void;
     ValidateValue(value: number): void;
-    root: HTMLInputElement | null;
+    root: HTMLInputElement | n;
     render(): JSX.Element;
 }

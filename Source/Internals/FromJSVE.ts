@@ -64,7 +64,7 @@ export function IsNumber(obj, allowNumberObj = false, allowNaN = false): obj is 
 	if (!allowNaN && IsNaN(obj)) return false;
 	return typeof obj == "number" || (allowNumberObj && obj instanceof Number);
 }
-export function ToNumber(stringOrFloatVal: string|number|undefined|null, valIfConversionFails = NaN, allowParseNaN = false) {
+export function ToNumber(stringOrFloatVal: string|number|undefined|n, valIfConversionFails = NaN, allowParseNaN = false) {
 	if (!IsString(stringOrFloatVal) && !IsNumber(stringOrFloatVal)) return valIfConversionFails;
 	if (IsString(stringOrFloatVal) && stringOrFloatVal.length == 0) return valIfConversionFails;
 	const result = Number(stringOrFloatVal);

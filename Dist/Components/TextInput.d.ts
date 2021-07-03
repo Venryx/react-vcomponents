@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare type TextInputProps = {
-    value: string | null;
+    value: string | n;
     enabled?: boolean;
     editable?: boolean;
     instant?: boolean;
@@ -11,7 +11,7 @@ export declare type TextInputProps = {
 "disabled" | "readOnly" | // obsolete (due to custom props)
 "min" | "max" | "step">;
 export declare class TextInput extends BaseComponent<TextInputProps, {
-    editedValue: string | null;
+    editedValue: string | n;
 }> {
     static defaultProps: {
         enabled: boolean;
@@ -19,7 +19,7 @@ export declare class TextInput extends BaseComponent<TextInputProps, {
         type: string;
         useEscape: boolean;
     };
-    root: HTMLInputElement | null;
+    root: HTMLInputElement | n;
     render(): JSX.Element;
     GetValue(): string;
 }

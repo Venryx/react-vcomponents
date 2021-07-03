@@ -54,7 +54,7 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 		const {largeUnit, smallUnit, showUnits, min, max, value, onChange, style, ...rest} = this.props;
 		const valueAbs = Math.abs(value);
 
-		let valueStr: string|null = null;
+		let valueStr: string|n = null;
 		if (value != null) {
 			const signStr = value < 0 ? "-" : "";
 			const stepUpMultiplier = GetStepUpMultiplierBetweenXAndY(smallUnit!, largeUnit!);

@@ -113,7 +113,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		return this.GetOptionMatchingValue(value).value;
 	}
 	
-	root: HTMLSelectElement|null;
+	root: HTMLSelectElement|n;
 	render() {
 		var {displayType, value, verifyValue, enabled, className, title, style, childStyle, onChange} = this.props;
 		var options = this.OptionsList;

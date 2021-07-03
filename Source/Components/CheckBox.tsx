@@ -23,7 +23,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 	}
 
 	id;
-	input: HTMLInputElement|null;
+	input: HTMLInputElement|n;
 	render() {
 		var {text, wrap, title, value, enabled, containerProps, style, checkboxProps, checkboxStyle, labelProps, labelStyle, internalChanging, onChange} = this.props;
 		let {editedValue} = this.state;

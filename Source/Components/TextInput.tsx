@@ -4,7 +4,7 @@ import * as keycode from "keycode";
 import {E} from "../Internals/FromJSVE.js";
 
 export type TextInputProps = {
-	value: string|null, enabled?: boolean, editable?: boolean,
+	value: string|n, enabled?: boolean, editable?: boolean,
 	instant?: boolean, useEscape?: boolean,
 	onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>)=>void,
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>,
@@ -14,7 +14,7 @@ export type TextInputProps = {
 >;
 
 @ApplyBasicStyles
-export class TextInput extends BaseComponent<TextInputProps, {editedValue: string|null}> {
+export class TextInput extends BaseComponent<TextInputProps, {editedValue: string|n}> {
 	static defaultProps = {enabled: true, editable: true, type: "text", useEscape: true};
 	/*ComponentWillReceiveProps(props) {
 		// if value changing, and "instant" is enabled
@@ -23,7 +23,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 		}
 	}*/
 
-	root: HTMLInputElement|null;
+	root: HTMLInputElement|n;
 	render() {
 		var {
 			value, enabled, editable, onChange, instant, useEscape, style,

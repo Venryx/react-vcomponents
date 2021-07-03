@@ -11,7 +11,7 @@ export type SpinnerProps = {
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
 
 @ApplyBasicStyles
-export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|null}> {
+export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|n}> {
 	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true, useEscape: true};
 
 	ComponentDidMountOrUpdate() {
@@ -31,7 +31,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|nu
 		else this.root?.setCustomValidity(result);
 	}
 
-	root: HTMLInputElement|null;
+	root: HTMLInputElement|n;
 	render() {
 		let {
 			enabled, autoSize, instant, useEscape, enforceRange, validator, onChange,

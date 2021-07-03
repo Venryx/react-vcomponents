@@ -9,5 +9,5 @@ export declare function ReactChildrenAsText(children: React.ReactNode, valueIfFa
 export declare function Clone(obj: any, keepPrototype?: boolean): any;
 export declare function IsNaN(obj: any): boolean;
 export declare function IsNumber(obj: any, allowNumberObj?: boolean, allowNaN?: boolean): obj is number;
-export declare function ToNumber(stringOrFloatVal: string | number | undefined | null, valIfConversionFails?: number, allowParseNaN?: boolean): number;
+export declare function ToNumber(stringOrFloatVal: string | number | undefined | n, valIfConversionFails?: number, allowParseNaN?: boolean): number;
 export declare function NumberCES_KeepBetween(s: Number, min: number, max: number, allowFixMinMax?: boolean): number;
