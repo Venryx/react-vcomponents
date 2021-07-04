@@ -20,8 +20,8 @@ import { BaseComponent, ApplyBasicStyles } from "react-vextensions";
 import { E } from "../Internals/FromJSVE.js";
 let Row = class Row extends BaseComponent {
     render() {
-        let _a = this.props, { noShrink, center, style } = _a, rest = __rest(_a, ["noShrink", "center", "style"]);
-        return React.createElement("div", Object.assign({}, rest, { style: E({ display: "flex" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
+        let _a = this.props, { noShrink, center, style, title } = _a, rest = __rest(_a, ["noShrink", "center", "style", "title"]);
+        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
     }
 };
 Row = __decorate([
@@ -30,14 +30,14 @@ Row = __decorate([
 export { Row };
 let RowLR = class RowLR extends BaseComponent {
     render() {
-        var _a = this.props, { splitAt, height, className, style, leftStyle, rightStyle, children } = _a, rest = __rest(_a, ["splitAt", "height", "className", "style", "leftStyle", "rightStyle", "children"]);
+        var _a = this.props, { splitAt, height, className, style, leftStyle, rightStyle, children, title } = _a, rest = __rest(_a, ["splitAt", "height", "className", "style", "leftStyle", "rightStyle", "children", "title"]);
         //Assert((children as any).length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
         // if a child has "just-wrapper" tag, take out the wrapper and use its children directly (temp helper for React <16)
         /*if (children[1].props.className && children[1].props.className == "just-wrapper") {
             children[1] = children[1].props.children;
         }*/
         let childrenList = children;
-        return (React.createElement("div", Object.assign({}, rest, { style: E({ display: "flex", flexShrink: 0 }, style) }),
+        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex", flexShrink: 0 }, style) }),
             React.createElement(Row, { center: true, style: E({ width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]),
             React.createElement(Row, { center: true, style: E({ width: typeof splitAt == "string" ? (100 - parseInt(splitAt.slice(0, -1))) + "%" : `calc(100% - ${splitAt}px)` }, rightStyle) },
                 childrenList.length == 2 && childrenList[1],

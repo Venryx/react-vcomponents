@@ -7,7 +7,7 @@ export type TextInputProps = {
 	value: string|n, enabled?: boolean, editable?: boolean,
 	instant?: boolean, useEscape?: boolean,
 	onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>)=>void,
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>,
+} & Omit<FixHTMLProps<React.InputHTMLAttributes<HTMLInputElement>>,
 	"value" | "onChange" | // overridden
 	"disabled" | "readOnly" | // obsolete (due to custom props)
 	"min" | "max" | "step" // not-applicable
@@ -27,12 +27,12 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 	render() {
 		var {
 			value, enabled, editable, onChange, instant, useEscape, style,
-			onBlur, onKeyDown,
+			onBlur, onKeyDown, title,
 			...rest
 		} = this.props;
 		var {editedValue} = this.state;
 		return (
-			<input {...rest} ref={c=>this.root = c} disabled={enabled != true} readOnly={!editable} style={E({color: "black"}, style)}
+			<input {...rest} ref={c=>this.root = c} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} style={E({color: "black"}, style)}
 				value={editedValue != null ? editedValue : (value || "")}
 				onChange={e=> {
 					var newVal = e.target.value;

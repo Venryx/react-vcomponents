@@ -8,9 +8,9 @@ AddGlobalStyle(`
 `);
 
 @ApplyBasicStyles
-export class Grid extends BaseComponent<{single?, centerY?, style?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+export class Grid extends BaseComponent<{single?, centerY?, style?} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>, {}> {
 	render() {
-		let {single, centerY, className, style, ...rest} = this.props;
-		return <div {...rest} className={classnames(className, single && "Grid_WithSingleItem")} style={E({display: "grid"}, centerY && {alignItems: "center"}, style)}/>
+		let {single, centerY, className, style, title, ...rest} = this.props;
+		return <div {...rest} title={title ?? undefined} className={classnames(className, single && "Grid_WithSingleItem")} style={E({display: "grid"}, centerY && {alignItems: "center"}, style)}/>
 	}
 }

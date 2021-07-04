@@ -23,8 +23,8 @@ function Global(target) {
 }
 let Span = class Span extends BaseComponent {
     render() {
-        var _a = this.props, { pre, style } = _a, rest = __rest(_a, ["pre", "style"]);
-        return React.createElement("span", Object.assign({}, rest, { style: E(style, pre && { whiteSpace: "pre" }) }));
+        var _a = this.props, { pre, style, title } = _a, rest = __rest(_a, ["pre", "style", "title"]);
+        return React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E(style, pre && { whiteSpace: "pre" }) }));
     }
 };
 Span = __decorate([
@@ -34,8 +34,8 @@ Span = __decorate([
 export { Span };
 let Pre = class Pre extends BaseComponent {
     render() {
-        let _a = this.props, { allowWrap, style, children } = _a, rest = __rest(_a, ["allowWrap", "style", "children"]);
-        return React.createElement("span", Object.assign({}, rest, { style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
+        let _a = this.props, { allowWrap, style, children, title } = _a, rest = __rest(_a, ["allowWrap", "style", "children", "title"]);
+        return React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
     }
 };
 Pre = __decorate([
@@ -50,8 +50,8 @@ let Div = class Div extends BaseComponent {
         //return (shouldUpdate && shouldUpdate(nextProps, nextState)) || ShallowCompare(this, nextProps, nextState);
     }
     render() {
-        let _a = this.props, { shouldUpdate, style } = _a, rest = __rest(_a, ["shouldUpdate", "style"]);
-        return React.createElement("div", Object.assign({}, rest, { style: style }));
+        let _a = this.props, { shouldUpdate, style, title } = _a, rest = __rest(_a, ["shouldUpdate", "style", "title"]);
+        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: style }));
     }
 };
 Div = __decorate([

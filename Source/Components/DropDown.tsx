@@ -23,7 +23,7 @@ AddGlobalStyle(`
 
 // avoiding BaseComponentPlus for now, since seems to cause error when used in parent project (need to investigate)
 //export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: false}) {
-export class DropDown extends BaseComponent<{className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: boolean}> {
+export class DropDown extends BaseComponent<{className?, onShow?, onHide?, active?: boolean} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>, {active: boolean}> {
 	static defaultState = {active: false};
 	
 	ComponentDidMount() {

@@ -8,7 +8,7 @@ export declare type SpinnerProps = {
     enforceRange?: boolean;
     validator?: (value: number) => boolean | string;
     onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>) => any;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
+} & Omit<FixHTMLProps<React.InputHTMLAttributes<HTMLInputElement>>, "onChange">;
 export declare class Spinner extends BaseComponent<SpinnerProps, {
     editedValue: number | n;
 }> {

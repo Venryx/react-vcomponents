@@ -6,7 +6,7 @@ import {ReactChildrenAsText, E, Assert} from "../Internals/FromJSVE.js";
 export type CheckBoxProps = {
 	text?: React.ReactNode, wrap?: boolean, enabled?: boolean,
 	value: boolean | "partial", internalChanging?: boolean, onChange?: (val: boolean, e)=>void,
-	containerProps?: RowProps, title?: string, style?, // Why not "containerStyle"? Because if inherent props like "style" are exposed, it's always for the outermost element.
+	containerProps?: RowProps, title?: string|n, style?, // Why not "containerStyle"? Because if inherent props like "style" are exposed, it's always for the outermost element.
 	checkboxProps?: InputHTMLAttributes<HTMLInputElement>, checkboxStyle?,
 	labelProps?: LabelHTMLAttributes<HTMLLabelElement>, labelStyle?,
 };
@@ -34,7 +34,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 		let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
 
 		return (
-			<Row {...containerProps} center title={title} style={E({position: "relative"}, style)}>
+			<Row {...containerProps} center title={title ?? undefined} style={E({position: "relative"}, style)}>
 				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value == true}
 					onChange={e=>{
 						// if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)

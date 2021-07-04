@@ -9,7 +9,7 @@ export declare type CheckBoxProps = {
     internalChanging?: boolean;
     onChange?: (val: boolean, e: any) => void;
     containerProps?: RowProps;
-    title?: string;
+    title?: string | n;
     style?: any;
     checkboxProps?: InputHTMLAttributes<HTMLInputElement>;
     checkboxStyle?: any;

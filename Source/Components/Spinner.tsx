@@ -8,7 +8,7 @@ export type SpinnerProps = {
 	instant?: boolean, useEscape?: boolean,
 	enforceRange?: boolean, validator?: (value: number)=>boolean|string,
 	onChange?: (newValue: number, event: React.ChangeEvent<HTMLInputElement>)=>any,
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
+} & Omit<FixHTMLProps<React.InputHTMLAttributes<HTMLInputElement>>, "onChange">;
 
 @ApplyBasicStyles
 export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|n}> {
@@ -48,7 +48,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|n}
 
 		return (
 			<input {...rest} ref={c=>this.root = c} type="number" step={step} min={min} max={max} value={editedValue != null ? editedValue : (value || 0)} disabled={enabled != true}
-				title={title} style={style}
+				title={title ?? undefined} style={style}
 				onChange={e=> {
 					var newVal = Number(e.target.value);
 					if (enforceRange) newVal = NumberCES_KeepBetween(newVal, min as number, max as number);

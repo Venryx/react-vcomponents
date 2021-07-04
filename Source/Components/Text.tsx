@@ -4,12 +4,12 @@ import {ReactChildrenAsText, E} from "../Internals/FromJSVE.js";
 
 export type TextProps = {
 	wrap?: boolean, style?,
-} & React.HTMLAttributes<HTMLSpanElement>;
+} & FixHTMLProps<React.HTMLAttributes<HTMLSpanElement>>;
 
 @ApplyBasicStyles
 export class Text extends BaseComponent<TextProps, {}> {
 	render() {
-		let {wrap, style, children, ...rest} = this.props;
+		let {wrap, style, children, title, ...rest} = this.props;
 
 		let textStr = ReactChildrenAsText(children, "");
 		let textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
@@ -17,7 +17,7 @@ export class Text extends BaseComponent<TextProps, {}> {
 		let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
 
 		return (
-			<span {...rest}
+			<span {...rest} title={title ?? undefined}
 					style={E(
 						{display: "flex", alignItems: "center"},
 						applyPre && {whiteSpace: "pre"},

@@ -39,7 +39,6 @@ export declare const Button_styles: {
 export declare type ButtonProps = {
     enabled?: boolean;
     text?: string | JSX.Element;
-    title?: string;
     className?: string;
     style?: any;
     size?: number;
@@ -56,7 +55,7 @@ export declare type ButtonProps = {
     onCheckedChanged?: any;
     onLeftClick?: any;
     onDirectClick?: any;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
 export declare class Button extends BaseComponent<ButtonProps, {}> {
     static defaultProps: {
         enabled: boolean;

@@ -48,7 +48,7 @@ let Spinner = class Spinner extends BaseComponent {
         if (!autoSize && !("width" in style)) {
             style.width = 60;
         }
-        return (React.createElement("input", Object.assign({}, rest, { ref: c => this.root = c, type: "number", step: step, min: min, max: max, value: editedValue != null ? editedValue : (value || 0), disabled: enabled != true, title: title, style: style, onChange: e => {
+        return (React.createElement("input", Object.assign({}, rest, { ref: c => this.root = c, type: "number", step: step, min: min, max: max, value: editedValue != null ? editedValue : (value || 0), disabled: enabled != true, title: title !== null && title !== void 0 ? title : undefined, style: style, onChange: e => {
                 var newVal = Number(e.target.value);
                 if (enforceRange)
                     newVal = NumberCES_KeepBetween(newVal, min, max);

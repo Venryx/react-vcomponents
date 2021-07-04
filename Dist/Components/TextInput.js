@@ -21,9 +21,9 @@ import * as keycode from "keycode";
 import { E } from "../Internals/FromJSVE.js";
 let TextInput = class TextInput extends BaseComponent {
     render() {
-        var _a = this.props, { value, enabled, editable, onChange, instant, useEscape, style, onBlur, onKeyDown } = _a, rest = __rest(_a, ["value", "enabled", "editable", "onChange", "instant", "useEscape", "style", "onBlur", "onKeyDown"]);
+        var _a = this.props, { value, enabled, editable, onChange, instant, useEscape, style, onBlur, onKeyDown, title } = _a, rest = __rest(_a, ["value", "enabled", "editable", "onChange", "instant", "useEscape", "style", "onBlur", "onKeyDown", "title"]);
         var { editedValue } = this.state;
-        return (React.createElement("input", Object.assign({}, rest, { ref: c => this.root = c, disabled: enabled != true, readOnly: !editable, style: E({ color: "black" }, style), value: editedValue != null ? editedValue : (value || ""), onChange: e => {
+        return (React.createElement("input", Object.assign({}, rest, { ref: c => this.root = c, title: title !== null && title !== void 0 ? title : undefined, disabled: enabled != true, readOnly: !editable, style: E({ color: "black" }, style), value: editedValue != null ? editedValue : (value || ""), onChange: e => {
                 var newVal = e.target.value;
                 if (newVal == editedValue)
                     return; // if no text change, ignore event

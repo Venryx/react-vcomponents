@@ -51,7 +51,7 @@ AddGlobalStyle(`
 // Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "React.HTMLAttributes<HTMLDivElement>"
 let TextArea = class TextArea extends BaseComponent {
     render() {
-        var _a = this.props, { value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown } = _a, rest = __rest(_a, ["value", "defaultValue", "enabled", "editable", "className", "style", "pattern", "onChange", "instant", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown"]);
+        var _a = this.props, { value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, title } = _a, rest = __rest(_a, ["value", "defaultValue", "enabled", "editable", "className", "style", "pattern", "onChange", "instant", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown", "title"]);
         var { editedValue, minHeight } = this.state;
         // if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
         if (defaultValue === undefined && value == null)
@@ -59,7 +59,7 @@ let TextArea = class TextArea extends BaseComponent {
         //let Comp = autoSize ? TextAreaAutoSize : "textarea";
         //let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
         let Comp = autoSize ? TextAreaAutoSize : "textarea";
-        return React.createElement(Comp, Object.assign({}, rest, { ref: c => this.root = c, disabled: enabled != true, readOnly: !editable, className: classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: E(styles.root, autoSize && {
+        return React.createElement(Comp, Object.assign({}, rest, { ref: c => this.root = c, title: title !== null && title !== void 0 ? title : undefined, disabled: enabled != true, readOnly: !editable, className: classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: E(styles.root, autoSize && {
                 resize: "none",
                 overflow: "hidden",
             }, autoSize_minHeight && minHeight != null && { minHeight }, style) }, autoSize_minHeight && { onHeightChange: height => {

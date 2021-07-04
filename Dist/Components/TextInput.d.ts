@@ -7,7 +7,7 @@ export declare type TextInputProps = {
     instant?: boolean;
     useEscape?: boolean;
     onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>) => void;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | // overridden
+} & Omit<FixHTMLProps<React.InputHTMLAttributes<HTMLInputElement>>, "value" | "onChange" | // overridden
 "disabled" | "readOnly" | // obsolete (due to custom props)
 "min" | "max" | "step">;
 export declare class TextInput extends BaseComponent<TextInputProps, {

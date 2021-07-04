@@ -5,7 +5,7 @@ export declare class DropDown extends BaseComponent<{
     onShow?: any;
     onHide?: any;
     active?: boolean;
-} & React.HTMLAttributes<HTMLDivElement>, {
+} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>, {
     active: boolean;
 }> {
     static defaultState: {

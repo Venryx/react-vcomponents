@@ -77,7 +77,7 @@ let Button = class Button extends BaseComponent {
         if (faIcon) {
             className_final = className_final + ` fas fa-${faIcon}`;
         }
-        return (React.createElement("div", Object.assign({}, rest, { title: title, className: className_final, style: finalStyle, onClick: e => {
+        return (React.createElement("div", Object.assign({}, rest, { className: className_final, style: finalStyle, onClick: e => {
                 var { enabled, onClick, onLeftClick, onDirectClick } = this.props;
                 if (!enabled)
                     return;

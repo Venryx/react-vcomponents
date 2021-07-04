@@ -33,21 +33,21 @@ export class RowLR extends BaseComponent<{height?, className?, rowStyle?, leftSt
     }
 }*/
 
-export type RowProps = {noShrink?, center?, style?} & React.HTMLAttributes<HTMLDivElement>;
+export type RowProps = {noShrink?, center?, style?} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
 @ApplyBasicStyles
 export class Row extends BaseComponent<RowProps, {}> {
 	render() {
-		let {noShrink, center, style, ...rest} = this.props;
-		return <div {...rest} style={E({display: "flex"}, noShrink && {flexShrink: 0}, center && {alignItems: "center"}, style)}/>
+		let {noShrink, center, style, title, ...rest} = this.props;
+		return <div {...rest} title={title ?? undefined} style={E({display: "flex"}, noShrink && {flexShrink: 0}, center && {alignItems: "center"}, style)}/>
 	}
 }
 
-export type RowLRProps = {splitAt?: number | string, height?: number, className?: string, style?, leftStyle?, rightStyle?} & React.HTMLAttributes<HTMLDivElement>;
+export type RowLRProps = {splitAt?: number | string, height?: number, className?: string, style?, leftStyle?, rightStyle?} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
 @ApplyBasicStyles
 export class RowLR extends BaseComponent<RowLRProps, {}> {
 	static defaultProps = {splitAt: "50%"};
 	render() {
-		var {splitAt, height, className, style, leftStyle, rightStyle, children, ...rest} = this.props;
+		var {splitAt, height, className, style, leftStyle, rightStyle, children, title, ...rest} = this.props;
 		//Assert((children as any).length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
 
 		// if a child has "just-wrapper" tag, take out the wrapper and use its children directly (temp helper for React <16)
@@ -57,7 +57,7 @@ export class RowLR extends BaseComponent<RowLRProps, {}> {
 
 		let childrenList = children as any[];
 		return (
-			<div {...rest} style={E({display: "flex", flexShrink: 0}, style)}>
+			<div {...rest} title={title ?? undefined} style={E({display: "flex", flexShrink: 0}, style)}>
 				<Row center style={E(
 					{width: typeof splitAt == "string" ? splitAt + "%" : splitAt},
 					leftStyle

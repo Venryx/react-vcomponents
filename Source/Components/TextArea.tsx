@@ -44,13 +44,13 @@ export class TextArea extends BaseComponent
 		<{
 			enabled?: boolean, editable?: boolean, pattern?: string, onChange?: (newVal: string, event: React.ChangeEvent<HTMLTextAreaElement>)=>void,
 			instant?: boolean, useEscape?: boolean, autoSize?: boolean, autoSize_minHeight?: boolean, allowLineBreaks?: boolean,
-		} & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange" | "disabled" | "readOnly">,
+		} & Omit<FixHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>>, "onChange" | "disabled" | "readOnly">,
 		{editedValue: string|n, minHeight: number}> {
 	static defaultProps = {enabled: true, editable: true, allowLineBreaks: true, useEscape: true};
 	
 	root: TextAreaAutoSize | HTMLTextAreaElement;
 	render() {
-		var {value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, ...rest} = this.props;
+		var {value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, title, ...rest} = this.props;
 		var {editedValue, minHeight} = this.state;
 
 		// if defaultValue is not specified, assume we're using value; then, if we see value is null, set to "" instead, so it clears any stale content
@@ -60,7 +60,7 @@ export class TextArea extends BaseComponent
 		//let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
 		let Comp: React.DetailedHTMLFactory<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
 
-		return <Comp {...rest} ref={c=>this.root = c} disabled={enabled != true} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
+		return <Comp {...rest} ref={c=>this.root = c} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
 			style={E(
 				styles.root,
 				autoSize && {

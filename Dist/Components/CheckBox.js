@@ -22,7 +22,7 @@ let CheckBox = CheckBox_1 = class CheckBox extends BaseComponent {
         let textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
         // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
         let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
-        return (React.createElement(Row, Object.assign({}, containerProps, { center: true, title: title, style: E({ position: "relative" }, style) }),
+        return (React.createElement(Row, Object.assign({}, containerProps, { center: true, title: title !== null && title !== void 0 ? title : undefined, style: E({ position: "relative" }, style) }),
             React.createElement("input", Object.assign({ ref: c => this.input = c }, checkboxProps, { id: "checkBox_" + this.id, type: "checkbox", disabled: enabled != true, checked: value == true, onChange: e => {
                     // if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)
                     if (value == "partial") {

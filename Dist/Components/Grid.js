@@ -24,8 +24,8 @@ AddGlobalStyle(`
 `);
 let Grid = class Grid extends BaseComponent {
     render() {
-        let _a = this.props, { single, centerY, className, style } = _a, rest = __rest(_a, ["single", "centerY", "className", "style"]);
-        return React.createElement("div", Object.assign({}, rest, { className: classnames(className, single && "Grid_WithSingleItem"), style: E({ display: "grid" }, centerY && { alignItems: "center" }, style) }));
+        let _a = this.props, { single, centerY, className, style, title } = _a, rest = __rest(_a, ["single", "centerY", "className", "style", "title"]);
+        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classnames(className, single && "Grid_WithSingleItem"), style: E({ display: "grid" }, centerY && { alignItems: "center" }, style) }));
     }
 };
 Grid = __decorate([

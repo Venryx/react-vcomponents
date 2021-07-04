@@ -45,13 +45,13 @@ export const Button_styles = {
 `);*/
 
 export type ButtonProps = {
-	enabled?: boolean, text?: string | JSX.Element, title?: string, className?: string, style?,
+	enabled?: boolean, text?: string | JSX.Element, className?: string, style?,
 	size?: number, width?: number, height?: number, useOpacityForHover?: boolean,
 	iconPath?: string, iconSize?: number, // custom icons
 	faIcon?: string, // font-awesome icons
 	hasCheckbox?: boolean, checked?: boolean, checkboxStyle?, checkboxLabelStyle?, onCheckedChanged?,
 	onLeftClick?, onDirectClick?
-} & React.HTMLAttributes<HTMLDivElement>;
+} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
 
 //@Radium
 @ApplyBasicStyles
@@ -106,7 +106,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 		}
 
 		return (
-			<div {...rest} title={title}
+			<div {...rest}
 				className={className_final}
 				style={finalStyle}
 				onClick={e=> {

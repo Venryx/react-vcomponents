@@ -4,7 +4,7 @@ export declare type ColumnProps = {
     noShrink?: any;
     center?: any;
     style?: any;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
 export declare class Column extends BaseComponent<ColumnProps, {}> {
     render(): JSX.Element;
 }
