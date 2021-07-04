@@ -2,13 +2,13 @@ import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import * as keycode from "keycode";
 import {E} from "../Internals/FromJSVE.js";
-import {FixHTMLProps, n} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed, n} from "../@Types.js";
 
 export type TextInputProps = {
 	value: string|n, enabled?: boolean, editable?: boolean,
 	instant?: boolean, useEscape?: boolean,
 	onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>)=>void,
-} & Omit<FixHTMLProps<React.InputHTMLAttributes<HTMLInputElement>>,
+} & Omit<HTMLProps_Fixed<"input">,
 	"value" | "onChange" | // overridden
 	"disabled" | "readOnly" | // obsolete (due to custom props)
 	"min" | "max" | "step" // not-applicable

@@ -1,11 +1,11 @@
 import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
-import {FixHTMLProps} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {ReactChildrenAsText, E} from "../Internals/FromJSVE.js";
 
 export type TextProps = {
 	wrap?: boolean, style?,
-} & FixHTMLProps<React.HTMLAttributes<HTMLSpanElement>>;
+} & HTMLProps_Fixed<"span">;
 
 @ApplyBasicStyles
 export class Text extends BaseComponent<TextProps, {}> {

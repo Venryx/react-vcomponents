@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles} from "react-vextensions";
-import {FixHTMLProps} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 export const Button_styles = {
@@ -52,7 +52,7 @@ export type ButtonProps = {
 	faIcon?: string, // font-awesome icons
 	hasCheckbox?: boolean, checked?: boolean, checkboxStyle?, checkboxLabelStyle?, onCheckedChanged?,
 	onLeftClick?, onDirectClick?
-} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
+} & FixHTMLProps<HTMLProps_Fixed<"div">>;
 
 //@Radium
 @ApplyBasicStyles

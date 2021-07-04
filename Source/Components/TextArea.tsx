@@ -38,7 +38,7 @@ AddGlobalStyle(`
 }
 `);
 
-// Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "React.HTMLAttributes<HTMLDivElement>"
+// Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "HTMLProps_Fixed<"div">"
 
 @ApplyBasicStyles
 export class TextArea extends BaseComponent

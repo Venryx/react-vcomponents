@@ -1,13 +1,13 @@
 import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
-import {FixHTMLProps} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 function Global(target) {
 	Object.assign(window, {[target.name]: target});
 }
 
-export type SpanProps = {pre?} & FixHTMLProps<React.HTMLAttributes<HTMLSpanElement>>;
+export type SpanProps = {pre?} & HTMLProps_Fixed<"span">;
 @Global
 @ApplyBasicStyles
 export class Span extends BaseComponent<SpanProps, {}> {
@@ -17,7 +17,7 @@ export class Span extends BaseComponent<SpanProps, {}> {
     }
 }
 
-export type PreProps = {allowWrap?: boolean} & FixHTMLProps<React.HTMLAttributes<HTMLSpanElement>>;
+export type PreProps = {allowWrap?: boolean} & HTMLProps_Fixed<"span">;
 @Global
 @ApplyBasicStyles
 export class Pre extends BaseComponent<PreProps, {}> {
@@ -27,7 +27,7 @@ export class Pre extends BaseComponent<PreProps, {}> {
 	}
 }
 
-export type DivProps = {shouldUpdate?} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
+export type DivProps = {shouldUpdate?} & HTMLProps_Fixed<"div">;
 @Global
 //@SimpleShouldUpdate_Overridable // we can't make these "pure", as their children may need updating
 @ApplyBasicStyles

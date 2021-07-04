@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
-import {FixHTMLProps} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 /*export class Row extends BaseComponent<any, any> {
@@ -34,7 +34,7 @@ export class RowLR extends BaseComponent<{height?, className?, rowStyle?, leftSt
     }
 }*/
 
-export type RowProps = {noShrink?, center?, style?} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
+export type RowProps = {noShrink?, center?, style?} & HTMLProps_Fixed<"div">;
 @ApplyBasicStyles
 export class Row extends BaseComponent<RowProps, {}> {
 	render() {
@@ -43,7 +43,7 @@ export class Row extends BaseComponent<RowProps, {}> {
 	}
 }
 
-export type RowLRProps = {splitAt?: number | string, height?: number, className?: string, style?, leftStyle?, rightStyle?} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
+export type RowLRProps = {splitAt?: number | string, height?: number, className?: string, style?, leftStyle?, rightStyle?} & HTMLProps_Fixed<"div">;
 @ApplyBasicStyles
 export class RowLR extends BaseComponent<RowLRProps, {}> {
 	static defaultProps = {splitAt: "50%"};

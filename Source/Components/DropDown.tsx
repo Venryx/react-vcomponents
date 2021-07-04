@@ -3,7 +3,7 @@ import {BaseComponent, AddGlobalStyle, GetDOM, BaseComponentPlus} from "react-ve
 import React from "react";
 import classNames from "classnames";
 import {E} from "../Internals/FromJSVE.js";
-import {FixHTMLProps} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 
 AddGlobalStyle(`
 .dropdown {
@@ -23,8 +23,8 @@ AddGlobalStyle(`
 `);
 
 // avoiding BaseComponentPlus for now, since seems to cause error when used in parent project (need to investigate)
-//export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: false}) {
-export class DropDown extends BaseComponent<{className?, onShow?, onHide?, active?: boolean} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>, {active: boolean}> {
+//export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & HTMLProps_Fixed<"div">, {active: false}) {
+export class DropDown extends BaseComponent<{className?, onShow?, onHide?, active?: boolean} & HTMLProps_Fixed<"div">, {active: boolean}> {
 	static defaultState = {active: false};
 	
 	ComponentDidMount() {
@@ -104,7 +104,7 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?, activ
 	}
 }
 
-//export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+//export class DropDownTrigger extends BaseComponent<{className?} & HTMLProps_Fixed<"div">, {}> {
 export class DropDownTrigger extends BaseComponent<{}, {}> {
 	render() {
 		/* const {children, className, ...rest} = this.props;
@@ -120,11 +120,11 @@ export class DropDownTrigger extends BaseComponent<{}, {}> {
 	}
 }
 
-export class DropDownContent extends BaseComponent<{className?, style?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+export class DropDownContent extends BaseComponent<{className?, style?} & HTMLProps_Fixed<"div">, {}> {
 	render() {
-		const {children, className, style, ...rest} = this.props;
+		const {children, className, style, title, ...rest} = this.props;
 		return (
-			<div {...rest}className={classNames("dropdown__content", className)} style={E(
+			<div {...rest} title={title ?? undefined} className={classNames("dropdown__content", className)} style={E(
 				{padding: 10, background: "rgba(0,0,0,.7)"},
 				style,
 			)}>
