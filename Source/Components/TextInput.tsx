@@ -2,6 +2,7 @@ import React from "react";
 import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
 import * as keycode from "keycode";
 import {E} from "../Internals/FromJSVE.js";
+import {FixHTMLProps, n} from "../@Types.js";
 
 export type TextInputProps = {
 	value: string|n, enabled?: boolean, editable?: boolean,

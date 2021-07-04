@@ -1,5 +1,6 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
+import { FixHTMLProps } from "../@Types.js";
 export declare type RowProps = {
     noShrink?: any;
     center?: any;

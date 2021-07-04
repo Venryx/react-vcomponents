@@ -1,5 +1,6 @@
 import React from "react";
 import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
+import {FixHTMLProps} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 function Global(target) {

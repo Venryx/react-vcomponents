@@ -1,5 +1,6 @@
 import { BaseComponent } from "react-vextensions";
 import React from "react";
+import { FixHTMLProps } from "../@Types.js";
 export declare class DropDown extends BaseComponent<{
     className?: any;
     onShow?: any;

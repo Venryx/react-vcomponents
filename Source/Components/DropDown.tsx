@@ -3,6 +3,7 @@ import {BaseComponent, AddGlobalStyle, GetDOM, BaseComponentPlus} from "react-ve
 import React from "react";
 import classNames from "classnames";
 import {E} from "../Internals/FromJSVE.js";
+import {FixHTMLProps} from "../@Types.js";
 
 AddGlobalStyle(`
 .dropdown {

@@ -1,6 +1,7 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
+import { FixHTMLProps, n } from "../@Types.js";
 export declare class TextArea extends BaseComponent<{
     enabled?: boolean;
     editable?: boolean;

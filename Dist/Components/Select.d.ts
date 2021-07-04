@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
+import { n } from "../@Types.js";
 export declare type Select_Props = {
     options: {
         name: string;

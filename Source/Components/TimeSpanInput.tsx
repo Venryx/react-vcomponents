@@ -1,5 +1,6 @@
 import React from "react";
 import {BaseComponent, BaseComponentPlus} from "react-vextensions";
+import {n} from "../@Types.js";
 import {ToNumber, Assert, IsNaN, NumberCES_KeepBetween, E} from "../Internals/FromJSVE.js";
 import {TextInput, TextInputProps} from "./TextInput.js";
 

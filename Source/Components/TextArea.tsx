@@ -4,6 +4,7 @@ import TextAreaAutoSize from "react-textarea-autosize";
 import * as keycode from "keycode";
 import classnames from "classnames";
 import {E} from "../Internals/FromJSVE.js";
+import {FixHTMLProps, n} from "../@Types.js";
 
 var styles = {
 	root: {

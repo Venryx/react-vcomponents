@@ -1,5 +1,6 @@
 import React from "react";
 import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles} from "react-vextensions";
+import {FixHTMLProps} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 export const Button_styles = {
