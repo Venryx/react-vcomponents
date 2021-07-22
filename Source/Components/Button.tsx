@@ -52,7 +52,7 @@ export type ButtonProps = {
 	faIcon?: string, // font-awesome icons
 	hasCheckbox?: boolean, checked?: boolean, checkboxStyle?, checkboxLabelStyle?, onCheckedChanged?,
 	onLeftClick?, onDirectClick?
-} & FixHTMLProps<HTMLProps_Fixed<"div">>;
+} & HTMLProps_Fixed<"div">;
 
 //@Radium
 @ApplyBasicStyles

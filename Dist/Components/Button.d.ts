@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import { FixHTMLProps, HTMLProps_Fixed } from "../@Types.js";
+import { HTMLProps_Fixed } from "../@Types.js";
 export declare const Button_styles: {
     root: {
         display: string;
@@ -56,7 +56,7 @@ export declare type ButtonProps = {
     onCheckedChanged?: any;
     onLeftClick?: any;
     onDirectClick?: any;
-} & FixHTMLProps<HTMLProps_Fixed<"div">>;
+} & HTMLProps_Fixed<"div">;
 export declare class Button extends BaseComponent<ButtonProps, {}> {
     static defaultProps: {
         enabled: boolean;
