@@ -60,7 +60,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 	static defaultProps = {enabled: true};
 	
 	render() {
-		var {
+		let {
 			enabled, text, title, className, style,
 			size, width, height, useOpacityForHover,
 			iconPath, iconSize,
@@ -107,7 +107,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 		}
 
 		return (
-			<div {...rest}
+			<div {...rest} title={title ?? undefined}
 				className={className_final}
 				style={finalStyle}
 				onClick={e=> {

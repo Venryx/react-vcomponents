@@ -19,7 +19,7 @@ export declare type Select_Props = {
     verifyValue?: boolean;
     enabled?: boolean;
     className?: any;
-    title?: any;
+    title?: string | n;
     style?: any;
     childStyle?: any;
     onChange?: any;

@@ -108,7 +108,7 @@ let Select = Select_1 = class Select extends BaseComponent {
             return <Option key={index} index={index} style={child.props.style}>{child.props.children}</Option>;
         });*/
         if (displayType == "dropdown") {
-            return (React.createElement("select", { ref: c => this.root = c, disabled: enabled != true, value: "value" + this.GetIndexOfOptionMatchingValue(value), className: className, title: title, style: E({ color: "#000" }, style), onChange: e => {
+            return (React.createElement("select", { ref: c => this.root = c, disabled: enabled != true, value: "value" + this.GetIndexOfOptionMatchingValue(value), className: className, title: title !== null && title !== void 0 ? title : undefined, style: E({ color: "#000" }, style), onChange: e => {
                     if (!onChange)
                         return;
                     var newSelectedIndex = this.root.selectedIndex;
@@ -118,7 +118,7 @@ let Select = Select_1 = class Select extends BaseComponent {
                 return React.createElement(Dropdown_OptionUI, { key: index, index: index, style: E(childStyle, option.style) }, option.name);
             })));
         }
-        return (React.createElement("div", { style: E({ /*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map((option, index) => {
+        return (React.createElement("div", { title: title !== null && title !== void 0 ? title : undefined, style: E({ /*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map((option, index) => {
             return React.createElement(ButtonBar_OptionUI, { key: index, first: index == 0, last: index == options.length - 1, selected: option.value === value, enabled: enabled, style: E(childStyle, option.style), onSelect: e => onChange && onChange(option.value) }, option.name);
         })));
     }

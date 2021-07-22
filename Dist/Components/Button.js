@@ -53,7 +53,7 @@ export const Button_styles = {
 //@Radium
 let Button = class Button extends BaseComponent {
     render() {
-        var _a = this.props, { enabled, text, title, className, style, size, width, height, useOpacityForHover, iconPath, iconSize, faIcon, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "useOpacityForHover", "iconPath", "iconSize", "faIcon", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
+        let _a = this.props, { enabled, text, title, className, style, size, width, height, useOpacityForHover, iconPath, iconSize, faIcon, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "useOpacityForHover", "iconPath", "iconSize", "faIcon", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
         let padding = "5px 15px";
         let borderThickness = (style || {}).borderWidth || 1;
         width = width || size;
@@ -77,7 +77,7 @@ let Button = class Button extends BaseComponent {
         if (faIcon) {
             className_final = className_final + ` fas fa-${faIcon}`;
         }
-        return (React.createElement("div", Object.assign({}, rest, { className: className_final, style: finalStyle, onClick: e => {
+        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: className_final, style: finalStyle, onClick: e => {
                 var { enabled, onClick, onLeftClick, onDirectClick } = this.props;
                 if (!enabled)
                     return;

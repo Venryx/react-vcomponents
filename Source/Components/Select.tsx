@@ -10,7 +10,7 @@ export type Select_Props = {
 	/** If set, overrides compareBy. */ compareByFunc?: CompareByFunc,
 	equateNullAndUndefined?: boolean,
 	value, verifyValue?: boolean,
-	enabled?: boolean, className?, title?, style?, childStyle?, onChange?
+	enabled?: boolean, className?, title?: string|n, style?, childStyle?, onChange?
 };
 
 export type Select_Option = {name: string, value, style?};
@@ -134,7 +134,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		if (displayType == "dropdown") {
 			return (
 				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + this.GetIndexOfOptionMatchingValue(value)}
-						className={className} title={title} style={E({color: "#000"}, style)} onChange={e=> {
+						className={className} title={title ?? undefined} style={E({color: "#000"}, style)} onChange={e=> {
 							if (!onChange) return;
 							var newSelectedIndex = this.root!.selectedIndex;
 							let newSelectedOption = this.OptionsList[newSelectedIndex];
@@ -150,7 +150,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		}
 		
 		return (
-			<div /*disabled={enabled != true}*/ style={E({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style)}>
+			<div title={title ?? undefined} /*disabled={enabled != true}*/ style={E({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style)}>
 				{options.map((option, index)=> {
 					return <ButtonBar_OptionUI key={index}
 							first={index == 0} last={index == options.length - 1} selected={option.value === value}
