@@ -1,10 +1,10 @@
-import React from "react";
+/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import { FixHTMLProps } from "../@Types.js";
+import { HTMLProps_Fixed } from "../@Types.js";
 export declare class Grid extends BaseComponent<{
     single?: any;
     centerY?: any;
     style?: any;
-} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>, {}> {
+} & HTMLProps_Fixed<"div">, {}> {
     render(): JSX.Element;
 }

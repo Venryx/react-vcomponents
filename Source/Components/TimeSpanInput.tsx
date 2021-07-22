@@ -69,7 +69,7 @@ export class TimeSpanInput extends BaseComponentPlus({largeUnit: "minute", small
 		}
 		
 		let inputItself = (
-			<TextInput {...rest} style={E({width: 70}, style)} value={valueStr} onChange={valStr=>{
+			<TextInput {...rest as any} style={E({width: 70}, style)} value={valueStr} onChange={valStr=>{
 				const isNegative = valStr.includes("-");
 				const strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
 				const segments = strNoSign.split(":").map(a=>a.trim());

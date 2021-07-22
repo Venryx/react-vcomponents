@@ -1,11 +1,11 @@
-import React from "react";
+/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import { FixHTMLProps } from "../@Types.js";
+import { HTMLProps_Fixed } from "../@Types.js";
 export declare type RowProps = {
     noShrink?: any;
     center?: any;
     style?: any;
-} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
+} & HTMLProps_Fixed<"div">;
 export declare class Row extends BaseComponent<RowProps, {}> {
     render(): JSX.Element;
 }
@@ -16,7 +16,7 @@ export declare type RowLRProps = {
     style?: any;
     leftStyle?: any;
     rightStyle?: any;
-} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>;
+} & HTMLProps_Fixed<"div">;
 export declare class RowLR extends BaseComponent<RowLRProps, {}> {
     static defaultProps: {
         splitAt: string;

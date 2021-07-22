@@ -1,3 +1,5 @@
+import {n} from "../@Types.js";
+
 export function E<E1,E2,E3,E4,E5,E6,E7,E8,E9,E10,E11,E12,E13,E14,E15,E16,E17,E18,E19,E20>(
 	e1?:E1,e2?:E2,e3?:E3,e4?:E4,e5?:E5,e6?:E6,e7?:E7,e8?:E8,e9?:E9,e10?:E10,
 	e11?:E11,e12?:E12,e13?:E13,e14?:E14,e15?:E15,e16?:E16,e17?:E17,e18?:E18,e19?:E19,e20?:E20,
@@ -41,11 +43,11 @@ export function AssertWarn(condition, messageOrMessageFunc?: string | Function) 
 	console.warn(`Assert-warn failed) ${message}\n\nStackTrace)`); // ${GetStackTraceStr()}`);
 }
 
-function IsArrayOfStrings(obj): obj is string[] { return obj instanceof Array && obj.every(a=>IsString(a)); }
+//function IsArrayOfStrings(obj): obj is string[] { return obj instanceof Array && obj.every(a=>IsString(a)); }
 function IsString(obj): obj is string { return typeof obj == "string"; }
 export function ReactChildrenAsText(children: React.ReactNode, valueIfFailed: string) {
 	if (IsString(children)) return children;
-	if (IsArrayOfStrings(children)) return children.join("");
+	if (Array.isArray(children)) return children.map(a=>a != null ? a.toString() : "").join("");
 	return valueIfFailed;
 }
 

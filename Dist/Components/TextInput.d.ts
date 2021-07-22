@@ -1,6 +1,6 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
-import { FixHTMLProps, n } from "../@Types.js";
+import { HTMLProps_Fixed, n } from "../@Types.js";
 export declare type TextInputProps = {
     value: string | n;
     enabled?: boolean;
@@ -8,7 +8,7 @@ export declare type TextInputProps = {
     instant?: boolean;
     useEscape?: boolean;
     onChange?: (newVal: string, event: React.ChangeEvent<HTMLInputElement>) => void;
-} & Omit<FixHTMLProps<React.InputHTMLAttributes<HTMLInputElement>>, "value" | "onChange" | // overridden
+} & Omit<HTMLProps_Fixed<"input">, "value" | "onChange" | // overridden
 "disabled" | "readOnly" | // obsolete (due to custom props)
 "min" | "max" | "step">;
 export declare class TextInput extends BaseComponent<TextInputProps, {

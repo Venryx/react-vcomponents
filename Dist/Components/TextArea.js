@@ -48,7 +48,7 @@ AddGlobalStyle(`
 	height: unset !important;
 }
 `);
-// Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "React.HTMLAttributes<HTMLDivElement>"
+// Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "HTMLProps_Fixed<"div">"
 let TextArea = class TextArea extends BaseComponent {
     render() {
         var _a = this.props, { value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, title } = _a, rest = __rest(_a, ["value", "defaultValue", "enabled", "editable", "className", "style", "pattern", "onChange", "instant", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown", "title"]);

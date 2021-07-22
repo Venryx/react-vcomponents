@@ -32,13 +32,13 @@ export function AssertWarn(condition, messageOrMessageFunc) {
     var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
     console.warn(`Assert-warn failed) ${message}\n\nStackTrace)`); // ${GetStackTraceStr()}`);
 }
-function IsArrayOfStrings(obj) { return obj instanceof Array && obj.every(a => IsString(a)); }
+//function IsArrayOfStrings(obj): obj is string[] { return obj instanceof Array && obj.every(a=>IsString(a)); }
 function IsString(obj) { return typeof obj == "string"; }
 export function ReactChildrenAsText(children, valueIfFailed) {
     if (IsString(children))
         return children;
-    if (IsArrayOfStrings(children))
-        return children.join("");
+    if (Array.isArray(children))
+        return children.map(a => a != null ? a.toString() : "").join("");
     return valueIfFailed;
 }
 export function Clone(obj, keepPrototype = false) {

@@ -35,7 +35,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 		let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
 
 		return (
-			<Row {...containerProps} center title={title ?? undefined} style={E({position: "relative"}, style)}>
+			<Row {...containerProps as any} center title={title ?? undefined} style={E({position: "relative"}, style)}>
 				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value == true}
 					onChange={e=>{
 						// if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)

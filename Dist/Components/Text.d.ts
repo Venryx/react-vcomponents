@@ -1,10 +1,10 @@
-import React from "react";
+/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import { FixHTMLProps } from "../@Types.js";
+import { HTMLProps_Fixed } from "../@Types.js";
 export declare type TextProps = {
     wrap?: boolean;
     style?: any;
-} & FixHTMLProps<React.HTMLAttributes<HTMLSpanElement>>;
+} & HTMLProps_Fixed<"span">;
 export declare class Text extends BaseComponent<TextProps, {}> {
     render(): JSX.Element;
 }

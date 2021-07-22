@@ -31,7 +31,7 @@ AddGlobalStyle(`
 */
 `);
 // avoiding BaseComponentPlus for now, since seems to cause error when used in parent project (need to investigate)
-//export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & React.HTMLAttributes<HTMLDivElement>, {active: false}) {
+//export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & HTMLProps_Fixed<"div">, {active: false}) {
 export class DropDown extends BaseComponent {
     constructor() {
         super(...arguments);
@@ -108,7 +108,7 @@ export class DropDown extends BaseComponent {
     }
 }
 DropDown.defaultState = { active: false };
-//export class DropDownTrigger extends BaseComponent<{className?} & React.HTMLAttributes<HTMLDivElement>, {}> {
+//export class DropDownTrigger extends BaseComponent<{className?} & HTMLProps_Fixed<"div">, {}> {
 export class DropDownTrigger extends BaseComponent {
     render() {
         /* const {children, className, ...rest} = this.props;
@@ -125,7 +125,7 @@ export class DropDownTrigger extends BaseComponent {
 }
 export class DropDownContent extends BaseComponent {
     render() {
-        const _a = this.props, { children, className, style } = _a, rest = __rest(_a, ["children", "className", "style"]);
-        return (React.createElement("div", Object.assign({}, rest, { className: classNames("dropdown__content", className), style: E({ padding: 10, background: "rgba(0,0,0,.7)" }, style) }), children));
+        const _a = this.props, { children, className, style, title } = _a, rest = __rest(_a, ["children", "className", "style", "title"]);
+        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classNames("dropdown__content", className), style: E({ padding: 10, background: "rgba(0,0,0,.7)" }, style) }), children));
     }
 }

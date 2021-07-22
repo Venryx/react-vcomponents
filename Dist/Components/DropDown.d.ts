@@ -1,12 +1,12 @@
+/// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import React from "react";
-import { FixHTMLProps } from "../@Types.js";
+import { HTMLProps_Fixed } from "../@Types.js";
 export declare class DropDown extends BaseComponent<{
     className?: any;
     onShow?: any;
     onHide?: any;
     active?: boolean;
-} & FixHTMLProps<React.HTMLAttributes<HTMLDivElement>>, {
+} & HTMLProps_Fixed<"div">, {
     active: boolean;
 }> {
     static defaultState: {
@@ -27,6 +27,6 @@ export declare class DropDownTrigger extends BaseComponent<{}, {}> {
 export declare class DropDownContent extends BaseComponent<{
     className?: any;
     style?: any;
-} & React.HTMLAttributes<HTMLDivElement>, {}> {
+} & HTMLProps_Fixed<"div">, {}> {
     render(): JSX.Element;
 }
