@@ -19,6 +19,8 @@ import React from "react";
 import { ApplyBasicStyles, BaseComponent } from "react-vextensions";
 import { E } from "../Internals/FromJSVE.js";
 function Global(target) {
+    if (typeof window == "undefined")
+        return;
     Object.assign(window, { [target.name]: target });
 }
 let Span = class Span extends BaseComponent {

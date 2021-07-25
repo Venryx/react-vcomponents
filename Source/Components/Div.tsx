@@ -4,6 +4,7 @@ import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 function Global(target) {
+	if (typeof window == "undefined") return;
 	Object.assign(window, {[target.name]: target});
 }
 
