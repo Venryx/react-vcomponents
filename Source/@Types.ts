@@ -1,5 +1,6 @@
 export type n = null | undefined;
-export type FixHTMLProps<T> = Omit<T, "title"> & {title?: string|n};
+//export type FixHTMLProps<T> = Omit<T, "title"> & {title?: string|n};
+export type FixHTMLProps<T> = Omit<T, "title"> & {title?: any}; // have to use "any", else you can't destructure the fields into an element using {...rest}
 //export type HTMLProps_Fixed<T> = FixHTMLProps<React.HTMLProps<T>>;
 
 /*

@@ -42,7 +42,7 @@ let Select = Select_1 = class Select extends BaseComponent {
         });
     }*/
     static GetOptionsListFromProps(props) {
-        let { options: options_raw, value } = props;
+        let { options: options_raw, value, addPlaceholderForInvalidValue } = props;
         let result = [];
         if (options_raw instanceof Array) {
             for (let option_raw of options_raw) {
@@ -66,7 +66,7 @@ let Select = Select_1 = class Select extends BaseComponent {
         }
         // if invalid value is supplied, add placeholder-option for it (so user can see that unlisted/invalid value is present)
         const compareByFunc_final = GetFinalCompareByFunc(props);
-        if (result.find(option => compareByFunc_final(option, value)) == null) {
+        if (addPlaceholderForInvalidValue && result.find(option => compareByFunc_final(option, value)) == null) {
             result.push({ name: `[invalid: "${value}"]`, value });
         }
         return result;

@@ -17,6 +17,7 @@ export declare type Select_Props = {
     equateNullAndUndefined?: boolean;
     value: any;
     verifyValue?: boolean;
+    addPlaceholderForInvalidValue?: boolean;
     enabled?: boolean;
     className?: any;
     title?: string | n;

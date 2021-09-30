@@ -9,7 +9,7 @@ export type Select_Props = {
 	compareBy?: "name" | "value" | "value_strict" | "value_toString",
 	/** If set, overrides compareBy. */ compareByFunc?: CompareByFunc,
 	equateNullAndUndefined?: boolean,
-	value, verifyValue?: boolean,
+	value, verifyValue?: boolean, addPlaceholderForInvalidValue?: boolean,
 	enabled?: boolean, className?, title?: string|n, style?, childStyle?, onChange?
 };
 
@@ -59,7 +59,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	}*/
 	
 	static GetOptionsListFromProps(props: Select_Props) {
-		let {options: options_raw, value} = props;
+		let {options: options_raw, value, addPlaceholderForInvalidValue} = props;
 
 		let result = [] as Select_Option[];
 		if (options_raw instanceof Array) {
@@ -83,7 +83,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 
 		// if invalid value is supplied, add placeholder-option for it (so user can see that unlisted/invalid value is present)
 		const compareByFunc_final = GetFinalCompareByFunc(props);
-		if (result.find(option=>compareByFunc_final(option, value)) == null) {
+		if (addPlaceholderForInvalidValue && result.find(option=>compareByFunc_final(option, value)) == null) {
 			result.push({name: `[invalid: "${value}"]`, value});
 		}
 
