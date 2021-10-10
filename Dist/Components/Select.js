@@ -115,11 +115,13 @@ let Select = Select_1 = class Select extends BaseComponent {
                     let newSelectedOption = this.OptionsList[newSelectedIndex];
                     onChange(newSelectedOption.value);
                 } }, options.map((option, index) => {
-                return React.createElement(Dropdown_OptionUI, { key: index, index: index, style: E(childStyle, option.style) }, option.name);
+                let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
+                return React.createElement(Dropdown_OptionUI, { key: index, index: index, style: E(childStyle_final, option.style) }, option.name);
             })));
         }
-        return (React.createElement("div", { title: title !== null && title !== void 0 ? title : undefined, style: E({ /*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map((option, index) => {
-            return React.createElement(ButtonBar_OptionUI, { key: index, first: index == 0, last: index == options.length - 1, selected: option.value === value, enabled: enabled, style: E(childStyle, option.style), onSelect: e => onChange && onChange(option.value) }, option.name);
+        return (React.createElement("div", { className: className, title: title !== null && title !== void 0 ? title : undefined, style: E({ /*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map((option, index) => {
+            let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
+            return React.createElement(ButtonBar_OptionUI, { key: index, first: index == 0, last: index == options.length - 1, selected: option.value === value, enabled: enabled, style: E(childStyle_final, option.style), onSelect: e => onChange && onChange(option.value) }, option.name);
         })));
     }
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles} from "react-vextensions";
-import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed, n} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 export const Button_styles = {
@@ -49,6 +49,7 @@ export type ButtonProps = {
 	enabled?: boolean, text?: string | JSX.Element, className?: string, style?,
 	size?: number, width?: number, height?: number, useOpacityForHover?: boolean,
 	iconPath?: string, iconSize?: number, // custom icons
+	mdIcon?: string, // material-design icons (https://github.com/Templarian/MaterialDesign)
 	faIcon?: string, // font-awesome icons
 	hasCheckbox?: boolean, checked?: boolean, checkboxStyle?, checkboxLabelStyle?, onCheckedChanged?,
 	onLeftClick?, onDirectClick?
@@ -64,13 +65,14 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			enabled, text, title, className, style,
 			size, width, height, useOpacityForHover,
 			iconPath, iconSize,
-			faIcon,
+			mdIcon, faIcon,
 			hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged,
 			onLeftClick, children,
 			...rest
 		} = this.props;
 
 		let padding: string|number = "5px 15px";
+		let fontSize: number|n;
 		let borderThickness = (style || {}).borderWidth || 1;
 
 		width = width || size;
@@ -80,16 +82,18 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			var heightDifPerSide = (height - baseHeight) / 2;
 			padding = (`${heightDifPerSide}px 15px`);
 		}
-		if (faIcon) {
+		if (mdIcon || faIcon) {
 			width = width ?? 28;
 			height = height ?? 28;
 			padding = 0;
+			fontSize = 18;
 		}
 		
 		let finalStyle = E(
 			Button_styles.root,
 			useOpacityForHover && Button_styles.root_opacityHover,
-			{padding, width, height},
+			{width, height, padding},
+			fontSize !== undefined && {fontSize},
 			iconPath && {backgroundImage: `url(${iconPath})`},
 			(iconSize && (width || height)) && {
 				padding: 0,
@@ -102,6 +106,9 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			style,
 		);
 		let className_final = `Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`;
+		if (mdIcon) {
+			className_final = className_final + ` mdi mdi-${mdIcon}`;
+		}
 		if (faIcon) {
 			className_final = className_final + ` fas fa-${faIcon}`;
 		}

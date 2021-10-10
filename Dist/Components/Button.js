@@ -53,8 +53,9 @@ export const Button_styles = {
 //@Radium
 let Button = class Button extends BaseComponent {
     render() {
-        let _a = this.props, { enabled, text, title, className, style, size, width, height, useOpacityForHover, iconPath, iconSize, faIcon, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "useOpacityForHover", "iconPath", "iconSize", "faIcon", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
+        let _a = this.props, { enabled, text, title, className, style, size, width, height, useOpacityForHover, iconPath, iconSize, mdIcon, faIcon, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "useOpacityForHover", "iconPath", "iconSize", "mdIcon", "faIcon", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
         let padding = "5px 15px";
+        let fontSize;
         let borderThickness = (style || {}).borderWidth || 1;
         width = width || size;
         height = height || size;
@@ -63,17 +64,21 @@ let Button = class Button extends BaseComponent {
             var heightDifPerSide = (height - baseHeight) / 2;
             padding = (`${heightDifPerSide}px 15px`);
         }
-        if (faIcon) {
+        if (mdIcon || faIcon) {
             width = width !== null && width !== void 0 ? width : 28;
             height = height !== null && height !== void 0 ? height : 28;
             padding = 0;
+            fontSize = 18;
         }
-        let finalStyle = E(Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { padding, width, height }, iconPath && { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {
+        let finalStyle = E(Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { width, height, padding }, fontSize !== undefined && { fontSize }, iconPath && { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {
             padding: 0,
             backgroundPosition: `${(width - borderThickness * 2 - iconSize) / 2}px ${(height - borderThickness * 2 - iconSize) / 2}px`,
             backgroundSize: iconSize
         }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, Button_styles.root_override, style);
         let className_final = `Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`;
+        if (mdIcon) {
+            className_final = className_final + ` mdi mdi-${mdIcon}`;
+        }
         if (faIcon) {
             className_final = className_final + ` fas fa-${faIcon}`;
         }

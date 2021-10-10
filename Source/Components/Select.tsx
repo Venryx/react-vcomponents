@@ -10,7 +10,7 @@ export type Select_Props = {
 	/** If set, overrides compareBy. */ compareByFunc?: CompareByFunc,
 	equateNullAndUndefined?: boolean,
 	value, verifyValue?: boolean, addPlaceholderForInvalidValue?: boolean,
-	enabled?: boolean, className?, title?: string|n, style?, childStyle?, onChange?
+	enabled?: boolean, className?, title?: string|n, style?, childStyle?: Object | ((index: number)=>Object), onChange?
 };
 
 export type Select_Option = {name: string, value, style?};
@@ -141,7 +141,8 @@ export class Select extends BaseComponent<Select_Props, {}> {
 							onChange(newSelectedOption.value);
 						}}>
 					{options.map((option, index)=> {
-						return <Dropdown_OptionUI key={index} index={index} style={E(childStyle, option.style)}>
+						let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
+						return <Dropdown_OptionUI key={index} index={index} style={E(childStyle_final, option.style)}>
 							{option.name}
 						</Dropdown_OptionUI>;
 					})}
@@ -150,11 +151,17 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		}
 		
 		return (
-			<div title={title ?? undefined} /*disabled={enabled != true}*/ style={E({/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style)}>
+			<div className={className} title={title ?? undefined} /*disabled={enabled != true}*/
+				style={E(
+					{/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/},
+					style,
+				)}
+			>
 				{options.map((option, index)=> {
+					let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
 					return <ButtonBar_OptionUI key={index}
 							first={index == 0} last={index == options.length - 1} selected={option.value === value}
-							enabled={enabled!} style={E(childStyle, option.style)} onSelect={e=>onChange && onChange(option.value)}>
+							enabled={enabled!} style={E(childStyle_final, option.style)} onSelect={e=>onChange && onChange(option.value)}>
 						{option.name}
 					</ButtonBar_OptionUI>;
 				})}

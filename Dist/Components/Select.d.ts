@@ -22,7 +22,7 @@ export declare type Select_Props = {
     className?: any;
     title?: string | n;
     style?: any;
-    childStyle?: any;
+    childStyle?: Object | ((index: number) => Object);
     onChange?: any;
 };
 export declare type Select_Option = {
