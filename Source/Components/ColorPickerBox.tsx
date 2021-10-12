@@ -19,10 +19,23 @@ let SketchPicker, chroma;
 	chroma = req("chroma-js");
 }*/
 
+// from: https://casesandberg.github.io/react-color/#api-onChange
+type SketchPickerColorResult = {
+	hex: string,
+	rgb: {r: number, g: number, b: number, a: number},
+	hsl: {r: number, g: number, b: number, a: number},
+};
+
+//export type ColorObj = {r: number, g: number, b: number, a: number};
+export type ColorArray_Input = [number, number, number, number?];
+export type ColorArray = [number, number, number, number];
+
+export type ColorPickerBox_Props = {
+	color: ColorArray_Input, onChange?: (color: ColorArray)=>void, popupStyle?: any,
+};
+
 @ApplyBasicStyles
-export class ColorPickerBox extends BaseComponent<
-			{color: string, onChange?: (color: string)=>void, popupStyle?: any},
-			{show: boolean, color: string}> {
+export class ColorPickerBox extends BaseComponent<ColorPickerBox_Props, {show: boolean, color: ColorArray}> {
 	/*constructor(props) {
 		DynamicImports();
 		super(props);
@@ -36,16 +49,16 @@ export class ColorPickerBox extends BaseComponent<
 		Assert(SketchPicker != null && chroma != null, "You must call ColorPickerBox.Init with the react-color and chroma-js module-exports before creating an instance.");
 	}
 	
-	ComponentWillMountOrReceiveProps(props) {
+	ComponentWillMountOrReceiveProps(props: ColorPickerBox_Props) {
 		let {color} = props;
-		this.SetState({color});
+		this.SetState({color: [color[0], color[1], color[2], color[3] ?? 1]});
 	}
 
   	render() {
 	  	let {onChange, popupStyle} = this.props;
 		let {show, color} = this.state;
 
-		let presetColors = [chroma.hsl(0, 0, 0).css(), chroma.hsl(0, 0, .5).css(), chroma.hsl(0, 0, 1).css()];
+		let presetColors: string[] = [chroma.hsl(0, 0, 0).css(), chroma.hsl(0, 0, .5).css(), chroma.hsl(0, 0, 1).css()];
 		for (let h = 0; h < 360; h = parseInt(h + (360 / 15) + "")) {
 			//for (let s = 0; s <= 1; s += 1 / 2) {
 			let s = 1;
@@ -65,14 +78,12 @@ export class ColorPickerBox extends BaseComponent<
 						<div style={{position: "fixed", top: 0, right: 0, bottom: 0, left: 0}} onClick={()=>this.SetState({show: false})}/>
 						<SketchPicker
 							presetColors={presetColors}
-							color={{r: color.split(",")[0], g: color.split(",")[1], b: color.split(",")[2], a: color.split(",")[3]}}
-							onChange={color=> {
-								let colorStr = color.rgb.VValues().join(",");
-								this.SetState({color: colorStr});
+							color={{r: color[0], g: color[1], b: color[2], a: color[3]}}
+							onChange={(color: SketchPickerColorResult)=> {
+								this.SetState({color: [color.rgb.r, color.rgb.g, color.rgb.b, color.rgb.a]});
 							}}
-							onChangeComplete={color=> {
-								let colorStr = color.rgb.VValues().join(",");
-								if (onChange) onChange(colorStr);
+							onChangeComplete={(color: SketchPickerColorResult)=> {
+								if (onChange) onChange([color.rgb.r, color.rgb.g, color.rgb.b, color.rgb.a]);
 							}}/>
 					</div>}
 			</div>

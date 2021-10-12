@@ -11,17 +11,6 @@ import { Assert, E } from "../Internals/FromJSVE.js";
 //declare var __webpack_require__;
 //declare var Require; // custom function added by webpack-runtime-require (we assume user project has this installed)
 let SketchPicker, chroma;
-/*function DynamicImports() {
-    //let req = eval("require");
-    //let req = __webpack_require__;
-    Assert(Require, "webpack-runtime-require package must be installed (and initialized) to use the ColorPickerBox component.");
-    let req = Require;
-
-    Assert(typeof req("react-color") != "string", "react-color package must be installed (and imported) to use the ColorPickerBox component.");
-    SketchPicker = req("react-color").SketchPicker;
-    Assert(typeof req("chroma-js") != "string", "chroma-js package must be installed (and imported) to use the ColorPickerBox component.");
-    chroma = req("chroma-js");
-}*/
 let ColorPickerBox = class ColorPickerBox extends BaseComponent {
     /*constructor(props) {
         DynamicImports();
@@ -36,8 +25,9 @@ let ColorPickerBox = class ColorPickerBox extends BaseComponent {
         Assert(SketchPicker != null && chroma != null, "You must call ColorPickerBox.Init with the react-color and chroma-js module-exports before creating an instance.");
     }
     ComponentWillMountOrReceiveProps(props) {
+        var _a;
         let { color } = props;
-        this.SetState({ color });
+        this.SetState({ color: [color[0], color[1], color[2], (_a = color[3]) !== null && _a !== void 0 ? _a : 1] });
     }
     render() {
         let { onChange, popupStyle } = this.props;
@@ -56,13 +46,11 @@ let ColorPickerBox = class ColorPickerBox extends BaseComponent {
             show &&
                 React.createElement("div", { style: E({ position: "absolute", zIndex: 2 }, popupStyle) },
                     React.createElement("div", { style: { position: "fixed", top: 0, right: 0, bottom: 0, left: 0 }, onClick: () => this.SetState({ show: false }) }),
-                    React.createElement(SketchPicker, { presetColors: presetColors, color: { r: color.split(",")[0], g: color.split(",")[1], b: color.split(",")[2], a: color.split(",")[3] }, onChange: color => {
-                            let colorStr = color.rgb.VValues().join(",");
-                            this.SetState({ color: colorStr });
-                        }, onChangeComplete: color => {
-                            let colorStr = color.rgb.VValues().join(",");
+                    React.createElement(SketchPicker, { presetColors: presetColors, color: { r: color[0], g: color[1], b: color[2], a: color[3] }, onChange: (color) => {
+                            this.SetState({ color: [color.rgb.r, color.rgb.g, color.rgb.b, color.rgb.a] });
+                        }, onChangeComplete: (color) => {
                             if (onChange)
-                                onChange(colorStr);
+                                onChange([color.rgb.r, color.rgb.g, color.rgb.b, color.rgb.a]);
                         } }))));
     }
 };
