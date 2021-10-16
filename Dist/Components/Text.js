@@ -20,12 +20,17 @@ import { ApplyBasicStyles, BaseComponent } from "react-vextensions";
 import { ReactChildrenAsText, E } from "../Internals/FromJSVE.js";
 let Text = class Text extends BaseComponent {
     render() {
-        let _a = this.props, { wrap, style, children, title } = _a, rest = __rest(_a, ["wrap", "style", "children", "title"]);
+        let _a = this.props, { keepWhitespace, wrap, style, children, title } = _a, rest = __rest(_a, ["keepWhitespace", "wrap", "style", "children", "title"]);
         let textStr = ReactChildrenAsText(children, "");
         let textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
-        // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
-        let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
-        return (React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex", alignItems: "center" }, applyPre && { whiteSpace: "pre" }, style) }), children));
+        // if text starts/ends with a space, keep whitespace by default
+        keepWhitespace !== null && keepWhitespace !== void 0 ? keepWhitespace : (keepWhitespace = textHasEdgeSpaces);
+        wrap !== null && wrap !== void 0 ? wrap : (wrap = true);
+        const whiteSpaceStyle = keepWhitespace && wrap ? { whiteSpace: "pre-wrap" } :
+            keepWhitespace ? { whiteSpace: "pre" } :
+                wrap ? {} : // default behavior
+                    { whiteSpace: "nowrap" };
+        return (React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex", alignItems: "center" }, whiteSpaceStyle, style) }), children));
     }
 };
 Text = __decorate([

@@ -2,6 +2,7 @@
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare type TextProps = {
+    keepWhitespace?: boolean;
     wrap?: boolean;
     style?: any;
 } & HTMLProps_Fixed<"span">;
