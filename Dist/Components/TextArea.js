@@ -26,7 +26,7 @@ var styles = {
         margin: 0,
         /*border: "1px solid #A9A9A9",*/
         padding: "3 5",
-        border: "none",
+        //border: "none",
         //background: "url(/Main/Packages/Images/Tiling/Menu/Menu.png)",
         //color: "#888",
         //cursor: "text",
