@@ -7,14 +7,15 @@ import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 
 AddGlobalStyle(`
 .dropdown {
-    display: inline-block;
+	display: inline-block;
+	position: relative;
 }
 .dropdown__content {
-    display: none;
-    position: absolute;
+	display: none;
+	position: absolute;
 }
 .dropdown--active > .dropdown__content {
-    display: block;
+	display: block;
 }
 /*
 .dropdown__content > * { pointer-events: auto; }
