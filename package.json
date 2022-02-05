@@ -1,7 +1,7 @@
 {
   "name": "react-vcomponents",
   "description": "Components for ReactJS, by Venryx.",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "main": "Dist/index.js",
   "typings": "Dist/index.d.ts",
   "type": "module",
