@@ -16,16 +16,16 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { BaseComponent, ApplyBasicStyles, AddGlobalStyle } from "react-vextensions";
+import { BaseComponent, ApplyBasicStyles, AddGlobalStyle, cssHelper } from "react-vextensions";
 import classnames from "classnames";
-import { E } from "../Internals/FromJSVE.js";
 AddGlobalStyle(`
 .Grid_WithSingleItem > * { grid-area: 1/1/1/1; }
 `);
 let Grid = class Grid extends BaseComponent {
     render() {
         let _a = this.props, { single, centerY, className, style, title } = _a, rest = __rest(_a, ["single", "centerY", "className", "style", "title"]);
-        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classnames(className, single && "Grid_WithSingleItem"), style: E({ display: "grid" }, centerY && { alignItems: "center" }, style) }));
+        const { css } = cssHelper(this);
+        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classnames(className, single && "Grid_WithSingleItem"), style: css({ display: "grid" }, centerY && { alignItems: "center" }, style) }));
     }
 };
 Grid = __decorate([

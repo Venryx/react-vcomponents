@@ -1,5 +1,5 @@
 import React from "react";
-import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
+import {ApplyBasicStyles, BaseComponent, cssHelper} from "react-vextensions";
 import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {ReactChildrenAsText, E} from "../Internals/FromJSVE.js";
 
@@ -19,14 +19,15 @@ export class Text extends BaseComponent<TextProps, {}> {
 		wrap ??= true;
 
 		const whiteSpaceStyle =
-			keepWhitespace && wrap ? {whiteSpace: "pre-wrap"} :
-			keepWhitespace ? {whiteSpace: "pre"} :
+			keepWhitespace && wrap ? {whiteSpace: "pre-wrap"} as const :
+			keepWhitespace ? {whiteSpace: "pre"} as const :
 			wrap ? {} : // default behavior
-			{whiteSpace: "nowrap"};
+			{whiteSpace: "nowrap"} as const;
 
+		const {css} = cssHelper(this);
 		return (
 			<span {...rest} title={title ?? undefined}
-					style={E(
+					style={css(
 						{display: "flex", alignItems: "center"},
 						whiteSpaceStyle,
 						style

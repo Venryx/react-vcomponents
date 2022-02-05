@@ -1,9 +1,7 @@
-import {cloneElement} from "react";
-import {BaseComponent, AddGlobalStyle, GetDOM, BaseComponentPlus} from "react-vextensions";
-import React from "react";
 import classNames from "classnames";
-import {E} from "../Internals/FromJSVE.js";
-import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
+import React, {cloneElement} from "react";
+import {AddGlobalStyle, BaseComponent, cssHelper, GetDOM} from "react-vextensions";
+import {HTMLProps_Fixed} from "../@Types.js";
 
 AddGlobalStyle(`
 .dropdown {
@@ -38,7 +36,7 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?, activ
 	}
 	private OnWindowClick = (event)=> {
 		const dropdownElement = GetDOM(this);
-		if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && this.IsActive()) {
+		if (event.target !== dropdownElement && !dropdownElement!.contains(event.target) && this.IsActive()) {
 			this.Hide();
 		}
 	};
@@ -124,8 +122,9 @@ export class DropDownTrigger extends BaseComponent<{}, {}> {
 export class DropDownContent extends BaseComponent<{className?, style?} & HTMLProps_Fixed<"div">, {}> {
 	render() {
 		const {children, className, style, title, ...rest} = this.props;
+		const {css} = cssHelper(this);
 		return (
-			<div {...rest} title={title ?? undefined} className={classNames("dropdown__content", className)} style={E(
+			<div {...rest} title={title ?? undefined} className={classNames("dropdown__content", className)} style={css(
 				{padding: 10, background: "rgba(0,0,0,.7)"},
 				style,
 			)}>

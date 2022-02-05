@@ -9,11 +9,9 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { cloneElement } from "react";
-import { BaseComponent, AddGlobalStyle, GetDOM } from "react-vextensions";
-import React from "react";
 import classNames from "classnames";
-import { E } from "../Internals/FromJSVE.js";
+import React, { cloneElement } from "react";
+import { AddGlobalStyle, BaseComponent, cssHelper, GetDOM } from "react-vextensions";
 AddGlobalStyle(`
 .dropdown {
 	display: inline-block;
@@ -127,6 +125,7 @@ export class DropDownTrigger extends BaseComponent {
 export class DropDownContent extends BaseComponent {
     render() {
         const _a = this.props, { children, className, style, title } = _a, rest = __rest(_a, ["children", "className", "style", "title"]);
-        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classNames("dropdown__content", className), style: E({ padding: 10, background: "rgba(0,0,0,.7)" }, style) }), children));
+        const { css } = cssHelper(this);
+        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classNames("dropdown__content", className), style: css({ padding: 10, background: "rgba(0,0,0,.7)" }, style) }), children));
     }
 }

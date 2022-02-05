@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles, cssHelper} from "react-vextensions";
 import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
@@ -8,7 +8,7 @@ import {E} from "../Internals/FromJSVE.js";
 		var {style, height, children, ...otherProps} = this.props;
 		height = height != null ? height : (style||{}).height;
 		return (
-			<div {...otherProps} style={E(BasicStyles(this.props), style,
+			<div {...otherProps} style={css(BasicStyles(this.props), style,
 					//height != null ? {height} : {flex: 1})}>
 					height != null && {height})}>
 				{children}
@@ -22,11 +22,11 @@ export class RowLR extends BaseComponent<{height?, className?, rowStyle?, leftSt
 		var {height, className, rowStyle, leftStyle, rightStyle, children} = this.props;
         Assert((children as any).length == 2, "Row child-count must be 2. (one for left-side, one for right-side)");
 		return (
-			<div className={"row3 clear " + (className || "")} style={E(height != null && {height}, rowStyle)}>
-				<div style={E({float: "left", width: "50%"}, leftStyle)}>
+			<div className={"row3 clear " + (className || "")} style={css(height != null && {height}, rowStyle)}>
+				<div style={css({float: "left", width: "50%"}, leftStyle)}>
 					{children[0]}
 				</div>
-				<div style={E({float: "right", width: "50%"}, rightStyle)}>
+				<div style={css({float: "right", width: "50%"}, rightStyle)}>
 					{children[1]}
 				</div>
 			</div>
@@ -39,7 +39,8 @@ export type RowProps = {noShrink?, center?, style?} & HTMLProps_Fixed<"div">;
 export class Row extends BaseComponent<RowProps, {}> {
 	render() {
 		let {noShrink, center, style, title, ...rest} = this.props;
-		return <div {...rest} title={title ?? undefined} style={E({display: "flex"}, noShrink && {flexShrink: 0}, center && {alignItems: "center"}, style)}/>
+		const {css} = cssHelper(this);
+		return <div {...rest} title={title ?? undefined} style={css({display: "flex"}, noShrink && {flexShrink: 0}, center && {alignItems: "center"}, style)}/>
 	}
 }
 
@@ -57,15 +58,16 @@ export class RowLR extends BaseComponent<RowLRProps, {}> {
 		}*/
 
 		let childrenList = children as any[];
+		const {css} = cssHelper(this);
 		return (
-			<div {...rest} title={title ?? undefined} style={E({display: "flex", flexShrink: 0}, style)}>
-				<Row center style={E(
+			<div {...rest} title={title ?? undefined} style={css({display: "flex", flexShrink: 0}, style)}>
+				<Row center style={css(
 					{width: typeof splitAt == "string" ? splitAt + "%" : splitAt},
 					leftStyle
 				)}>
 					{children![0]}
 				</Row>
-				<Row center style={E(
+				<Row center style={css(
 					{width: typeof splitAt == "string" ? (100 - parseInt(splitAt.slice(0, -1))) + "%" : `calc(100% - ${splitAt}px)`},
 					rightStyle
 				)}>

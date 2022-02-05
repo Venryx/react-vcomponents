@@ -16,12 +16,12 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { BaseComponent, ApplyBasicStyles } from "react-vextensions";
-import { E } from "../Internals/FromJSVE.js";
+import { BaseComponent, ApplyBasicStyles, cssHelper } from "react-vextensions";
 let Row = class Row extends BaseComponent {
     render() {
         let _a = this.props, { noShrink, center, style, title } = _a, rest = __rest(_a, ["noShrink", "center", "style", "title"]);
-        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
+        const { css } = cssHelper(this);
+        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: css({ display: "flex" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
     }
 };
 Row = __decorate([
@@ -37,9 +37,10 @@ let RowLR = class RowLR extends BaseComponent {
             children[1] = children[1].props.children;
         }*/
         let childrenList = children;
-        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex", flexShrink: 0 }, style) }),
-            React.createElement(Row, { center: true, style: E({ width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]),
-            React.createElement(Row, { center: true, style: E({ width: typeof splitAt == "string" ? (100 - parseInt(splitAt.slice(0, -1))) + "%" : `calc(100% - ${splitAt}px)` }, rightStyle) },
+        const { css } = cssHelper(this);
+        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: css({ display: "flex", flexShrink: 0 }, style) }),
+            React.createElement(Row, { center: true, style: css({ width: typeof splitAt == "string" ? splitAt + "%" : splitAt }, leftStyle) }, children[0]),
+            React.createElement(Row, { center: true, style: css({ width: typeof splitAt == "string" ? (100 - parseInt(splitAt.slice(0, -1))) + "%" : `calc(100% - ${splitAt}px)` }, rightStyle) },
                 childrenList.length == 2 && childrenList[1],
                 childrenList.length > 2 && childrenList.slice(1))));
     }

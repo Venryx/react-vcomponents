@@ -16,8 +16,8 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { ApplyBasicStyles, BaseComponent } from "react-vextensions";
-import { ReactChildrenAsText, E } from "../Internals/FromJSVE.js";
+import { ApplyBasicStyles, BaseComponent, cssHelper } from "react-vextensions";
+import { ReactChildrenAsText } from "../Internals/FromJSVE.js";
 let Text = class Text extends BaseComponent {
     render() {
         let _a = this.props, { keepWhitespace, wrap, style, children, title } = _a, rest = __rest(_a, ["keepWhitespace", "wrap", "style", "children", "title"]);
@@ -30,7 +30,8 @@ let Text = class Text extends BaseComponent {
             keepWhitespace ? { whiteSpace: "pre" } :
                 wrap ? {} : // default behavior
                     { whiteSpace: "nowrap" };
-        return (React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex", alignItems: "center" }, whiteSpaceStyle, style) }), children));
+        const { css } = cssHelper(this);
+        return (React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: css({ display: "flex", alignItems: "center" }, whiteSpaceStyle, style) }), children));
     }
 };
 Text = __decorate([

@@ -1,5 +1,5 @@
 import React from "react";
-import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
+import {ApplyBasicStyles, BaseComponent, cssHelper} from "react-vextensions";
 import {n} from "../@Types.js";
 import {Assert, AssertWarn, E, RemoveDuplicates} from "../Internals/FromJSVE.js";
 
@@ -118,6 +118,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 	render() {
 		var {displayType, value, verifyValue, enabled, className, title, style, childStyle, onChange} = this.props;
 		var options = this.OptionsList;
+		const {css} = cssHelper(this);
 		
 		let valueValid = this.GetIndexOfOptionMatchingValue(value) != -1 && !this.GetOptionMatchingValue()?.name.startsWith(`[invalid: "`);
 		// if there are no options yet, or value provided is null, don't require match, since this may be a pre-data render
@@ -134,7 +135,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		if (displayType == "dropdown") {
 			return (
 				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + this.GetIndexOfOptionMatchingValue(value)}
-						className={className} title={title ?? undefined} style={E({color: "#000"}, style)} onChange={e=> {
+						className={className} title={title ?? undefined} style={css({color: "#000"}, style)} onChange={e=> {
 							if (!onChange) return;
 							var newSelectedIndex = this.root!.selectedIndex;
 							let newSelectedOption = this.OptionsList[newSelectedIndex];
@@ -142,7 +143,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 						}}>
 					{options.map((option, index)=> {
 						let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
-						return <Dropdown_OptionUI key={index} index={index} style={E(childStyle_final, option.style)}>
+						return <Dropdown_OptionUI key={index} index={index} style={css(childStyle_final, option.style)}>
 							{option.name}
 						</Dropdown_OptionUI>;
 					})}
@@ -152,7 +153,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		
 		return (
 			<div className={className} title={title ?? undefined} /*disabled={enabled != true}*/
-				style={E(
+				style={css(
 					{/*borderRadius: 4, background: "rgba(255,255,255,.3)"*/},
 					style,
 				)}
@@ -161,7 +162,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 					let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
 					return <ButtonBar_OptionUI key={index}
 							first={index == 0} last={index == options.length - 1} selected={option.value === value}
-							enabled={enabled!} style={E(childStyle_final, option.style)} onSelect={e=>onChange && onChange(option.value)}>
+							enabled={enabled!} style={css(childStyle_final, option.style)} onSelect={e=>onChange && onChange(option.value)}>
 						{option.name}
 					</ButtonBar_OptionUI>;
 				})}
@@ -173,8 +174,9 @@ export class Select extends BaseComponent<Select_Props, {}> {
 export class Dropdown_OptionUI extends BaseComponent<{index, style}, {}> {
 	render() {
 	    var {index, style, children} = this.props;
-	    return (
-			<option value={`value${index}`} style={E({color: "#000"}, style)}>
+		const {css} = cssHelper(this);
+		return (
+			<option value={`value${index}`} style={css({color: "#000"}, style)}>
 				{children}
 			</option>
 		);
@@ -185,11 +187,12 @@ export class ButtonBar_OptionUI extends BaseComponent<{first: boolean, last: boo
 	render() {
 		 let {first, last, selected, enabled,style, onSelect, children} = this.props;
 		 let {hovered} = this.state;
-	    return (
+		const {css} = cssHelper(this);
+		return (
 			<div className="ButtonBar_OptionUI"
 				onMouseEnter={()=>{ if (enabled) this.SetState({hovered: true}) }}
 				onMouseLeave={()=>{ if (enabled) this.SetState({hovered: false}) }}
-				style={E(
+				style={css(
 					{display: "inline-block", background: "rgba(255,255,255,.3)", padding: "5px 12px", cursor: "pointer"},
 					hovered && {background: "rgba(255,255,255,.5)"},
 					first && {borderRadius: "4px 0 0 4px"},

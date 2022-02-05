@@ -6,9 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var CheckBox_1;
 import React from "react";
-import { BaseComponent, ApplyBasicStyles } from "react-vextensions";
+import { BaseComponent, ApplyBasicStyles, cssHelper } from "react-vextensions";
 import { Row } from "./Row.js";
-import { ReactChildrenAsText, E } from "../Internals/FromJSVE.js";
+import { ReactChildrenAsText } from "../Internals/FromJSVE.js";
 let CheckBox = CheckBox_1 = class CheckBox extends BaseComponent {
     constructor(props) {
         super(props);
@@ -22,7 +22,8 @@ let CheckBox = CheckBox_1 = class CheckBox extends BaseComponent {
         let textHasEdgeSpaces = textStr.startsWith(" ") || textStr.endsWith(" ");
         // if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
         let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
-        return (React.createElement(Row, Object.assign({}, containerProps, { center: true, title: title !== null && title !== void 0 ? title : undefined, style: E({ position: "relative" }, style) }),
+        const { css } = cssHelper(this);
+        return (React.createElement(Row, Object.assign({}, containerProps, { center: true, title: title !== null && title !== void 0 ? title : undefined, style: css({ position: "relative" }, style) }),
             React.createElement("input", Object.assign({ ref: c => this.input = c }, checkboxProps, { id: "checkBox_" + this.id, type: "checkbox", disabled: enabled != true, checked: value == true, onChange: e => {
                     // if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)
                     if (value == "partial") {
@@ -33,7 +34,7 @@ let CheckBox = CheckBox_1 = class CheckBox extends BaseComponent {
                     onChange === null || onChange === void 0 ? void 0 : onChange(this.input.checked, e);
                 }, style: checkboxStyle })),
             text &&
-                React.createElement("label", Object.assign({}, labelProps, { htmlFor: "checkBox_" + this.id, style: E({ marginLeft: 3 }, applyPre && { whiteSpace: "pre" }, labelStyle) }),
+                React.createElement("label", Object.assign({}, labelProps, { htmlFor: "checkBox_" + this.id, style: css({ marginLeft: 3 }, applyPre && { whiteSpace: "pre" }, labelStyle) }),
                     React.createElement("span", null),
                     text))
         /*<input ref={c=>this.input = c} type="checkbox"

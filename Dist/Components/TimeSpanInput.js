@@ -10,8 +10,8 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { BaseComponentPlus } from "react-vextensions";
-import { ToNumber, Assert, NumberCES_KeepBetween, E } from "../Internals/FromJSVE.js";
+import { BaseComponentPlus, cssHelper } from "react-vextensions";
+import { ToNumber, Assert, NumberCES_KeepBetween } from "../Internals/FromJSVE.js";
 import { TextInput } from "./TextInput.js";
 export const TimeUnit_values = ["second", "minute", "hour", "day", "week"];
 export const TimeUnit_stepUpMultipliers = [0, 60, 60, 24, 7];
@@ -62,7 +62,8 @@ export class TimeSpanInput extends BaseComponentPlus({ largeUnit: "minute", smal
                 valueStr = `${signStr}${valueAbs}${TimeUnit_labels[smallUnit]}`;
             }
         }
-        let inputItself = (React.createElement(TextInput, Object.assign({}, rest, { style: E({ width: 70 }, style), value: valueStr, onChange: valStr => {
+        const { css } = cssHelper(this);
+        let inputItself = (React.createElement(TextInput, Object.assign({}, rest, { style: css({ width: 70 }, style), value: valueStr, onChange: valStr => {
                 const isNegative = valStr.includes("-");
                 const strNoSign = isNegative ? valStr.replace(/-/g, "") : valStr;
                 const segments = strNoSign.split(":").map(a => a.trim());

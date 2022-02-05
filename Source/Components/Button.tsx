@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles} from "react-vextensions";
+import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles, cssHelper} from "react-vextensions";
 import {FixHTMLProps, HTMLProps_Fixed, n} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
@@ -39,7 +39,7 @@ export const Button_styles = {
 	},
 	root_override: {},
 	checkbox: {marginLeft: -6},
-};
+} as const;
 
 /*AddGlobalStyle(`
 .Button:hover { background-color: rgba(90,100,110,.8) !important; }
@@ -70,6 +70,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			onLeftClick, children,
 			...rest
 		} = this.props;
+		const {css} = cssHelper(this);
 
 		let padding: string|number = "5px 15px";
 		let fontSize: number|n;
@@ -89,7 +90,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			fontSize = 18;
 		}
 		
-		let finalStyle = E(
+		let finalStyle = css("finalStyle",
 			Button_styles.root,
 			useOpacityForHover && Button_styles.root_opacityHover,
 			{width, height, padding},
@@ -125,7 +126,7 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 					if (onLeftClick && e.button == 0) onLeftClick(e);
 				}}
 			>
-				{/*hasCheckbox && <CheckBox value={checked} style={E(styles.checkbox, checkboxStyle)} labelStyle={checkboxLabelStyle}
+				{/*hasCheckbox && <CheckBox value={checked} style={css(styles.checkbox, checkboxStyle)} labelStyle={checkboxLabelStyle}
 					onChange={checked=>onCheckedChanged && onCheckedChanged(checked)}/>*/}
 				{hasCheckbox
 					? <span style={{verticalAlign: 4}}>{text}</span>

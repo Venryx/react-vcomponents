@@ -16,11 +16,10 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { BaseComponent, AddGlobalStyle, ApplyBasicStyles } from "react-vextensions";
+import { BaseComponent, AddGlobalStyle, ApplyBasicStyles, cssHelper } from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
 import * as keycode from "keycode";
 import classnames from "classnames";
-import { E } from "../Internals/FromJSVE.js";
 var styles = {
     root: {
         margin: 0,
@@ -59,7 +58,8 @@ let TextArea = class TextArea extends BaseComponent {
         //let Comp = autoSize ? TextAreaAutoSize : "textarea";
         //let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
         let Comp = autoSize ? TextAreaAutoSize : "textarea";
-        return React.createElement(Comp, Object.assign({}, rest, { ref: c => this.root = c, title: title !== null && title !== void 0 ? title : undefined, disabled: enabled != true, readOnly: !editable, className: classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: E(styles.root, autoSize && {
+        const { css } = cssHelper(this);
+        return React.createElement(Comp, Object.assign({}, rest, { ref: c => this.root = c, title: title !== null && title !== void 0 ? title : undefined, disabled: enabled != true, readOnly: !editable, className: classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: css(styles.root, autoSize && {
                 resize: "none",
                 overflow: "hidden",
             }, autoSize_minHeight && minHeight != null && { minHeight }, style) }, autoSize_minHeight && { onHeightChange: height => {

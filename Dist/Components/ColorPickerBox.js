@@ -5,8 +5,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import React from "react";
-import { BaseComponent, ApplyBasicStyles } from "react-vextensions";
-import { Assert, E } from "../Internals/FromJSVE.js";
+import { BaseComponent, ApplyBasicStyles, cssHelper } from "react-vextensions";
+import { Assert } from "../Internals/FromJSVE.js";
 //declare var require;
 //declare var __webpack_require__;
 //declare var Require; // custom function added by webpack-runtime-require (we assume user project has this installed)
@@ -40,11 +40,12 @@ let ColorPickerBox = class ColorPickerBox extends BaseComponent {
                 presetColors.push(chroma.hsl(h, s, l).css());
             }
         }
+        const { css } = cssHelper(this);
         return (React.createElement("div", null,
             React.createElement("div", { style: { padding: 5, background: "#fff", borderRadius: 1, boxShadow: "0 0 0 1px rgba(0,0,0,.1)", display: "inline-block", cursor: "pointer" }, onClick: () => this.SetState({ show: !show }) },
                 React.createElement("div", { style: { width: 36, height: 14, borderRadius: 2, background: `rgba(${color})` } })),
             show &&
-                React.createElement("div", { style: E({ position: "absolute", zIndex: 2 }, popupStyle) },
+                React.createElement("div", { style: css({ position: "absolute", zIndex: 2 }, popupStyle) },
                     React.createElement("div", { style: { position: "fixed", top: 0, right: 0, bottom: 0, left: 0 }, onClick: () => this.SetState({ show: false }) }),
                     React.createElement(SketchPicker, { presetColors: presetColors, color: { r: color[0], g: color[1], b: color[2], a: color[3] }, onChange: (color) => {
                             this.SetState({ color: [color.rgb.r, color.rgb.g, color.rgb.b, color.rgb.a] });

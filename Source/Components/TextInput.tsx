@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles, cssHelper} from "react-vextensions";
 import * as keycode from "keycode";
 import {E} from "../Internals/FromJSVE.js";
 import {FixHTMLProps, HTMLProps_Fixed, n} from "../@Types.js";
@@ -32,8 +32,10 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 			...rest
 		} = this.props;
 		var {editedValue} = this.state;
+		
+		const {css} = cssHelper(this);
 		return (
-			<input {...rest} ref={c=>this.root = c} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} style={E({color: "black"}, style)}
+			<input {...rest} ref={c=>this.root = c} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} style={css({color: "black"}, style)}
 				value={editedValue != null ? editedValue : (value || "")}
 				onChange={e=> {
 					var newVal = e.target.value;

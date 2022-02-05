@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles, cssHelper} from "react-vextensions";
 import {Assert, E} from "../Internals/FromJSVE.js";
 
 //declare var require;
@@ -67,6 +67,7 @@ export class ColorPickerBox extends BaseComponent<ColorPickerBox_Props, {show: b
 			}
 		}
 
+		const {css} = cssHelper(this);
 		return (
 			<div>
 				<div style={{padding: 5, background: "#fff", borderRadius: 1, boxShadow: "0 0 0 1px rgba(0,0,0,.1)", display: "inline-block", cursor: "pointer"}}
@@ -74,7 +75,7 @@ export class ColorPickerBox extends BaseComponent<ColorPickerBox_Props, {show: b
 					<div style={{width: 36, height: 14, borderRadius: 2, background: `rgba(${color})`}}/>
 				</div>
 				{show &&
-					<div style={E({position: "absolute", zIndex: 2}, popupStyle)}>
+					<div style={css({position: "absolute", zIndex: 2}, popupStyle)}>
 						<div style={{position: "fixed", top: 0, right: 0, bottom: 0, left: 0}} onClick={()=>this.SetState({show: false})}/>
 						<SketchPicker
 							presetColors={presetColors}

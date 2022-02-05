@@ -6,8 +6,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var Select_1;
 import React from "react";
-import { ApplyBasicStyles, BaseComponent } from "react-vextensions";
-import { Assert, AssertWarn, E, RemoveDuplicates } from "../Internals/FromJSVE.js";
+import { ApplyBasicStyles, BaseComponent, cssHelper } from "react-vextensions";
+import { Assert, AssertWarn, RemoveDuplicates } from "../Internals/FromJSVE.js";
 export const compareBy_defaultFuncs = {
     name: (option, value) => option.name === value,
     value: (option, value) => {
@@ -98,6 +98,7 @@ let Select = Select_1 = class Select extends BaseComponent {
         var _a;
         var { displayType, value, verifyValue, enabled, className, title, style, childStyle, onChange } = this.props;
         var options = this.OptionsList;
+        const { css } = cssHelper(this);
         let valueValid = this.GetIndexOfOptionMatchingValue(value) != -1 && !((_a = this.GetOptionMatchingValue()) === null || _a === void 0 ? void 0 : _a.name.startsWith(`[invalid: "`));
         // if there are no options yet, or value provided is null, don't require match, since this may be a pre-data render
         if (options.length && value != null && verifyValue) {
@@ -108,7 +109,7 @@ let Select = Select_1 = class Select extends BaseComponent {
             return <Option key={index} index={index} style={child.props.style}>{child.props.children}</Option>;
         });*/
         if (displayType == "dropdown") {
-            return (React.createElement("select", { ref: c => this.root = c, disabled: enabled != true, value: "value" + this.GetIndexOfOptionMatchingValue(value), className: className, title: title !== null && title !== void 0 ? title : undefined, style: E({ color: "#000" }, style), onChange: e => {
+            return (React.createElement("select", { ref: c => this.root = c, disabled: enabled != true, value: "value" + this.GetIndexOfOptionMatchingValue(value), className: className, title: title !== null && title !== void 0 ? title : undefined, style: css({ color: "#000" }, style), onChange: e => {
                     if (!onChange)
                         return;
                     var newSelectedIndex = this.root.selectedIndex;
@@ -116,12 +117,12 @@ let Select = Select_1 = class Select extends BaseComponent {
                     onChange(newSelectedOption.value);
                 } }, options.map((option, index) => {
                 let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
-                return React.createElement(Dropdown_OptionUI, { key: index, index: index, style: E(childStyle_final, option.style) }, option.name);
+                return React.createElement(Dropdown_OptionUI, { key: index, index: index, style: css(childStyle_final, option.style) }, option.name);
             })));
         }
-        return (React.createElement("div", { className: className, title: title !== null && title !== void 0 ? title : undefined, style: E({ /*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map((option, index) => {
+        return (React.createElement("div", { className: className, title: title !== null && title !== void 0 ? title : undefined, style: css({ /*borderRadius: 4, background: "rgba(255,255,255,.3)"*/}, style) }, options.map((option, index) => {
             let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
-            return React.createElement(ButtonBar_OptionUI, { key: index, first: index == 0, last: index == options.length - 1, selected: option.value === value, enabled: enabled, style: E(childStyle_final, option.style), onSelect: e => onChange && onChange(option.value) }, option.name);
+            return React.createElement(ButtonBar_OptionUI, { key: index, first: index == 0, last: index == options.length - 1, selected: option.value === value, enabled: enabled, style: css(childStyle_final, option.style), onSelect: e => onChange && onChange(option.value) }, option.name);
         })));
     }
 };
@@ -139,16 +140,18 @@ export { Select };
 export class Dropdown_OptionUI extends BaseComponent {
     render() {
         var { index, style, children } = this.props;
-        return (React.createElement("option", { value: `value${index}`, style: E({ color: "#000" }, style) }, children));
+        const { css } = cssHelper(this);
+        return (React.createElement("option", { value: `value${index}`, style: css({ color: "#000" }, style) }, children));
     }
 }
 export class ButtonBar_OptionUI extends BaseComponent {
     render() {
         let { first, last, selected, enabled, style, onSelect, children } = this.props;
         let { hovered } = this.state;
+        const { css } = cssHelper(this);
         return (React.createElement("div", { className: "ButtonBar_OptionUI", onMouseEnter: () => { if (enabled)
                 this.SetState({ hovered: true }); }, onMouseLeave: () => { if (enabled)
-                this.SetState({ hovered: false }); }, style: E({ display: "inline-block", background: "rgba(255,255,255,.3)", padding: "5px 12px", cursor: "pointer" }, hovered && { background: "rgba(255,255,255,.5)" }, first && { borderRadius: "4px 0 0 4px" }, !first && { border: "solid #222", borderWidth: "0 0 0 1px" }, last && { borderRadius: "0 4px 4px 0" }, first && last && { borderRadius: "4px" }, selected && { background: "rgba(255,255,255,.5)" }, !enabled && { opacity: .5, cursor: "default" }, style), onClick: enabled ? onSelect : null }, children));
+                this.SetState({ hovered: false }); }, style: css({ display: "inline-block", background: "rgba(255,255,255,.3)", padding: "5px 12px", cursor: "pointer" }, hovered && { background: "rgba(255,255,255,.5)" }, first && { borderRadius: "4px 0 0 4px" }, !first && { border: "solid #222", borderWidth: "0 0 0 1px" }, last && { borderRadius: "0 4px 4px 0" }, first && last && { borderRadius: "4px" }, selected && { background: "rgba(255,255,255,.5)" }, !enabled && { opacity: .5, cursor: "default" }, style), onClick: enabled ? onSelect : null }, children));
     }
 }
 /*export class Select_Auto extends BaseComponent<

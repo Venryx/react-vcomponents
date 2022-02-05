@@ -1,5 +1,5 @@
 import React from "react";
-import {ApplyBasicStyles, BaseComponent} from "react-vextensions";
+import {ApplyBasicStyles, BaseComponent, cssHelper} from "react-vextensions";
 import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
@@ -13,9 +13,10 @@ export type SpanProps = {pre?} & HTMLProps_Fixed<"span">;
 @ApplyBasicStyles
 export class Span extends BaseComponent<SpanProps, {}> {
     render() {
+		const {css} = cssHelper(this);
 		var {pre, style, title, ...rest} = this.props;
-        return <span {...rest} title={title ?? undefined} style={E(style, pre && {whiteSpace: "pre"})}/>;
-    }
+        return <span {...rest} title={title ?? undefined} style={css(style, pre && {whiteSpace: "pre"})}/>;
+	}
 }
 
 export type PreProps = {allowWrap?: boolean} & HTMLProps_Fixed<"span">;
@@ -24,7 +25,8 @@ export type PreProps = {allowWrap?: boolean} & HTMLProps_Fixed<"span">;
 export class Pre extends BaseComponent<PreProps, {}> {
 	render() {
 		let {allowWrap, style, children, title, ...rest} = this.props;
-		return <span {...rest} title={title ?? undefined} style={E({whiteSpace: allowWrap ? "pre-wrap" : "pre"}, style)}>{children}</span>;
+		const {css} = cssHelper(this);
+		return <span {...rest} title={title ?? undefined} style={css({whiteSpace: allowWrap ? "pre-wrap" : "pre"}, style)}>{children}</span>;
 	}
 }
 

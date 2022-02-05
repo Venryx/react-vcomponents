@@ -1,5 +1,5 @@
 import React from "react";
-import {BaseComponent, AddGlobalStyle, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, AddGlobalStyle, ApplyBasicStyles, cssHelper} from "react-vextensions";
 import TextAreaAutoSize from "react-textarea-autosize";
 import * as keycode from "keycode";
 import classnames from "classnames";
@@ -30,7 +30,7 @@ var styles = {
 		opacity: .7,
 		cursor: "default",
 	}
-};
+} as const;
 
 AddGlobalStyle(`
 .autoSize_minHeight {
@@ -61,8 +61,9 @@ export class TextArea extends BaseComponent
 		//let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
 		let Comp: React.DetailedHTMLFactory<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
 
+		const {css} = cssHelper(this);
 		return <Comp {...rest} ref={c=>this.root = c} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}
-			style={E(
+			style={css(
 				styles.root,
 				autoSize && {
 					resize: "none",

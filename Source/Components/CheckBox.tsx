@@ -1,5 +1,5 @@
 import React, {InputHTMLAttributes, LabelHTMLAttributes} from "react";
-import {BaseComponent, ApplyBasicStyles} from "react-vextensions";
+import {BaseComponent, ApplyBasicStyles, cssHelper} from "react-vextensions";
 import {Row, RowProps} from "./Row.js";
 import {ReactChildrenAsText, E, Assert} from "../Internals/FromJSVE.js";
 import {n} from "../@Types.js";
@@ -34,8 +34,9 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 		// if text starts/ends with a space, apply "pre" by default, since otherwise the space gets trimmed
 		let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
 
+		const {css} = cssHelper(this);
 		return (
-			<Row {...containerProps as any} center title={title ?? undefined} style={E({position: "relative"}, style)}>
+			<Row {...containerProps as any} center title={title ?? undefined} style={css({position: "relative"}, style)}>
 				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value == true}
 					onChange={e=>{
 						// if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)
@@ -48,7 +49,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 						onChange?.(this.input!.checked, e);
 					}} style={checkboxStyle}/>
 				{text &&
-				<label {...labelProps} htmlFor={"checkBox_" + this.id} style={E({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
+				<label {...labelProps} htmlFor={"checkBox_" + this.id} style={css({marginLeft: 3}, applyPre && {whiteSpace: "pre"}, labelStyle)}><span/>{text}</label>}
 			</Row>
 			/*<input ref={c=>this.input = c} type="checkbox"
 				checked={editedValue != null ? editedValue : (checked || false)}

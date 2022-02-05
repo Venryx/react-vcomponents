@@ -16,12 +16,12 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { BaseComponent, ApplyBasicStyles } from "react-vextensions";
-import { E } from "../Internals/FromJSVE.js";
+import { BaseComponent, ApplyBasicStyles, cssHelper } from "react-vextensions";
 let Column = class Column extends BaseComponent {
     render() {
         let _a = this.props, { noShrink, center, style, title } = _a, rest = __rest(_a, ["noShrink", "center", "style", "title"]);
-        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ display: "flex", flexDirection: "column" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
+        const { css } = cssHelper(this);
+        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: css({ display: "flex", flexDirection: "column" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
     }
 };
 Column = __decorate([

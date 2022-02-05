@@ -16,8 +16,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { BaseComponent, ApplyBasicStyles, ClassBasedStyles } from "react-vextensions";
-import { E } from "../Internals/FromJSVE.js";
+import { BaseComponent, ApplyBasicStyles, ClassBasedStyles, cssHelper } from "react-vextensions";
 export const Button_styles = {
     root: {
         //display: "inline-block",
@@ -54,6 +53,7 @@ export const Button_styles = {
 let Button = class Button extends BaseComponent {
     render() {
         let _a = this.props, { enabled, text, title, className, style, size, width, height, useOpacityForHover, iconPath, iconSize, mdIcon, faIcon, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "useOpacityForHover", "iconPath", "iconSize", "mdIcon", "faIcon", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
+        const { css } = cssHelper(this);
         let padding = "5px 15px";
         let fontSize;
         let borderThickness = (style || {}).borderWidth || 1;
@@ -70,7 +70,7 @@ let Button = class Button extends BaseComponent {
             padding = 0;
             fontSize = 18;
         }
-        let finalStyle = E(Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { width, height, padding }, fontSize !== undefined && { fontSize }, iconPath && { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {
+        let finalStyle = css("finalStyle", Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { width, height, padding }, fontSize !== undefined && { fontSize }, iconPath && { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {
             padding: 0,
             backgroundPosition: `${(width - borderThickness * 2 - iconSize) / 2}px ${(height - borderThickness * 2 - iconSize) / 2}px`,
             backgroundSize: iconSize

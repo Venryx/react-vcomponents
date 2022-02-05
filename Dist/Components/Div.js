@@ -16,8 +16,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import React from "react";
-import { ApplyBasicStyles, BaseComponent } from "react-vextensions";
-import { E } from "../Internals/FromJSVE.js";
+import { ApplyBasicStyles, BaseComponent, cssHelper } from "react-vextensions";
 function Global(target) {
     if (typeof window == "undefined")
         return;
@@ -25,8 +24,9 @@ function Global(target) {
 }
 let Span = class Span extends BaseComponent {
     render() {
+        const { css } = cssHelper(this);
         var _a = this.props, { pre, style, title } = _a, rest = __rest(_a, ["pre", "style", "title"]);
-        return React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E(style, pre && { whiteSpace: "pre" }) }));
+        return React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: css(style, pre && { whiteSpace: "pre" }) }));
     }
 };
 Span = __decorate([
@@ -37,7 +37,8 @@ export { Span };
 let Pre = class Pre extends BaseComponent {
     render() {
         let _a = this.props, { allowWrap, style, children, title } = _a, rest = __rest(_a, ["allowWrap", "style", "children", "title"]);
-        return React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: E({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
+        const { css } = cssHelper(this);
+        return React.createElement("span", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: css({ whiteSpace: allowWrap ? "pre-wrap" : "pre" }, style) }), children);
     }
 };
 Pre = __decorate([

@@ -2,39 +2,39 @@
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare const Button_styles: {
-    root: {
-        display: string;
-        alignItems: string;
-        justifyContent: string;
-        backgroundColor: string;
-        backgroundRepeat: string;
-        borderRadius: number;
-        border: string;
-        color: string;
-        fontSize: number;
-        textAlign: string;
-        cursor: string;
-        ":hover": {
-            backgroundColor: string;
+    readonly root: {
+        readonly display: "inline-flex";
+        readonly alignItems: "center";
+        readonly justifyContent: "center";
+        readonly backgroundColor: "rgba(90,100,110,.6)";
+        readonly backgroundRepeat: "no-repeat";
+        readonly borderRadius: 5;
+        readonly border: "1px solid rgba(210,210,230,.12)";
+        readonly color: "#AAA";
+        readonly fontSize: 14;
+        readonly textAlign: "center";
+        readonly cursor: "pointer";
+        readonly ":hover": {
+            readonly backgroundColor: "rgba(90,100,110,.8)";
         };
     };
-    root_opacityHover: {
-        opacity: number;
-        ":hover": {
-            opacity: number;
+    readonly root_opacityHover: {
+        readonly opacity: 0.6;
+        readonly ":hover": {
+            readonly opacity: 1;
         };
     };
-    root_hasCheckbox: {
-        paddingTop: number;
-        verticalAlign: number;
+    readonly root_hasCheckbox: {
+        readonly paddingTop: 4;
+        readonly verticalAlign: 1;
     };
-    root_disabled: {
-        opacity: number;
-        cursor: string;
+    readonly root_disabled: {
+        readonly opacity: 0.5;
+        readonly cursor: "default";
     };
-    root_override: {};
-    checkbox: {
-        marginLeft: number;
+    readonly root_override: {};
+    readonly checkbox: {
+        readonly marginLeft: -6;
     };
 };
 export declare type ButtonProps = {
