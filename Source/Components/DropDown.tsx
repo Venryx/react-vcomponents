@@ -23,16 +23,20 @@ AddGlobalStyle(`
 
 // avoiding BaseComponentPlus for now, since seems to cause error when used in parent project (need to investigate)
 //export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & HTMLProps_Fixed<"div">, {active: false}) {
-export class DropDown extends BaseComponent<{className?, onShow?, onHide?, active?: boolean} & HTMLProps_Fixed<"div">, {active: boolean}> {
-	static defaultState = {active: false};
+export class DropDown extends BaseComponent<{className?, active?: boolean, onShow?, onHide?, autoHide?: boolean} & HTMLProps_Fixed<"div">, {active: boolean}> {
+	static defaultState = {active: false, autoHide: true};
 	
 	ComponentDidMount() {
-		window.addEventListener("click", this.OnWindowClick);
-		window.addEventListener("touchstart", this.OnWindowClick);
+		if (this.props.autoHide) {
+			window.addEventListener("click", this.OnWindowClick);
+			window.addEventListener("touchstart", this.OnWindowClick);
+		}
 	}
 	ComponentWillUnmount() {
-		window.removeEventListener("click", this.OnWindowClick);
-		window.removeEventListener("touchstart", this.OnWindowClick);
+		if (this.props.autoHide) {
+			window.removeEventListener("click", this.OnWindowClick);
+			window.removeEventListener("touchstart", this.OnWindowClick);
+		}
 	}
 	private OnWindowClick = (event)=> {
 		const dropdownElement = GetDOM(this);
@@ -95,6 +99,7 @@ export class DropDown extends BaseComponent<{className?, onShow?, onHide?, activ
 		delete cleanProps.active;
 		delete cleanProps.onShow;
 		delete cleanProps.onHide;
+		delete cleanProps.autoHide;
 		return (
 			<div {...cleanProps} className={classNames("dropdown", {"dropdown--active": active}, className)}>
 				{boundChildren}

@@ -3,14 +3,16 @@ import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare class DropDown extends BaseComponent<{
     className?: any;
+    active?: boolean;
     onShow?: any;
     onHide?: any;
-    active?: boolean;
+    autoHide?: boolean;
 } & HTMLProps_Fixed<"div">, {
     active: boolean;
 }> {
     static defaultState: {
         active: boolean;
+        autoHide: boolean;
     };
     ComponentDidMount(): void;
     ComponentWillUnmount(): void;

@@ -40,7 +40,12 @@ export class Row extends BaseComponent<RowProps, {}> {
 	render() {
 		let {noShrink, center, style, title, ...rest} = this.props;
 		const {css} = cssHelper(this);
-		return <div {...rest} title={title ?? undefined} style={css({display: "flex"}, noShrink && {flexShrink: 0}, center && {alignItems: "center"}, style)}/>
+		return <div {...rest} title={title ?? undefined} style={css(
+			{display: "flex"},
+			noShrink && {flexShrink: 0},
+			center && {alignItems: "center"},
+			style,
+		)}/>
 	}
 }
 

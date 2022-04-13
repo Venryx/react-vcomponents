@@ -51,12 +51,16 @@ export class DropDown extends BaseComponent {
         };
     }
     ComponentDidMount() {
-        window.addEventListener("click", this.OnWindowClick);
-        window.addEventListener("touchstart", this.OnWindowClick);
+        if (this.props.autoHide) {
+            window.addEventListener("click", this.OnWindowClick);
+            window.addEventListener("touchstart", this.OnWindowClick);
+        }
     }
     ComponentWillUnmount() {
-        window.removeEventListener("click", this.OnWindowClick);
-        window.removeEventListener("touchstart", this.OnWindowClick);
+        if (this.props.autoHide) {
+            window.removeEventListener("click", this.OnWindowClick);
+            window.removeEventListener("touchstart", this.OnWindowClick);
+        }
     }
     IsActive() {
         return this.props.active != null ? this.props.active : this.state.active;
@@ -103,10 +107,11 @@ export class DropDown extends BaseComponent {
         delete cleanProps.active;
         delete cleanProps.onShow;
         delete cleanProps.onHide;
+        delete cleanProps.autoHide;
         return (React.createElement("div", Object.assign({}, cleanProps, { className: classNames("dropdown", { "dropdown--active": active }, className) }), boundChildren));
     }
 }
-DropDown.defaultState = { active: false };
+DropDown.defaultState = { active: false, autoHide: true };
 //export class DropDownTrigger extends BaseComponent<{className?} & HTMLProps_Fixed<"div">, {}> {
 export class DropDownTrigger extends BaseComponent {
     render() {
