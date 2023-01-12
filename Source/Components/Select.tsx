@@ -75,7 +75,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 			result = (options_raw as any).options;
 		}*/ else {
 			let optionsMap = options_raw as any;
-			for (let {name, value} of optionsMap.Props()) {
+			for (let [name, value] of Object.entries(optionsMap)) {
 				//result.push(new Option(name, value));
 				result.push({name, value});
 			}
@@ -185,7 +185,7 @@ export class Dropdown_OptionUI extends BaseComponent<{index, style}, {}> {
 
 export class ButtonBar_OptionUI extends BaseComponent<{first: boolean, last: boolean, selected: boolean, enabled: boolean, style, onSelect}, {hovered: boolean}> {
 	render() {
-		 let {first, last, selected, enabled,style, onSelect, children} = this.props;
+		 let {first, last, selected, enabled, style, onSelect, children} = this.props;
 		 let {hovered} = this.state;
 		const {css} = cssHelper(this);
 		return (

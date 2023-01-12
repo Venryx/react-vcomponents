@@ -59,7 +59,7 @@ let Select = Select_1 = class Select extends BaseComponent {
         }*/
         else {
             let optionsMap = options_raw;
-            for (let { name, value } of optionsMap.Props()) {
+            for (let [name, value] of Object.entries(optionsMap)) {
                 //result.push(new Option(name, value));
                 result.push({ name, value });
             }
