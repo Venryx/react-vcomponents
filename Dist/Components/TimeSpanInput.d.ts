@@ -24,7 +24,7 @@ export declare type TimeSpanProps = {
     value: number;
     onChange?: (totalSmallUnits: number) => any;
 } & Omit<TextInputProps, "value" | "onChange">;
-declare const TimeSpanInput_base: (new (..._: any[]) => BaseComponent<TimeSpanProps, {}, unknown>) & {
+declare const TimeSpanInput_base: (new (..._: any[]) => BaseComponent<TimeSpanProps, {}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };
