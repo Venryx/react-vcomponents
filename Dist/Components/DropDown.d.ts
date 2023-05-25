@@ -27,6 +27,7 @@ export declare class DropDownTrigger extends BaseComponent<{}, {}> {
     render(): JSX.Element[];
 }
 export declare class DropDownContent extends BaseComponent<{
+    content?: () => JSX.Element;
     className?: any;
     style?: any;
 } & HTMLProps_Fixed<"div">, {}> {

@@ -129,8 +129,10 @@ export class DropDownTrigger extends BaseComponent {
 }
 export class DropDownContent extends BaseComponent {
     render() {
-        const _a = this.props, { children, className, style, title } = _a, rest = __rest(_a, ["children", "className", "style", "title"]);
+        const _a = this.props, { content, children, className, style, title } = _a, rest = __rest(_a, ["content", "children", "className", "style", "title"]);
         const { css } = cssHelper(this);
-        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classNames("dropdown__content", className), style: css({ padding: 10, background: "rgba(0,0,0,.7)" }, style) }), children));
+        return (React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, className: classNames("dropdown__content", className), style: css({ padding: 10, background: "rgba(0,0,0,.7)" }, style) }), content === null || content === void 0 ? void 0 :
+            content(),
+            children));
     }
 }
