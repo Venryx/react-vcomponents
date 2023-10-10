@@ -120,7 +120,8 @@ export class Select extends BaseComponent<Select_Props, {}> {
 		var options = this.OptionsList;
 		const {css} = cssHelper(this);
 		
-		let valueValid = this.GetIndexOfOptionMatchingValue(value) != -1 && !this.GetOptionMatchingValue()?.name.startsWith(`[invalid: "`);
+		const indexOfOptionMatchingValue = this.GetIndexOfOptionMatchingValue(value);
+		let valueValid = indexOfOptionMatchingValue != -1 && !this.GetOptionMatchingValue()?.name.startsWith(`[invalid: "`);
 		// if there are no options yet, or value provided is null, don't require match, since this may be a pre-data render
 		if (options.length && value != null && verifyValue) {
 			AssertWarn((valueValid), `Select's value must match one of the options. @options(${
@@ -134,7 +135,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 
 		if (displayType == "dropdown") {
 			return (
-				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + this.GetIndexOfOptionMatchingValue(value)}
+				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + indexOfOptionMatchingValue}
 						className={className} title={title ?? undefined} style={css({color: "#000"}, style)} onChange={e=> {
 							if (!onChange) return;
 							var newSelectedIndex = this.root!.selectedIndex;
@@ -161,7 +162,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 				{options.map((option, index)=> {
 					let childStyle_final = childStyle instanceof Function ? childStyle(index) : childStyle;
 					return <ButtonBar_OptionUI key={index}
-							first={index == 0} last={index == options.length - 1} selected={option.value === value}
+							first={index == 0} last={index == options.length - 1} selected={indexOfOptionMatchingValue == index}
 							enabled={enabled!} style={css(childStyle_final, option.style)} onSelect={e=>onChange && onChange(option.value)}>
 						{option.name}
 					</ButtonBar_OptionUI>;
