@@ -124,7 +124,7 @@ export class DropDownTrigger extends BaseComponent<{}, {}> {
 	}
 }
 
-export class DropDownContent extends BaseComponent<{content?: ()=>JSX.Element, className?, style?} & HTMLProps_Fixed<"div">, {}> {
+export class DropDownContent extends BaseComponent<{content?: ()=>JSX.Element, className?, style?} & Omit<HTMLProps_Fixed<"div">, "content">, {}> {
 	render() {
 		const {content, children, className, style, title, ...rest} = this.props;
 		const {css} = cssHelper(this);

@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare type TextProps = {
@@ -7,5 +7,5 @@ export declare type TextProps = {
     style?: any;
 } & HTMLProps_Fixed<"span">;
 export declare class Text extends BaseComponent<TextProps, {}> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }

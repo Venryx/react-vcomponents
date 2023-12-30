@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare const Button_styles: {
@@ -62,5 +62,5 @@ export declare class Button extends BaseComponent<ButtonProps, {}> {
     static defaultProps: {
         enabled: boolean;
     };
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }

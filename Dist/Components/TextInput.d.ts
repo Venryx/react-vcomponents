@@ -21,6 +21,6 @@ export declare class TextInput extends BaseComponent<TextInputProps, {
         useEscape: boolean;
     };
     root: HTMLInputElement | n;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
     GetValue(): string;
 }

@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { TextInputProps } from "./TextInput.js";
 export declare const TimeUnit_values: readonly ["second", "minute", "hour", "day", "week"];
@@ -11,7 +11,7 @@ export declare const TimeUnit_labels: {
     day: string;
     week: string;
 };
-export declare function GetTimeUnitFromLabel(unitLabel: string): "second" | "minute" | "hour" | "day" | "week";
+export declare function GetTimeUnitFromLabel(unitLabel: string): "week" | "second" | "minute" | "hour" | "day";
 export declare function GetStepUpMultiplierBetweenXAndY(unitX: TimeUnit, unitY: TimeUnit): number;
 export declare function ConvertFromUnitXToY(valueInX: number, unitX: TimeUnit, unitY: TimeUnit): number;
 export declare type TimeSpanProps = {
@@ -30,6 +30,6 @@ declare const TimeSpanInput_base: (new (..._: any[]) => BaseComponent<TimeSpanPr
 };
 export declare class TimeSpanInput extends TimeSpanInput_base {
     constructor(props: any);
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export {};

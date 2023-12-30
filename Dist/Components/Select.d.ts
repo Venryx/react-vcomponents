@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { n } from "../@Types.js";
 export declare type Select_Props = {
@@ -52,13 +52,13 @@ export declare class Select extends BaseComponent<Select_Props, {}> {
     /** Finds the first "matching option", then returns that entry's "value" field. (vs this.props.value, which may only loosely match the entry's "value" field, as per "compareBy" property) */
     GetOptionValueMatchingValue(value?: any): any;
     root: HTMLSelectElement | n;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export declare class Dropdown_OptionUI extends BaseComponent<{
     index: any;
     style: any;
 }, {}> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export declare class ButtonBar_OptionUI extends BaseComponent<{
     first: boolean;
@@ -70,5 +70,5 @@ export declare class ButtonBar_OptionUI extends BaseComponent<{
 }, {
     hovered: boolean;
 }> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }

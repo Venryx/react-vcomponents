@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare type RowProps = {
@@ -7,7 +7,7 @@ export declare type RowProps = {
     style?: any;
 } & HTMLProps_Fixed<"div">;
 export declare class Row extends BaseComponent<RowProps, {}> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export declare type RowLRProps = {
     splitAt?: number | string;
@@ -21,5 +21,5 @@ export declare class RowLR extends BaseComponent<RowLRProps, {}> {
     static defaultProps: {
         splitAt: string;
     };
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }

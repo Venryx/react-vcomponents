@@ -1,6 +1,6 @@
 import React from "react";
 import {BaseComponent, AddGlobalStyle, ApplyBasicStyles, cssHelper} from "react-vextensions";
-import TextAreaAutoSize from "react-textarea-autosize";
+import {default as TextAreaAutoSize} from "react-textarea-autosize";
 import * as keycode from "keycode";
 import classnames from "classnames";
 import {E} from "../Internals/FromJSVE.js";
@@ -49,7 +49,7 @@ export class TextArea extends BaseComponent
 		{editedValue: string|n, minHeight: number}> {
 	static defaultProps = {enabled: true, editable: true, allowLineBreaks: true, useEscape: true};
 	
-	root: TextAreaAutoSize | HTMLTextAreaElement;
+	root: typeof TextAreaAutoSize | HTMLTextAreaElement;
 	render() {
 		var {value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, title, ...rest} = this.props;
 		var {editedValue, minHeight} = this.state;
@@ -59,7 +59,8 @@ export class TextArea extends BaseComponent
 
 		//let Comp = autoSize ? TextAreaAutoSize : "textarea";
 		//let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
-		let Comp: React.DetailedHTMLFactory<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
+		//let Comp: React.DetailedHTMLFactory<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
+		let Comp: any = autoSize ? TextAreaAutoSize : "textarea"; // todo: add more meaningful typing
 
 		const {css} = cssHelper(this);
 		return <Comp {...rest} ref={c=>this.root = c} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} className={classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight")}

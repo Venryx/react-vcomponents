@@ -1,6 +1,6 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
-import TextAreaAutoSize from "react-textarea-autosize";
+import { default as TextAreaAutoSize } from "react-textarea-autosize";
 import { FixHTMLProps, n } from "../@Types.js";
 export declare class TextArea extends BaseComponent<{
     enabled?: boolean;
@@ -22,6 +22,6 @@ export declare class TextArea extends BaseComponent<{
         allowLineBreaks: boolean;
         useEscape: boolean;
     };
-    root: TextAreaAutoSize | HTMLTextAreaElement;
-    render(): JSX.Element;
+    root: typeof TextAreaAutoSize | HTMLTextAreaElement;
+    render(): React.JSX.Element;
 }

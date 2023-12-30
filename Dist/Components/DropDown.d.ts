@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare class DropDown extends BaseComponent<{
@@ -21,7 +21,7 @@ export declare class DropDown extends BaseComponent<{
     IsActive(): boolean;
     Show(): void;
     Hide(): void;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export declare class DropDownTrigger extends BaseComponent<{}, {}> {
     render(): JSX.Element[];
@@ -30,6 +30,6 @@ export declare class DropDownContent extends BaseComponent<{
     content?: () => JSX.Element;
     className?: any;
     style?: any;
-} & HTMLProps_Fixed<"div">, {}> {
-    render(): JSX.Element;
+} & Omit<HTMLProps_Fixed<"div">, "content">, {}> {
+    render(): React.JSX.Element;
 }

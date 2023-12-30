@@ -17,7 +17,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from "react";
 import { BaseComponent, AddGlobalStyle, ApplyBasicStyles, cssHelper } from "react-vextensions";
-import TextAreaAutoSize from "react-textarea-autosize";
+import { default as TextAreaAutoSize } from "react-textarea-autosize";
 import * as keycode from "keycode";
 import classnames from "classnames";
 var styles = {
@@ -57,7 +57,8 @@ let TextArea = class TextArea extends BaseComponent {
             value = "";
         //let Comp = autoSize ? TextAreaAutoSize : "textarea";
         //let Comp: React.HTMLFactory<HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
-        let Comp = autoSize ? TextAreaAutoSize : "textarea";
+        //let Comp: React.DetailedHTMLFactory<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = autoSize ? TextAreaAutoSize : "textarea";
+        let Comp = autoSize ? TextAreaAutoSize : "textarea"; // todo: add more meaningful typing
         const { css } = cssHelper(this);
         return React.createElement(Comp, Object.assign({}, rest, { ref: c => this.root = c, title: title !== null && title !== void 0 ? title : undefined, disabled: enabled != true, readOnly: !editable, className: classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: css(styles.root, autoSize && {
                 resize: "none",

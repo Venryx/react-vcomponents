@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
 export declare type ColumnProps = {
@@ -7,5 +7,5 @@ export declare type ColumnProps = {
     style?: any;
 } & HTMLProps_Fixed<"div">;
 export declare class Column extends BaseComponent<ColumnProps, {}> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }

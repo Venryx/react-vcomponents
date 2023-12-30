@@ -24,5 +24,5 @@ export declare class Spinner extends BaseComponent<SpinnerProps, {
     ComponentDidMountOrUpdate(): void;
     ValidateValue(value: number): void;
     root: HTMLInputElement | n;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
