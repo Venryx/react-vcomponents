@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { FixHTMLProps, n } from "../@Types.js";
-export declare type SpinnerProps = {
+export type SpinnerProps = {
     enabled?: boolean;
     autoSize?: boolean;
     instant?: boolean;
@@ -14,10 +14,10 @@ export declare class Spinner extends BaseComponent<SpinnerProps, {
     editedValue: number | n;
 }> {
     static defaultProps: {
-        step: number;
+        step: string;
+        value: number;
         min: number;
         max: number;
-        value: number;
         enabled: boolean;
         useEscape: boolean;
     };

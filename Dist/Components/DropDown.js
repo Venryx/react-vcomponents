@@ -29,8 +29,8 @@ AddGlobalStyle(`
 .dropdown__content { pointer-events: none; }
 */
 `);
-// avoiding BaseComponentPlus for now, since seems to cause error when used in parent project (need to investigate)
 //export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & HTMLProps_Fixed<"div">, {active: false}) {
+/** NOTE: You must pass a `DropDownTrigger` and `DropDownContent` as children of this one, and have that `DropDownTrigger` have a child with a working `onClick` property -- otherwise the DropDown will not open/trigger. */
 export class DropDown extends BaseComponent {
     constructor() {
         super(...arguments);
@@ -113,6 +113,7 @@ export class DropDown extends BaseComponent {
 }
 DropDown.defaultState = { active: false, autoHide: true };
 //export class DropDownTrigger extends BaseComponent<{className?} & HTMLProps_Fixed<"div">, {}> {
+/** NOTE: The component you pass as a child of this one, *must* have a working `onClick` property -- otherwise the DropDown will not open/trigger. */
 export class DropDownTrigger extends BaseComponent {
     render() {
         /* const {children, className, ...rest} = this.props;

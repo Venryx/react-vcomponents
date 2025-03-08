@@ -1,6 +1,5 @@
-/// <reference types="react" />
-export declare type n = null | undefined;
-export declare type FixHTMLProps<T> = Omit<T, "title"> & {
+export type n = null | undefined;
+export type FixHTMLProps<T> = Omit<T, "title"> & {
     title?: any;
 };
-export declare type HTMLProps_Fixed<T extends keyof JSX.IntrinsicElements> = Omit<FixHTMLProps<JSX.IntrinsicElements[T]>, "ref">;
+export type HTMLProps_Fixed<T extends keyof React.JSX.IntrinsicElements> = Omit<FixHTMLProps<React.JSX.IntrinsicElements[T]>, "ref">;

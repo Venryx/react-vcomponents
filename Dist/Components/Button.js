@@ -34,6 +34,7 @@ export const Button_styles = {
         ":hover": {
             //backgroundColor: "rgba(0,0,0,.7)"
             backgroundColor: "rgba(90,100,110,.8)",
+            //backgroundColor: "rgba(20,20,20,1)",
         },
     },
     root_opacityHover: {
@@ -45,6 +46,8 @@ export const Button_styles = {
     root_hasCheckbox: { paddingTop: 4, verticalAlign: 1 },
     root_disabled: {
         opacity: .5, cursor: "default",
+        //pointerEvents: "none",
+        //":hover": {backgroundColor: "rgba(0,0,0,.3)"}
     },
     root_override: {},
     checkbox: { marginLeft: -6 },
@@ -55,7 +58,6 @@ let Button = class Button extends BaseComponent {
         let _a = this.props, { enabled, text, title, className, style, size, width, height, useOpacityForHover, iconPath, iconSize, mdIcon, faIcon, hasCheckbox, checked, checkboxStyle, checkboxLabelStyle, onCheckedChanged, onLeftClick, children } = _a, rest = __rest(_a, ["enabled", "text", "title", "className", "style", "size", "width", "height", "useOpacityForHover", "iconPath", "iconSize", "mdIcon", "faIcon", "hasCheckbox", "checked", "checkboxStyle", "checkboxLabelStyle", "onCheckedChanged", "onLeftClick", "children"]);
         const { css } = cssHelper(this);
         let padding = "5px 15px";
-        let fontSize;
         let borderThickness = (style || {}).borderWidth || 1;
         width = width || size;
         height = height || size;
@@ -64,17 +66,24 @@ let Button = class Button extends BaseComponent {
             var heightDifPerSide = (height - baseHeight) / 2;
             padding = (`${heightDifPerSide}px 15px`);
         }
+        // font-based icon
+        let stylesForFontBasedIcon = {};
         if (mdIcon || faIcon) {
             width = width !== null && width !== void 0 ? width : 28;
             height = height !== null && height !== void 0 ? height : 28;
             padding = 0;
-            fontSize = 18;
+            stylesForFontBasedIcon = { fontSize: iconSize !== null && iconSize !== void 0 ? iconSize : 18 };
         }
-        let finalStyle = css("finalStyle", Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { width, height, padding }, fontSize !== undefined && { fontSize }, iconPath && { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {
-            padding: 0,
-            backgroundPosition: `${(width - borderThickness * 2 - iconSize) / 2}px ${(height - borderThickness * 2 - iconSize) / 2}px`,
-            backgroundSize: iconSize
-        }, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, Button_styles.root_override, style);
+        // image-based icon
+        let stylesForImageBasedIcon = {};
+        if (iconPath) {
+            stylesForImageBasedIcon = css("stylesForImageBasedIcon", { backgroundImage: `url(${iconPath})` }, (iconSize && (width || height)) && {
+                padding: 0,
+                backgroundPosition: `${(width - borderThickness * 2 - iconSize) / 2}px ${(height - borderThickness * 2 - iconSize) / 2}px`,
+                backgroundSize: iconSize
+            });
+        }
+        let finalStyle = css("finalStyle", Button_styles.root, useOpacityForHover && Button_styles.root_opacityHover, { width, height, padding }, stylesForFontBasedIcon, stylesForImageBasedIcon, hasCheckbox && Button_styles.root_hasCheckbox, !enabled && Button_styles.root_disabled, Button_styles.root_override, style);
         let className_final = `Button ${enabled ? ClassBasedStyles(finalStyle) : ""} ${className || ""}`;
         if (mdIcon) {
             className_final = className_final + ` mdi mdi-${mdIcon}`;

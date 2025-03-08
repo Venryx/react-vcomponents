@@ -21,8 +21,8 @@ AddGlobalStyle(`
 */
 `);
 
-// avoiding BaseComponentPlus for now, since seems to cause error when used in parent project (need to investigate)
 //export class DropDown extends BaseComponentPlus({} as {className?, onShow?, onHide?, active?: boolean} & HTMLProps_Fixed<"div">, {active: false}) {
+/** NOTE: You must pass a `DropDownTrigger` and `DropDownContent` as children of this one, and have that `DropDownTrigger` have a child with a working `onClick` property -- otherwise the DropDown will not open/trigger. */
 export class DropDown extends BaseComponent<{className?, active?: boolean, onShow?, onHide?, autoHide?: boolean} & HTMLProps_Fixed<"div">, {active: boolean}> {
 	static defaultState = {active: false, autoHide: true};
 	
@@ -109,6 +109,7 @@ export class DropDown extends BaseComponent<{className?, active?: boolean, onSho
 }
 
 //export class DropDownTrigger extends BaseComponent<{className?} & HTMLProps_Fixed<"div">, {}> {
+/** NOTE: The component you pass as a child of this one, *must* have a working `onClick` property -- otherwise the DropDown will not open/trigger. */
 export class DropDownTrigger extends BaseComponent<{}, {}> {
 	render() {
 		/* const {children, className, ...rest} = this.props;
@@ -119,12 +120,12 @@ export class DropDownTrigger extends BaseComponent<{}, {}> {
 		); */
 		const {children, ...rest} = this.props;
 		// whatever properties were passed to this DropDownTrigger (eg. the onClick handler from DropDown.render), add them onto the children
-		const childrenWithPassedProps = React.Children.map(children, (child: JSX.Element)=>cloneElement(child, rest));
-		return childrenWithPassedProps as JSX.Element[];
+		const childrenWithPassedProps = React.Children.map(children, (child: React.JSX.Element)=>cloneElement(child, rest));
+		return childrenWithPassedProps as React.JSX.Element[];
 	}
 }
 
-export class DropDownContent extends BaseComponent<{content?: ()=>JSX.Element, className?, style?} & Omit<HTMLProps_Fixed<"div">, "content">, {}> {
+export class DropDownContent extends BaseComponent<{content?: ()=>React.JSX.Element, className?, style?} & Omit<HTMLProps_Fixed<"div">, "content">, {}> {
 	render() {
 		const {content, children, className, style, title, ...rest} = this.props;
 		const {css} = cssHelper(this);

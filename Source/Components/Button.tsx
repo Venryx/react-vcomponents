@@ -1,7 +1,7 @@
 import React from "react";
 import {BaseComponent, BaseProps, AddGlobalStyle, ApplyBasicStyles, ClassBasedStyles, cssHelper} from "react-vextensions";
 import {FixHTMLProps, HTMLProps_Fixed, n} from "../@Types.js";
-import {E} from "../Internals/FromJSVE.js";
+import {Assert, E} from "../Internals/FromJSVE.js";
 
 export const Button_styles = {
 	root: {
@@ -46,7 +46,7 @@ export const Button_styles = {
 `);*/
 
 export type ButtonProps = {
-	enabled?: boolean, text?: string | JSX.Element, className?: string, style?,
+	enabled?: boolean, text?: string | React.JSX.Element, className?: string, style?,
 	size?: number, width?: number, height?: number, useOpacityForHover?: boolean,
 	iconPath?: string, iconSize?: number, // custom icons
 	mdIcon?: string, // material-design icons (https://github.com/Templarian/MaterialDesign)
@@ -73,7 +73,6 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 		const {css} = cssHelper(this);
 
 		let padding: string|number = "5px 15px";
-		let fontSize: number|n;
 		let borderThickness = (style || {}).borderWidth || 1;
 
 		width = width || size;
@@ -83,24 +82,35 @@ export class Button extends BaseComponent<ButtonProps, {}> {
 			var heightDifPerSide = (height - baseHeight) / 2;
 			padding = (`${heightDifPerSide}px 15px`);
 		}
+
+		// font-based icon
+		let stylesForFontBasedIcon = {};
 		if (mdIcon || faIcon) {
 			width = width ?? 28;
 			height = height ?? 28;
 			padding = 0;
-			fontSize = 18;
+			stylesForFontBasedIcon = {fontSize: iconSize ?? 18};
+		}
+		
+		// image-based icon
+		let stylesForImageBasedIcon = {};
+		if (iconPath) {
+			stylesForImageBasedIcon = css("stylesForImageBasedIcon",
+				{backgroundImage: `url(${iconPath})`},
+				(iconSize && (width || height)) && {
+					padding: 0,
+					backgroundPosition: `${(width! - borderThickness*2 - iconSize) / 2}px ${(height! - borderThickness*2 - iconSize) / 2}px`,
+					backgroundSize: iconSize
+				},
+			);
 		}
 		
 		let finalStyle = css("finalStyle",
 			Button_styles.root,
 			useOpacityForHover && Button_styles.root_opacityHover,
 			{width, height, padding},
-			fontSize !== undefined && {fontSize},
-			iconPath && {backgroundImage: `url(${iconPath})`},
-			(iconSize && (width || height)) && {
-				padding: 0,
-				backgroundPosition: `${(width! - borderThickness*2 - iconSize) / 2}px ${(height! - borderThickness*2 - iconSize) / 2}px`,
-				backgroundSize: iconSize
-			},
+			stylesForFontBasedIcon,
+			stylesForImageBasedIcon,
 			hasCheckbox && Button_styles.root_hasCheckbox,
 			!enabled && Button_styles.root_disabled,
 			Button_styles.root_override,

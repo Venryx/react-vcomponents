@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
-export declare type ColumnProps = {
+export type ColumnProps = {
     noShrink?: any;
     center?: any;
     style?: any;

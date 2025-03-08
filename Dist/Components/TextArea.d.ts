@@ -2,7 +2,7 @@ import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { default as TextAreaAutoSize } from "react-textarea-autosize";
 import { FixHTMLProps, n } from "../@Types.js";
-export declare class TextArea extends BaseComponent<{
+export type TextAreaProps = {
     enabled?: boolean;
     editable?: boolean;
     pattern?: string;
@@ -12,7 +12,8 @@ export declare class TextArea extends BaseComponent<{
     autoSize?: boolean;
     autoSize_minHeight?: boolean;
     allowLineBreaks?: boolean;
-} & Omit<FixHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>>, "onChange" | "disabled" | "readOnly">, {
+} & Omit<FixHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>>, "onChange" | "disabled" | "readOnly">;
+export declare class TextArea extends BaseComponent<TextAreaProps, {
     editedValue: string | n;
     minHeight: number;
 }> {

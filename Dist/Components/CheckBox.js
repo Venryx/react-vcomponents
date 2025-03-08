@@ -24,7 +24,7 @@ let CheckBox = CheckBox_1 = class CheckBox extends BaseComponent {
         let applyPre = wrap == false || (wrap != true && textHasEdgeSpaces);
         const { css } = cssHelper(this);
         return (React.createElement(Row, Object.assign({}, containerProps, { center: true, title: title !== null && title !== void 0 ? title : undefined, style: css({ position: "relative" }, style) }),
-            React.createElement("input", Object.assign({ ref: c => this.input = c }, checkboxProps, { id: "checkBox_" + this.id, type: "checkbox", disabled: enabled != true, checked: value == true, onChange: e => {
+            React.createElement("input", Object.assign({ ref: c => void (this.input = c) }, checkboxProps, { id: "checkBox_" + this.id, type: "checkbox", disabled: enabled != true, checked: value == true, onChange: e => {
                     // if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)
                     if (value == "partial") {
                         this.input.checked = false; // this isn't really necessary (since props-change will update dom.checked), but we'll do it for consistency

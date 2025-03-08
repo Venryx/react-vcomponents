@@ -37,9 +37,9 @@ export declare const Button_styles: {
         readonly marginLeft: -6;
     };
 };
-export declare type ButtonProps = {
+export type ButtonProps = {
     enabled?: boolean;
-    text?: string | JSX.Element;
+    text?: string | React.JSX.Element;
     className?: string;
     style?: any;
     size?: number;

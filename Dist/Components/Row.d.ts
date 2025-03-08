@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed } from "../@Types.js";
-export declare type RowProps = {
+export type RowProps = {
     noShrink?: any;
     center?: any;
     style?: any;
@@ -9,7 +9,7 @@ export declare type RowProps = {
 export declare class Row extends BaseComponent<RowProps, {}> {
     render(): React.JSX.Element;
 }
-export declare type RowLRProps = {
+export type RowLRProps = {
     splitAt?: number | string;
     height?: number;
     className?: string;

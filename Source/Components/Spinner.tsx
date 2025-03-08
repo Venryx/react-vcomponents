@@ -13,7 +13,11 @@ export type SpinnerProps = {
 
 @ApplyBasicStyles
 export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|n}> {
-	static defaultProps = {step: 1, min: 0, max: Number.MAX_SAFE_INTEGER, value: 0, enabled: true, useEscape: true};
+	static defaultProps = {
+		step: "any", // step:any allows decimal values, but keeps the up/down buttons working (+1/-1)
+		value: 0, min: 0, max: Number.MAX_SAFE_INTEGER,
+		enabled: true, useEscape: true,
+	};
 
 	ComponentDidMountOrUpdate() {
 		this.ValidateValue(this.props.value as number);
@@ -48,7 +52,7 @@ export class Spinner extends BaseComponent<SpinnerProps, {editedValue: number|n}
 		}
 
 		return (
-			<input {...rest} ref={c=>this.root = c} type="number" step={step} min={min} max={max} value={editedValue != null ? editedValue : (value || 0)} disabled={enabled != true}
+			<input {...rest} ref={c=>void(this.root = c)} type="number" step={step} min={min} max={max} value={editedValue != null ? editedValue : (value || 0)} disabled={enabled != true}
 				title={title ?? undefined} style={style}
 				onChange={e=> {
 					var newVal = Number(e.target.value);

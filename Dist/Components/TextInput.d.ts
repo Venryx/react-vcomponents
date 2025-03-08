@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { HTMLProps_Fixed, n } from "../@Types.js";
-export declare type TextInputProps = {
+export type TextInputProps = {
     value: string | n;
     enabled?: boolean;
     editable?: boolean;

@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes, LabelHTMLAttributes } from "react";
 import { BaseComponent } from "react-vextensions";
 import { RowProps } from "./Row.js";
 import { n } from "../@Types.js";
-export declare type CheckBoxProps = {
+export type CheckBoxProps = {
     text?: React.ReactNode;
     wrap?: boolean;
     enabled?: boolean;

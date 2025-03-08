@@ -40,13 +40,13 @@ AddGlobalStyle(`
 
 // Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "HTMLProps_Fixed<"div">"
 
+export type TextAreaProps = {
+	enabled?: boolean, editable?: boolean, pattern?: string, onChange?: (newVal: string, event: React.ChangeEvent<HTMLTextAreaElement>)=>void,
+	instant?: boolean, useEscape?: boolean, autoSize?: boolean, autoSize_minHeight?: boolean, allowLineBreaks?: boolean,
+} & Omit<FixHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>>, "onChange" | "disabled" | "readOnly">;
+
 @ApplyBasicStyles
-export class TextArea extends BaseComponent
-		<{
-			enabled?: boolean, editable?: boolean, pattern?: string, onChange?: (newVal: string, event: React.ChangeEvent<HTMLTextAreaElement>)=>void,
-			instant?: boolean, useEscape?: boolean, autoSize?: boolean, autoSize_minHeight?: boolean, allowLineBreaks?: boolean,
-		} & Omit<FixHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>>, "onChange" | "disabled" | "readOnly">,
-		{editedValue: string|n, minHeight: number}> {
+export class TextArea extends BaseComponent<TextAreaProps, {editedValue: string|n, minHeight: number}> {
 	static defaultProps = {enabled: true, editable: true, allowLineBreaks: true, useEscape: true};
 	
 	root: typeof TextAreaAutoSize | HTMLTextAreaElement;

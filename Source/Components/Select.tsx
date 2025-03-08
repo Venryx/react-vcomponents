@@ -135,7 +135,7 @@ export class Select extends BaseComponent<Select_Props, {}> {
 
 		if (displayType == "dropdown") {
 			return (
-				<select ref={c=>this.root = c} disabled={enabled != true} value={"value" + indexOfOptionMatchingValue}
+				<select ref={c=>void(this.root = c)} disabled={enabled != true} value={"value" + indexOfOptionMatchingValue}
 						className={className} title={title ?? undefined} style={css({color: "#000"}, style)} onChange={e=> {
 							if (!onChange) return;
 							var newSelectedIndex = this.root!.selectedIndex;

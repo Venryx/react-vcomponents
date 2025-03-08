@@ -37,7 +37,7 @@ export class CheckBox extends BaseComponent<CheckBoxProps, {editedValue: boolean
 		const {css} = cssHelper(this);
 		return (
 			<Row {...containerProps as any} center title={title ?? undefined} style={css({position: "relative"}, style)}>
-				<input ref={c=>this.input = c} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value == true}
+				<input ref={c=>void(this.input = c)} {...checkboxProps} id={"checkBox_" + this.id} type="checkbox" disabled={enabled != true} checked={value == true}
 					onChange={e=>{
 						// if value was partial/indeterminate, and we click, return "false" as new-val (default behavior leaves dom in checked=true state)
 						if (value == "partial") {

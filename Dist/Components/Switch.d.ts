@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 export declare class Switch extends BaseComponent<{
     preferLater?: boolean;
@@ -6,5 +6,5 @@ export declare class Switch extends BaseComponent<{
     static defaultProps: {
         preferLater: boolean;
     };
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }

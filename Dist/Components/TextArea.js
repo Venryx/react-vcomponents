@@ -35,6 +35,8 @@ var styles = {
         //whiteSpace: "pre",
         //overflowWrap: "normal", // removed; else text can overflow that cannot be scrolled to
         width: "100%",
+        //height: "100%",
+        /*overflow: "auto",*/
     },
     root_disabled: {
         /*background: "white",*/
@@ -47,7 +49,6 @@ AddGlobalStyle(`
 	height: unset !important;
 }
 `);
-// Note: Where possible, use something like "React.TextareaHTMLAttributes<HTMLTextAreaElement>". For the rest (eg. HTMLDivElement), use eg. "HTMLProps_Fixed<"div">"
 let TextArea = class TextArea extends BaseComponent {
     render() {
         var _a = this.props, { value, defaultValue, enabled, editable, className, style, pattern, onChange, instant, useEscape, autoSize, autoSize_minHeight, allowLineBreaks, onKeyDown, title } = _a, rest = __rest(_a, ["value", "defaultValue", "enabled", "editable", "className", "style", "pattern", "onChange", "instant", "useEscape", "autoSize", "autoSize_minHeight", "allowLineBreaks", "onKeyDown", "title"]);
@@ -62,7 +63,8 @@ let TextArea = class TextArea extends BaseComponent {
         const { css } = cssHelper(this);
         return React.createElement(Comp, Object.assign({}, rest, { ref: c => this.root = c, title: title !== null && title !== void 0 ? title : undefined, disabled: enabled != true, readOnly: !editable, className: classnames("simpleText selectable", className, autoSize_minHeight && "autoSize_minHeight"), style: css(styles.root, autoSize && {
                 resize: "none",
-                overflow: "hidden",
+                overflow: "hidden", // this is done to prevent measuring issues?
+                //overflowWrap: null,
             }, autoSize_minHeight && minHeight != null && { minHeight }, style) }, autoSize_minHeight && { onHeightChange: height => {
                 if (autoSize_minHeight) {
                     this.SetState({ minHeight: height });

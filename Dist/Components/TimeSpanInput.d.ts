@@ -3,7 +3,7 @@ import { BaseComponent } from "react-vextensions";
 import { TextInputProps } from "./TextInput.js";
 export declare const TimeUnit_values: readonly ["second", "minute", "hour", "day", "week"];
 export declare const TimeUnit_stepUpMultipliers: number[];
-export declare type TimeUnit = typeof TimeUnit_values[number];
+export type TimeUnit = typeof TimeUnit_values[number];
 export declare const TimeUnit_labels: {
     second: string;
     minute: string;
@@ -11,10 +11,10 @@ export declare const TimeUnit_labels: {
     day: string;
     week: string;
 };
-export declare function GetTimeUnitFromLabel(unitLabel: string): "week" | "second" | "minute" | "hour" | "day";
+export declare function GetTimeUnitFromLabel(unitLabel: string): TimeUnit;
 export declare function GetStepUpMultiplierBetweenXAndY(unitX: TimeUnit, unitY: TimeUnit): number;
 export declare function ConvertFromUnitXToY(valueInX: number, unitX: TimeUnit, unitY: TimeUnit): number;
-export declare type TimeSpanProps = {
+export type TimeSpanProps = {
     largeUnit?: TimeUnit;
     smallUnit?: TimeUnit;
     showUnits?: boolean;
@@ -24,7 +24,7 @@ export declare type TimeSpanProps = {
     value: number;
     onChange?: (totalSmallUnits: number) => any;
 } & Omit<TextInputProps, "value" | "onChange">;
-declare const TimeSpanInput_base: (new (..._: any[]) => BaseComponent<TimeSpanProps, {}, object>) & {
+declare const TimeSpanInput_base: (new (..._: any) => BaseComponent<TimeSpanProps, {}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { n } from "../@Types.js";
-export declare type Select_Props = {
+export type Select_Props = {
     options: {
         name: string;
         value: any;
@@ -25,12 +25,12 @@ export declare type Select_Props = {
     childStyle?: Object | ((index: number) => Object);
     onChange?: any;
 };
-export declare type Select_Option = {
+export type Select_Option = {
     name: string;
     value: any;
     style?: any;
 };
-export declare type CompareByFunc = (option: Select_Option, value: any) => boolean;
+export type CompareByFunc = (option: Select_Option, value: any) => boolean;
 export declare const compareBy_defaultFuncs: {
     [key: string]: CompareByFunc;
 };

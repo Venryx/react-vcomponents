@@ -35,7 +35,7 @@ export class TextInput extends BaseComponent<TextInputProps, {editedValue: strin
 		
 		const {css} = cssHelper(this);
 		return (
-			<input {...rest} ref={c=>this.root = c} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} style={css({color: "black"}, style)}
+			<input {...rest} ref={c=>void(this.root = c)} title={title ?? undefined} disabled={enabled != true} readOnly={!editable} style={css({color: "black"}, style)}
 				value={editedValue != null ? editedValue : (value || "")}
 				onChange={e=> {
 					var newVal = e.target.value;

@@ -110,7 +110,7 @@ let Select = Select_1 = class Select extends BaseComponent {
             return <Option key={index} index={index} style={child.props.style}>{child.props.children}</Option>;
         });*/
         if (displayType == "dropdown") {
-            return (React.createElement("select", { ref: c => this.root = c, disabled: enabled != true, value: "value" + indexOfOptionMatchingValue, className: className, title: title !== null && title !== void 0 ? title : undefined, style: css({ color: "#000" }, style), onChange: e => {
+            return (React.createElement("select", { ref: c => void (this.root = c), disabled: enabled != true, value: "value" + indexOfOptionMatchingValue, className: className, title: title !== null && title !== void 0 ? title : undefined, style: css({ color: "#000" }, style), onChange: e => {
                     if (!onChange)
                         return;
                     var newSelectedIndex = this.root.selectedIndex;

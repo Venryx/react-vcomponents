@@ -1,8 +1,8 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
-export declare type ColorArray_Input = [number, number, number, number?];
-export declare type ColorArray = [number, number, number, number];
-export declare type ColorPickerBox_Props = {
+export type ColorArray_Input = [number, number, number, number?];
+export type ColorArray = [number, number, number, number];
+export type ColorPickerBox_Props = {
     color: ColorArray_Input;
     onChange?: (color: ColorArray) => void;
     popupStyle?: any;
