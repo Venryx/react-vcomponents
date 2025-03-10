@@ -21,7 +21,7 @@ let Column = class Column extends BaseComponent {
     render() {
         let _a = this.props, { noShrink, center, style, title } = _a, rest = __rest(_a, ["noShrink", "center", "style", "title"]);
         const { css } = cssHelper(this);
-        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: css({ display: "flex", flexDirection: "column" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
+        return React.createElement("div", Object.assign({}, rest, { ref: c => void (this.root = c), title: title !== null && title !== void 0 ? title : undefined, style: css({ display: "flex", flexDirection: "column" }, noShrink && { flexShrink: 0 }, center && { alignItems: "center" }, style) }));
     }
 };
 Column = __decorate([

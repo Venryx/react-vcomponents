@@ -54,7 +54,7 @@ let Div = class Div extends BaseComponent {
     }
     render() {
         let _a = this.props, { shouldUpdate, style, title } = _a, rest = __rest(_a, ["shouldUpdate", "style", "title"]);
-        return React.createElement("div", Object.assign({}, rest, { title: title !== null && title !== void 0 ? title : undefined, style: style }));
+        return React.createElement("div", Object.assign({}, rest, { ref: c => void (this.root = c), title: title !== null && title !== void 0 ? title : undefined, style: style }));
     }
 };
 Div = __decorate([

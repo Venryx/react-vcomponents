@@ -1,6 +1,6 @@
 import React from "react";
 import { BaseComponent } from "react-vextensions";
-import { HTMLProps_Fixed } from "../@Types.js";
+import { HTMLProps_Fixed, n } from "../@Types.js";
 export type SpanProps = {
     pre?: any;
 } & HTMLProps_Fixed<"span">;
@@ -18,5 +18,6 @@ export type DivProps = {
 } & HTMLProps_Fixed<"div">;
 export declare class Div extends BaseComponent<DivProps, {}> {
     shouldComponentUpdate(nextProps: any, nextState: any): any;
+    root: HTMLDivElement | n;
     render(): React.JSX.Element;
 }
