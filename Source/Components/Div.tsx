@@ -1,6 +1,6 @@
 import React from "react";
 import {ApplyBasicStyles, BaseComponent, cssHelper} from "react-vextensions";
-import {FixHTMLProps, HTMLProps_Fixed} from "../@Types.js";
+import {FixHTMLProps, HTMLProps_Fixed, n} from "../@Types.js";
 import {E} from "../Internals/FromJSVE.js";
 
 function Global(target) {
@@ -40,8 +40,9 @@ export class Div extends BaseComponent<DivProps, {}> {
 		return shouldUpdate ? shouldUpdate(nextProps, nextState) : true;
 		//return (shouldUpdate && shouldUpdate(nextProps, nextState)) || ShallowCompare(this, nextProps, nextState);
 	}
+	root: HTMLDivElement|n;
 	render() {
 		let {shouldUpdate, style, title, ...rest} = this.props;
-		return <div {...rest} title={title ?? undefined} style={style}/>;
+		return <div {...rest} ref={c=>void(this.root = c)} title={title ?? undefined} style={style}/>;
 	}
 }
