@@ -83,7 +83,6 @@ export class DropDown extends BaseComponent<{className?, active?: boolean, onSho
 			if (child.type === DropDownTrigger) {
 				const originalOnClick = child.props.onClick;
 				child = cloneElement(child, {
-					ref: "trigger",
 					onClick: (event) => {
 						this.OnToggleClick(event);
 						if (originalOnClick) {
